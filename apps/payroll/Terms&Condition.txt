@@ -1,0 +1,141 @@
+TERMS AND CONDITIONS
+Product: Vertex HRMS
+Company: Dort Asia
+Effective Date: April 17, 2026
+
+1. INTRODUCTION
+Welcome to Vertex, a Human Resource Management System ("HRMS") developed and operated by Dort Asia. These Terms and Conditions ("Terms") govern your access to and use of the Vertex platform, including all its features, modules, APIs, and related services. By registering, accessing, or using Vertex, you ("User" or "Client") agree to be legally bound by these Terms. If you do not agree, you must discontinue use immediately.
+
+2. DEFINITIONS
+
+"Dort Asia" refers to the company that owns, develops, and maintains the Vertex HRMS platform.
+"Vertex" refers to the HRMS software, web application, mobile application, and all associated services provided by Dort Asia.
+"Client" refers to the organization or business that has subscribed to and is using Vertex.
+"User" refers to any individual (employee, HR manager, admin, etc.) who accesses Vertex under the Client's account.
+"Data" refers to all employee records, payroll information, documents, and any other content uploaded or generated within Vertex.
+"Subscription" refers to the paid or trial plan selected by the Client to access Vertex.
+
+
+3. ELIGIBILITY
+To use Vertex, you must:
+
+Be a registered business entity or an authorized representative of one.
+Be at least 18 years of age.
+Have the legal authority to enter into binding agreements on behalf of your organization.
+Comply with all applicable local, national, and international laws and regulations.
+
+Dort Asia reserves the right to deny access to any individual or organization that does not meet these eligibility requirements.
+
+4. ACCOUNT REGISTRATION AND SECURITY
+4.1 Clients must provide accurate, complete, and up-to-date information during registration. Any false or misleading information may result in immediate termination of the account.
+4.2 Each Client is responsible for maintaining the confidentiality of their login credentials. Dort Asia will not be held liable for any unauthorized access resulting from the Client's failure to secure their credentials.
+4.3 Clients must immediately notify Dort Asia of any suspected unauthorized access or breach of their account at support@dortasia.com.
+4.4 Dort Asia reserves the right to suspend or terminate accounts where suspicious or unauthorized activity is detected.
+4.5 Each account is for the sole use of the registered Client and may not be shared with or transferred to any third party without prior written consent from Dort Asia.
+
+5. SUBSCRIPTION PLANS AND PAYMENT
+5.1 Vertex is offered under various subscription plans, including free trials and paid tiers. Details of each plan, including pricing and features, are listed on the Dort Asia website.
+5.2 All subscription fees are billed in advance on a monthly or annual basis, depending on the selected plan.
+5.3 Payments are non-refundable unless otherwise stated in a written agreement or required by applicable law.
+5.4 Dort Asia reserves the right to modify pricing at any time with a minimum of 30 days' written notice to existing Clients.
+5.5 Failure to pay subscription fees on time may result in suspension of access until the outstanding balance is cleared.
+5.6 Clients are responsible for all applicable taxes related to their subscription.
+
+6. PERMITTED USE
+Clients and Users may use Vertex solely for lawful human resource management purposes, including but not limited to:
+
+Employee onboarding and offboarding
+Attendance and leave management
+Payroll processing
+Performance management
+Document management
+Recruitment tracking
+HR analytics and reporting
+
+Any use outside of these purposes requires prior written approval from Dort Asia.
+
+7. PROHIBITED USE
+You must NOT use Vertex to:
+
+Upload or distribute malicious software, viruses, or harmful code.
+Attempt to gain unauthorized access to other accounts or Dort Asia's systems.
+Use the platform for any illegal, fraudulent, or unethical activity.
+Reproduce, resell, or sublicense Vertex or any of its features without authorization.
+Scrape, copy, or extract data from the platform using automated tools.
+Reverse engineer, decompile, or disassemble any part of the Vertex platform.
+Upload content that is defamatory, discriminatory, or violates the rights of any individual.
+Use Vertex to process data of individuals without their proper legal consent.
+
+Violation of these prohibitions may result in immediate account termination and legal action.
+
+8. DATA OWNERSHIP AND PRIVACY
+8.1 All employee data and organizational data entered into Vertex remains the sole property of the Client. Dort Asia does not claim ownership over Client data.
+8.2 Dort Asia will process Client data strictly in accordance with its Privacy Policy, which is incorporated into these Terms by reference.
+8.3 Clients are solely responsible for ensuring that their collection, storage, and use of employee data complies with all applicable data protection laws, including but not limited to local labor and privacy legislation.
+8.4 Dort Asia implements industry-standard security measures to protect Client data, including encryption, access controls, and regular security audits.
+8.5 Upon termination of the subscription, Clients may request a full export of their data within 30 days. After this period, Dort Asia reserves the right to permanently delete the data from its servers.
+8.6 Dort Asia will never sell Client data to third parties. Data may be shared with third-party service providers only to the extent necessary to operate and maintain the Vertex platform.
+
+9. CONFIDENTIALITY
+Both parties agree to keep confidential any proprietary or sensitive information shared during the course of the business relationship. This obligation of confidentiality survives the termination of these Terms for a period of three (3) years.
+
+10. INTELLECTUAL PROPERTY
+10.1 Vertex, including its software, design, branding, logos, and all related content, is the exclusive intellectual property of Dort Asia and is protected under applicable intellectual property laws.
+10.2 Clients are granted a limited, non-exclusive, non-transferable license to use Vertex during the active subscription period solely for internal business purposes.
+10.3 Clients must not use Dort Asia's brand name, logo, or trademarks without prior written permission.
+10.4 Any feedback, suggestions, or improvement ideas submitted by Clients may be used by Dort Asia to improve Vertex without any obligation of compensation.
+
+11. SYSTEM AVAILABILITY AND UPTIME
+11.1 Dort Asia strives to maintain a system uptime of 99.5% and will notify Clients in advance of any planned maintenance windows.
+11.2 Dort Asia is not liable for downtime caused by factors beyond its reasonable control, including but not limited to internet outages, third-party service failures, or force majeure events.
+11.3 Clients may report technical issues via the Vertex support portal, and Dort Asia will use commercially reasonable efforts to resolve them promptly.
+
+12. THIRD-PARTY INTEGRATIONS
+Vertex may offer integrations with third-party tools and services such as accounting software, communication tools, or payment gateways. Dort Asia does not take responsibility for the availability, performance, or data practices of such third-party services. Clients use these integrations at their own risk.
+
+13. LIMITATION OF LIABILITY
+13.1 To the fullest extent permitted by law, Dort Asia shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of or inability to use Vertex.
+13.2 Dort Asia's total cumulative liability to any Client under these Terms shall not exceed the total subscription fees paid by the Client in the three (3) months preceding the claim.
+13.3 Dort Asia is not liable for any loss of data, loss of profits, or business interruption arising from circumstances outside its reasonable control.
+
+14. INDEMNIFICATION
+Clients agree to indemnify, defend, and hold harmless Dort Asia, its directors, employees, and partners from and against any claims, liabilities, damages, losses, or expenses (including legal fees) arising from:
+
+The Client's use or misuse of Vertex.
+Violation of these Terms.
+Infringement of any third-party rights.
+Unlawful processing of employee data.
+
+
+15. TERMINATION
+15.1 Either party may terminate the subscription at any time with 30 days' written notice.
+15.2 Dort Asia may immediately suspend or terminate access without notice if a Client:
+
+Violates any provision of these Terms.
+Engages in fraudulent or illegal activity.
+Fails to pay subscription fees after reasonable notice.
+
+15.3 Upon termination, the Client's license to use Vertex ceases immediately. All outstanding fees remain payable.
+
+16. MODIFICATIONS TO TERMS
+Dort Asia reserves the right to update or modify these Terms at any time. Clients will be notified of significant changes via email or an in-app notification at least 14 days before the changes take effect. Continued use of Vertex after the effective date constitutes acceptance of the updated Terms.
+
+17. GOVERNING LAW AND DISPUTE RESOLUTION
+17.1 These Terms shall be governed by and construed in accordance with the laws applicable in the jurisdiction where Dort Asia is registered.
+17.2 Any disputes arising out of or in connection with these Terms shall first be attempted to be resolved through good-faith negotiation between the parties.
+17.3 If negotiation fails, disputes shall be referred to binding arbitration in accordance with applicable arbitration rules. The decision of the arbitrator shall be final and binding.
+
+18. FORCE MAJEURE
+Dort Asia shall not be held liable for any failure or delay in performance resulting from circumstances beyond its reasonable control, including natural disasters, pandemics, government actions, cyberattacks, or internet infrastructure failures.
+
+19. ENTIRE AGREEMENT
+These Terms, together with the Privacy Policy and any signed subscription agreements, constitute the entire agreement between the Client and Dort Asia regarding the use of Vertex and supersede all prior agreements or understandings.
+
+20. CONTACT INFORMATION
+For any questions, concerns, or legal notices regarding these Terms, please contact:
+Dort Asia
+Email: legal@dortasia.com
+Support: support@dortasia.com
+Website: www.dortasia.com
+
+By using Vertex, you acknowledge that you have read, understood, and agreed to these Terms and Conditions.

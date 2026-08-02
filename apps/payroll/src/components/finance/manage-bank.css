@@ -1,0 +1,413 @@
+/* ═══════════════════════════════════════════════
+   MANAGE BANK FULL PAGE
+   ═══════════════════════════════════════════════ */
+
+.manage-bank-page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 40px;
+  background-color: #F9F9FB; /* Light grey background outside cards */
+}
+
+.manage-bank-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.manage-bank-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.manage-bank-subtitle {
+  font-size: 14px;
+  color: #6B7280;
+  font-weight: 500;
+}
+
+.manage-bank-back-btn {
+  background-color: #FFFFFF;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #D1D5DB;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.manage-bank-back-btn:hover {
+  background-color: #F9FAFB;
+}
+
+/* ─── Account Overview Card ─── */
+.mb-overview-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.mb-overview-top {
+  display: flex;
+  padding: 24px;
+}
+
+.mb-overview-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mb-overview-col:not(:last-child) {
+  border-right: 1px solid #E5E7EB;
+  padding-right: 24px;
+  margin-right: 24px;
+}
+
+/* Col 1: Bank Identity */
+.mb-bank-identity {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.mb-bank-logo-box {
+  width: 64px;
+  height: 64px;
+  background-color: #F3F4F6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mb-bank-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.mb-bank-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.mb-badge-primary {
+  background-color: #D1FAE5;
+  color: #059669;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.mb-account-type {
+  font-size: 13px;
+  color: #6B7280;
+  margin-bottom: 4px;
+}
+
+.mb-account-number {
+  font-size: 15px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.mb-badge-active {
+  background-color: #DBEAFE;
+  color: #2563EB;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+/* Col 2: Balance */
+.mb-balance-label {
+  font-size: 13px;
+  color: #6B7280;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.mb-balance-amount {
+  font-size: 28px;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.mb-ledger-balance {
+  font-size: 12px;
+  color: #6B7280;
+}
+
+/* Col 3: MTD Flows */
+.mb-flow-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mb-flow-row:not(:last-child) {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed #E5E7EB;
+}
+
+.mb-flow-label {
+  font-size: 12px;
+  color: #6B7280;
+  margin-bottom: 4px;
+}
+
+.mb-flow-amount {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.mb-flow-amount.credit { color: #10B981; }
+.mb-flow-amount.debit { color: #EF4444; }
+
+.mb-flow-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mb-flow-icon.credit {
+  background-color: #D1FAE5;
+  color: #10B981;
+}
+
+.mb-flow-icon.debit {
+  background-color: #FEE2E2;
+  color: #EF4444;
+}
+
+/* Overview Bottom Strip */
+.mb-overview-bottom {
+  background-color: #F9FAFB;
+  border-top: 1px solid #E5E7EB;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mb-detail-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.mb-detail-label {
+  font-size: 11px;
+  color: #6B7280;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.mb-detail-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* ─── Tabs ─── */
+.mb-tabs {
+  display: flex;
+  gap: 24px;
+  border-bottom: 1px solid #E5E7EB;
+  margin-bottom: 24px;
+}
+
+.mb-tab {
+  font-size: 14px;
+  font-weight: 600;
+  color: #6B7280;
+  padding-bottom: 12px;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+  margin-bottom: -1px; /* Align border with the container border */
+}
+
+.mb-tab:hover {
+  color: #111827;
+}
+
+.mb-tab.active {
+  color: #2563EB;
+  border-bottom-color: #2563EB;
+}
+
+/* ─── Ledger Card ─── */
+.mb-ledger-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+}
+
+.mb-ledger-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.mb-ledger-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.mb-ledger-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mb-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #FFFFFF;
+  border: 1px solid #D1D5DB;
+  color: #374151;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.mb-action-btn:hover {
+  background-color: #F9FAFB;
+}
+
+/* Table */
+.mb-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.mb-table th {
+  text-align: left;
+  padding: 12px 24px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6B7280;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.mb-table th.text-right {
+  text-align: right;
+}
+
+.mb-table td {
+  padding: 16px 24px;
+  font-size: 13px;
+  color: #374151;
+  border-bottom: 1px solid #F3F4F6;
+  vertical-align: top;
+}
+
+.mb-table td.text-right {
+  text-align: right;
+}
+
+.mb-tx-desc-main {
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.mb-tx-desc-sub {
+  font-size: 12px;
+  color: #6B7280;
+}
+
+.mb-tx-type-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.mb-tx-type-badge.debit {
+  background-color: #FEE2E2;
+  color: #EF4444;
+}
+
+.mb-tx-type-badge.credit {
+  background-color: #D1FAE5;
+  color: #10B981;
+}
+
+/* Footer Pagination */
+.mb-ledger-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-top: 1px solid #E5E7EB;
+}
+
+.mb-pagination-info {
+  font-size: 13px;
+  color: #6B7280;
+}
+
+.mb-pagination-controls {
+  display: flex;
+  gap: 4px;
+}
+
+.mb-page-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #E5E7EB;
+  background-color: #FFFFFF;
+  color: #374151;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.mb-page-btn.active {
+  background-color: #EFF6FF;
+  color: #2563EB;
+  border-color: #BFDBFE;
+}
+
+.mb-page-btn:hover:not(.active) {
+  background-color: #F9FAFB;
+}

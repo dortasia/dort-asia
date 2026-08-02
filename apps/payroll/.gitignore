@@ -1,0 +1,62 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Next.js
+.next/
+out/
+build/
+
+# Env files
+.env
+.env.local
+.env*.local
+
+# Debug / diagnostic scripts (local only)
+check_*.mjs
+test_*.js
+diagnose*.mjs
+diagnose*.log
+fix_*.mjs
+full_*.mjs
+dump_*.mjs
+investigate_*.mjs
+apply_*.mjs
+cols.mjs
+full_check.mjs
+
+# Log and output files
+*.log
+*_out.txt
+*_output.txt
+build_log*.txt
+tsc-errors.txt
+lint-output.txt
+schema_out.txt
+settings_output.txt
+cols_output.txt
+leaves_output.txt
+mapping_output.txt
+
+# Data / schema dumps (local only)
+*_data.json
+*_schema.json
+tmp_*.json
+full_mapping.json
+eslint-report*.json
+
+# TypeScript build info
+*.tsbuildinfo
+next-env.d.ts
+
+# IDE
+.vscode/
+.idea/
+
+# Vercel
+.vercel
+
+# Misc
+.DS_Store
+*.pem

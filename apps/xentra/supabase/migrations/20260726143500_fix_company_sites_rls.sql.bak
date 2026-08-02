@@ -1,0 +1,40 @@
+-- Drop the old incorrect policies that were checking auth.uid() against company_id (UUID)
+DROP POLICY IF EXISTS "Users can delete their own company sites" ON "public"."company_sites";
+DROP POLICY IF EXISTS "Users can insert their own company sites" ON "public"."company_sites";
+DROP POLICY IF EXISTS "Users can update their own company sites" ON "public"."company_sites";
+DROP POLICY IF EXISTS "Users can view their own company sites" ON "public"."company_sites";
+
+-- Admins and Super Admins can manage company sites
+CREATE POLICY "Admins and Super Admins can insert company sites" 
+ON "public"."company_sites" 
+FOR INSERT 
+WITH CHECK (
+  public.is_admin_in_company(company_id)
+);
+
+CREATE POLICY "Admins and Super Admins can update company sites" 
+ON "public"."company_sites" 
+FOR UPDATE 
+USING (
+  public.is_admin_in_company(company_id)
+);
+
+CREATE POLICY "Admins and Super Admins can delete company sites" 
+ON "public"."company_sites" 
+FOR DELETE 
+USING (
+  public.is_admin_in_company(company_id)
+);
+
+-- Everyone in the company can view company sites
+CREATE POLICY "Employees can view company sites"
+ON "public"."company_sites"
+FOR SELECT
+USING (
+  EXISTS (
+    SELECT 1 FROM "public"."employees"
+    WHERE "employees"."user_id" = auth.uid() AND "employees"."company_id" = "company_sites"."company_id"
+  )
+  OR
+  public.is_admin_in_company(company_id)
+);

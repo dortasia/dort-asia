@@ -1,0 +1,121 @@
+1. Personal Information
+First Name
+Required
+Only alphabets allowed
+Min: 2 characters
+Max: 50 characters
+No numbers / special symbols
+Example:
+
+✅ Dinesh
+❌ Dinesh123
+
+Last Name
+Required
+Only alphabets allowed
+Min: 1 character
+Max: 50 characters
+Stakeholder ID
+Required
+Auto-generated preferred
+Format: STK-001
+Unique only
+Cannot be edited after save
+Equity Category
+Required
+Dropdown only
+Example:
+Founder’s Equity
+Investor
+Partner
+Director
+Shareholder
+Email Address
+Required
+Valid email format
+Unique email only
+Max: 100 characters
+Example:
+
+✅ dinesh.vc@company.com
+
+❌ dinesh.com
+
+Phone Number
+Required
+Singapore format preferred
+Country code fixed: +65
+Only numbers allowed
+Exactly 8 digits after +65
+Example:
+
+✅ +65 91234567
+❌ +65 123
+
+Date of Birth
+Required
+Must be past date only
+Minimum age: 18+
+Cannot select future date
+2. Investment Details
+Initial Capital
+Required
+Numbers only
+Positive values only
+Max: 2 decimal places
+Currency: SGD
+Example:
+
+✅ 50000
+❌ -1000
+
+Equity Percentage
+Required
+Number only
+Range: 0.01% to 100%
+Max: 2 decimal places
+Total combined stakeholders must not exceed 100%
+Example:
+
+✅ 25.50%
+❌ 150%
+
+Monthly Salary
+Optional (if applicable)
+Numbers only
+Positive values only
+Currency: SGD
+Max: 2 decimal places
+3. Bank Details
+Bank Name
+Required
+Dropdown only
+Supported banks only:
+DBS
+Citi
+OCBC
+Standard Chartered
+UOB
+Account Holder Name
+Required
+Must match legal employee/stakeholder name
+Only alphabets + spaces
+Min: 2 characters
+Max: 100 characters
+Account Number
+Required
+Numbers only
+Dynamic validation based on selected bank
+Example:
+Bank	Digits
+DBS	10
+Citi	12
+OCBC	7–9
+SCB	10
+UOB	10
+No spaces
+No special characters
+System Conditions 🔒
+Lock After Save
+Once submitted → fields become read-only
+Only Admin can unlock

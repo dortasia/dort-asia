@@ -1,0 +1,6 @@
+User logs in — their ID or email is available (e.g. ikrisshna08@gmail.com)
+Avatar needs to render — instead of picking a random color, you pass that user's ID/email into a hash function
+Hash function runs — it reads every character of the string and does a math calculation, turning it into a number. Same string always gives the same number.
+That number picks a color — you have a fixed list of colors, and the number points to one slot in that list. Same number always points to the same slot.
+Color is applied — the avatar renders with that background and text color
+Next time the avatar loads — the same email goes through the same hash, gives the same number, picks the same color. Every single time.

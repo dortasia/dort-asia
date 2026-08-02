@@ -1,0 +1,28 @@
+﻿Today attendance: [
+  {
+    "id": "17bfbd25-af3f-4b8f-833a-3befe7503394",
+    "employee_id": "51f84689-845d-44fc-aefe-64ad7ee64c46",
+    "date": "2026-03-28",
+    "status": "present",
+    "location": "10.843454,79.6289251",
+    "clock_in": "13:38",
+    "clock_out": null,
+    "hours": null,
+    "proof_url": null,
+    "created_at": "2026-03-28T08:08:49.424127+00:00",
+    "clock_in_time": "2026-03-28T08:08:49.094121+00:00"
+  },
+  {
+    "id": "d45a363c-8308-4b7c-a532-bfcf84f31ab8",
+    "employee_id": "51f84689-845d-44fc-aefe-64ad7ee64c46",
+    "date": "2026-03-28",
+    "status": "present",
+    "location": "10.8435034,79.6290244",
+    "clock_in": "13:09",
+    "clock_out": null,
+    "hours": null,
+    "proof_url": null,
+    "created_at": "2026-03-28T07:39:08.386806+00:00",
+    "clock_in_time": "2026-03-28T07:39:08.17397+00:00"
+  }
+]

@@ -1,0 +1,6 @@
+1. each company should have seperate Bucket in their company's name within it to folder need to be created (Company - within it the data of Company and super admin need to be stored; Employee - within it the data of the Employees within the company should be stored)
+2.the user with the already registered should not create another account with the given email and Phone nominee_name
+3.Employees Deployed within the Company should have Authentication capability for bothe Mobile app and Web (Landing & Hrms), when the employee was removed from the company the Data of the employees should be deleted within 24 hrs and the employee loss the authentication capability
+4.the person who had registered as a company in the dort asia (Landing Page) had same authentication for all apps in the Apps in the Dort asia
+5.the avatars (Default & updated) should be same all along the Environment of dort asia (which includes Default (alphabet Avatar like google))
+6.admin (1 for a department) are the Head of the Department and sub admin (2 for a department) Employees (varies by the plan)
