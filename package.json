@@ -1,6 +1,7 @@
 {
   "name": "dort-asia-monorepo",
   "private": true,
+  "packageManager": "npm@10.5.0",
   "workspaces": [
     "apps/*"
   ],
