@@ -22,12 +22,17 @@ export async function middleware(request: NextRequest) {
           return request.cookies.getAll()
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) => request.cookies.set(name, value))
+          const isLocalhost = request.nextUrl.hostname === 'localhost';
+          
+          cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value))
           supabaseResponse = NextResponse.next({
             request,
           })
           cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options)
+            supabaseResponse.cookies.set(name, value, {
+              ...options,
+              domain: isLocalhost ? undefined : '.dortasia.com',
+            })
           )
         },
       },
@@ -44,7 +49,7 @@ export async function middleware(request: NextRequest) {
 
   if (!user && !isAuthPage) {
     // No user found, redirect to landing page login
-    const landingUrl = process.env.NEXT_PUBLIC_LANDING_URL || 'http://localhost:3001';
+    const landingUrl = process.env.NEXT_PUBLIC_LANDING_URL || 'https://dortasia.com';
     return NextResponse.redirect(`${landingUrl}/login`)
   }
 

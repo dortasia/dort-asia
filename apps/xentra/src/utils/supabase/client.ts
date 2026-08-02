@@ -11,5 +11,11 @@ export function createClient() {
     );
   }
 
-  return createBrowserClient(url, anonKey);
+  const isLocalhost = typeof window !== 'undefined' && window.location.hostname === 'localhost';
+
+  return createBrowserClient(url, anonKey, {
+    cookieOptions: {
+      domain: isLocalhost ? undefined : '.dortasia.com',
+    }
+  });
 }
