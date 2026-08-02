@@ -129,7 +129,7 @@ export const useAppStore = create<AppState>()(
       setSpotlightOpen: (isOpen) => set({ isSpotlightOpen: isOpen }),
     }),
     {
-      name: "hrms-store",
+      name: "hrms-store-v2",
       /** Avoid SSR HTML vs first client paint mismatch (persist reads localStorage on client only after rehydrate). */
       skipHydration: true,
       partialize: (state) => ({

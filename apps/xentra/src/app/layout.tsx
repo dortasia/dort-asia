@@ -34,6 +34,19 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased bg-[#FBFBFD] overflow-hidden zoom-container m-0 p-0">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                  for(let registration of registrations) {
+                    registration.unregister();
+                  }
+                });
+              }
+            `,
+          }}
+        />
         <AuthProvider initialUser={initialUser}>
           <QueryProvider>
             <div className="flex zoom-container bg-[#FBFBFD] overflow-hidden">
