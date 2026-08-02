@@ -1243,11 +1243,11 @@ export default function EmployeeProfileView() {
  if (data.company_id) {
  const { data: compSettingsProj } = await supabase
  .from("company_settings")
- .select("attendance_config")
+ .select("attendance_settings")
  .eq("company_id", data.company_id)
  .maybeSingle();
- if (compSettingsProj?.attendance_config?.projects) {
- setRealProjects(compSettingsProj.attendance_config.projects);
+ if (compSettingsProj?.attendance_settings?.projects) {
+ setRealProjects(compSettingsProj.attendance_settings.projects);
  }
  }
  }

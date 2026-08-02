@@ -1689,7 +1689,7 @@ export default function EditEmployeePage() {
       // 2. Fetch settings using the correct companyId
       const { data: compSettings } = await supabase
         .from('company_settings')
-        .select('app_config')
+        .select('app_config, attendance_settings')
         .eq('company_id', companyId)
         .maybeSingle();
 
@@ -1700,8 +1700,8 @@ export default function EditEmployeePage() {
         if (compSettings.app_config.custom_roles) {
           setAvailableRoles(["Admin", "Sub Admin", "Employee", ...compSettings.app_config.custom_roles]);
         }
-        if (compSettings.app_config.attendance_config?.projects) {
-          setCompanyProjects(compSettings.app_config.attendance_config.projects);
+        if (compSettings.attendance_settings?.projects) {
+          setCompanyProjects(compSettings.attendance_settings.projects);
         }
       }
 

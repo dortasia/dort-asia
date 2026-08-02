@@ -72,7 +72,7 @@ export default function EmployeeTableRenderer({ employees }: { employees: Employ
 
         let { data: comp } = await supabase
           .from('company_settings')
-          .select('attendance_config')
+          .select('attendance_settings')
           .eq('company_id', user.id)
           .maybeSingle();
 
@@ -85,15 +85,15 @@ export default function EmployeeTableRenderer({ employees }: { employees: Employ
           if (empRecord) {
             const { data: compEmp } = await supabase
               .from('company_settings')
-              .select('attendance_config')
+              .select('attendance_settings')
               .eq('company_id', empRecord.company_id)
               .maybeSingle();
             comp = compEmp;
           }
         }
 
-        if (comp?.attendance_config?.projects) {
-          setRealProjects(comp.attendance_config.projects);
+        if (comp?.attendance_settings?.projects) {
+          setRealProjects(comp.attendance_settings.projects);
         }
       } catch (e) {
         console.error("Error loading company projects in employee table:", e);
