@@ -161,10 +161,10 @@ export default function FormDatePicker({
         onClick={handleToggle}
         disabled={disabled}
         className={cn(
-          "w-full flex items-center justify-between pr-3.5 py-2.5 bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl type-small focus:outline-none focus:border-[#C8DF52] focus:bg-white transition-all cursor-pointer",
+          "w-full flex items-center justify-between pr-3.5 py-2.5 bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl type-small focus:outline-none focus:border-[#007AFF] focus:bg-white transition-all cursor-pointer",
           icon ? "pl-10" : "pl-3.5",
           disabled && "opacity-50 cursor-not-allowed",
-          isOpen && "border-[#C8DF52] bg-white"
+          isOpen && "border-[#007AFF] bg-white"
         )}
       >
         {icon && (
@@ -296,15 +296,15 @@ export default function FormDatePicker({
                     key={day}
                     type="button"
                     onClick={() => handleDateClick(day)}
-                    className={cn(
-                      "h-8 w-8 rounded-full flex items-center justify-center type-small transition-colors cursor-pointer",
-                      isSelected 
-                        ? "bg-[#C8DF52] !text-[#161616] font-medium shadow-sm" 
+                    className={`
+                      h-8 w-8 rounded-full flex items-center justify-center type-small transition-colors
+                      ${isSelected 
+                        ? "bg-[#007AFF] !text-white font-medium shadow-sm" 
                         : isToday 
-                          ? "bg-gray-100 text-[#C8DF52] font-medium" 
-                          : "!text-[#161616] hover:bg-[#F4F4F5]"
-                    )}
-                  >
+                          ? "bg-gray-100 text-[#007AFF] font-medium" 
+                          : "text-gray-700 hover:bg-gray-100"
+                      }
+                    `}>
                     {day}
                   </button>
                 );

@@ -1,21 +1,26 @@
 import { createBrowserClient } from '@supabase/ssr'
 
+let client: ReturnType<typeof createBrowserClient> | null = null
+
 export function createClient() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  // Reuse the same client instance to avoid lock conflicts with Turbopack HMR
+  if (client) return client
 
-  if (!url || !anonKey) {
-    throw new Error(
-      "Supabase environment variables are missing. " +
-      "Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY."
-    );
-  }
+  // Do not set auth.storageKey here: createServerClient in middleware uses the
+  // default Supabase cookie key (sb-<project-ref>-auth-token). A custom key
+  // makes the browser read/write different cookies than the server, causing
+  // AuthSessionMissingError on the client while middleware still sees the session.
+  const isLocalhost = typeof window !== 'undefined' && window.location.hostname === 'localhost'
 
-  const isLocalhost = typeof window !== 'undefined' && window.location.hostname === 'localhost';
-
-  return createBrowserClient(url, anonKey, {
-    cookieOptions: {
-      domain: isLocalhost ? undefined : '.dortasia.com',
+  client = createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookieOptions: {
+        domain: isLocalhost ? undefined : '.dortasia.com',
+      }
     }
-  });
+  )
+
+  return client
 }

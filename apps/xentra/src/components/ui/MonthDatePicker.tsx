@@ -107,10 +107,10 @@ export default function MonthDatePicker({ selectedDate, onChange }: MonthDatePic
                   className={`
                     h-8 w-8 rounded-full flex items-center justify-center type-small transition-colors
                     ${isSelected 
-                      ? "bg-[#C8DF52] text-[#161616] shadow-sm" 
+                      ? "bg-[#007AFF] text-white shadow-sm" 
                       : isToday 
-                        ? "bg-gray-100 text-[#C8DF52]" 
-                        : "text-[#161616] hover:bg-gray-100"
+                        ? "bg-gray-100 text-[#007AFF]" 
+                        : "text-gray-700 hover:bg-gray-100"
                     }
                   `}
                 >

@@ -5,12 +5,14 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Icon } from '@iconify/react'
 import { Search } from 'lucide-react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { cn } from '@/lib/utils'
 import { useAuthStore } from '@/store/useAuthStore'
 import { useCompanyStore } from '@/store/useCompanyStore'
 import { supabase } from '@/lib/supabase'
 
 export default function SettingsLayout({ children }: { children: React.ReactNode }) {
+  const [queryClient] = useState(() => new QueryClient())
   const pathname = usePathname()
   const [searchQuery, setSearchQuery] = useState('')
   const { user } = useAuthStore()
@@ -91,9 +93,10 @@ export default function SettingsLayout({ children }: { children: React.ReactNode
   const isSubscriptionsActive = isItemActive('/settings/subscriptions')
 
   return (
-    <div className="flex flex-col h-[calc(100%+3rem)] min-h-[calc(100%+3rem)] overflow-hidden bg-[#F9FAFB] font-sans relative -mt-4 -mx-4 -mb-8">
-      {/* Map Portal Container */}
-      <div id="settings-map-portal" className="absolute top-0 right-0 bottom-0 left-[360px] z-[45] pointer-events-none" />
+    <QueryClientProvider client={queryClient}>
+      <div className="flex flex-col h-full w-full overflow-hidden bg-transparent font-sans relative rounded-[24px]">
+        {/* Map Portal Container */}
+        <div id="settings-map-portal" className="absolute top-0 right-0 bottom-0 left-[360px] z-[45] pointer-events-none" />
       
       {/* Top Header Bar */}
       <div className="flex items-center h-[72px] bg-white shrink-0 z-50">
@@ -220,5 +223,6 @@ export default function SettingsLayout({ children }: { children: React.ReactNode
       </main>
       </div>
     </div>
+    </QueryClientProvider>
   )
 }

@@ -1,0 +1,852 @@
+/* ═══════════════════════════════════════════════
+   HOME PAGE — ROW‑BASED WIDGET GRID
+   ═══════════════════════════════════════════════ */
+
+/* ─── Row 1 ── Notify · Events · 3 Expiry Cards ─── */
+.home-row-1 {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+  margin-bottom: 12px;
+  height: 130px;
+}
+
+/* ── Mini action card (Notify / Events) ── */
+.home-mini-card {
+  background: #f8f9fa;
+  border-radius: 20px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 130px;
+  width: 130px;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
+  position: relative;
+}
+.home-mini-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.home-mini-card__header {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+}
+
+.home-mini-card__title {
+  font-family: "SF Pro Display", "SF Pro Text", "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.2;
+}
+
+.home-mini-card__chevron {
+  color: #1a1a1a;
+}
+
+.home-mini-card__icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  align-self: flex-end;
+  margin-top: auto;
+}
+
+/* ── Expiry events wrapper container ── */
+.home-expiry-container {
+  background: #f8f9fa;
+  border-radius: 20px;
+  padding: 12px;
+  display: flex;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+}
+.home-expiry-container::-webkit-scrollbar { display: none; }
+
+/* ── Expiry card ─ pure white inside the gray wrapper ── */
+.home-expiry-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  flex: none;
+  width: 260px;
+  min-width: 260px;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
+}
+.home-expiry-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+/* Top row of the expiry card: avatar + info */
+.home-expiry-card__top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.home-expiry-card__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  flex-shrink: 0;
+}
+
+.home-expiry-card__info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.home-expiry-card__name {
+  font-family: "SF Pro Display", "SF Pro Text", "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+
+.home-expiry-card__type {
+  font-family: "SF Pro Display", "SF Pro Text", "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 12px;
+  color: #9CA3AF;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+/* Gray Pill inside Expiry Card */
+.home-expiry-card__pill {
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: #f4f5f9;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+}
+
+.home-expiry-card__pill-number {
+  font-family: "SF Pro Rounded", "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #007AFF;
+}
+
+.home-expiry-card__pill-text {
+  font-family: "SF Pro Display", "SF Pro Text", "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: #9CA3AF;
+}
+
+/* ═══════════════════════════════════════════════
+   ROW 2 — My Tasks · Leave · Stats · Screen Time
+   ═══════════════════════════════════════════════ */
+
+.home-row-2 {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+  margin-bottom: 12px;
+  height: 130px;
+}
+
+/* ── Stat card (Total Employees / Dept / Storage) ── */
+.home-stat-card {
+  background: #f8f9fa;
+  border-radius: 20px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  min-width: 0;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+.home-stat-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.home-stat-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 45%;
+  background: #e6f0ff; /* extremely light blue */
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+  z-index: 0;
+}
+
+.home-stat-card__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  color: #007aff;
+}
+
+.home-stat-card__content {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+  align-items: flex-end; /* right align the text based on the image */
+  text-align: right;
+  flex: 1;
+}
+
+.home-stat-card__label {
+  font-family: "SF Pro Display", "SF Pro Text", "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.2;
+}
+
+.home-stat-card__value-row {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.home-stat-card__number {
+  font-family: "SF Pro Rounded", "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #007AFF;
+}
+
+.home-stat-card__sub {
+  font-family: "SF Pro Display", "SF Pro Text", "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #6B7280;
+}
+.home-stat-card__sub strong {
+  font-weight: 600;
+  color: #374151;
+}
+
+/* ── Screen time card ── */
+.home-screentime-card {
+  background: #f8f9fa;
+  border-radius: 20px;
+  padding: 16px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 130px;
+  width: 130px;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+.home-screentime-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.home-screentime-card__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.home-screentime-card__title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.home-screentime-card__sub {
+  font-size: 10px;
+  font-weight: 500;
+  color: #9ca3af;
+  white-space: nowrap;
+}
+
+.home-screentime-card__chart {
+  width: 100%;
+  height: 60px;
+  margin-top: auto;
+}
+
+/* ═══════════════════════════════════════════════
+   ROW 3 — Upcoming Holidays · Chat now · Pending Profile
+   ═══════════════════════════════════════════════ */
+
+.home-row-3 {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+  margin-bottom: 12px;
+  height: 140px;
+}
+
+/* ── Upcoming Holidays card ── */
+.home-holidays-card {
+  background: #f8f9fa;
+  border-radius: 18px;
+  padding: 16px 18px;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
+}
+.home-holidays-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.home-holidays-card__header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.home-holidays-card__title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1;
+}
+
+.home-holidays-card__list-wrapper {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 12px 14px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.home-holidays-card__list {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  overflow-x: auto;
+  width: 100%;
+}
+.home-holidays-card__list::-webkit-scrollbar { display: none; }
+
+.home-holidays-card__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.home-holidays-card__month {
+  font-size: 11px;
+  font-weight: 600;
+  color: #9ca3af;
+  text-transform: capitalize;
+}
+
+.home-holidays-card__day {
+  font-size: 18px;
+  font-weight: 800;
+  color: #ef4444;
+  line-height: 1.1;
+}
+
+.home-holidays-card__divider {
+  width: 1px;
+  height: 24px;
+  background-color: #f3f4f6;
+  flex-shrink: 0;
+}
+
+/* ── Chat now card ── */
+.home-chat-card {
+  background: #f8f9fa;
+  border-radius: 18px;
+  padding: 16px 18px;
+  flex: none;
+  width: 140px;
+  min-width: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
+}
+.home-chat-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.home-chat-card__header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.home-chat-card__title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1;
+}
+
+.home-chat-card__bot {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-chat-card__image {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+}
+
+/* ── Pending Profile Updates card ── */
+.home-pending-card {
+  background: #f8f9fa;
+  border-radius: 18px;
+  padding: 16px 18px;
+  flex: 1.5;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
+}
+.home-pending-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.home-pending-card__header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.home-pending-card__title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1;
+}
+
+.home-pending-card__list {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  align-items: stretch;
+}
+.home-pending-card__list::-webkit-scrollbar { display: none; }
+
+.home-pending-card__item {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-shrink: 0;
+  min-width: 180px;
+}
+
+.home-pending-card__item-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.home-pending-card__avatar-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  flex-shrink: 0;
+}
+
+.home-pending-card__info-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.home-pending-card__name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.home-pending-card__role {
+  font-size: 11px;
+  font-weight: 500;
+  color: #9ca3af;
+  white-space: nowrap;
+}
+
+.home-pending-card__progress-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.home-pending-card__bar-wrap {
+  flex: 1;
+  height: 6px;
+  border-radius: 4px;
+  background: #f3f4f6;
+  overflow: hidden;
+}
+
+.home-pending-card__bar {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+.home-pending-card__pct {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.home-pending-card__pct-text {
+  font-weight: 500;
+  color: #9ca3af;
+}
+
+/* ═══════════════════════════════════════════════
+   ROW 4 — Attendance Chart · Recent Clock ins · History
+   ═══════════════════════════════════════════════ */
+
+.home-row-4 {
+  display: flex;
+  gap: 16px;
+  align-items: stretch;
+  height: 300px;
+}
+
+/* ── Attendance Chart ── */
+.home-chart-card {
+  background: #f8f9fa;
+  border-radius: 20px;
+  padding: 16px;
+  flex: 1.1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.home-chart-layout {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  height: 100%;
+}
+
+.home-chart-y {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 600;
+  color: #4b5563;
+  padding-bottom: 24px; /* Space for x-axis */
+}
+
+.home-chart-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.home-chart-white-box {
+  background: #ffffff;
+  border-radius: 20px;
+  flex: 1;
+  padding: 16px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.home-chart-bar-wrap {
+  width: 28px;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.home-chart-bar {
+  width: 100%;
+  border-radius: 14px;
+  transition: height 0.4s ease;
+}
+
+.home-chart-x {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+/* ── Recent Clock ins ── */
+.home-recent-card {
+  background: #f8f9fa;
+  border-radius: 20px;
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.home-chart-card__header,
+.home-recent-card__header,
+.home-history-card__header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.home-chart-card__title,
+.home-recent-card__title,
+.home-history-card__title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1;
+}
+
+.home-recent-card__list,
+.home-history-card__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+}
+
+.home-recent-card__list::-webkit-scrollbar,
+.home-history-card__list::-webkit-scrollbar {
+  display: none;
+}
+
+.home-recent-card__item {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 0 16px;
+  height: 64px; /* Fixed height for consistency */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.home-recent-card__user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.home-recent-card__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #d1d5db;
+}
+
+.home-recent-card__name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.home-recent-card__status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.home-recent-card__clocked-in {
+  font-size: 11px;
+  font-weight: 600;
+  color: #22c55e;
+}
+
+.home-recent-card__time {
+  font-size: 10px;
+  font-weight: 500;
+  color: #9ca3af;
+}
+
+/* ── Your Clock in History ── */
+.home-history-card {
+  background: #f8f9fa;
+  border-radius: 20px;
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.home-history-card__item {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 0 20px;
+  height: 64px; /* Fixed height for consistency */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.home-history-card__date {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a1a1a;
+  width: 100px;
+}
+
+.home-history-card__hours {
+  font-size: 12px;
+  font-weight: 500;
+  color: #9ca3af;
+}
+
+.home-history-card__hist-time {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* -----------------------------------------------
+   DARK MODE OVERRIDES
+   ----------------------------------------------- */
+
+.dark .home-mini-card,
+.dark .home-expiry-container,
+.dark .home-stat-card,
+.dark .home-screentime-card,
+.dark .home-holidays-card,
+.dark .home-chat-card,
+.dark .home-pending-card,
+.dark .home-chart-card,
+.dark .home-recent-card,
+.dark .home-history-card {
+  background: #1C1C22;
+}
+
+.dark .home-expiry-card,
+.dark .home-stat-card__icon,
+.dark .home-holidays-card__list-wrapper,
+.dark .home-pending-card__item,
+.dark .home-chart-white-box,
+.dark .home-recent-card__item,
+.dark .home-history-card__item {
+  background: #25252D;
+}
+
+.dark .home-mini-card__title,
+.dark .home-expiry-card__name,
+.dark .home-stat-card__label,
+.dark .home-screentime-card__title,
+.dark .home-holidays-card__title,
+.dark .home-chat-card__title,
+.dark .home-pending-card__title,
+.dark .home-pending-card__name,
+.dark .home-chart-card__title,
+.dark .home-recent-card__title,
+.dark .home-recent-card__name,
+.dark .home-history-card__title,
+.dark .home-history-card__date {
+  color: #ffffff;
+}
+
+.dark .home-mini-card__chevron,
+.dark .home-expiry-card__type,
+.dark .home-stat-card__sub,
+.dark .home-screentime-card__sub,
+.dark .home-holidays-card__month,
+.dark .home-pending-card__role,
+.dark .home-pending-card__pct-text,
+.dark .home-chart-y,
+.dark .home-chart-x,
+.dark .home-recent-card__time,
+.dark .home-history-card__hours {
+  color: #9ca3af;
+}
+
+.dark .home-expiry-card__avatar,
+.dark .home-pending-card__avatar-circle,
+.dark .home-recent-card__avatar {
+  background: #3F444D;
+}
+
+.dark .home-expiry-card__pill {
+  background: #363640;
+}
+
+.dark .home-holidays-card__divider {
+  background: #3F444D;
+}
+
+.dark .home-stat-card::before {
+  background: rgba(10, 132, 255, 0.05);
+}
+
+.dark .home-pending-card__bar-wrap {
+  background: #2A2A31;
+}
+
+/* Ensure the chevrons on HomeRow1 get correctly colored */
+.dark .home-mini-card__chevron {
+  color: #9ca3af;
+}
+

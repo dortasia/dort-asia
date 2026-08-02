@@ -74,12 +74,6 @@ interface AppState {
   setCachedSidebar: (data: CachedSidebarData) => void;
   cachedEmployees: CachedEmployee[] | null;
   setCachedEmployees: (data: CachedEmployee[]) => void;
-  cachedEmployeesTotal: number | null;
-  setCachedEmployeesTotal: (total: number) => void;
-  cachedPayroll: any | null;
-  setCachedPayroll: (data: any) => void;
-  cachedFinance: any | null;
-  setCachedFinance: (data: any) => void;
   clearCache: () => void;
 
   // ── UI States ──
@@ -106,20 +100,11 @@ export const useAppStore = create<AppState>()(
         set({ cachedSidebar: data, cacheTimestamp: Date.now() }),
       cachedEmployees: null,
       setCachedEmployees: (data) => set({ cachedEmployees: data }),
-      cachedEmployeesTotal: null,
-      setCachedEmployeesTotal: (total) => set({ cachedEmployeesTotal: total }),
-      cachedPayroll: null,
-      setCachedPayroll: (data) => set({ cachedPayroll: data }),
-      cachedFinance: null,
-      setCachedFinance: (data) => set({ cachedFinance: data }),
       clearCache: () =>
         set({ 
           cachedSidebar: null, 
           cacheTimestamp: null, 
           cachedEmployees: null,
-          cachedEmployeesTotal: null,
-          cachedPayroll: null,
-          cachedFinance: null
         }),
 
       // ── UI States ──
@@ -129,7 +114,7 @@ export const useAppStore = create<AppState>()(
       setSpotlightOpen: (isOpen) => set({ isSpotlightOpen: isOpen }),
     }),
     {
-      name: "hrms-store-v2",
+      name: "hrms-store-v3",
       /** Avoid SSR HTML vs first client paint mismatch (persist reads localStorage on client only after rehydrate). */
       skipHydration: true,
       partialize: (state) => ({
@@ -138,9 +123,6 @@ export const useAppStore = create<AppState>()(
         cachedSidebar: state.cachedSidebar,
         cacheTimestamp: state.cacheTimestamp,
         cachedEmployees: state.cachedEmployees,
-        cachedEmployeesTotal: state.cachedEmployeesTotal,
-        cachedPayroll: state.cachedPayroll,
-        cachedFinance: state.cachedFinance,
       }),
     }
   )

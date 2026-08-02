@@ -1,0 +1,3380 @@
+﻿{
+    "tables":  [
+                   "attendance",
+                   "attendance_y2026m07",
+                   "attendance_y2026m08",
+                   "claim_policies",
+                   "claims",
+                   "companies",
+                   "company_module_settings",
+                   "company_settings",
+                   "company_sites",
+                   "delegations",
+                   "departments",
+                   "employee_bank_details",
+                   "employee_certifications",
+                   "employee_contact_details",
+                   "employee_declarations",
+                   "employee_documents",
+                   "employee_education",
+                   "employee_identity_docs",
+                   "employee_insurance",
+                   "employee_personal_details",
+                   "employee_salary",
+                   "employee_work_details",
+                   "employees",
+                   "fwl_rate_master",
+                   "leave_policies",
+                   "leave_requests"
+               ],
+    "columns":  [
+                    {
+                        "column_default":  "gen_random_uuid()",
+                        "column_name":  "id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "attendance"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "company_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "attendance"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "employee_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "attendance"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "site_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "YES",
+                        "table_name":  "attendance"
+                    },
+                    {
+                        "column_default":  "CURRENT_DATE",
+                        "column_name":  "date",
+                        "data_type":  "date",
+                        "is_nullable":  "NO",
+                        "table_name":  "attendance"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "status",
+                        "data_type":  "text",
+                        "is_nullable":  "NO",
+                        "table_name":  "attendance"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "location",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "attendance"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "proof_url",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "attendance"
+                    },
+                    {
+                        "column_default":  "timezone(\u0027utc\u0027::text, now())",
+                        "column_name":  "created_at",
+                        "data_type":  "timestamp with time zone",
+                        "is_nullable":  "NO",
+                        "table_name":  "attendance"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "clock_in",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "attendance"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "clock_out",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "attendance"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "hours",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "attendance"
+                    },
+                    {
+                        "column_default":  "gen_random_uuid()",
+                        "column_name":  "id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "attendance_y2026m07"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "company_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "attendance_y2026m07"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "employee_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "attendance_y2026m07"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "site_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "YES",
+                        "table_name":  "attendance_y2026m07"
+                    },
+                    {
+                        "column_default":  "CURRENT_DATE",
+                        "column_name":  "date",
+                        "data_type":  "date",
+                        "is_nullable":  "NO",
+                        "table_name":  "attendance_y2026m07"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "status",
+                        "data_type":  "text",
+                        "is_nullable":  "NO",
+                        "table_name":  "attendance_y2026m07"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "location",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "attendance_y2026m07"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "proof_url",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "attendance_y2026m07"
+                    },
+                    {
+                        "column_default":  "timezone(\u0027utc\u0027::text, now())",
+                        "column_name":  "created_at",
+                        "data_type":  "timestamp with time zone",
+                        "is_nullable":  "NO",
+                        "table_name":  "attendance_y2026m07"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "clock_in",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "attendance_y2026m07"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "clock_out",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "attendance_y2026m07"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "hours",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "attendance_y2026m07"
+                    },
+                    {
+                        "column_default":  "gen_random_uuid()",
+                        "column_name":  "id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "attendance_y2026m08"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "company_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "attendance_y2026m08"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "employee_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "attendance_y2026m08"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "site_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "YES",
+                        "table_name":  "attendance_y2026m08"
+                    },
+                    {
+                        "column_default":  "CURRENT_DATE",
+                        "column_name":  "date",
+                        "data_type":  "date",
+                        "is_nullable":  "NO",
+                        "table_name":  "attendance_y2026m08"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "status",
+                        "data_type":  "text",
+                        "is_nullable":  "NO",
+                        "table_name":  "attendance_y2026m08"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "location",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "attendance_y2026m08"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "proof_url",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "attendance_y2026m08"
+                    },
+                    {
+                        "column_default":  "timezone(\u0027utc\u0027::text, now())",
+                        "column_name":  "created_at",
+                        "data_type":  "timestamp with time zone",
+                        "is_nullable":  "NO",
+                        "table_name":  "attendance_y2026m08"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "clock_in",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "attendance_y2026m08"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "clock_out",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "attendance_y2026m08"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "hours",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "attendance_y2026m08"
+                    },
+                    {
+                        "column_default":  "gen_random_uuid()",
+                        "column_name":  "id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "claim_policies"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "company_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "claim_policies"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "department_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "YES",
+                        "table_name":  "claim_policies"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "category",
+                        "data_type":  "text",
+                        "is_nullable":  "NO",
+                        "table_name":  "claim_policies"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "monthly_limit",
+                        "data_type":  "numeric",
+                        "is_nullable":  "YES",
+                        "table_name":  "claim_policies"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "yearly_limit",
+                        "data_type":  "numeric",
+                        "is_nullable":  "YES",
+                        "table_name":  "claim_policies"
+                    },
+                    {
+                        "column_default":  "\u0027{}\u0027::jsonb",
+                        "column_name":  "hierarchy_setup",
+                        "data_type":  "jsonb",
+                        "is_nullable":  "YES",
+                        "table_name":  "claim_policies"
+                    },
+                    {
+                        "column_default":  "timezone(\u0027utc\u0027::text, now())",
+                        "column_name":  "created_at",
+                        "data_type":  "timestamp with time zone",
+                        "is_nullable":  "NO",
+                        "table_name":  "claim_policies"
+                    },
+                    {
+                        "column_default":  "gen_random_uuid()",
+                        "column_name":  "id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "claims"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "employee_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "claims"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "policy_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "claims"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "amount",
+                        "data_type":  "numeric",
+                        "is_nullable":  "NO",
+                        "table_name":  "claims"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "claim_date",
+                        "data_type":  "date",
+                        "is_nullable":  "NO",
+                        "table_name":  "claims"
+                    },
+                    {
+                        "column_default":  "\u0027Pending\u0027::text",
+                        "column_name":  "status",
+                        "data_type":  "text",
+                        "is_nullable":  "NO",
+                        "table_name":  "claims"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "current_approver_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "YES",
+                        "table_name":  "claims"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "receipt_url",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "claims"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "description",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "claims"
+                    },
+                    {
+                        "column_default":  "timezone(\u0027utc\u0027::text, now())",
+                        "column_name":  "created_at",
+                        "data_type":  "timestamp with time zone",
+                        "is_nullable":  "NO",
+                        "table_name":  "claims"
+                    },
+                    {
+                        "column_default":  "gen_random_uuid()",
+                        "column_name":  "id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "companies"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "super_admin_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "YES",
+                        "table_name":  "companies"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "company_name",
+                        "data_type":  "text",
+                        "is_nullable":  "NO",
+                        "table_name":  "companies"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "logo_url",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "companies"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "super_admin_name",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "companies"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "super_admin_avatar_url",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "companies"
+                    },
+                    {
+                        "column_default":  "timezone(\u0027utc\u0027::text, now())",
+                        "column_name":  "created_at",
+                        "data_type":  "timestamp with time zone",
+                        "is_nullable":  "NO",
+                        "table_name":  "companies"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "login_email",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "companies"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "phone_number",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "companies"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "sign_in_method",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "companies"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "company_type",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "companies"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "branch_location",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "companies"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "website",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "companies"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "super_admin_designation",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "companies"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "sector",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "companies"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "corporate_addres",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "companies"
+                    },
+                    {
+                        "column_default":  "gen_random_uuid()",
+                        "column_name":  "id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "company_module_settings"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "company_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "company_module_settings"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "module",
+                        "data_type":  "text",
+                        "is_nullable":  "NO",
+                        "table_name":  "company_module_settings"
+                    },
+                    {
+                        "column_default":  "\u0027{}\u0027::jsonb",
+                        "column_name":  "settings",
+                        "data_type":  "jsonb",
+                        "is_nullable":  "NO",
+                        "table_name":  "company_module_settings"
+                    },
+                    {
+                        "column_default":  "timezone(\u0027utc\u0027::text, now())",
+                        "column_name":  "created_at",
+                        "data_type":  "timestamp with time zone",
+                        "is_nullable":  "NO",
+                        "table_name":  "company_module_settings"
+                    },
+                    {
+                        "column_default":  "timezone(\u0027utc\u0027::text, now())",
+                        "column_name":  "updated_at",
+                        "data_type":  "timestamp with time zone",
+                        "is_nullable":  "NO",
+                        "table_name":  "company_module_settings"
+                    },
+                    {
+                        "column_default":  "gen_random_uuid()",
+                        "column_name":  "id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "company_settings"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "company_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "company_settings"
+                    },
+                    {
+                        "column_default":  "\u002709:00\u0027::text",
+                        "column_name":  "shift_start",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "company_settings"
+                    },
+                    {
+                        "column_default":  "\u002718:00\u0027::text",
+                        "column_name":  "shift_end",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "company_settings"
+                    },
+                    {
+                        "column_default":  "ARRAY[\u0027Mon\u0027::text, \u0027Tue\u0027::text, \u0027Wed\u0027::text, \u0027Thu\u0027::text, \u0027Fri\u0027::text]",
+                        "column_name":  "working_days",
+                        "data_type":  "ARRAY",
+                        "is_nullable":  "YES",
+                        "table_name":  "company_settings"
+                    },
+                    {
+                        "column_default":  "15",
+                        "column_name":  "grace_period_mins",
+                        "data_type":  "integer",
+                        "is_nullable":  "YES",
+                        "table_name":  "company_settings"
+                    },
+                    {
+                        "column_default":  "true",
+                        "column_name":  "auto_overtime",
+                        "data_type":  "boolean",
+                        "is_nullable":  "YES",
+                        "table_name":  "company_settings"
+                    },
+                    {
+                        "column_default":  "true",
+                        "column_name":  "require_approval_new_hire",
+                        "data_type":  "boolean",
+                        "is_nullable":  "YES",
+                        "table_name":  "company_settings"
+                    },
+                    {
+                        "column_default":  "true",
+                        "column_name":  "single_admin_per_department",
+                        "data_type":  "boolean",
+                        "is_nullable":  "YES",
+                        "table_name":  "company_settings"
+                    },
+                    {
+                        "column_default":  "\u0027{}\u0027::jsonb",
+                        "column_name":  "app_config",
+                        "data_type":  "jsonb",
+                        "is_nullable":  "YES",
+                        "table_name":  "company_settings"
+                    },
+                    {
+                        "column_default":  "timezone(\u0027utc\u0027::text, now())",
+                        "column_name":  "created_at",
+                        "data_type":  "timestamp with time zone",
+                        "is_nullable":  "NO",
+                        "table_name":  "company_settings"
+                    },
+                    {
+                        "column_default":  "false",
+                        "column_name":  "setup_completed",
+                        "data_type":  "boolean",
+                        "is_nullable":  "YES",
+                        "table_name":  "company_settings"
+                    },
+                    {
+                        "column_default":  "\u0027{}\u0027::jsonb",
+                        "column_name":  "attendance_settings",
+                        "data_type":  "jsonb",
+                        "is_nullable":  "YES",
+                        "table_name":  "company_settings"
+                    },
+                    {
+                        "column_default":  "\u0027{}\u0027::jsonb",
+                        "column_name":  "leave_settings",
+                        "data_type":  "jsonb",
+                        "is_nullable":  "YES",
+                        "table_name":  "company_settings"
+                    },
+                    {
+                        "column_default":  "\u0027{}\u0027::jsonb",
+                        "column_name":  "overtime_settings",
+                        "data_type":  "jsonb",
+                        "is_nullable":  "YES",
+                        "table_name":  "company_settings"
+                    },
+                    {
+                        "column_default":  "\u0027{}\u0027::jsonb",
+                        "column_name":  "claim_settings",
+                        "data_type":  "jsonb",
+                        "is_nullable":  "YES",
+                        "table_name":  "company_settings"
+                    },
+                    {
+                        "column_default":  "\u0027{}\u0027::jsonb",
+                        "column_name":  "company_module_settings",
+                        "data_type":  "jsonb",
+                        "is_nullable":  "YES",
+                        "table_name":  "company_settings"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "id",
+                        "data_type":  "text",
+                        "is_nullable":  "NO",
+                        "table_name":  "company_sites"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "company_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "company_sites"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "name",
+                        "data_type":  "text",
+                        "is_nullable":  "NO",
+                        "table_name":  "company_sites"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "latitude",
+                        "data_type":  "numeric",
+                        "is_nullable":  "YES",
+                        "table_name":  "company_sites"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "longitude",
+                        "data_type":  "numeric",
+                        "is_nullable":  "YES",
+                        "table_name":  "company_sites"
+                    },
+                    {
+                        "column_default":  "200",
+                        "column_name":  "radius",
+                        "data_type":  "integer",
+                        "is_nullable":  "YES",
+                        "table_name":  "company_sites"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "address",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "company_sites"
+                    },
+                    {
+                        "column_default":  "now()",
+                        "column_name":  "created_at",
+                        "data_type":  "timestamp with time zone",
+                        "is_nullable":  "YES",
+                        "table_name":  "company_sites"
+                    },
+                    {
+                        "column_default":  "now()",
+                        "column_name":  "updated_at",
+                        "data_type":  "timestamp with time zone",
+                        "is_nullable":  "YES",
+                        "table_name":  "company_sites"
+                    },
+                    {
+                        "column_default":  "true",
+                        "column_name":  "site_pass_enabled",
+                        "data_type":  "boolean",
+                        "is_nullable":  "YES",
+                        "table_name":  "company_sites"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "site_pass_code",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "company_sites"
+                    },
+                    {
+                        "column_default":  "true",
+                        "column_name":  "dynamic_qr_rotation",
+                        "data_type":  "boolean",
+                        "is_nullable":  "YES",
+                        "table_name":  "company_sites"
+                    },
+                    {
+                        "column_default":  "\u0027own_dept_admin\u0027::text",
+                        "column_name":  "scanner_permission",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "company_sites"
+                    },
+                    {
+                        "column_default":  "\u0027[]\u0027::jsonb",
+                        "column_name":  "custom_scanners",
+                        "data_type":  "jsonb",
+                        "is_nullable":  "YES",
+                        "table_name":  "company_sites"
+                    },
+                    {
+                        "column_default":  "true",
+                        "column_name":  "is_geofencing_enabled",
+                        "data_type":  "boolean",
+                        "is_nullable":  "YES",
+                        "table_name":  "company_sites"
+                    },
+                    {
+                        "column_default":  "false",
+                        "column_name":  "is_site_pass_enabled",
+                        "data_type":  "boolean",
+                        "is_nullable":  "YES",
+                        "table_name":  "company_sites"
+                    },
+                    {
+                        "column_default":  "gen_random_uuid()",
+                        "column_name":  "id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "delegations"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "employee_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "delegations"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "manager_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "delegations"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "start_date",
+                        "data_type":  "date",
+                        "is_nullable":  "NO",
+                        "table_name":  "delegations"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "end_date",
+                        "data_type":  "date",
+                        "is_nullable":  "NO",
+                        "table_name":  "delegations"
+                    },
+                    {
+                        "column_default":  "\u0027Active\u0027::text",
+                        "column_name":  "status",
+                        "data_type":  "text",
+                        "is_nullable":  "NO",
+                        "table_name":  "delegations"
+                    },
+                    {
+                        "column_default":  "timezone(\u0027utc\u0027::text, now())",
+                        "column_name":  "created_at",
+                        "data_type":  "timestamp with time zone",
+                        "is_nullable":  "NO",
+                        "table_name":  "delegations"
+                    },
+                    {
+                        "column_default":  "gen_random_uuid()",
+                        "column_name":  "id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "departments"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "company_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "departments"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "department_name",
+                        "data_type":  "text",
+                        "is_nullable":  "NO",
+                        "table_name":  "departments"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "description",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "departments"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "head_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "YES",
+                        "table_name":  "departments"
+                    },
+                    {
+                        "column_default":  "\u0027[]\u0027::jsonb",
+                        "column_name":  "designations",
+                        "data_type":  "jsonb",
+                        "is_nullable":  "YES",
+                        "table_name":  "departments"
+                    },
+                    {
+                        "column_default":  "\u0027{}\u0027::jsonb",
+                        "column_name":  "delegation_config",
+                        "data_type":  "jsonb",
+                        "is_nullable":  "YES",
+                        "table_name":  "departments"
+                    },
+                    {
+                        "column_default":  "timezone(\u0027utc\u0027::text, now())",
+                        "column_name":  "created_at",
+                        "data_type":  "timestamp with time zone",
+                        "is_nullable":  "NO",
+                        "table_name":  "departments"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "dept_id",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "departments"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "department_site",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "departments"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "created_date",
+                        "data_type":  "date",
+                        "is_nullable":  "YES",
+                        "table_name":  "departments"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "theme_bg",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "departments"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "theme_accent",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "departments"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "start_time",
+                        "data_type":  "time without time zone",
+                        "is_nullable":  "YES",
+                        "table_name":  "departments"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "end_time",
+                        "data_type":  "time without time zone",
+                        "is_nullable":  "YES",
+                        "table_name":  "departments"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "employee_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "employee_bank_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "bank_name",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_bank_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "bank_account_number",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_bank_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "account_number",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_bank_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "account_holder_name",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_bank_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "bank_code",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_bank_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "branch_code",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_bank_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "salary_payment_mode",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_bank_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "online_payment_type",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_bank_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "online_payment_id",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_bank_details"
+                    },
+                    {
+                        "column_default":  "gen_random_uuid()",
+                        "column_name":  "id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "employee_certifications"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "employee_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "employee_certifications"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "cert_name",
+                        "data_type":  "text",
+                        "is_nullable":  "NO",
+                        "table_name":  "employee_certifications"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "issuing_org",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_certifications"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "issue_date",
+                        "data_type":  "date",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_certifications"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "expiry_date",
+                        "data_type":  "date",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_certifications"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "certification_url",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_certifications"
+                    },
+                    {
+                        "column_default":  "timezone(\u0027utc\u0027::text, now())",
+                        "column_name":  "created_at",
+                        "data_type":  "timestamp with time zone",
+                        "is_nullable":  "NO",
+                        "table_name":  "employee_certifications"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "employee_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "employee_contact_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "mobile_code",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_contact_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "residential_address",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_contact_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "postal_code",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_contact_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "current_address",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_contact_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "current_postal_code",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_contact_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "current_mobile_number",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_contact_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "current_email",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_contact_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "current_residential_address",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_contact_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "native_address",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_contact_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "native_postal_code",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_contact_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "native_mobile_code",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_contact_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "native_mobile_number",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_contact_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "native_residential_address",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_contact_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "linkedin_url",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_contact_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "instagram_url",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_contact_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "employee_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "employee_declarations"
+                    },
+                    {
+                        "column_default":  "false",
+                        "column_name":  "terms_accepted",
+                        "data_type":  "boolean",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_declarations"
+                    },
+                    {
+                        "column_default":  "false",
+                        "column_name":  "privacy_consent",
+                        "data_type":  "boolean",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_declarations"
+                    },
+                    {
+                        "column_default":  "false",
+                        "column_name":  "emp_declaration",
+                        "data_type":  "boolean",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_declarations"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "digital_signature",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_declarations"
+                    },
+                    {
+                        "column_default":  "gen_random_uuid()",
+                        "column_name":  "id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "employee_documents"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "employee_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "employee_documents"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "document_name",
+                        "data_type":  "text",
+                        "is_nullable":  "NO",
+                        "table_name":  "employee_documents"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "category",
+                        "data_type":  "text",
+                        "is_nullable":  "NO",
+                        "table_name":  "employee_documents"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "file_url",
+                        "data_type":  "text",
+                        "is_nullable":  "NO",
+                        "table_name":  "employee_documents"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "file_type",
+                        "data_type":  "text",
+                        "is_nullable":  "NO",
+                        "table_name":  "employee_documents"
+                    },
+                    {
+                        "column_default":  "timezone(\u0027utc\u0027::text, now())",
+                        "column_name":  "created_at",
+                        "data_type":  "timestamp with time zone",
+                        "is_nullable":  "NO",
+                        "table_name":  "employee_documents"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "employee_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "employee_education"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "higher_edu_country",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_education"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "higher_edu_institution",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_education"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "higher_edu_course",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_education"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "higher_edu_qualification",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_education"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "higher_edu_grad_year",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_education"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "higher_edu_course_duration",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_education"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "higher_edu_cert_url",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_education"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "schooling_country",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_education"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "schooling_institution",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_education"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "schooling_qualification",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_education"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "schooling_grad_year",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_education"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "schooling_cert_url",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_education"
+                    },
+                    {
+                        "column_default":  "\u0027[]\u0027::jsonb",
+                        "column_name":  "certifications",
+                        "data_type":  "jsonb",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_education"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "employee_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "employee_identity_docs"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "nric_number",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_identity_docs"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "fin_number",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_identity_docs"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "passport_number",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_identity_docs"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "passport_expiry",
+                        "data_type":  "date",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_identity_docs"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "issuing_country",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_identity_docs"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "pass_type",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_identity_docs"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "pass_number",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_identity_docs"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "pass_issue_date",
+                        "data_type":  "date",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_identity_docs"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "pass_expiry_date",
+                        "data_type":  "date",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_identity_docs"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "nric_copy_url",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_identity_docs"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "passport_copy_url",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_identity_docs"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "pass_copy_url",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_identity_docs"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "work_permit_skill",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_identity_docs"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "employee_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "employee_insurance"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "insurance_type",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_insurance"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "insur_provider",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_insurance"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "insur_policy_num",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_insurance"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "insur_policy_start",
+                        "data_type":  "date",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_insurance"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "insur_policy_expiry",
+                        "data_type":  "date",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_insurance"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "insur_coverage_amt",
+                        "data_type":  "numeric",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_insurance"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "insur_premium_amt",
+                        "data_type":  "numeric",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_insurance"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "insur_payment_freq",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_insurance"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "emp_covered",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_insurance"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "deps_covered",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_insurance"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "num_deps",
+                        "data_type":  "integer",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_insurance"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "spouse_coverage",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_insurance"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "children_coverage",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_insurance"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "parents_coverage",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_insurance"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "employee_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "employee_personal_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "gender",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_personal_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "date_of_birth",
+                        "data_type":  "date",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_personal_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "marital_status",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_personal_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "blood_group",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_personal_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "nationality",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_personal_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "race",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_personal_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "religion",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_personal_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "personal_email",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_personal_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "personal_number",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_personal_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "emergency_contact_name",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_personal_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "emergency_contact_number",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_personal_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "emergency_contact_relation",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_personal_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "emergency_contact_address",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_personal_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "emergency_contact_code",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_personal_details"
+                    },
+                    {
+                        "column_default":  "gen_random_uuid()",
+                        "column_name":  "id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "employee_salary"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "company_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "employee_salary"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "employee_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "employee_salary"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "base_salary",
+                        "data_type":  "numeric",
+                        "is_nullable":  "NO",
+                        "table_name":  "employee_salary"
+                    },
+                    {
+                        "column_default":  "\u0027{}\u0027::jsonb",
+                        "column_name":  "allowance",
+                        "data_type":  "jsonb",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_salary"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "effective_date",
+                        "data_type":  "date",
+                        "is_nullable":  "NO",
+                        "table_name":  "employee_salary"
+                    },
+                    {
+                        "column_default":  "0",
+                        "column_name":  "cpf_employee",
+                        "data_type":  "numeric",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_salary"
+                    },
+                    {
+                        "column_default":  "0",
+                        "column_name":  "cdac",
+                        "data_type":  "numeric",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_salary"
+                    },
+                    {
+                        "column_default":  "0",
+                        "column_name":  "sinda",
+                        "data_type":  "numeric",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_salary"
+                    },
+                    {
+                        "column_default":  "0",
+                        "column_name":  "mbmf",
+                        "data_type":  "numeric",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_salary"
+                    },
+                    {
+                        "column_default":  "0",
+                        "column_name":  "ecf",
+                        "data_type":  "numeric",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_salary"
+                    },
+                    {
+                        "column_default":  "0",
+                        "column_name":  "iras",
+                        "data_type":  "numeric",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_salary"
+                    },
+                    {
+                        "column_default":  "0",
+                        "column_name":  "cpf_employer",
+                        "data_type":  "numeric",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_salary"
+                    },
+                    {
+                        "column_default":  "0",
+                        "column_name":  "sdl",
+                        "data_type":  "numeric",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_salary"
+                    },
+                    {
+                        "column_default":  "0",
+                        "column_name":  "foreign_worker_levy",
+                        "data_type":  "numeric",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_salary"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "comments",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_salary"
+                    },
+                    {
+                        "column_default":  "timezone(\u0027utc\u0027::text, now())",
+                        "column_name":  "created_at",
+                        "data_type":  "timestamp with time zone",
+                        "is_nullable":  "NO",
+                        "table_name":  "employee_salary"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "cdac_rate",
+                        "data_type":  "numeric",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_salary"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "sinda_rate",
+                        "data_type":  "numeric",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_salary"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "mbmf_rate",
+                        "data_type":  "numeric",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_salary"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "ecf_rate",
+                        "data_type":  "numeric",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_salary"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "iras_rate",
+                        "data_type":  "numeric",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_salary"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "sdl_rate",
+                        "data_type":  "numeric",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_salary"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "employee_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "employee_work_details"
+                    },
+                    {
+                        "column_default":  "\u0027Full Time\u0027::text",
+                        "column_name":  "job_type",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_work_details"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "shift_type",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_work_details"
+                    },
+                    {
+                        "column_default":  "false",
+                        "column_name":  "overtime_applicable",
+                        "data_type":  "boolean",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_work_details"
+                    },
+                    {
+                        "column_default":  "false",
+                        "column_name":  "claims_applicable",
+                        "data_type":  "boolean",
+                        "is_nullable":  "YES",
+                        "table_name":  "employee_work_details"
+                    },
+                    {
+                        "column_default":  "gen_random_uuid()",
+                        "column_name":  "id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "company_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "user_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "department_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "department_head",
+                        "data_type":  "uuid",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "name",
+                        "data_type":  "text",
+                        "is_nullable":  "NO",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "email",
+                        "data_type":  "text",
+                        "is_nullable":  "NO",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  "\u0027Employee\u0027::text",
+                        "column_name":  "app_role",
+                        "data_type":  "text",
+                        "is_nullable":  "NO",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "emp_id",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "phone_number",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "designation",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "date_of_joining",
+                        "data_type":  "date",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "avatar_url",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  "true",
+                        "column_name":  "is_active",
+                        "data_type":  "boolean",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  "timezone(\u0027utc\u0027::text, now())",
+                        "column_name":  "created_at",
+                        "data_type":  "timestamp with time zone",
+                        "is_nullable":  "NO",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  "false",
+                        "column_name":  "is_head",
+                        "data_type":  "boolean",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "reporting_department_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "report_attendance_to",
+                        "data_type":  "uuid",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "report_leave_to",
+                        "data_type":  "uuid",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "report_claim_to",
+                        "data_type":  "uuid",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "manager_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "leave_policy_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  "\u0027{}\u0027::jsonb",
+                        "column_name":  "custom_fields",
+                        "data_type":  "jsonb",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "first_name",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "last_name",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "date_of_birth",
+                        "data_type":  "date",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "gender",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "marital_status",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "nationality",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "race",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "religion",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "pass_type",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "skill_status",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "linkedin_url",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "instagram_url",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "employees"
+                    },
+                    {
+                        "column_default":  "gen_random_uuid()",
+                        "column_name":  "id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "fwl_rate_master"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "sector",
+                        "data_type":  "character varying",
+                        "is_nullable":  "NO",
+                        "table_name":  "fwl_rate_master"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "pass_type",
+                        "data_type":  "character varying",
+                        "is_nullable":  "NO",
+                        "table_name":  "fwl_rate_master"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "tier",
+                        "data_type":  "character varying",
+                        "is_nullable":  "NO",
+                        "table_name":  "fwl_rate_master"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "skill_level",
+                        "data_type":  "character varying",
+                        "is_nullable":  "NO",
+                        "table_name":  "fwl_rate_master"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "ratio_min",
+                        "data_type":  "numeric",
+                        "is_nullable":  "NO",
+                        "table_name":  "fwl_rate_master"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "ratio_max",
+                        "data_type":  "numeric",
+                        "is_nullable":  "NO",
+                        "table_name":  "fwl_rate_master"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "monthly_rate",
+                        "data_type":  "numeric",
+                        "is_nullable":  "NO",
+                        "table_name":  "fwl_rate_master"
+                    },
+                    {
+                        "column_default":  "timezone(\u0027utc\u0027::text, now())",
+                        "column_name":  "created_at",
+                        "data_type":  "timestamp with time zone",
+                        "is_nullable":  "NO",
+                        "table_name":  "fwl_rate_master"
+                    },
+                    {
+                        "column_default":  "timezone(\u0027utc\u0027::text, now())",
+                        "column_name":  "updated_at",
+                        "data_type":  "timestamp with time zone",
+                        "is_nullable":  "NO",
+                        "table_name":  "fwl_rate_master"
+                    },
+                    {
+                        "column_default":  "gen_random_uuid()",
+                        "column_name":  "id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "leave_policies"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "company_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "leave_policies"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "template_name",
+                        "data_type":  "text",
+                        "is_nullable":  "NO",
+                        "table_name":  "leave_policies"
+                    },
+                    {
+                        "column_default":  "\u0027{}\u0027::jsonb",
+                        "column_name":  "leave_configuration",
+                        "data_type":  "jsonb",
+                        "is_nullable":  "NO",
+                        "table_name":  "leave_policies"
+                    },
+                    {
+                        "column_default":  "timezone(\u0027utc\u0027::text, now())",
+                        "column_name":  "created_at",
+                        "data_type":  "timestamp with time zone",
+                        "is_nullable":  "NO",
+                        "table_name":  "leave_policies"
+                    },
+                    {
+                        "column_default":  "gen_random_uuid()",
+                        "column_name":  "id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "leave_requests"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "employee_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "NO",
+                        "table_name":  "leave_requests"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "leave_type",
+                        "data_type":  "text",
+                        "is_nullable":  "NO",
+                        "table_name":  "leave_requests"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "start_date",
+                        "data_type":  "date",
+                        "is_nullable":  "NO",
+                        "table_name":  "leave_requests"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "end_date",
+                        "data_type":  "date",
+                        "is_nullable":  "NO",
+                        "table_name":  "leave_requests"
+                    },
+                    {
+                        "column_default":  "\u0027Pending\u0027::text",
+                        "column_name":  "status",
+                        "data_type":  "text",
+                        "is_nullable":  "NO",
+                        "table_name":  "leave_requests"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "manager_id",
+                        "data_type":  "uuid",
+                        "is_nullable":  "YES",
+                        "table_name":  "leave_requests"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "reason",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "leave_requests"
+                    },
+                    {
+                        "column_default":  null,
+                        "column_name":  "attachment_url",
+                        "data_type":  "text",
+                        "is_nullable":  "YES",
+                        "table_name":  "leave_requests"
+                    },
+                    {
+                        "column_default":  "timezone(\u0027utc\u0027::text, now())",
+                        "column_name":  "created_at",
+                        "data_type":  "timestamp with time zone",
+                        "is_nullable":  "NO",
+                        "table_name":  "leave_requests"
+                    }
+                ],
+    "policies":  [
+                     {
+                         "cmd":  "ALL",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Admins can manage company attendance",
+                         "qual":  "(company_id IN ( SELECT employees.company_id\n   FROM employees\n  WHERE (employees.user_id = auth.uid())))",
+                         "roles":  "{authenticated}",
+                         "schemaname":  "public",
+                         "tablename":  "attendance",
+                         "with_check":  "(company_id IN ( SELECT employees.company_id\n   FROM employees\n  WHERE (employees.user_id = auth.uid())))"
+                     },
+                     {
+                         "cmd":  "INSERT",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Employees can insert own attendance",
+                         "qual":  null,
+                         "roles":  "{authenticated}",
+                         "schemaname":  "public",
+                         "tablename":  "attendance",
+                         "with_check":  "(employee_id IN ( SELECT employees.id\n   FROM employees\n  WHERE (employees.user_id = auth.uid())))"
+                     },
+                     {
+                         "cmd":  "UPDATE",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Employees can update own attendance",
+                         "qual":  "(employee_id IN ( SELECT employees.id\n   FROM employees\n  WHERE (employees.user_id = auth.uid())))",
+                         "roles":  "{authenticated}",
+                         "schemaname":  "public",
+                         "tablename":  "attendance",
+                         "with_check":  null
+                     },
+                     {
+                         "cmd":  "SELECT",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Employees can view own attendance",
+                         "qual":  "(employee_id IN ( SELECT employees.id\n   FROM employees\n  WHERE (employees.user_id = auth.uid())))",
+                         "roles":  "{authenticated}",
+                         "schemaname":  "public",
+                         "tablename":  "attendance",
+                         "with_check":  null
+                     },
+                     {
+                         "cmd":  "INSERT",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Users can insert their own companies",
+                         "qual":  null,
+                         "roles":  "{public}",
+                         "schemaname":  "public",
+                         "tablename":  "companies",
+                         "with_check":  "(auth.uid() = super_admin_id)"
+                     },
+                     {
+                         "cmd":  "UPDATE",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Users can update their own companies",
+                         "qual":  "(auth.uid() = super_admin_id)",
+                         "roles":  "{public}",
+                         "schemaname":  "public",
+                         "tablename":  "companies",
+                         "with_check":  null
+                     },
+                     {
+                         "cmd":  "SELECT",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Users can view their own companies",
+                         "qual":  "(auth.uid() = super_admin_id)",
+                         "roles":  "{public}",
+                         "schemaname":  "public",
+                         "tablename":  "companies",
+                         "with_check":  null
+                     },
+                     {
+                         "cmd":  "ALL",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Allow admins full access to module settings",
+                         "qual":  "(EXISTS ( SELECT 1\n   FROM employees\n  WHERE ((employees.user_id = auth.uid()) AND (employees.company_id = company_module_settings.company_id) AND (employees.app_role = ANY (ARRAY[\u0027SUPER_ADMIN\u0027::text, \u0027ADMIN\u0027::text])))))",
+                         "roles":  "{authenticated}",
+                         "schemaname":  "public",
+                         "tablename":  "company_module_settings",
+                         "with_check":  null
+                     },
+                     {
+                         "cmd":  "SELECT",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Allow employees read access to operational settings",
+                         "qual":  "(module = ANY (ARRAY[\u0027leave\u0027::text, \u0027claims\u0027::text, \u0027overtime\u0027::text, \u0027department\u0027::text]))",
+                         "roles":  "{authenticated}",
+                         "schemaname":  "public",
+                         "tablename":  "company_module_settings",
+                         "with_check":  null
+                     },
+                     {
+                         "cmd":  "ALL",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Super admins can manage company_settings",
+                         "qual":  "(EXISTS ( SELECT 1\n   FROM companies\n  WHERE ((companies.id = company_settings.company_id) AND (companies.super_admin_id = auth.uid()))))",
+                         "roles":  "{public}",
+                         "schemaname":  "public",
+                         "tablename":  "company_settings",
+                         "with_check":  "(EXISTS ( SELECT 1\n   FROM companies\n  WHERE ((companies.id = company_settings.company_id) AND (companies.super_admin_id = auth.uid()))))"
+                     },
+                     {
+                         "cmd":  "DELETE",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Admins and Super Admins can delete company sites",
+                         "qual":  "is_admin_in_company(company_id)",
+                         "roles":  "{public}",
+                         "schemaname":  "public",
+                         "tablename":  "company_sites",
+                         "with_check":  null
+                     },
+                     {
+                         "cmd":  "INSERT",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Admins and Super Admins can insert company sites",
+                         "qual":  null,
+                         "roles":  "{public}",
+                         "schemaname":  "public",
+                         "tablename":  "company_sites",
+                         "with_check":  "is_admin_in_company(company_id)"
+                     },
+                     {
+                         "cmd":  "UPDATE",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Admins and Super Admins can update company sites",
+                         "qual":  "is_admin_in_company(company_id)",
+                         "roles":  "{public}",
+                         "schemaname":  "public",
+                         "tablename":  "company_sites",
+                         "with_check":  null
+                     },
+                     {
+                         "cmd":  "SELECT",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Employees can view company sites",
+                         "qual":  "((EXISTS ( SELECT 1\n   FROM employees\n  WHERE (((employees.user_id = auth.uid()) OR (employees.email = (auth.jwt() -\u003e\u003e \u0027email\u0027::text))) AND (employees.company_id = company_sites.company_id)))) OR is_admin_in_company(company_id))",
+                         "roles":  "{authenticated}",
+                         "schemaname":  "public",
+                         "tablename":  "company_sites",
+                         "with_check":  null
+                     },
+                     {
+                         "cmd":  "ALL",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Super admins can manage departments",
+                         "qual":  "(EXISTS ( SELECT 1\n   FROM companies\n  WHERE ((companies.id = departments.company_id) AND (companies.super_admin_id = auth.uid()))))",
+                         "roles":  "{public}",
+                         "schemaname":  "public",
+                         "tablename":  "departments",
+                         "with_check":  "(EXISTS ( SELECT 1\n   FROM companies\n  WHERE ((companies.id = departments.company_id) AND (companies.super_admin_id = auth.uid()))))"
+                     },
+                     {
+                         "cmd":  "ALL",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Manage bank details",
+                         "qual":  "(EXISTS ( SELECT 1\n   FROM (employees em\n     JOIN companies c ON ((em.company_id = c.id)))\n  WHERE ((em.id = employee_bank_details.employee_id) AND ((c.super_admin_id = auth.uid()) OR (em.user_id = auth.uid())))))",
+                         "roles":  "{anon,authenticated}",
+                         "schemaname":  "public",
+                         "tablename":  "employee_bank_details",
+                         "with_check":  "(EXISTS ( SELECT 1\n   FROM (employees em\n     JOIN companies c ON ((em.company_id = c.id)))\n  WHERE ((em.id = employee_bank_details.employee_id) AND ((c.super_admin_id = auth.uid()) OR (em.user_id = auth.uid())))))"
+                     },
+                     {
+                         "cmd":  "ALL",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Manage certifications",
+                         "qual":  "(EXISTS ( SELECT 1\n   FROM (employees em\n     JOIN companies c ON ((em.company_id = c.id)))\n  WHERE ((em.id = employee_certifications.employee_id) AND ((c.super_admin_id = auth.uid()) OR (em.user_id = auth.uid())))))",
+                         "roles":  "{anon,authenticated}",
+                         "schemaname":  "public",
+                         "tablename":  "employee_certifications",
+                         "with_check":  "(EXISTS ( SELECT 1\n   FROM (employees em\n     JOIN companies c ON ((em.company_id = c.id)))\n  WHERE ((em.id = employee_certifications.employee_id) AND ((c.super_admin_id = auth.uid()) OR (em.user_id = auth.uid())))))"
+                     },
+                     {
+                         "cmd":  "ALL",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Manage contact details",
+                         "qual":  "(EXISTS ( SELECT 1\n   FROM (employees em\n     JOIN companies c ON ((em.company_id = c.id)))\n  WHERE ((em.id = employee_contact_details.employee_id) AND ((c.super_admin_id = auth.uid()) OR (em.user_id = auth.uid())))))",
+                         "roles":  "{anon,authenticated}",
+                         "schemaname":  "public",
+                         "tablename":  "employee_contact_details",
+                         "with_check":  "(EXISTS ( SELECT 1\n   FROM (employees em\n     JOIN companies c ON ((em.company_id = c.id)))\n  WHERE ((em.id = employee_contact_details.employee_id) AND ((c.super_admin_id = auth.uid()) OR (em.user_id = auth.uid())))))"
+                     },
+                     {
+                         "cmd":  "ALL",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Manage declarations",
+                         "qual":  "(EXISTS ( SELECT 1\n   FROM (employees em\n     JOIN companies c ON ((em.company_id = c.id)))\n  WHERE ((em.id = employee_declarations.employee_id) AND ((c.super_admin_id = auth.uid()) OR (em.user_id = auth.uid())))))",
+                         "roles":  "{anon,authenticated}",
+                         "schemaname":  "public",
+                         "tablename":  "employee_declarations",
+                         "with_check":  "(EXISTS ( SELECT 1\n   FROM (employees em\n     JOIN companies c ON ((em.company_id = c.id)))\n  WHERE ((em.id = employee_declarations.employee_id) AND ((c.super_admin_id = auth.uid()) OR (em.user_id = auth.uid())))))"
+                     },
+                     {
+                         "cmd":  "ALL",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Manage education details",
+                         "qual":  "(EXISTS ( SELECT 1\n   FROM (employees em\n     JOIN companies c ON ((em.company_id = c.id)))\n  WHERE ((em.id = employee_education.employee_id) AND ((c.super_admin_id = auth.uid()) OR (em.user_id = auth.uid())))))",
+                         "roles":  "{anon,authenticated}",
+                         "schemaname":  "public",
+                         "tablename":  "employee_education",
+                         "with_check":  "(EXISTS ( SELECT 1\n   FROM (employees em\n     JOIN companies c ON ((em.company_id = c.id)))\n  WHERE ((em.id = employee_education.employee_id) AND ((c.super_admin_id = auth.uid()) OR (em.user_id = auth.uid())))))"
+                     },
+                     {
+                         "cmd":  "ALL",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Manage identity docs",
+                         "qual":  "(EXISTS ( SELECT 1\n   FROM (employees em\n     JOIN companies c ON ((em.company_id = c.id)))\n  WHERE ((em.id = employee_identity_docs.employee_id) AND ((c.super_admin_id = auth.uid()) OR (em.user_id = auth.uid())))))",
+                         "roles":  "{anon,authenticated}",
+                         "schemaname":  "public",
+                         "tablename":  "employee_identity_docs",
+                         "with_check":  "(EXISTS ( SELECT 1\n   FROM (employees em\n     JOIN companies c ON ((em.company_id = c.id)))\n  WHERE ((em.id = employee_identity_docs.employee_id) AND ((c.super_admin_id = auth.uid()) OR (em.user_id = auth.uid())))))"
+                     },
+                     {
+                         "cmd":  "ALL",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Manage insurance details",
+                         "qual":  "(EXISTS ( SELECT 1\n   FROM (employees em\n     JOIN companies c ON ((em.company_id = c.id)))\n  WHERE ((em.id = employee_insurance.employee_id) AND ((c.super_admin_id = auth.uid()) OR (em.user_id = auth.uid())))))",
+                         "roles":  "{anon,authenticated}",
+                         "schemaname":  "public",
+                         "tablename":  "employee_insurance",
+                         "with_check":  "(EXISTS ( SELECT 1\n   FROM (employees em\n     JOIN companies c ON ((em.company_id = c.id)))\n  WHERE ((em.id = employee_insurance.employee_id) AND ((c.super_admin_id = auth.uid()) OR (em.user_id = auth.uid())))))"
+                     },
+                     {
+                         "cmd":  "ALL",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Manage personal details",
+                         "qual":  "(EXISTS ( SELECT 1\n   FROM (employees em\n     JOIN companies c ON ((em.company_id = c.id)))\n  WHERE ((em.id = employee_personal_details.employee_id) AND ((c.super_admin_id = auth.uid()) OR (em.user_id = auth.uid())))))",
+                         "roles":  "{anon,authenticated}",
+                         "schemaname":  "public",
+                         "tablename":  "employee_personal_details",
+                         "with_check":  "(EXISTS ( SELECT 1\n   FROM (employees em\n     JOIN companies c ON ((em.company_id = c.id)))\n  WHERE ((em.id = employee_personal_details.employee_id) AND ((c.super_admin_id = auth.uid()) OR (em.user_id = auth.uid())))))"
+                     },
+                     {
+                         "cmd":  "ALL",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Super admins can manage employee_salary",
+                         "qual":  "(EXISTS ( SELECT 1\n   FROM companies\n  WHERE ((companies.id = employee_salary.company_id) AND (companies.super_admin_id = auth.uid()))))",
+                         "roles":  "{public}",
+                         "schemaname":  "public",
+                         "tablename":  "employee_salary",
+                         "with_check":  "(EXISTS ( SELECT 1\n   FROM companies\n  WHERE ((companies.id = employee_salary.company_id) AND (companies.super_admin_id = auth.uid()))))"
+                     },
+                     {
+                         "cmd":  "ALL",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Manage work details",
+                         "qual":  "(EXISTS ( SELECT 1\n   FROM (employees em\n     JOIN companies c ON ((em.company_id = c.id)))\n  WHERE ((em.id = employee_work_details.employee_id) AND ((c.super_admin_id = auth.uid()) OR (em.user_id = auth.uid())))))",
+                         "roles":  "{anon,authenticated}",
+                         "schemaname":  "public",
+                         "tablename":  "employee_work_details",
+                         "with_check":  "(EXISTS ( SELECT 1\n   FROM (employees em\n     JOIN companies c ON ((em.company_id = c.id)))\n  WHERE ((em.id = employee_work_details.employee_id) AND ((c.super_admin_id = auth.uid()) OR (em.user_id = auth.uid())))))"
+                     },
+                     {
+                         "cmd":  "DELETE",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Admins and Super Admins can delete employees",
+                         "qual":  "is_admin_in_company(company_id)",
+                         "roles":  "{public}",
+                         "schemaname":  "public",
+                         "tablename":  "employees",
+                         "with_check":  null
+                     },
+                     {
+                         "cmd":  "INSERT",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Admins and Super Admins can insert employees",
+                         "qual":  null,
+                         "roles":  "{public}",
+                         "schemaname":  "public",
+                         "tablename":  "employees",
+                         "with_check":  "is_admin_in_company(company_id)"
+                     },
+                     {
+                         "cmd":  "UPDATE",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Admins and Super Admins can update employees",
+                         "qual":  "is_admin_in_company(company_id)",
+                         "roles":  "{public}",
+                         "schemaname":  "public",
+                         "tablename":  "employees",
+                         "with_check":  null
+                     },
+                     {
+                         "cmd":  "SELECT",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Admins and Super Admins can view all company employees",
+                         "qual":  "is_admin_in_company(company_id)",
+                         "roles":  "{public}",
+                         "schemaname":  "public",
+                         "tablename":  "employees",
+                         "with_check":  null
+                     },
+                     {
+                         "cmd":  "SELECT",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Employees can read own record",
+                         "qual":  "((user_id = auth.uid()) OR (lower(email) = lower((auth.jwt() -\u003e\u003e \u0027email\u0027::text))))",
+                         "roles":  "{public}",
+                         "schemaname":  "public",
+                         "tablename":  "employees",
+                         "with_check":  null
+                     },
+                     {
+                         "cmd":  "ALL",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Super admins can manage employees",
+                         "qual":  "(EXISTS ( SELECT 1\n   FROM companies\n  WHERE ((companies.id = employees.company_id) AND (companies.super_admin_id = auth.uid()))))",
+                         "roles":  "{public}",
+                         "schemaname":  "public",
+                         "tablename":  "employees",
+                         "with_check":  "(EXISTS ( SELECT 1\n   FROM companies\n  WHERE ((companies.id = employees.company_id) AND (companies.super_admin_id = auth.uid()))))"
+                     },
+                     {
+                         "cmd":  "SELECT",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Allow authenticated select",
+                         "qual":  "true",
+                         "roles":  "{authenticated}",
+                         "schemaname":  "public",
+                         "tablename":  "fwl_rate_master",
+                         "with_check":  null
+                     },
+                     {
+                         "cmd":  "ALL",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Super admins can manage leave_policies",
+                         "qual":  "(EXISTS ( SELECT 1\n   FROM companies\n  WHERE ((companies.id = leave_policies.company_id) AND (companies.super_admin_id = auth.uid()))))",
+                         "roles":  "{public}",
+                         "schemaname":  "public",
+                         "tablename":  "leave_policies",
+                         "with_check":  "(EXISTS ( SELECT 1\n   FROM companies\n  WHERE ((companies.id = leave_policies.company_id) AND (companies.super_admin_id = auth.uid()))))"
+                     },
+                     {
+                         "cmd":  "ALL",
+                         "permissive":  "PERMISSIVE",
+                         "policyname":  "Users can manage their company leave_policies",
+                         "qual":  "(EXISTS ( SELECT 1\n   FROM employees\n  WHERE ((employees.company_id = leave_policies.company_id) AND (employees.user_id = auth.uid()))))",
+                         "roles":  "{public}",
+                         "schemaname":  "public",
+                         "tablename":  "leave_policies",
+                         "with_check":  "(EXISTS ( SELECT 1\n   FROM employees\n  WHERE ((employees.company_id = leave_policies.company_id) AND (employees.user_id = auth.uid()))))"
+                     }
+                 ],
+    "rls_status":  [
+                       {
+                           "rls_enabled":  true,
+                           "rls_forced":  false,
+                           "table_name":  "attendance_y2026m07"
+                       },
+                       {
+                           "rls_enabled":  true,
+                           "rls_forced":  false,
+                           "table_name":  "attendance_y2026m08"
+                       },
+                       {
+                           "rls_enabled":  true,
+                           "rls_forced":  false,
+                           "table_name":  "claim_policies"
+                       },
+                       {
+                           "rls_enabled":  true,
+                           "rls_forced":  false,
+                           "table_name":  "claims"
+                       },
+                       {
+                           "rls_enabled":  true,
+                           "rls_forced":  false,
+                           "table_name":  "companies"
+                       },
+                       {
+                           "rls_enabled":  true,
+                           "rls_forced":  false,
+                           "table_name":  "company_module_settings"
+                       },
+                       {
+                           "rls_enabled":  true,
+                           "rls_forced":  false,
+                           "table_name":  "company_settings"
+                       },
+                       {
+                           "rls_enabled":  true,
+                           "rls_forced":  false,
+                           "table_name":  "company_sites"
+                       },
+                       {
+                           "rls_enabled":  true,
+                           "rls_forced":  false,
+                           "table_name":  "delegations"
+                       },
+                       {
+                           "rls_enabled":  true,
+                           "rls_forced":  false,
+                           "table_name":  "departments"
+                       },
+                       {
+                           "rls_enabled":  true,
+                           "rls_forced":  false,
+                           "table_name":  "employee_bank_details"
+                       },
+                       {
+                           "rls_enabled":  true,
+                           "rls_forced":  false,
+                           "table_name":  "employee_certifications"
+                       },
+                       {
+                           "rls_enabled":  true,
+                           "rls_forced":  false,
+                           "table_name":  "employee_contact_details"
+                       },
+                       {
+                           "rls_enabled":  true,
+                           "rls_forced":  false,
+                           "table_name":  "employee_declarations"
+                       },
+                       {
+                           "rls_enabled":  true,
+                           "rls_forced":  false,
+                           "table_name":  "employee_documents"
+                       },
+                       {
+                           "rls_enabled":  true,
+                           "rls_forced":  false,
+                           "table_name":  "employee_education"
+                       },
+                       {
+                           "rls_enabled":  true,
+                           "rls_forced":  false,
+                           "table_name":  "employee_identity_docs"
+                       },
+                       {
+                           "rls_enabled":  true,
+                           "rls_forced":  false,
+                           "table_name":  "employee_insurance"
+                       },
+                       {
+                           "rls_enabled":  true,
+                           "rls_forced":  false,
+                           "table_name":  "employee_personal_details"
+                       },
+                       {
+                           "rls_enabled":  true,
+                           "rls_forced":  false,
+                           "table_name":  "employee_salary"
+                       },
+                       {
+                           "rls_enabled":  true,
+                           "rls_forced":  false,
+                           "table_name":  "employee_work_details"
+                       },
+                       {
+                           "rls_enabled":  true,
+                           "rls_forced":  false,
+                           "table_name":  "employees"
+                       },
+                       {
+                           "rls_enabled":  true,
+                           "rls_forced":  false,
+                           "table_name":  "fwl_rate_master"
+                       },
+                       {
+                           "rls_enabled":  true,
+                           "rls_forced":  false,
+                           "table_name":  "leave_policies"
+                       },
+                       {
+                           "rls_enabled":  true,
+                           "rls_forced":  false,
+                           "table_name":  "leave_requests"
+                       }
+                   ],
+    "foreign_keys":  [
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "attendance_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "attendance"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "attendance_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "attendance"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "attendance_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "attendance"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "attendance_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "attendance"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "attendance_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "attendance"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "attendance_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "attendance"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "attendance_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "attendance"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "attendance_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "attendance"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "attendance_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "attendance"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "attendance_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "attendance"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "attendance_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "attendance"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "attendance_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "attendance"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "attendance_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "attendance"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "attendance_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "attendance"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "attendance_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "attendance"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "attendance_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "attendance"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "attendance_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "attendance"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "attendance_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "attendance"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "attendance_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "attendance_y2026m07"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "attendance_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "attendance_y2026m07"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "attendance_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "attendance_y2026m07"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "attendance_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "attendance_y2026m07"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "attendance_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "attendance_y2026m07"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "attendance_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "attendance_y2026m07"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "attendance_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "attendance_y2026m07"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "attendance_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "attendance_y2026m07"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "attendance_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "attendance_y2026m07"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "attendance_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "attendance_y2026m07"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "attendance_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "attendance_y2026m07"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "attendance_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "attendance_y2026m07"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "attendance_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "attendance_y2026m07"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "attendance_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "attendance_y2026m07"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "attendance_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "attendance_y2026m07"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "attendance_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "attendance_y2026m07"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "attendance_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "attendance_y2026m07"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "attendance_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "attendance_y2026m07"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "attendance_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "attendance_y2026m08"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "attendance_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "attendance_y2026m08"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "attendance_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "attendance_y2026m08"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "attendance_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "attendance_y2026m08"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "attendance_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "attendance_y2026m08"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "attendance_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "attendance_y2026m08"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "attendance_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "attendance_y2026m08"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "attendance_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "attendance_y2026m08"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "attendance_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "attendance_y2026m08"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "attendance_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "attendance_y2026m08"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "attendance_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "attendance_y2026m08"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "attendance_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "attendance_y2026m08"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "attendance_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "attendance_y2026m08"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "attendance_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "attendance_y2026m08"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "attendance_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "attendance_y2026m08"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "attendance_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "attendance_y2026m08"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "attendance_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "attendance_y2026m08"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "attendance_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "attendance_y2026m08"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "claim_policies_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "claim_policies"
+                         },
+                         {
+                             "column_name":  "department_id",
+                             "constraint_name":  "claim_policies_department_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "departments",
+                             "table_name":  "claim_policies"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "claims_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "claims"
+                         },
+                         {
+                             "column_name":  "policy_id",
+                             "constraint_name":  "claims_policy_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "claim_policies",
+                             "table_name":  "claims"
+                         },
+                         {
+                             "column_name":  "current_approver_id",
+                             "constraint_name":  "claims_current_approver_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "claims"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "company_module_settings_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "company_module_settings"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "company_settings_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "company_settings"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "company_sites_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "company_sites"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "delegations_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "delegations"
+                         },
+                         {
+                             "column_name":  "manager_id",
+                             "constraint_name":  "delegations_manager_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "delegations"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "departments_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "departments"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "employee_bank_details_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "employee_bank_details"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "employee_certifications_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "employee_certifications"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "employee_contact_details_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "employee_contact_details"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "employee_declarations_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "employee_declarations"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "employee_documents_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "employee_documents"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "employee_education_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "employee_education"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "employee_identity_docs_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "employee_identity_docs"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "employee_insurance_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "employee_insurance"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "employee_personal_details_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "employee_personal_details"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "employee_salary_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "employee_salary"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "employee_salary_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "employee_salary"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "employee_work_details_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "employee_work_details"
+                         },
+                         {
+                             "column_name":  "department_id",
+                             "constraint_name":  "fk_employees_department",
+                             "foreign_column":  "id",
+                             "foreign_table":  "departments",
+                             "table_name":  "employees"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "employees_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "employees"
+                         },
+                         {
+                             "column_name":  "report_claim_to",
+                             "constraint_name":  "employees_report_claim_to_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "employees"
+                         },
+                         {
+                             "column_name":  "report_leave_to",
+                             "constraint_name":  "employees_report_leave_to_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "employees"
+                         },
+                         {
+                             "column_name":  "report_attendance_to",
+                             "constraint_name":  "employees_report_attendance_to_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "employees"
+                         },
+                         {
+                             "column_name":  "department_head",
+                             "constraint_name":  "employees_department_head_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "employees"
+                         },
+                         {
+                             "column_name":  "department_head",
+                             "constraint_name":  "employees_master_department_head_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "employees"
+                         },
+                         {
+                             "column_name":  "reporting_department_id",
+                             "constraint_name":  "employees_reporting_department_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "departments",
+                             "table_name":  "employees"
+                         },
+                         {
+                             "column_name":  "company_id",
+                             "constraint_name":  "leave_policies_company_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "companies",
+                             "table_name":  "leave_policies"
+                         },
+                         {
+                             "column_name":  "manager_id",
+                             "constraint_name":  "leave_requests_manager_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "leave_requests"
+                         },
+                         {
+                             "column_name":  "employee_id",
+                             "constraint_name":  "leave_requests_employee_id_fkey",
+                             "foreign_column":  "id",
+                             "foreign_table":  "employees",
+                             "table_name":  "leave_requests"
+                         }
+                     ]
+}

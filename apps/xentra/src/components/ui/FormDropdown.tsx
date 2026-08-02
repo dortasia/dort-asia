@@ -91,10 +91,10 @@ export default function FormDropdown({
         onClick={handleToggle}
         disabled={disabled}
         className={cn(
-          "w-full flex items-center justify-between pr-3.5 py-2.5 bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl type-small focus:outline-none focus:border-[#C8DF52] focus:bg-white transition-all cursor-pointer",
+          "w-full flex items-center justify-between pr-3.5 py-2.5 bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl type-small focus:outline-none focus:border-[#007AFF] focus:bg-white transition-all cursor-pointer",
           icon ? "pl-10" : "pl-3.5",
           disabled && "opacity-50 cursor-not-allowed",
-          isOpen && "border-[#C8DF52] bg-white"
+          isOpen && "border-[#007AFF] bg-white"
         )}
       >
         {icon && (

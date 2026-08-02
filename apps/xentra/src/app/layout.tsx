@@ -1,39 +1,64 @@
-import type { Metadata } from 'next';
-import '@/styles/index.css';
+import type { Metadata } from "next";
+import { Inter, Noto_Color_Emoji } from "next/font/google";
+import { StoreHydration } from "@/components/StoreHydration";
+import "./globals.css";
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const notoColorEmoji = Noto_Color_Emoji({
+  variable: "--font-noto-emoji",
+  weight: "400",
+  display: "swap",
+  subsets: ["emoji"],
+});
 
 export const metadata: Metadata = {
-  title: 'Xentra Employee Management',
-  description: 'Manage employees efficiently.',
+  title: "HRMS — Dort Asia",
+  description: "Human Resource Management System",
 };
 
-import { Sidebar } from '@/components/Sidebar';
-import { QueryProvider } from '@/providers/QueryProvider';
-import { AuthProvider } from '@/providers/AuthProvider';
-
-import { createClient } from '@/lib/supabase-server';
-
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  
-  let initialUser = null;
-  if (user) {
-    initialUser = {
-      id: user.id,
-      email: user.email || '',
-      fullName: user.user_metadata?.full_name || '',
-      role: user.user_metadata?.role || 'admin',
-      avatarUrl: user.user_metadata?.avatar_url || '',
-    };
-  }
-
   return (
-    <html lang="en">
-      <body className="antialiased bg-[#FBFBFD] overflow-hidden zoom-container m-0 p-0">
+    <html lang="en" className={`${inter.variable} ${notoColorEmoji.variable}`} suppressHydrationWarning>
+      <head>
+        <script
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                let isDark = false;
+                let accentColor = "#007AFF";
+                const storage = localStorage.getItem("hrms-store");
+                if (storage) {
+                  const state = JSON.parse(storage).state;
+                  if (state.theme === "dark") {
+                    isDark = true;
+                  } else if (state.theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                    isDark = true;
+                  }
+                  if (state.accentColor) {
+                    accentColor = state.accentColor;
+                  }
+                }
+                if (isDark) {
+                  document.documentElement.classList.add("dark");
+                }
+                document.documentElement.style.setProperty("--user-accent", accentColor);
+              } catch (e) {}
+            `,
+          }}
+        />
+      </head>
+      <body suppressHydrationWarning className="antialiased flex w-full overflow-hidden zoom-container">
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -47,20 +72,8 @@ export default async function RootLayout({
             `,
           }}
         />
-        <AuthProvider initialUser={initialUser}>
-          <QueryProvider>
-            <div className="flex zoom-container bg-[#FBFBFD] overflow-hidden">
-            <Sidebar />
-            <main className="flex-1 ml-[80px] flex flex-col pt-2 pr-2 pb-2 pl-0 bg-[#FBFBFD]">
-              <div className="main-content-card w-full rounded-[25px] bg-white border border-[#E5E7EB] overflow-hidden">
-                <div className="w-full h-full overflow-y-auto page-scrollbar pt-4 px-4 pb-8">
-                  {children}
-                </div>
-              </div>
-            </main>
-            </div>
-          </QueryProvider>
-        </AuthProvider>
+        <StoreHydration />
+        {children}
       </body>
     </html>
   );
