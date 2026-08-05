@@ -95,10 +95,13 @@ export default function HeaderSearchBar() {
 
   // Fetch live notifications, unread count & user profile
   useEffect(() => {
+    let mounted = true;
+    let channel: any = null;
     const supabase = createClient();
+
     async function loadUserData() {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
+      if (!user || !mounted) return;
 
       setUserEmail(user.email || "");
 
@@ -113,6 +116,8 @@ export default function HeaderSearchBar() {
         .eq("email", user.email)
         .maybeSingle();
 
+      if (!mounted) return;
+
       if (emp?.avatar_url) {
         setAvatarUrl(emp.avatar_url);
       } else {
@@ -124,52 +129,48 @@ export default function HeaderSearchBar() {
       }
 
       // Fetch initial notifications
-      const fetchNotifs = async () => {
-        let query = supabase
-          .from("notifications")
-          .select("*")
-          .order("created_at", { ascending: false })
-          .limit(10);
+      let query = supabase
+        .from("notifications")
+        .select("*")
+        .order("created_at", { ascending: false })
+        .limit(10);
 
-        if (emp?.id) {
-          query = query.eq("employee_id", emp.id);
-        } else {
-           // For super admin without employee_id, get company-wide generic ones
-           query = query.is("employee_id", null);
-        }
+      if (emp?.id) {
+        query = query.eq("employee_id", emp.id);
+      } else {
+        query = query.is("employee_id", null);
+      }
 
-        const { data: notifsData } = await query;
-        if (notifsData) {
-          setRecentNotifs(notifsData);
-          setUnreadCount(notifsData.filter((n: any) => !n.is_read).length);
-        }
-      };
+      const { data: notifsData } = await query;
+      if (notifsData && mounted) {
+        setRecentNotifs(notifsData);
+        setUnreadCount(notifsData.filter((n: any) => !n.is_read).length);
+      }
 
-      await fetchNotifs();
+      if (!mounted) return;
 
-      // Subscribe to real-time notification inserts
-      const notifChannel = supabase
-        .channel("public:notifications")
+      // Subscribe to real-time notification inserts using a unique channel name per component instance
+      const channelName = `header_notifs_${user.id}_${Math.random().toString(36).slice(2, 7)}`;
+      channel = supabase
+        .channel(channelName)
         .on(
           "postgres_changes",
           { event: "INSERT", schema: "public", table: "notifications" },
           (payload: any) => {
-             // Only add to state if it's for this user or it's a global notification for superadmin
-             if (payload.new.employee_id === emp?.id || (!emp?.id && payload.new.employee_id === null)) {
-               setRecentNotifs((prev) => [payload.new as RecentNotification, ...prev].slice(0, 10));
-               setUnreadCount((prev) => prev + 1);
-             }
+            if (!mounted) return;
+            if (payload.new.employee_id === emp?.id || (!emp?.id && payload.new.employee_id === null)) {
+              setRecentNotifs((prev) => [payload.new as RecentNotification, ...prev].slice(0, 10));
+              setUnreadCount((prev) => prev + 1);
+            }
           }
         )
         .subscribe();
-
-      return notifChannel;
     }
 
-    let channel: any;
-    loadUserData().then(c => { if (c) channel = c; });
+    loadUserData();
 
     return () => {
+      mounted = false;
       if (channel) {
         supabase.removeChannel(channel);
       }
