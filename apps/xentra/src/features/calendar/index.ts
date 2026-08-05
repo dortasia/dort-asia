@@ -1,0 +1,1 @@
+export const CALENDAR_MODULE_STATUS = 'FUTURE_READY'

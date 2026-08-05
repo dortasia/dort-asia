@@ -97,7 +97,10 @@ export default function EmployeeProfileView() {
  const [teamMembers, setTeamMembers] = useState<any[]>([]);
  const [loading, setLoading] = useState(true);
  const [realProjects, setRealProjects] = useState<any[]>([]);
- const [activeTab, setActiveTab] = useState("Personal");
+ const [activeTab, setActiveTab] = useState("Documents");
+  const [documents, setDocuments] = useState<any[]>([]);
+  const [attendance, setAttendance] = useState<any[]>([]);
+  const [histories, setHistories] = useState<any[]>([]);
 
  // Pagination states
  const [docPage, setDocPage] = useState(1);
@@ -1243,11 +1246,11 @@ export default function EmployeeProfileView() {
  if (data.company_id) {
  const { data: compSettingsProj } = await supabase
  .from("company_settings")
- .select("attendance_settings")
+ .select("attendance_config")
  .eq("company_id", data.company_id)
  .maybeSingle();
- if (compSettingsProj?.attendance_settings?.projects) {
- setRealProjects(compSettingsProj.attendance_settings.projects);
+ if (compSettingsProj?.attendance_config?.projects) {
+ setRealProjects(compSettingsProj.attendance_config.projects);
  }
  }
  }
@@ -1275,7 +1278,7 @@ export default function EmployeeProfileView() {
  const { bg: color } = getAvatarColor(emp.name || "User");
  const initials = getInitials(emp.name || "US");
 
- const TABS = ["All", "Personal", "Medical", "Work", "Bank", "Documents", "Projects", "Histories", "Salary"];
+ const TABS = ["Documents", "Histories", "Attendance Log"];
 
  return (
  <div className="flex-1 flex flex-col bg-white overflow-y-auto page-scrollbar lg:h-screen">
@@ -1292,45 +1295,8 @@ export default function EmployeeProfileView() {
  <h1 className="text-[18px] lg:text-[20px] font-bold text-gray-900 tracking-tight">Employee Profile</h1>
  </div>
  
- {/* Top Right Actions Layout */}
- <div className="flex items-center gap-2.5">
- <button 
- onClick={() => setIsConfigurePanelOpen(true)}
- title="Configure Credentials"
- className="h-10 w-10 bg-[#007AFF] flex items-center justify-center rounded-[12px] shadow-sm text-white hover:bg-[#0063CC] transition-colors focus:outline-none"
- >
- <Settings className="h-4 w-4" strokeWidth={2.5} />
- </button>
- <button 
- onClick={() => setIsUploadPanelOpen(true)}
- title="Upload Document"
- className="h-10 w-10 bg-[#007AFF] flex items-center justify-center rounded-[12px] shadow-sm text-white hover:bg-[#0063CC] transition-colors focus:outline-none"
- >
- <Upload className="h-4 w-4" strokeWidth={2.5} />
- </button>
- <button 
- onClick={() => router.push(`/payroll/history/${emp.id}`)}
- title="Process Pay / History"
- className="h-10 w-10 bg-[#007AFF] flex items-center justify-center rounded-[12px] shadow-sm text-white hover:bg-[#0063CC] transition-colors focus:outline-none"
- >
- <Banknote className="h-4 w-4" strokeWidth={2.5} />
- </button>
- <button 
- onClick={() => setIsShareModalOpen(true)}
- title="Share Profile"
- className="h-10 w-10 bg-[#007AFF] flex items-center justify-center rounded-[12px] shadow-sm text-white hover:bg-[#0063CC] transition-colors focus:outline-none"
- >
- <Share2 className="h-4 w-4" strokeWidth={2.5} />
- </button>
- <button 
- onClick={() => router.push(`/employees/${emp.id}/edit`)}
- title="Edit Profile"
- className="h-10 w-10 bg-[#007AFF] flex items-center justify-center rounded-[12px] shadow-sm text-white hover:bg-[#0063CC] transition-colors focus:outline-none"
- >
- <Edit2 className="h-4 w-4" strokeWidth={2.5} />
- </button>
- </div>
- </header>
+ {/* Top Right Actions Layout Removed */}
+      </header>
 
  <main className="flex-1 px-4 pb-12">
  <div className="flex flex-col xl:flex-row gap-6">
@@ -1503,1037 +1469,93 @@ export default function EmployeeProfileView() {
  </div>
  </div>
  </div>
- </div>
 
- {/* Profile Data Tabs Selection */}
- <div className="flex items-center gap-3 overflow-x-auto page-scrollbar pb-1 mb-4">
- {TABS.map(tab => (
- <button
- key={tab}
- onClick={() => setActiveTab(tab)}
- className={`whitespace-nowrap px-6 py-2.5 rounded-full text-[13px] font-semibold transition-all border ${activeTab === tab ? "bg-[#007AFF] text-white border-[#007AFF] shadow-sm" : "bg-white text-[#007AFF] border-[#007AFF] hover:bg-blue-50 "}`}
- >
- {tab}
- </button>
- ))}
- </div>
+         {/* Configurable Tab Content Area */}
+        <div className="mb-12">
+          {activeTab === "Documents" && (
+            <div className="bg-[#FAFAF9] rounded-[24px] p-6 md:p-8 animate-in fade-in duration-300">
+              <h3 className="text-[24px] font-bold tracking-tight text-[#111827] mb-6">Documents</h3>
+              {documents.length === 0 ? (
+                <p className="text-[14px] leading-relaxed text-[#4B5563]">No documents found.</p>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {documents.map((doc: any) => (
+                    <div key={doc.id} className="bg-[#FFFFFF] p-4 rounded-lg border border-[#ECECEC] flex flex-col gap-2">
+                      <span className="font-bold text-gray-900">{doc.document_name}</span>
+                      <span className="text-[12px] text-gray-500">{doc.category} - {doc.file_type}</span>
+                      <a href={doc.file_url} target="_blank" rel="noreferrer" className="text-[#007AFF] text-[13px] font-semibold mt-2 hover:underline">View Document</a>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
 
- {/* Configurable Tab Content Area */}
- <div className="mb-12">
- {(activeTab === "Personal" || activeTab === "All") && (
- <div className="bg-[#F4F4F5] rounded-[24px] p-6 md:p-8 mb-8 animate-in fade-in duration-300 space-y-8">
- <div>
- <div className="flex items-center gap-3 mb-6">
- <div className="p-2 bg-gray-50 text-gray-500 rounded-xl border border-gray-200 ">
- <User size={18} />
- </div>
- <h3 className="text-[15px] font-bold text-gray-900 uppercase tracking-wider mb-0">Personal Information</h3>
- </div>
- <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6">
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Full Name</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.name || "-"}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Date Of Birth</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.date_of_birth ? new Date(emp.date_of_birth).toLocaleDateString('en-GB') : (emp.custom_fields?.dob ? new Date(emp.custom_fields.dob).toLocaleDateString('en-GB') : "Not Specified")}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Gender</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.gender || emp.custom_fields?.gender || "-"}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Marital Status</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.custom_fields?.maritalStatus || "-"}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Employee ID</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.emp_id || "-"}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Country</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.country || emp.custom_fields?.country || emp.custom_fields?.nationality || "-"}
- </div>
- </div>
- </div>
- </div>
+          {activeTab === "Histories" && (
+            <div className="bg-[#FAFAF9] rounded-[24px] p-6 md:p-8 animate-in fade-in duration-300">
+              <h3 className="text-[24px] font-bold tracking-tight text-[#111827] mb-6">Histories</h3>
+              {histories.length === 0 ? (
+                <p className="text-[14px] leading-relaxed text-[#4B5563]">No work histories available.</p>
+              ) : (
+                <div className="flex flex-col gap-4">
+                  {histories.map((hist: any, i: number) => (
+                    <div key={i} className="bg-[#FFFFFF] p-4 rounded-lg border border-[#ECECEC]">
+                      <p className="font-bold text-gray-900">Job Type: <span className="font-normal">{hist.job_type || "-"}</span></p>
+                      <p className="font-bold text-gray-900">Shift Type: <span className="font-normal">{hist.shift_type || "-"}</span></p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
 
- {/* Current Contact Details */}
- <div className="pt-6 border-t border-gray-200 ">
- <div className="flex items-center gap-3 mb-6">
- <div className="p-2 bg-gray-50 text-gray-500 rounded-xl border border-gray-200 ">
- <MapPin size={18} />
- </div>
- <h3 className="text-[15px] font-bold text-gray-900 uppercase tracking-wider mb-0">Current Contact Details</h3>
- </div>
- <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6">
- <div className="flex flex-col gap-2 lg:col-span-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Current Address</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.address || emp.custom_fields?.residentialAddress || emp.custom_fields?.currentResidentialAddress || "-"}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Postal Code</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.custom_fields?.postalCode || emp.custom_fields?.currentPostalCode || "-"}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Phone Number</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.mobile || emp.custom_fields?.mobileNumber || (emp.custom_fields?.currentMobileNumber ? `${emp.custom_fields.currentMobileCode || "+65"} ${emp.custom_fields.currentMobileNumber}` : "-")}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Email Address</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 overflow-hidden text-ellipsis">
- {emp.email || emp.custom_fields?.personalEmail || emp.custom_fields?.currentEmail || "-"}
- </div>
- </div>
- </div>
- </div>
+          {activeTab === "Attendance Log" && (
+            <div className="bg-[#FAFAF9] rounded-[24px] p-6 md:p-8 animate-in fade-in duration-300">
+              <h3 className="text-[24px] font-bold tracking-tight text-[#111827] mb-6">Attendance Log</h3>
+              {attendance.length === 0 ? (
+                <p className="text-[14px] leading-relaxed text-[#4B5563]">No attendance records found.</p>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left border-collapse">
+                    <thead>
+                      <tr className="border-b border-[#ECECEC]">
+                        <th className="py-3 px-4 text-[12px] uppercase tracking-wider font-semibold text-gray-500">Date</th>
+                        <th className="py-3 px-4 text-[12px] uppercase tracking-wider font-semibold text-gray-500">Status</th>
+                        <th className="py-3 px-4 text-[12px] uppercase tracking-wider font-semibold text-gray-500">Clock In</th>
+                        <th className="py-3 px-4 text-[12px] uppercase tracking-wider font-semibold text-gray-500">Clock Out</th>
+                        <th className="py-3 px-4 text-[12px] uppercase tracking-wider font-semibold text-gray-500">Hours</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {attendance.map((att: any) => (
+                        <tr key={att.id} className="border-b border-[#ECECEC] last:border-0 hover:bg-gray-50 transition-colors">
+                          <td className="py-3 px-4 text-[14px] text-gray-900">{new Date(att.date).toLocaleDateString('en-GB')}</td>
+                          <td className="py-3 px-4 text-[14px]">
+                            <span className={`px-2 py-1 rounded-md text-[11px] font-bold ${att.status === 'Present' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                              {att.status}
+                            </span>
+                          </td>
+                          <td className="py-3 px-4 text-[14px] text-gray-900">{att.clock_in || "-"}</td>
+                          <td className="py-3 px-4 text-[14px] text-gray-900">{att.clock_out || "-"}</td>
+                          <td className="py-3 px-4 text-[14px] text-gray-900">{att.hours || "-"}</td>
+                        </tr>
+                      ))}
+                                        </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+        </div>
+      </div>
+    </div>
+  </main>
 
- {/* Native Contact Details */}
- {(emp.custom_fields?.nativeResidentialAddress || emp.custom_fields?.nativeMobileNumber) && (
- <div className="pt-6 border-t border-gray-200 ">
- <div className="flex items-center gap-3 mb-6">
- <div className="p-2 bg-gray-50 text-gray-500 rounded-xl border border-gray-200 ">
- <Building size={18} />
- </div>
- <h3 className="text-[15px] font-bold text-gray-900 uppercase tracking-wider mb-0">Native Contact Details</h3>
- </div>
- <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6">
- <div className="flex flex-col gap-2 lg:col-span-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Native Address</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.custom_fields.nativeResidentialAddress || "-"}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Postal Code</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.custom_fields.nativePostalCode || "-"}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Phone Number</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.custom_fields.nativeMobileNumber ? `${emp.custom_fields.nativeMobileCode || ""} ${emp.custom_fields.nativeMobileNumber}` : "-"}
- </div>
- </div>
- </div>
- </div>
- )}
-
- {/* Emergency Contact Details (Moved here from Medical) */}
- <div className="pt-6 border-t border-gray-200 ">
- <div className="flex items-center gap-3 mb-6">
- <div className="p-2 bg-gray-50 text-gray-500 rounded-xl border border-gray-200 ">
- <Phone size={18} />
- </div>
- <h3 className="text-[15px] font-bold text-gray-900 uppercase tracking-wider mb-0">Emergency Contact Details</h3>
- </div>
- <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6">
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Primary Contact Name</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.emergency_contact_name || emp.custom_fields?.emergName || "-"}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Relationship</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.emergency_contact_relation || emp.custom_fields?.emergRelation || "Not Specified"}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Secondary Emergency Contact Number</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-[var(--user-accent)]">
- {emp.emergency_contact_number || emp.custom_fields?.emergContact || "-"}
- </div>
- </div>
- <div className="flex flex-col gap-2 lg:col-span-3">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Contact Address</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.emergency_contact_address || emp.custom_fields?.emergAddress || "-"}
- </div>
- </div>
- </div>
- </div>
- </div>
- )}
-
- {(activeTab === "Personal" || activeTab === "All") && (
- <div className="bg-[#F4F4F5] rounded-[24px] p-6 md:p-8 mb-8 animate-in fade-in duration-300">
- <div className="flex flex-col">
- <div className="flex items-center gap-3 mb-6">
- <div className="p-2 bg-gray-50 text-gray-500 rounded-xl border border-gray-200 ">
- <FileText size={18} />
- </div>
- <h3 className="text-[15px] font-bold text-gray-900 uppercase tracking-wider mb-0">Identity Documents</h3>
- </div>
- <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6">
- {(emp.custom_fields?.identityType === "NRIC" || 
- emp.custom_fields?.nationality?.toLowerCase() === "singaporean" || 
- emp.country?.toLowerCase() === "singapore" || 
- emp.custom_fields?.country?.toLowerCase() === "singapore" || 
- emp.custom_fields?.country?.toLowerCase() === "singaporean") && (
- <>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">NRIC Number</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.custom_fields?.nricNumber || "-"}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Residential Status</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 flex items-center gap-2">
- <div className={`h-2 w-2 rounded-full ${(emp.custom_fields?.nationality?.toLowerCase() === "singaporean" || emp.country?.toLowerCase() === "singapore" || emp.custom_fields?.country?.toLowerCase() === "singapore" || emp.custom_fields?.country?.toLowerCase() === "singaporean") ? 'bg-[#34C759]' : 'bg-[#007AFF]'}`} />
- {(emp.custom_fields?.nationality?.toLowerCase() === "singaporean" || emp.country?.toLowerCase() === "singapore" || emp.custom_fields?.country?.toLowerCase() === "singapore" || emp.custom_fields?.country?.toLowerCase() === "singaporean") ? "Citizen" : "PR (Permanent Resident)"}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Tax ID</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.custom_fields?.taxId || "-"}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Passport Number</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.passport_number || emp.custom_fields?.finPassportNumber || "-"}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Passport Expiry Date</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {(() => {
- const d = emp.passport_expiry_date || emp.custom_fields?.finPassportExpiryDate;
- if (!d) return "-";
- try {
- const dateObj = new Date(d);
- return isNaN(dateObj.getTime()) ? "-" : dateObj.toLocaleDateString('en-GB');
- } catch {
- return "-";
- }
- })()}
- </div>
- </div>
- </>
- )}
-
- {emp.custom_fields?.identityType === "FIN" && emp.custom_fields?.nationality !== "Singaporean" && (
- <>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">FIN Number</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.custom_fields?.finNumber || "-"}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Work Pass Category</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.custom_fields?.workPassType || emp.custom_fields?.workPassCategory || "-"}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Work Pass Expiry Date</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {(() => {
- const d = emp.work_pass_expiry_date || emp.custom_fields?.workPassExpiryDate || emp.custom_fields?.passExpiryDate;
- if (!d) return "-";
- try {
- const dateObj = new Date(d);
- return isNaN(dateObj.getTime()) ? "-" : dateObj.toLocaleDateString('en-GB');
- } catch {
- return "-";
- }
- })()}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Passport Number</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.passport_number || emp.custom_fields?.finPassportNumber || emp.custom_fields?.passportNumber || "-"}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Passport Expiry Date</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {(() => {
- const d = emp.passport_expiry_date || emp.custom_fields?.finPassportExpiryDate;
- if (!d) return "-";
- try {
- const dateObj = new Date(d);
- return isNaN(dateObj.getTime()) ? "-" : dateObj.toLocaleDateString('en-GB');
- } catch {
- return "-";
- }
- })()}
- </div>
- </div>
- </>
- )}
-
- {(!emp.custom_fields?.identityType || (emp.custom_fields?.nationality !== "Singaporean" && emp.custom_fields?.identityType !== "FIN")) && (
- <>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Aadhar Number</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 flex justify-between items-center group">
- <span>{emp.aadhar_number || emp.custom_fields?.aadharNumber || "NOT SUBMITTED"}</span>
- {emp.aadhar_proof_url ? (
- <a href={emp.aadhar_proof_url} target="_blank" rel="noreferrer" className="text-[var(--user-accent)] hover:underline flex items-center gap-1.5 text-[11px] font-bold">
- <ShieldCheck className="h-3.5 w-3.5"/> Verified
- </a>
- ) : (
- <span className="text-gray-400 text-[11px] font-bold flex items-center gap-1.5">
- <AlertCircle className="h-3.5 w-3.5"/> Pending
- </span>
- )}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">PAN Number</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 flex justify-between items-center group">
- <span>{emp.pan_number || emp.custom_fields?.panNumber || "NOT SUBMITTED"}</span>
- {emp.pan_proof_url ? (
- <a href={emp.pan_proof_url} target="_blank" rel="noreferrer" className="text-[var(--user-accent)] hover:underline flex items-center gap-1.5 text-[11px] font-bold">
- <ShieldCheck className="h-3.5 w-3.5"/> Verified
- </a>
- ) : (
- <span className="text-gray-400 text-[11px] font-bold flex items-center gap-1.5">
- <AlertCircle className="h-3.5 w-3.5"/> Pending
- </span>
- )}
- </div>
- </div>
- </>
- )}
- </div>
- </div>
- </div>
- )}
- {(activeTab === "Personal" || activeTab === "All") && (
- <div className="bg-[#F4F4F5] rounded-[24px] p-6 md:p-8 mb-8 animate-in fade-in duration-300 space-y-8">
- <div className="flex items-center gap-3 mb-6">
- <div className="p-2 bg-gray-50 text-gray-500 rounded-xl border border-gray-200 ">
- <GraduationCap size={18} />
- </div>
- <h3 className="text-[15px] font-bold text-gray-900 uppercase tracking-wider mb-0">Education Profile</h3>
- </div>
- 
- {(() => {
- try {
- const edu = typeof emp.education_details === 'string' ? JSON.parse(emp.education_details) : (emp.education_details || {});
- 
- let schools = edu.schools || [];
- if (schools.length === 0 && emp.custom_fields?.schoolingInstName) {
- schools = [{
- school_name: emp.custom_fields.schoolingInstName,
- qualification: emp.custom_fields.schoolingQual,
- proof_url: emp.custom_fields.schoolingCertUrl,
- year_passed: emp.custom_fields.schoolingGradYear
- }];
- }
- 
- let universities = edu.universities || [];
- if (universities.length === 0 && emp.custom_fields?.higherEduInstName) {
- universities = [{
- university_name: emp.custom_fields.higherEduInstName,
- degree_type: emp.custom_fields.higherEduQual,
- degree_name: emp.custom_fields.higherEduCourseName,
- proof_url: emp.custom_fields.higherEduCertUrl,
- year_passed: emp.custom_fields.higherEduGradYear
- }];
- }
- 
- let courses = edu.courses || [];
- if (courses.length === 0 && Array.isArray(emp.custom_fields?.certifications)) {
- courses = emp.custom_fields.certifications
- .filter((c: any) => c.certName || c.issuingOrg)
- .map((c: any) => ({
- course_name: c.certName,
- course_provider: c.issuingOrg,
- proof_url: c.certificationUrl,
- course_duration: c.certIssueDate ? `Issued: ${c.certIssueDate}${c.certExpiryDate ? ` • Expires: ${c.certExpiryDate}` : ''}` : ""
- }));
- }
- 
- const hasNoData = schools.length === 0 && universities.length === 0 && courses.length === 0;
-
- if (hasNoData) {
- return (
- <div className="bg-white p-8 text-center rounded-[16px] border border-[#E5E7EB] ">
- <GraduationCap className="h-8 w-8 text-gray-400 mx-auto mb-3 opacity-50"/>
- <p className="text-[14px] font-medium text-gray-500">No formal education history logged in the system.</p>
- </div>
- );
- }
-
- return (
- <div className="space-y-12">
- {/* Universities */}
- {universities.length > 0 && (
- <div className="space-y-6">
- <h4 className="text-[13px] font-bold text-gray-500 uppercase tracking-widest pl-1">Universities & Degrees</h4>
- <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6">
- {universities.map((u: any, i: number) => (
- <div key={i} className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">{u.university_name || "University Entry"}</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 flex flex-col gap-0.5">
- <div className="flex justify-between items-center">
- <span>{u.degree_type} - {u.degree_name}</span>
- {u.proof_url && <a href={u.proof_url} target="_blank" rel="noreferrer" className="text-[var(--user-accent)] hover:underline flex items-center gap-1 text-[11px]"><ShieldCheck className="h-3 w-3"/> Degree</a>}
- </div>
- <span className="text-[11px] font-medium text-gray-400">{u.sgpa ? `CGPA/SGPA: ${u.sgpa}` : ""} • Completed in {u.year_passed || "-"}</span>
- </div>
- </div>
- ))}
- </div>
- </div>
- )}
-
- {/* Schools */}
- {schools.length > 0 && (
- <div className="space-y-6">
- <h4 className="text-[13px] font-bold text-gray-500 uppercase tracking-widest pl-1">Schools History</h4>
- <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6">
- {schools.map((s: any, i: number) => (
- <div key={i} className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">{s.school_name || "School Entry"}</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 flex flex-col gap-0.5">
- <div className="flex justify-between items-center">
- <span>{s.qualification || "Unspecified"}</span>
- {s.proof_url && <a href={s.proof_url} target="_blank" rel="noreferrer" className="text-[var(--user-accent)] hover:underline flex items-center gap-1 text-[11px]"><Shield className="h-3 w-3"/> Verified</a>}
- </div>
- <span className="text-[11px] font-medium text-gray-400">Class of {s.year_passed || "-"}</span>
- </div>
- </div>
- ))}
- </div>
- </div>
- )}
-
- {/* Courses */}
- {courses.length > 0 && (
- <div className="space-y-6">
- <h4 className="text-[13px] font-bold text-gray-500 uppercase tracking-widest pl-1">Professional Certifications</h4>
- <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6">
- {courses.map((c: any, i: number) => (
- <div key={i} className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">{c.course_name || "Certification"}</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 flex flex-col gap-0.5">
- <div className="flex justify-between items-center">
- <span>{c.course_provider}</span>
- {c.proof_url && <a href={c.proof_url} target="_blank" rel="noreferrer" className="text-[var(--user-accent)] hover:underline flex items-center gap-1 text-[11px]"><Award className="h-3.5 w-3.5"/> Verified</a>}
- </div>
- <span className="text-[11px] font-medium text-gray-400">{c.course_duration || "Certificate"}</span>
- </div>
- </div>
- ))}
- </div>
- </div>
- )}
- </div>
- );
- } catch (e) {
- return (
- <div className="bg-white p-6 text-left rounded-[16px] border border-[#E5E7EB] ">
- <span className="text-[12px] text-red-500 font-bold tracking-widest uppercase block mb-2">Parse Error</span>
- <p className="text-[13px] font-mono text-gray-600 whitespace-pre-wrap">
- {typeof emp.education_details === 'string' ? emp.education_details : JSON.stringify(emp.education_details, null, 2)}
- </p>
- </div>
- );
- }
- })()}
- </div>
- )}
-
- {(activeTab === "Medical" || activeTab === "All") && (
- <div className="bg-[#F4F4F5] rounded-[24px] p-6 md:p-8 mb-8 animate-in fade-in duration-300 space-y-12">
- <div>
- <div className="flex items-center gap-3 mb-6">
- <div className="p-2 bg-gray-50 text-gray-500 rounded-xl border border-gray-200 ">
- <Stethoscope size={18} />
- </div>
- <h3 className="text-[15px] font-bold text-gray-900 uppercase tracking-wider mb-0">Medical Profile</h3>
- </div>
- <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6">
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Blood Group</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-black text-red-600 ">
- {emp.blood_group || emp.custom_fields?.bloodGroup || "Unknown"}
- </div>
- </div>
- </div>
- </div>
-
- <div className="pt-8 border-t border-[#E5E7EB] ">
- <div className="flex items-center gap-3 mb-6">
- <div className="p-2 bg-gray-50 text-gray-500 rounded-xl border border-gray-200 ">
- <ShieldCheck size={18} />
- </div>
- <h3 className="text-[15px] font-bold text-gray-900 uppercase tracking-wider mb-0">Insurance Details</h3>
- </div>
- <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6">
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Insurance Provider Name</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.policy_provider || emp.custom_fields?.insurProvider || emp.custom_fields?.insuranceProvider || "-"}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Policy Number</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.employee_insurance_id || emp.custom_fields?.insurPolicyNum || emp.custom_fields?.insurancePolicyNo || "-"}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Insurance Type</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.insurance_type || emp.custom_fields?.insuranceType || "-"}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Payment Frequency</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.custom_fields?.insurPaymentFreq || emp.custom_fields?.insurancePaymentFrequency || "-"}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Policy Start Date</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {(() => {
- const d = emp.policy_start_date || emp.custom_fields?.insurPolicyStart || emp.custom_fields?.insuranceStartDate;
- return d ? new Date(d).toLocaleDateString('en-GB') : "-";
- })()}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Policy Expiry Date</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {(() => {
- const d = emp.policy_end_date || emp.custom_fields?.insurPolicyExpiry || emp.custom_fields?.insuranceEndDate;
- return d ? new Date(d).toLocaleDateString('en-GB') : "-";
- })()}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Coverage Amount</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {(() => {
- const val = emp.coverage_amount || emp.custom_fields?.insurCoverageAmt || emp.custom_fields?.insuranceCoverageAmount || emp.custom_fields?.insuranceCoverage;
- return val ? `S$ ${Number(val).toLocaleString("en-SG")}` : "-";
- })()}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Premium Amount</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {(() => {
- const val = emp.custom_fields?.insurPremiumAmt || emp.custom_fields?.insurancePremiumAmount;
- return val ? `S$ ${Number(val).toLocaleString("en-SG")}` : "-";
- })()}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Employee Covered</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.custom_fields?.empCovered || "-"}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Dependents Covered</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.custom_fields?.depsCovered || "-"}
- {emp.custom_fields?.depsCovered === "Yes" && emp.custom_fields?.numDeps ? ` (${emp.custom_fields.numDeps})` : ""}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Spouse Coverage</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.custom_fields?.spouseCoverage || "-"}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Children Coverage</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.custom_fields?.childrenCoverage || "-"}
- </div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Parents Coverage</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">
- {emp.custom_fields?.parentsCoverage || "-"}
- </div>
- </div>
- <div className="flex flex-col gap-2 lg:col-span-3">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Nominee</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 flex items-center justify-between">
- <span>{emp.nominee_name || "-"}</span>
- {emp.nominee_relation && <span className="bg-gray-100 px-3 py-1 rounded-full text-[11px] font-bold text-gray-500 uppercase tracking-wider">{emp.nominee_relation}</span>}
- </div>
- </div>
- </div>
- </div>
- </div>
- )}
-
- {(activeTab === "Work" || activeTab === "All") && (
- <div className="bg-[#F4F4F5] rounded-[24px] p-6 md:p-8 mb-8 animate-in fade-in duration-300 space-y-12">
- <div>
- <div className="flex items-center gap-3 mb-6">
- <div className="p-2 bg-gray-50 text-gray-500 rounded-xl border border-gray-200 ">
- <Fingerprint size={18} />
- </div>
- <h3 className="text-[15px] font-bold text-gray-900 uppercase tracking-wider mb-0">Official Identifiers</h3>
- </div>
- <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6">
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Employee ID</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">{emp.emp_id || "Unassigned"}</div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Date of Joining</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">{emp.date_of_joining ? new Date(emp.date_of_joining).toLocaleDateString('en-GB') : "Not Disclosed"}</div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Department</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">{emp.departments?.department_name || "General"}</div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">App Role</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">{emp.role}</div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Designation</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">{emp.designation || "Unassigned"}</div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Employment Type</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">{emp.job_type || "Regular"}</div>
- </div>
- </div>
- </div>
- 
- <div className="pt-8 border-t border-[#E5E7EB] ">
- <div className="flex items-center gap-3 mb-6">
- <div className="p-2 bg-gray-50 text-gray-500 rounded-xl border border-gray-200 ">
- <Activity size={18} />
- </div>
- <h3 className="text-[15px] font-bold text-gray-900 uppercase tracking-wider mb-0">Operational Tracking</h3>
- </div>
- <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6">
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Salary</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">{emp.salary ? `S$ ${Number(emp.salary).toLocaleString("en-SG", { minimumFractionDigits: 0, maximumFractionDigits: 2 })}` : "Not Disclosed"}</div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Shift Protocol</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">{emp.shift_type || "Standard"}</div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Overtime</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">{emp.overtime_applicable ? "Applicable" : "N/A"}</div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Claims</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">{emp.claims_applicable ? "Eligible" : "N/A"}</div>
- </div>
- </div>
- </div>
- </div>
- )}
-
- {(activeTab === "Bank" || activeTab === "All") && (
- <div className="bg-[#F4F4F5] rounded-[24px] p-6 md:p-8 mb-12 animate-in fade-in duration-300">
- <div className="flex items-center gap-3 mb-6">
- <div className="p-2 bg-gray-50 text-gray-500 rounded-xl border border-gray-200 ">
- <Landmark size={18} />
- </div>
- <h3 className="text-[15px] font-bold text-gray-900 uppercase tracking-wider mb-0">Bank Details</h3>
- </div>
- <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6">
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Bank Name</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">{emp.bank_name || emp.custom_fields?.bankName || "Unassigned"}</div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Account Holder Name</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">{emp.account_holder_name || emp.custom_fields?.accountHolder || "Unassigned"}</div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Account Number</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 font-mono tracking-wider">{emp.account_number || emp.custom_fields?.accountNum || "Unassigned"}</div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Online Payment Method</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">{emp.custom_fields?.onlinePaymentType || "-"}</div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Online Payment ID/Number</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">{emp.custom_fields?.onlinePaymentId || "-"}</div>
- </div>
- <div className="flex flex-col gap-2">
- <label className="text-[12px] font-semibold text-gray-500 pl-1">Salary Payment Mode</label>
- <div className="bg-white rounded-[14px] px-5 py-3.5 text-[14px] font-bold text-gray-900 ">{emp.custom_fields?.salaryPaymentMode || "Unassigned"}</div>
- </div>
- </div>
- </div>
- )}
-
- {(activeTab === "Documents" || activeTab === "All") && (
- <div className="bg-[#F4F4F5] rounded-[24px] p-6 md:p-8 mb-8 animate-in fade-in duration-300">
- <div className="flex items-center justify-between mb-6">
- <h3 className="text-[15px] font-bold text-gray-900 uppercase tracking-wider">
- Documents & Attachments
- </h3>
- <button
- onClick={() => setIsUploadPanelOpen(true)}
- className="flex items-center gap-1.5 px-4 py-1.5 bg-[#007AFF] text-white rounded-[10px] text-[12px] font-bold hover:bg-[#0062CC] transition-all"
- >
- <Plus className="h-3.5 w-3.5" /> Upload New
- </button>
- </div>
-
- {getEmployeeDocuments().length === 0 ? (
- <div className="bg-white rounded-[18px] p-8 text-center border border-dashed border-gray-200 ">
- <FileText className="h-10 w-10 text-gray-300 mx-auto mb-3" />
- <p className="text-[14px] font-bold text-gray-900 mb-1">No documents uploaded</p>
- <p className="text-[12px] text-gray-500 max-w-[280px] mx-auto mb-4">You can upload identity proofs, certificates, and contract copies for this employee.</p>
- <button
- onClick={() => setIsUploadPanelOpen(true)}
- className="px-5 py-2 bg-gray-100 hover:bg-gray-200 text-gray-900 text-[13px] font-semibold rounded-[10px] transition-colors"
- >
- Upload Document
- </button>
- </div>
- ) : (
- <div className="flex flex-col gap-3">
- {/* Header Row */}
- <div className="grid grid-cols-12 gap-4 px-4 pb-2 text-[11px] font-bold text-[#8E8E93] uppercase tracking-wider">
- <div className="col-span-5 md:col-span-4">DOCUMENT NAME</div>
- <div className="hidden md:block md:col-span-3">TYPE</div>
- <div className="col-span-3 md:col-span-2">UPLOADED ON</div>
- <div className="col-span-2 md:col-span-2">STATUS</div>
- <div className="col-span-2 md:col-span-1 text-right">ACTIONS</div>
- </div>
- 
- {/* Rows */}
- <div className="flex flex-col gap-3">
- {getEmployeeDocuments()
- .slice((docPage - 1) * itemsPerPage, docPage * itemsPerPage)
- .map((doc, idx) => {
- const getFileExtension = (path: string, name: string) => {
- const pathParts = path.split('/');
- const filePart = pathParts[pathParts.length - 1];
- if (filePart.includes('.')) {
- const ext = filePart.split('.').pop()?.toUpperCase();
- if (ext && ext.length <= 4 && /^[A-Z0-9]+$/.test(ext)) return ext;
- }
- if (name.includes('.')) {
- const ext = name.split('.').pop()?.toUpperCase();
- if (ext && ext.length <= 4 && /^[A-Z0-9]+$/.test(ext)) return ext;
- }
- return 'DOC';
- };
-
- const extText = getFileExtension(doc.path, doc.name);
- let badgeColor = 'bg-[#8E8E93]'; // Gray default
- if (['PDF'].includes(extText)) {
- badgeColor = 'bg-[#FF3B30]'; // Red
- } else if (['DOC', 'DOCX', 'TXT', 'RTF'].includes(extText)) {
- badgeColor = 'bg-[#007AFF]'; // Blue
- } else if (['XLS', 'XLSX', 'CSV'].includes(extText)) {
- badgeColor = 'bg-[#34C759]'; // Green
- } else if (['PNG', 'JPG', 'JPEG', 'WEBP', 'GIF', 'SVG'].includes(extText)) {
- badgeColor = 'bg-[#30B0C7]'; // Teal
- } else if (['ZIP', 'RAR', '7Z', 'TAR', 'GZ'].includes(extText)) {
- badgeColor = 'bg-[#AF52DE]'; // Purple
- }
-
- return (
- <div 
- key={idx}
- className="bg-white rounded-[16px] border border-[#E5E7EB] p-3 flex items-center grid grid-cols-12 gap-4 group relative hover:border-[#007AFF]/40 hover:shadow-sm transition-all"
- >
- <button
- onClick={() => handleDeleteDoc(doc.path, doc.originalDocKey, doc.isCustom)}
- title="Delete Document"
- className="absolute -top-2 -right-2 p-1.5 rounded-full bg-red-100 text-red-500 opacity-0 group-hover:opacity-100 transition-all z-10 shadow-sm"
- >
- <Trash2 className="h-3 w-3" />
- </button>
-
- {/* Document Name */}
- <div className="col-span-5 md:col-span-4 flex items-center gap-3">
- <div className="h-10 w-10 rounded-[10px] border border-gray-200 flex items-center justify-center bg-gray-50 shrink-0 relative overflow-hidden">
- {(() => {
- const ext = extText.toLowerCase();
- let src = "/Icons/ExtensionIcons/docx_icon.svg";
- if (ext === "pdf") src = "/Icons/ExtensionIcons/PDF_file_icon.svg";
- else if (ext === "csv") src = "/Icons/ExtensionIcons/csv_icon.svg";
- else if (["xls", "xlsx"].includes(ext)) src = "/Icons/ExtensionIcons/xlsx_icon.svg";
- else if (["ppt", "pptx"].includes(ext)) src = "/Icons/ExtensionIcons/pptx_icon_(2019).svg";
- else if (["png", "jpg", "jpeg", "webp", "gif", "svg"].includes(ext)) src = "/Icons/ExtensionIcons/img.svg";
- 
- return (
- <div className="w-6 h-6 flex items-center justify-center mb-1">
- <Image src={src} alt={extText} width={22} height={22} className="object-contain" />
- </div>
- );
- })()}
- <div className={`absolute bottom-0 w-full flex justify-center ${badgeColor} py-[1px]`}>
- <span className="text-[7px] font-black text-white leading-none tracking-wider">{extText}</span>
- </div>
- </div>
- <h4 className="text-[13px] font-bold text-gray-900 truncate" title={doc.name}>
- {doc.name}
- </h4>
- </div>
-
- {/* Type */}
- <div className="hidden md:flex md:col-span-3 items-center">
- <span className="text-[11px] font-bold px-3 py-1 rounded-full bg-gray-100 text-gray-600 truncate">
- {doc.category}
- </span>
- </div>
-
- {/* Uploaded On */}
- <div className="col-span-3 md:col-span-2 flex items-center">
- <span className="text-[12px] font-bold text-gray-900 ">
- {doc.uploadedAt}
- </span>
- </div>
-
- {/* Status */}
- <div className="col-span-2 md:col-span-2 flex items-center">
- {doc.verified ? (
- <span className="text-[11px] font-bold text-[#34C759] bg-[#34C759]/10 px-2 py-1 rounded-md flex items-center gap-1 w-max">
- <ShieldCheck className="h-3.5 w-3.5" /> <span className="hidden xl:inline">Verified</span>
- </span>
- ) : (
- <span className="text-[11px] font-bold text-gray-500 bg-gray-100 px-2 py-1 rounded-md flex items-center gap-1 w-max">
- <AlertCircle className="h-3.5 w-3.5" /> <span className="hidden xl:inline">Pending</span>
- </span>
- )}
- </div>
-
- {/* Actions */}
- <div className="col-span-2 md:col-span-1 flex items-center justify-end gap-1.5 pr-1">
- <button
- onClick={() => handlePreview(doc.path)}
- title="Preview Document"
- className="p-1.5 rounded-lg border border-gray-200 hover:bg-gray-50 text-gray-600 transition-colors"
- >
- <Eye className="h-3.5 w-3.5" />
- </button>
- <button
- onClick={() => handleDownload(doc.path, doc.name)}
- title="Download Document"
- className="p-1.5 rounded-lg border border-gray-200 hover:bg-gray-50 text-gray-600 transition-colors"
- >
- <Download className="h-3.5 w-3.5" />
- </button>
- </div>
- </div>
- );
- })}
- </div>
- 
- {/* Pagination Controls */}
- {getEmployeeDocuments().length > itemsPerPage && (
- <div className="flex items-center justify-between border-t border-gray-200 pt-4 mt-2">
- <span className="text-[12px] font-semibold text-gray-500">
- Showing {(docPage - 1) * itemsPerPage + 1} to {Math.min(docPage * itemsPerPage, getEmployeeDocuments().length)} of {getEmployeeDocuments().length}
- </span>
- <div className="flex items-center gap-2">
- <button 
- onClick={() => setDocPage(p => Math.max(1, p - 1))}
- disabled={docPage === 1}
- className="px-3 py-1.5 rounded-lg text-[12px] font-bold bg-white border border-gray-200 text-gray-700 disabled:opacity-50 hover:bg-gray-50 transition-colors"
- >
- Previous
- </button>
- <span className="text-[12px] font-bold text-gray-900 px-2">{docPage}</span>
- <button 
- onClick={() => setDocPage(p => Math.min(Math.ceil(getEmployeeDocuments().length / itemsPerPage), p + 1))}
- disabled={docPage >= Math.ceil(getEmployeeDocuments().length / itemsPerPage)}
- className="px-3 py-1.5 rounded-lg text-[12px] font-bold bg-white border border-gray-200 text-gray-700 disabled:opacity-50 hover:bg-gray-50 transition-colors"
- >
- Next
- </button>
- </div>
- </div>
- )}
- </div>
- )}
- </div>
- )}
-
- {(activeTab === "Projects" || activeTab === "All") && (
- <div className="bg-[#F4F4F5] rounded-[24px] p-6 md:p-8 mb-12 animate-in fade-in duration-300">
- <div className="flex items-center justify-between mb-6">
- <h3 className="text-[15px] font-bold text-gray-900 uppercase tracking-wider">
- Projects History & Scope
- </h3>
- <button
- onClick={() => router.push('/projects')}
- className="flex items-center gap-1 text-[12px] font-bold text-[#007AFF] hover:underline"
- >
- View All Projects <ChevronRight className="h-3.5 w-3.5" />
- </button>
- </div>
-
- {/* Project Stats Summary */}
- <div className="grid grid-cols-3 gap-4 mb-8">
- <div className="bg-white rounded-[16px] p-4 border border-gray-100 flex flex-col justify-between">
- <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wide block mb-1">Total Assignments</span>
- <span className="text-[20px] font-black text-gray-900 ">{getEmployeeProjects().length}</span>
- </div>
- <div className="bg-white rounded-[16px] p-4 border border-gray-100 flex flex-col justify-between">
- <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wide block mb-1">Active Projects</span>
- <span className="text-[20px] font-black text-[#22C55E]">{getEmployeeProjects().filter(p => p.status === 'Active').length}</span>
- </div>
- <div className="bg-white rounded-[16px] p-4 border border-gray-100 flex flex-col justify-between">
- <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wide block mb-1">Completed History</span>
- <span className="text-[20px] font-black text-gray-400">{getEmployeeProjects().filter(p => p.status === 'Closed').length}</span>
- </div>
- </div>
-
- {getEmployeeProjects().length === 0 ? (
- <div className="bg-white rounded-[18px] p-8 text-center border border-dashed border-gray-200 ">
- <Briefcase className="h-10 w-10 text-gray-300 mx-auto mb-3" />
- <p className="text-[14px] font-bold text-gray-900 mb-1">No project assignments</p>
- <p className="text-[12px] text-gray-500 max-w-[280px] mx-auto">This employee is not currently assigned to any company projects.</p>
- </div>
- ) : (
- <div className="flex flex-col gap-6">
- <div className="flex flex-col gap-4">
- {getEmployeeProjects()
- .slice((projPage - 1) * itemsPerPage, projPage * itemsPerPage)
- .map((p) => {
- const cat = categoryStyle[p.category as ProjectCategory] || categoryStyle.Tech;
- const stat = statusStyle[p.status as ProjectStatus] || statusStyle.Active;
- return (
- <div 
- key={p.id}
- className="bg-white rounded-[18px] border border-gray-100 p-5 hover:shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:border-[#FF9500]/40 transition-all flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 group"
- >
- <div className="flex items-center gap-4 flex-1">
- <div 
- className="h-12 w-12 rounded-[14px] flex items-center justify-center text-[16px] font-bold shrink-0"
- style={{ backgroundColor: getAvatarColor(p.name).bg, color: getAvatarColor(p.name).color }}
- >
- {getInitials(p.name)}
- </div>
- <div>
- <h4 className="text-[15px] font-bold text-gray-900 leading-tight mb-1 group-hover:text-[#FF9500] transition-colors">{p.name}</h4>
- <div className="flex items-center gap-3 text-[12px] font-medium text-gray-500">
- <span className="flex items-center gap-1.5"><Hash className="h-3.5 w-3.5" /> {p.code}</span>
- <span className="flex items-center gap-1.5"><Building2 className="h-3.5 w-3.5" /> {p.client}</span>
- </div>
- </div>
- </div>
-
- <div className="flex items-center gap-6 w-full lg:w-auto">
- <div className="flex flex-col gap-1.5 min-w-[120px]">
- <span 
- className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider w-fit" 
- style={{ backgroundColor: cat.bg, color: cat.text }}
- >
- <span>{cat.icon}</span>{p.category}
- </span>
- <span className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider w-fit px-2.5 py-1 rounded-full bg-gray-50 " style={{ color: stat.text }}>
- <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: stat.dot }} />{p.status}
- </span>
- </div>
-
- <div className="flex-1 lg:w-[150px]">
- <div className="flex justify-between mb-1.5">
- <span className="text-[11px] font-semibold text-gray-400 flex items-center gap-1"><Activity className="h-3.5 w-3.5"/> Progress</span>
- <span className="text-[11px] font-extrabold text-[#4F46E5]">{p.progress}%</span>
- </div>
- <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
- <div className="h-full rounded-full transition-all" style={{ width: `${p.progress}%`, background: p.progress === 100 ? "#22C55E" : "#4f46e5" }} />
- </div>
- </div>
-
- <div className="flex flex-col gap-1 min-w-[150px] text-right">
- <span className="text-gray-900 font-bold text-[13px]">{p.financials}</span>
- <span className="flex items-center justify-end gap-1 text-[11px] font-medium text-gray-400">
- <Clock className="h-3.5 w-3.5 text-gray-400" /> {p.startDate} - {p.endDate}
- </span>
- </div>
-
- <button 
- onClick={() => router.push(`/projects/${p.code}`)}
- className="px-5 py-2.5 bg-gray-100 hover:bg-[#FF9500] hover:text-white text-gray-900 text-[13px] font-bold rounded-[12px] transition-colors ml-2 whitespace-nowrap"
- >
- View Project
- </button>
- </div>
- </div>
- );
- })}
- </div>
-
- {/* Pagination Controls */}
- {getEmployeeProjects().length > itemsPerPage && (
- <div className="flex items-center justify-between border-t border-gray-200 pt-6 mt-2">
- <span className="text-[12px] font-semibold text-gray-500">
- Showing {(projPage - 1) * itemsPerPage + 1} to {Math.min(projPage * itemsPerPage, getEmployeeProjects().length)} of {getEmployeeProjects().length}
- </span>
- <div className="flex items-center gap-2">
- <button 
- onClick={() => setProjPage(p => Math.max(1, p - 1))}
- disabled={projPage === 1}
- className="px-3 py-1.5 rounded-lg text-[13px] font-bold bg-white border border-gray-200 text-gray-700 disabled:opacity-50 hover:bg-gray-50 transition-colors"
- >
- Previous
- </button>
- <span className="text-[13px] font-bold text-gray-900 px-2">{projPage}</span>
- <button 
- onClick={() => setProjPage(p => Math.min(Math.ceil(getEmployeeProjects().length / itemsPerPage), p + 1))}
- disabled={projPage >= Math.ceil(getEmployeeProjects().length / itemsPerPage)}
- className="px-3 py-1.5 rounded-lg text-[13px] font-bold bg-white border border-gray-200 text-gray-700 disabled:opacity-50 hover:bg-gray-50 transition-colors"
- >
- Next
- </button>
- </div>
- </div>
- )}
- </div>
- )}
- </div>
- )}
-
-
- </div>
-
- </div>
-
-
- </div>
- </main>
-
- {/* Notification Modal */}
- {isNotificationModalOpen && (
- <div className="fixed inset-0 bg-black/50 z-[100] flex items-center justify-center p-4">
- <div className="bg-white border border-[#E5E7EB] rounded-[24px] w-full max-w-lg shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
+  {/* Notification Modal */}
+  {isNotificationModalOpen && (
+  <div className="fixed inset-0 bg-black/50 z-[100] flex items-center justify-center p-4">
+  <div className="bg-white border border-[#E5E7EB] rounded-[24px] w-full max-w-lg shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
  <div className="px-6 py-5 border-b border-[#E5E7EB] flex items-center justify-between">
  <h3 className="text-[18px] font-bold text-gray-900 flex items-center gap-2">
  <Bell className="h-5 w-5 text-[var(--user-accent)]" /> Send Push Notification
@@ -3725,21 +2747,21 @@ export default function EmployeeProfileView() {
  </p>
  
  <div className="flex flex-col gap-2">
- <label className="text-[12px] font-bold text-gray-500">
- Please type the Employee ID <strong className="text-red-500 select-all font-mono font-bold">{emp?.emp_id}</strong> to confirm:
- </label>
- <input 
- type="text"
- placeholder="Enter Employee ID"
- className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-950 focus:outline-none focus:ring-2 focus:ring-red-500/50 text-[13.5px] font-medium"
- value={deleteConfirmInput}
- onChange={(e) => setDeleteConfirmInput(e.target.value)}
- />
- </div>
+  <label className="text-[12px] font-bold text-gray-500">
+  Please type <strong className="text-red-500 font-bold">DELETE</strong> (or Employee ID <strong className="text-red-500 select-all font-mono font-bold">{emp?.emp_id}</strong>) to confirm:
+  </label>
+  <input 
+  type="text"
+  placeholder='Type "DELETE" or Employee ID'
+  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-950 focus:outline-none focus:ring-2 focus:ring-red-500/50 text-[13.5px] font-medium"
+  value={deleteConfirmInput}
+  onChange={(e) => setDeleteConfirmInput(e.target.value)}
+  />
+  </div>
 
- {deleteError && (
- <p className="text-[12px] text-red-600 font-semibold">{deleteError}</p>
- )}
+  {deleteError && (
+  <p className="text-[12px] text-red-600 font-semibold">{deleteError}</p>
+  )}
  </div>
 
  <div className="px-6 pb-6 pt-3 flex items-center justify-end gap-3 border-t border-gray-100 mt-2">
@@ -3752,7 +2774,7 @@ export default function EmployeeProfileView() {
  </button>
  <button 
  type="button" 
- disabled={deleteConfirmInput !== emp?.emp_id}
+ disabled={deleteConfirmInput.trim().toUpperCase() !== "DELETE" && deleteConfirmInput.trim() !== emp?.emp_id && deleteConfirmInput.trim().toLowerCase() !== emp?.name?.toLowerCase()}
  onClick={handleConfirmDelete}
  className="px-6 py-2.5 bg-red-600 hover:bg-red-700 disabled:bg-red-200 disabled:text-red-400 text-white font-bold text-[13px] rounded-xl transition-all flex items-center gap-1.5"
  >

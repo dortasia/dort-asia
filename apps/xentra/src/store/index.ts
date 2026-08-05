@@ -57,6 +57,7 @@ export interface CachedEmployee {
   bg: string;
   date_of_birth?: string;
   created_at?: string;
+  avatar_url?: string | null;
   rawData?: any;
 }
 

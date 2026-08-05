@@ -38,9 +38,9 @@ export default function NotifyPage() {
   return (
     <div className="flex-1 flex flex-col h-full bg-[#FAFAFA] dark:bg-[#0B0B0F] overflow-y-auto page-scrollbar">
       {/* Header */}
-      <header className="flex items-center justify-between px-8 pt-8 pb-6 shrink-0 animate-in fade-in slide-in-from-bottom-4 duration-300">
+      <header className="flex items-center justify-between p-4 shrink-0 animate-in fade-in slide-in-from-bottom-4 duration-300">
         <div>
-          <h1 className="text-[28px] font-bold text-gray-900 dark:text-white leading-tight tracking-tight uppercase">Notify</h1>
+          <h1 className="text-[28px] font-medium text-[#111827] dark:text-white tracking-tight font-sans">Notify</h1>
           <p className="text-[14px] text-gray-500 font-medium mt-1">Send notifications to your employees</p>
         </div>
         <Link href="/" className="flex items-center gap-1.5 text-[14px] font-semibold text-[#007AFF] hover:bg-[#E5F1FF] px-3 py-2 rounded-lg transition-colors">
@@ -49,7 +49,7 @@ export default function NotifyPage() {
         </Link>
       </header>
 
-      <main className="flex-1 px-8 pb-8 flex flex-col gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <main className="flex-1 p-4 pt-0 flex flex-col gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
         
         {/* Top 3 Columns */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

@@ -191,9 +191,9 @@ export function SettingsLeaveTemplatePage() {
   return (
     <div className="flex flex-col gap-6 max-w-[800px]">
       <div>
-        <div className="flex items-center gap-2 text-xs text-[#737373] mb-3">
+        <div className="flex items-center gap-2 type-small text-[#737373] mb-4">
           <Link href="/settings/employees" className="hover:text-[#161616] transition-colors flex items-center gap-1">
-            <Icon icon="hugeicons:arrow-left-01" className="w-3.5 h-3.5" />
+            <Icon icon="hugeicons:arrow-left-01" className="w-4 h-4" />
             Employee Settings
           </Link>
           <span>/</span>
@@ -201,12 +201,12 @@ export function SettingsLeaveTemplatePage() {
             Leave Management
           </Link>
           <span>/</span>
-          <span className="text-[#161616] font-medium">{templateName}</span>
+          <span className="text-[#161616]">{templateName}</span>
         </div>
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-[28px] font-medium text-[#111827] tracking-tight font-sans">{templateName} Leave Types</h2>
-            <p className="text-xs text-[#737373] mt-1">Manage the available leave types and allocations for this template.</p>
+            <h2 className="type-h2 text-[#161616]">{templateName} Leave Types</h2>
+            <p className="type-small text-[#737373] mt-1">Manage the available leave types and allocations for this template.</p>
           </div>
           <button 
             onClick={handleOpenAdd}

@@ -15,6 +15,7 @@ export default function AddDepartmentSidebar({ onClose, onSuccess }: Props) {
 
   const [isClosing, setIsClosing] = useState(false);
   const [name, setName] = useState("");
+  const [departmentType, setDepartmentType] = useState("");
   const [description, setDescription] = useState("");
   const [designations, setDesignations] = useState<string[]>([]);
   const [newDesignation, setNewDesignation] = useState("");
@@ -148,6 +149,10 @@ export default function AddDepartmentSidebar({ onClose, onSuccess }: Props) {
       setError("Department name is required.");
       return;
     }
+    if (!departmentType.trim()) {
+      setError("Department Type is required.");
+      return;
+    }
     if (designations.length === 0) {
       setError("At least one designation is required.");
       return;
@@ -228,7 +233,7 @@ export default function AddDepartmentSidebar({ onClose, onSuccess }: Props) {
         .from("departments")
         .insert({
           name: name.trim(),
-          description: description.trim(),
+          description: departmentType.trim() ? `Type: ${departmentType.trim()}` : description.trim(),
           designations: designations,
           company_id: user.id,
           dept_id: generatedDeptId,
@@ -245,6 +250,14 @@ export default function AddDepartmentSidebar({ onClose, onSuccess }: Props) {
         .single();
 
       if (insertErr) throw insertErr;
+
+      // Create notification
+      await supabase.from("notifications").insert({
+        title: "New Department Created",
+        message: `Department "${name.trim()}" has been created.`,
+        type: "success",
+        is_read: false
+      });
 
       // Update selected employees' department_id (excluding head)
       const otherEmployeeIds = finalEmployeeIds.filter(id => id !== headId);
@@ -293,7 +306,7 @@ export default function AddDepartmentSidebar({ onClose, onSuccess }: Props) {
 
       {/* Sidebar Panel Drawer */}
       <div 
-        className={`fixed inset-y-0 right-0 z-[10000] w-full max-w-[420px] bg-white dark:bg-[#121217] shadow-[-10px_0_30px_rgba(0,0,0,0.05)] border-l border-gray-100 dark:border-[#2C2C35] flex flex-col transition-transform duration-300 ease-out transform ${isClosing ? 'translate-x-full' : 'translate-x-0'}`}
+        className={`fixed inset-y-0 right-0 z-[10000] w-full max-w-[420px] bg-white dark:bg-[#121217] shadow-[-10px_0_30px_rgba(0,0,0,0.05)] border-l border-gray-100 dark:border-[#2C2C35] flex flex-col transition-transform duration-300 ease-out transform ${isClosing ? 'translate-x-full' : 'translate-x-0'} font-sf-text`}
         onClick={e => e.stopPropagation()}
       >
         {/* Header */}
@@ -327,6 +340,22 @@ export default function AddDepartmentSidebar({ onClose, onSuccess }: Props) {
                   placeholder="Enter department name (e.g. Engineering)"
                   className="w-full bg-[#F8F9FA] dark:bg-[#1C1C1E] rounded-[14px] px-4 py-3.5 text-[14px] font-medium text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-[#007AFF] border border-transparent"
                 />
+              </div>
+
+              {/* Department Type */}
+              <div>
+                <h3 className="text-[13px] font-bold text-gray-900 dark:text-white mb-3">
+                  Department Type <span className="text-[#FF3B30]">*</span>
+                </h3>
+                <input 
+                  type="text" 
+                  maxLength={25}
+                  value={departmentType} 
+                  onChange={e => setDepartmentType(e.target.value)}
+                  placeholder="e.g. Administration, Engineering, Finance"
+                  className="w-full bg-[#F8F9FA] dark:bg-[#1C1C1E] rounded-[14px] px-4 py-3.5 text-[14px] font-medium text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-[#007AFF] border border-transparent"
+                />
+                <span className="text-[11px] text-gray-400 mt-1 block text-right font-sf-rounded">{departmentType.length}/25</span>
               </div>
 
               {/* Add People */}
@@ -577,7 +606,7 @@ export default function AddDepartmentSidebar({ onClose, onSuccess }: Props) {
               <button 
                 type="submit"
                 disabled={saving || saved}
-                className={`flex-1 py-4 rounded-[16px] text-white text-[15px] font-bold transition-all shadow-sm flex items-center justify-center gap-2 ${saved ? 'bg-[#34C759]' : 'bg-[#007AFF] hover:bg-[#0062CC]'}`}
+                className={`flex-1 py-4 rounded-[16px] text-white text-[16px] font-sf-text font-bold leading-[1.3] transition-all shadow-sm flex items-center justify-center gap-2 ${saved ? 'bg-[#34C759]' : 'bg-[#0064E0] hover:bg-[#0052B8]'}`}
               >
                 {saving ? (
                   <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin" />

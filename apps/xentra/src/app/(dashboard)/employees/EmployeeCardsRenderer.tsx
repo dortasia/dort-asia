@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Eye, Edit, MoreHorizontal, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
+import { Eye, Edit, MoreHorizontal, ChevronLeft, ChevronRight, ChevronDown, X } from "lucide-react";
 import { createClient } from "@/utils/supabase/client";
 
 import { getUserAvatarUrl } from "@/utils/avatarColor";
@@ -51,24 +51,39 @@ export default function EmployeeCardsRenderer({ employees }: { employees: Employ
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleDelete = async (id: string, name: string, email: string) => {
-    if (confirm(`Are you sure you want to permanently delete ${name}?`)) {
-      try {
-        await fetch('/api/employee-credentials', {
-          method: 'POST',
-          body: JSON.stringify({ action: 'delete', email, employeeId: id }),
-          headers: { 'Content-Type': 'application/json' }
-        });
+  const [employeeToDelete, setEmployeeToDelete] = useState<{ id: string; name: string; email: string; empId?: string | null } | null>(null);
+  const [deleteInputText, setDeleteInputText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [deleteModalError, setDeleteModalError] = useState("");
 
-        const supabase = createClient();
-        const { error } = await supabase.from('employees').delete().eq('id', id);
-        
-        if (error) throw error;
-        
-        window.location.reload();
-      } catch (err: any) {
-        alert("Failed to delete employee: " + (err.message || "Unknown error"));
-      }
+  const handleDelete = (id: string, name: string, email: string, empId?: string | null) => {
+    setEmployeeToDelete({ id, name, email, empId });
+    setDeleteInputText("");
+    setDeleteModalError("");
+  };
+
+  const confirmDeleteEmployee = async () => {
+    if (!employeeToDelete) return;
+    setIsDeleting(true);
+    setDeleteModalError("");
+
+    try {
+      await fetch('/api/employee-credentials', {
+        method: 'POST',
+        body: JSON.stringify({ action: 'delete', email: employeeToDelete.email, employeeId: employeeToDelete.id }),
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      const supabase = createClient();
+      const { error } = await supabase.from('employees').delete().eq('id', employeeToDelete.id);
+      
+      if (error) throw error;
+      
+      window.location.reload();
+    } catch (err: any) {
+      setDeleteModalError("Failed to delete employee: " + (err.message || "Unknown error"));
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -112,7 +127,7 @@ export default function EmployeeCardsRenderer({ employees }: { employees: Employ
                     <div 
                       className="h-[40px] w-[40px] rounded-full flex items-center justify-center shrink-0 overflow-hidden bg-gray-100 dark:bg-gray-800"
                     >
-                      <img src={getUserAvatarUrl(employee.avatar_url)} alt={employee.name} className="h-full w-full object-cover" />
+                      <img src={getUserAvatarUrl(employee.avatar_url)} alt={employee.name} className="h-full w-full object-cover" onError={(e) => { e.currentTarget.src = "/default-profile.svg"; e.currentTarget.onerror = null; }} />
                     </div>
                     <div className="flex flex-col">
                       <span className="text-[14px] font-semibold text-gray-900 dark:text-white leading-tight">
@@ -304,6 +319,84 @@ export default function EmployeeCardsRenderer({ employees }: { employees: Employ
                   ))}
                 </div>
               )}
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Caution Delete Employee Modal */}
+      {employeeToDelete && (
+        <div 
+          className="fixed inset-0 z-[100000] bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200 font-sf-text"
+          onClick={() => {
+            setEmployeeToDelete(null);
+            setDeleteInputText("");
+            setDeleteModalError("");
+          }}
+        >
+          <div 
+            className="bg-white dark:bg-[#121217] border border-red-100 dark:border-red-900/30 rounded-[24px] w-full max-w-md overflow-hidden shadow-2xl animate-in zoom-in-95 duration-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="px-6 py-5 border-b border-red-50 dark:border-red-900/20 flex items-center justify-between">
+              <h3 className="text-[18px] font-bold text-red-600 dark:text-red-500">
+                Caution: Delete Employee
+              </h3>
+              <button 
+                onClick={() => {
+                  setEmployeeToDelete(null);
+                  setDeleteInputText("");
+                  setDeleteModalError("");
+                }} 
+                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            
+            <div className="p-6 flex flex-col gap-4">
+              <p className="text-[14px] text-gray-600 dark:text-gray-300 leading-relaxed font-medium">
+                Are you sure you want to permanently delete <strong className="text-gray-900 dark:text-white font-semibold">{employeeToDelete.name}</strong>? 
+                This action is irreversible and will delete all login credentials, timesheets, and records.
+              </p>
+              
+              <div className="flex flex-col gap-2">
+                <label className="text-[13px] font-medium text-gray-600 dark:text-gray-400">
+                  Type <strong className="text-red-600 dark:text-red-400 select-all font-semibold">DELETE</strong> to confirm:
+                </label>
+                <input 
+                  type="text"
+                  placeholder='Type "DELETE" here'
+                  className="w-full px-4 py-3 rounded-[14px] border border-gray-200 dark:border-[#2A2A31] bg-gray-50 dark:bg-[#1C1C22] text-gray-900 dark:text-white focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 text-[14px] font-medium transition-all"
+                  value={deleteInputText}
+                  onChange={(e) => setDeleteInputText(e.target.value)}
+                />
+              </div>
+
+              {deleteModalError && (
+                <p className="text-[13px] text-red-600 font-medium">{deleteModalError}</p>
+              )}
+            </div>
+
+            <div className="px-6 pb-6 pt-3 flex items-center justify-end gap-3 border-t border-gray-100 dark:border-white/5">
+              <button 
+                type="button" 
+                onClick={() => {
+                  setEmployeeToDelete(null);
+                  setDeleteInputText("");
+                  setDeleteModalError("");
+                }}
+                className="px-5 py-2.5 bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/20 text-gray-700 dark:text-gray-300 font-medium text-[14px] rounded-full transition-colors"
+              >
+                Cancel
+              </button>
+              <button 
+                type="button" 
+                disabled={isDeleting || (deleteInputText.trim().toUpperCase() !== "DELETE" && deleteInputText.trim() !== employeeToDelete.empId && deleteInputText.trim().toLowerCase() !== employeeToDelete.name.toLowerCase())}
+                onClick={confirmDeleteEmployee}
+                className="px-6 py-2.5 bg-red-600 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium text-[14px] rounded-full transition-colors flex items-center gap-2"
+              >
+                {isDeleting ? "Deleting..." : "Permanently Delete"}
+              </button>
             </div>
           </div>
         </div>

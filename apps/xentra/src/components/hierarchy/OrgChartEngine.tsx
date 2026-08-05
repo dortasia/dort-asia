@@ -35,7 +35,7 @@ function statusColor(status: string) {
 }
 
 // ─── Avatar helpers ───────────────────────────────────────────────────────────
-import { getAvatarColor as getUniversalAvatarColor, getInitials } from "@/utils/avatarColor";
+import { getAvatarColor as getUniversalAvatarColor, getInitials, getUserAvatarUrl } from "@/utils/avatarColor";
 function avatarBg(name: string) {
   return getUniversalAvatarColor(name).solid;
 }
@@ -206,7 +206,7 @@ function EmployeeCard({
           className="w-[42px] h-[42px] shrink-0 rounded-full overflow-hidden flex items-center justify-center text-white font-bold text-[14px] border-2 border-white dark:border-gray-800 shadow-sm"
           style={{ backgroundColor: node.avatar ? "transparent" : avatarBg(node.name) }}
         >
-          {node.avatar ? <img src={node.avatar} alt={node.name} className="w-full h-full object-cover" /> : getInitials(node.name)}
+          {<img src={getUserAvatarUrl(node.avatar)} alt={node.name} className="w-full h-full object-cover" />}
         </div>
         {/* Name + Role only */}
         <div className="flex-1 min-w-0">

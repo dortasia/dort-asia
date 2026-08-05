@@ -270,9 +270,9 @@ export default function AnalyticsPage() {
     <div className="flex-1 flex flex-col overflow-y-auto page-scrollbar">
 
       {/* Header */}
-      <header className="flex items-center justify-between px-6 py-8">
+      <header className="flex items-center justify-between p-4">
         <div>
-          <h1 className="text-[28px] font-bold text-gray-900 dark:text-white leading-tight tracking-tight">Analytics</h1>
+          <h1 className="text-[28px] font-medium text-[#111827] dark:text-white tracking-tight font-sans">Analytics</h1>
           <p className="text-[14px] text-gray-500 font-medium tracking-wide mt-1">
             Workspace traffic & insights
           </p>
@@ -296,10 +296,10 @@ export default function AnalyticsPage() {
         </div>
       </header>
 
-      <main className="flex-1 flex flex-col gap-6 pb-8">
+      <main className="flex-1 flex flex-col gap-6 p-4 pt-0">
 
-        {/* ── HERO CHART (edge-to-edge) ── */}
-        <div className="mx-6 bg-white rounded-[24px] border border-[#F1F3F5] shadow-[0_2px_16px_rgba(0,0,0,0.04)] p-6">
+        {/* ── HERO CHART ── */}
+        <div className="bg-white rounded-[24px] border border-[#F1F3F5] shadow-[0_2px_16px_rgba(0,0,0,0.04)] p-6">
           <div className="flex items-start justify-between mb-4">
             <div>
               <h2 className="text-[15px] font-bold text-[#1d1d1f]">Attendance Overview</h2>

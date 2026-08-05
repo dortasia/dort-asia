@@ -374,7 +374,7 @@ export default function StoragePage() {
 
   // Company storage
   const [storageUsedGB, setStorageUsedGB] = useState(0);
-  const [storageTotalGB, setStorageTotalGB] = useState(100);
+  const [storageTotalGB, setStorageTotalGB] = useState(15);
 
   // Google Drive
   const [driveConnected, setDriveConnected] = useState(false);
@@ -606,9 +606,9 @@ export default function StoragePage() {
     <div className="flex-1 flex flex-col overflow-y-auto page-scrollbar bg-white">
 
       {/* Header */}
-      <header className="flex items-center justify-between px-6 pt-8 pb-6">
+      <header className="flex items-center justify-between p-4">
         <div>
-          <h1 className="text-[22px] font-bold text-gray-900 leading-tight">Your Storage</h1>
+          <h1 className="text-[28px] font-medium text-[#111827] dark:text-white tracking-tight font-sans">Storage</h1>
           <p className="text-[13px] text-gray-500 font-medium mt-0.5">Company Centralized Cloud Storage</p>
         </div>
         <div className="flex items-center gap-4">
@@ -616,7 +616,7 @@ export default function StoragePage() {
         </div>
       </header>
 
-      <main className="flex-1 px-6 pb-8 flex flex-col gap-6">
+      <main className="flex-1 p-4 pt-0 flex flex-col gap-6">
 
         {/* Toast */}
         {toast && (

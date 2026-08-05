@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import { ChevronsUpDown, X, Users, PlusCircle, LogOut } from "lucide-react";
 import { createClient } from "@/utils/supabase/client";
 import { getAvatarColor, getInitials, getUserAvatarUrl, getCompanyLogoUrl } from "@/utils/avatarColor";
@@ -15,7 +16,6 @@ import {
   StreamlineDepartments,
   StreamlineExpiryAlerts,
   StreamlineStorage,
-  StreamlineNotifications,
   StreamlineSettings,
   StreamlineSubscription
 } from "@/components/StreamlineIcons";
@@ -84,10 +84,10 @@ export function Sidebar() {
     window.location.href = `${landingUrl}/login?logout=true`;
   };
 
-  // Hover expand/collapse with small debounce to prevent flicker
+  // Hover expand/collapse with instant-feeling responsive spring trigger
   const handleMouseEnter = () => {
     if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
-    hoverTimeoutRef.current = setTimeout(() => setIsExpanded(true), 60);
+    hoverTimeoutRef.current = setTimeout(() => setIsExpanded(true), 20);
   };
   const handleMouseLeave = () => {
     if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
@@ -95,7 +95,7 @@ export function Sidebar() {
       setIsExpanded(false);
       setShowTeamPanel(false);
       setShowCompanyDropdown(false);
-    }, 120);
+    }, 80);
   };
 
   useEffect(() => {
@@ -320,26 +320,33 @@ export function Sidebar() {
 
   const isCollapsed = !isExpanded;
 
-  // Shared transition style for fade+slide text reveals
+  // High-performance hardware-accelerated text reveal style
   const textRevealStyle = {
     opacity: isExpanded ? 1 : 0,
-    maxWidth: isExpanded ? '185px' : '0px',
+    maxWidth: isExpanded ? '220px' : '0px',
     overflow: 'hidden' as const,
     whiteSpace: 'nowrap' as const,
-    transition: 'opacity 200ms ease, max-width 260ms cubic-bezier(0.4,0,0.2,1)',
-    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "SF Pro", system-ui, sans-serif',
+    willChange: 'opacity, max-width',
+    transition: isExpanded
+      ? 'opacity 220ms cubic-bezier(0.16, 1, 0.3, 1) 30ms, max-width 300ms cubic-bezier(0.16, 1, 0.3, 1)'
+      : 'opacity 120ms ease-out, max-width 240ms cubic-bezier(0.4, 0, 1, 1)',
   };
 
   return (
-    <div
+    <motion.aside
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      style={{
-        width: isExpanded ? '258px' : '72px',
-        transition: 'width 280ms cubic-bezier(0.4, 0, 0.2, 1)',
-        fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "SF Pro", system-ui, sans-serif',
+      initial={false}
+      animate={{
+        width: isExpanded ? 298 : 74,
       }}
-      className="flex h-full flex-col bg-[#F9F9FB] dark:bg-[#0B0B0F] shrink-0 relative z-40 overflow-hidden font-sf"
+      transition={{
+        type: "spring",
+        stiffness: 420,
+        damping: 34,
+        mass: 0.8,
+      }}
+      className="flex h-full flex-col bg-[#F9F9FB] dark:bg-[#0B0B0F] shrink-0 relative z-40 overflow-hidden font-sf-text will-change-[width]"
     >
 
       {/* Team flyout panel */}
@@ -374,7 +381,7 @@ export function Sidebar() {
                           className={`h-9 w-9 rounded-full flex items-center justify-center font-bold text-[12px] border-2 ${m.isCurrentUser ? 'border-[#007AFF]' : 'border-white dark:border-[#0B0B0F]'} overflow-hidden`}
                           style={{ backgroundColor: bg, color }}
                         >
-                          {m.avatarUrl ? <img src={m.avatarUrl} alt={m.name} className="w-full h-full object-cover" /> : m.initials}
+                          {<img src={getUserAvatarUrl(m.avatarUrl)} alt={m.name} className="w-full h-full object-cover" />}
                         </div>
                         <span className={`text-[9px] font-medium truncate max-w-[42px] text-center leading-tight ${m.isCurrentUser ? 'text-[#007AFF] font-bold' : 'text-[#8E8E93]'}`}>
                           {m.isCurrentUser ? "You" : m.name.split(' ')[0]}
@@ -400,32 +407,25 @@ export function Sidebar() {
       {/* ── TOP HEADER ── */}
       <div className="flex flex-col pt-4 pb-1 shrink-0 px-3 gap-2">
 
-        {/* User Profile */}
-        <div className="flex items-center gap-3 min-w-0">
-          {/* Avatar — always visible, same size as company logo */}
-          <div className="relative shrink-0">
-            <div className="h-[44px] w-[44px] rounded-[14px] bg-[#F2F2FB] flex items-center justify-center overflow-hidden">
-              <img src={getUserAvatarUrl(userProfile.avatarUrl)} alt={userProfile.name} crossOrigin="anonymous" referrerPolicy="no-referrer" className="w-full h-full object-cover" />
+        {/* App Logo Header */}
+        <div className="flex items-center h-[48px] min-w-0 shrink-0">
+          {isCollapsed ? (
+            <div className="w-full flex items-center justify-center">
+              <img 
+                src="/app_logos/xentra-bluelogo.svg" 
+                alt="Xentra Logo" 
+                className="h-9 w-auto object-contain" 
+              />
             </div>
-            <div className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full bg-[#34C759] border-[2.5px] border-[#F9F9FB] dark:border-[#0B0B0F] z-10" />
-          </div>
-
-          {/* Name + Role — slides in */}
-          <div
-            style={{
-              opacity: isExpanded ? 1 : 0,
-              transform: isExpanded ? 'translateX(0)' : 'translateX(-6px)',
-              transition: 'opacity 220ms ease, transform 240ms cubic-bezier(0.4,0,0.2,1)',
-              pointerEvents: isExpanded ? 'auto' : 'none',
-              flex: 1,
-              minWidth: 0,
-              overflow: 'hidden',
-            }}
-            className="flex flex-col justify-center"
-          >
-            <span className="text-[16px] font-semibold text-[#111827] dark:text-white leading-tight truncate">{userProfile.name}</span>
-            <span className="text-[14px] font-normal text-[#6B7280] dark:text-gray-400 mt-[1px] truncate">{userProfile.title}</span>
-          </div>
+          ) : (
+            <div className="w-full flex items-center justify-start pl-1">
+              <img 
+                src="/app_logos/xentra-blue-logo.svg" 
+                alt="Xentra Logo" 
+                className="h-9 w-auto object-contain" 
+              />
+            </div>
+          )}
         </div>
 
         {/* Team People — collapses to zero height when not expanded */}
@@ -434,13 +434,16 @@ export function Sidebar() {
             opacity: isExpanded ? 1 : 0,
             maxHeight: isExpanded ? '80px' : '0px',
             overflow: 'hidden',
-            transition: 'opacity 200ms ease, max-height 280ms cubic-bezier(0.4,0,0.2,1)',
+            willChange: 'opacity, max-height',
+            transition: isExpanded
+              ? 'opacity 200ms cubic-bezier(0.16, 1, 0.3, 1) 30ms, max-height 300ms cubic-bezier(0.16, 1, 0.3, 1)'
+              : 'opacity 120ms ease-out, max-height 240ms cubic-bezier(0.4, 0, 1, 1)',
             pointerEvents: isExpanded ? 'auto' : 'none',
           }}
         >
           <div className="flex flex-col gap-2 mt-1">
             <div className="flex items-center justify-between">
-              <span className="text-[13px] font-semibold text-[#A3A3A3] uppercase tracking-wider">Team People</span>
+              <span className="text-[14px] font-semibold text-[#A3A3A3] tracking-wider">Team People</span>
               <button
                 ref={teamRowRef}
                 onClick={() => setShowTeamPanel(p => !p)}
@@ -457,7 +460,7 @@ export function Sidebar() {
                         className={`h-7 w-7 rounded-full flex items-center justify-center font-bold text-[11px] border-[2.5px] ${m.isCurrentUser ? 'border-[#007AFF]' : 'border-[#F9F9FB] dark:border-[#0B0B0F]'} ${z} overflow-hidden shrink-0`}
                         style={{ backgroundColor: bg, color }}
                       >
-                        {m.avatarUrl ? <img src={m.avatarUrl} alt={m.name} className="w-full h-full object-cover" /> : m.initials}
+                        {<img src={getUserAvatarUrl(m.avatarUrl)} alt={m.name} className="w-full h-full object-cover" />}
                       </div>
                     );
                   })}
@@ -473,7 +476,7 @@ export function Sidebar() {
 
         {/* "Main Menu" label */}
         <div style={{ opacity: isExpanded ? 1 : 0, transition: 'opacity 180ms ease', pointerEvents: isExpanded ? 'auto' : 'none' }}>
-          <span className="text-[13px] font-semibold text-[#A3A3A3] uppercase tracking-wider">Main Menu</span>
+          <span className="text-[14px] font-semibold text-[#A3A3A3] tracking-wider">Main Menu</span>
         </div>
       </div>
 
@@ -483,31 +486,41 @@ export function Sidebar() {
           {mainNavItems.map((item) => {
             const isActive = pathname === item.href || (item.name === "Home" && pathname === "/");
             return (
-              <Link
-                key={item.name}
-                href={item.href}
-                title={isCollapsed ? item.name : undefined}
-                className={`flex items-center rounded-[14px] transition-colors ${
-                  isCollapsed
-                    ? `justify-center py-2.5 ${isActive ? "bg-[#E5F1FF] dark:bg-[#0A84FF]/15" : "hover:bg-gray-100 dark:hover:bg-[#1C1C22]"}`
-                    : `justify-between py-[10px] px-[14px] ml-2 ${isActive ? "bg-[#E5F1FF] dark:bg-[#0A84FF]/15" : "hover:bg-gray-100 dark:hover:bg-[#1C1C22]"}`
-                }`}
-              >
-                <div className={`flex items-center ${isCollapsed ? "justify-center" : "gap-3.5 flex-1 min-w-0"}`}>
-                  <item.icon
-                    size={22}
-                    className={`shrink-0 pointer-events-none select-none transition-colors ${isActive ? 'text-[#161616] dark:text-white' : 'text-[#737373]'}`}
+              <div key={item.name} className="relative flex w-full items-center justify-center group">
+                {isActive && (
+                  <motion.div
+                    layoutId="sidebar-active-indicator"
+                    className="absolute -left-2 h-9 w-[3.5px] rounded-r-[25px] bg-[#007AFF] z-10"
+                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
                   />
-                  <span style={textRevealStyle} className={`text-[14px] ${isActive ? 'font-medium text-[#161616] dark:text-white' : 'text-[#737373]'}`}>
-                    {item.name}
-                  </span>
-                </div>
-                {isExpanded && item.name === "Attendance" && attendanceBadge > 0 && (
-                  <span className="flex h-[24px] min-w-[24px] shrink-0 items-center justify-center rounded-full bg-[#FF3B30]/15 border border-[#FF3B30]/30 px-1.5 text-[12px] font-bold text-[#C93400] font-sf-rounded">
-                    {attendanceBadge > 9 ? '9+' : attendanceBadge}
-                  </span>
                 )}
-              </Link>
+                <Link
+                  href={item.href}
+                  title={isCollapsed ? item.name : undefined}
+                  className={`flex items-center transition-colors ${
+                    isCollapsed 
+                      ? "w-11 h-11 justify-center rounded-[14px] mx-auto" 
+                      : "w-full rounded-[14px] py-[10px] px-[14px] mx-2"
+                  } ${
+                    isActive ? "bg-[#E5F1FF] dark:bg-[#0A84FF]/15" : "hover:bg-gray-100 dark:hover:bg-[#1C1C22]"
+                  }`}
+                >
+                  <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'gap-3.5 flex-1 min-w-0'}`}>
+                    <item.icon
+                      size={22}
+                      className={`shrink-0 pointer-events-none select-none transition-colors ${isActive ? 'text-[#007AFF]' : 'text-[#737373]'}`}
+                    />
+                    <span style={textRevealStyle} className={`text-[18px] ${isActive ? 'font-medium text-[#007AFF]' : 'text-[#737373]'}`}>
+                      {item.name}
+                    </span>
+                  </div>
+                  {isExpanded && item.name === "Attendance" && attendanceBadge > 0 && (
+                    <span className="flex h-[24px] min-w-[24px] shrink-0 items-center justify-center rounded-full bg-[#FF3B30]/15 border border-[#FF3B30]/30 px-1.5 text-[12px] font-bold text-[#C93400] font-sf-rounded">
+                      {attendanceBadge > 9 ? '9+' : attendanceBadge}
+                    </span>
+                  )}
+                </Link>
+              </div>
             );
           })}
         </nav>
@@ -516,68 +529,69 @@ export function Sidebar() {
       {/* ── BOTTOM SECTION ── */}
       <div className="shrink-0 border-t border-gray-200 dark:border-[#2A2A31] px-2 py-3 flex flex-col space-y-[2px]">
 
-        {/* Notifications */}
-        <Link
-          href="/notifications"
-          title={isCollapsed ? "Notifications" : undefined}
-          className={`flex items-center rounded-[14px] transition-colors ${
-            isCollapsed
-              ? `justify-center py-2.5 ${pathname === "/notifications" ? "bg-[#E5F1FF] dark:bg-[#0A84FF]/15" : "hover:bg-gray-100 dark:hover:bg-[#1C1C22]"}`
-              : `py-[10px] px-[14px] ml-2 ${pathname === "/notifications" ? "bg-[#E5F1FF] dark:bg-[#0A84FF]/15" : "hover:bg-gray-100 dark:hover:bg-[#1C1C22]"}`
-          }`}
-        >
-          <div className={`flex items-center ${isCollapsed ? "justify-center" : "gap-3.5 flex-1 min-w-0"}`}>
-            <StreamlineNotifications
-              size={22}
-              className={`shrink-0 pointer-events-none select-none transition-colors ${pathname === "/notifications" ? 'text-[#161616] dark:text-white' : 'text-[#737373]'}`}
-            />
-            <span style={textRevealStyle} className={`text-[14px] ${pathname === "/notifications" ? "font-medium text-[#161616] dark:text-white" : "text-[#737373]"}`}>
-              Notifications
-            </span>
-          </div>
-        </Link>
-
         {/* Settings */}
-        <Link
-          href="/settings"
-          title={isCollapsed ? "Settings" : undefined}
-          className={`flex items-center rounded-[14px] transition-colors ${
-            isCollapsed
-              ? `justify-center py-2.5 ${pathname === "/settings" ? "bg-[#E5F1FF] dark:bg-[#0A84FF]/15" : "hover:bg-gray-100 dark:hover:bg-[#1C1C22]"}`
-              : `py-[10px] px-[14px] ml-2 ${pathname === "/settings" ? "bg-[#E5F1FF] dark:bg-[#0A84FF]/15" : "hover:bg-gray-100 dark:hover:bg-[#1C1C22]"}`
-          }`}
-        >
-          <div className={`flex items-center ${isCollapsed ? "justify-center" : "gap-3.5 flex-1 min-w-0"}`}>
-            <StreamlineSettings
-              size={22}
-              className={`shrink-0 pointer-events-none select-none transition-colors ${pathname === "/settings" ? 'text-[#161616] dark:text-white' : 'text-[#737373]'}`}
+        <div className="relative flex w-full items-center justify-center group">
+          {pathname === "/settings" && (
+            <motion.div
+              layoutId="sidebar-active-indicator"
+              className="absolute -left-2 h-9 w-[3.5px] rounded-r-[25px] bg-[#007AFF] z-10"
+              transition={{ type: "spring", stiffness: 350, damping: 30 }}
             />
-            <span style={textRevealStyle} className={`text-[14px] ${pathname === "/settings" ? "font-medium text-[#161616] dark:text-white" : "text-[#737373]"}`}>
-              Settings
-            </span>
-          </div>
-        </Link>
+          )}
+          <Link
+            href="/settings"
+            title={isCollapsed ? "Settings" : undefined}
+            className={`flex items-center transition-colors ${
+              isCollapsed 
+                ? "w-11 h-11 justify-center rounded-[14px] mx-auto" 
+                : "w-full rounded-[14px] py-[10px] px-[14px] mx-2"
+            } ${
+              pathname === "/settings" ? "bg-[#E5F1FF] dark:bg-[#0A84FF]/15" : "hover:bg-gray-100 dark:hover:bg-[#1C1C22]"
+            }`}
+          >
+            <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'gap-3.5 flex-1 min-w-0'}`}>
+              <StreamlineSettings
+                size={22}
+                className={`shrink-0 pointer-events-none select-none transition-colors ${pathname === "/settings" ? 'text-[#007AFF]' : 'text-[#737373]'}`}
+              />
+              <span style={textRevealStyle} className={`text-[18px] ${pathname === "/settings" ? "font-medium text-[#007AFF]" : "text-[#737373]"}`}>
+                Settings
+              </span>
+            </div>
+          </Link>
+        </div>
 
         {/* Subscription */}
-        <Link
-          href="/subscription"
-          title={isCollapsed ? "Subscription" : undefined}
-          className={`flex items-center rounded-[14px] transition-colors ${
-            isCollapsed
-              ? `justify-center py-2.5 ${pathname === "/subscription" ? "bg-[#E5F1FF] dark:bg-[#0A84FF]/15" : "hover:bg-gray-100 dark:hover:bg-[#1C1C22]"}`
-              : `py-[10px] px-[14px] ml-2 ${pathname === "/subscription" ? "bg-[#E5F1FF] dark:bg-[#0A84FF]/15" : "hover:bg-gray-100 dark:hover:bg-[#1C1C22]"}`
-          }`}
-        >
-          <div className={`flex items-center ${isCollapsed ? "justify-center" : "gap-3.5 flex-1 min-w-0"}`}>
-            <StreamlineSubscription
-              size={22}
-              className={`shrink-0 pointer-events-none select-none transition-colors ${pathname === "/subscription" ? 'text-[#161616] dark:text-white' : 'text-[#737373]'}`}
+        <div className="relative flex w-full items-center justify-center group">
+          {pathname === "/subscription" && (
+            <motion.div
+              layoutId="sidebar-active-indicator"
+              className="absolute -left-2 h-9 w-[3.5px] rounded-r-[25px] bg-[#007AFF] z-10"
+              transition={{ type: "spring", stiffness: 350, damping: 30 }}
             />
-            <span style={textRevealStyle} className={`text-[14px] ${pathname === "/subscription" ? "font-medium text-[#161616] dark:text-white" : "text-[#737373]"}`}>
-              Subscription
-            </span>
-          </div>
-        </Link>
+          )}
+          <Link
+            href="/subscription"
+            title={isCollapsed ? "Subscription" : undefined}
+            className={`flex items-center transition-colors ${
+              isCollapsed 
+                ? "w-11 h-11 justify-center rounded-[14px] mx-auto" 
+                : "w-full rounded-[14px] py-[10px] px-[14px] mx-2"
+            } ${
+              pathname === "/subscription" ? "bg-[#E5F1FF] dark:bg-[#0A84FF]/15" : "hover:bg-gray-100 dark:hover:bg-[#1C1C22]"
+            }`}
+          >
+            <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'gap-3.5 flex-1 min-w-0'}`}>
+              <StreamlineSubscription
+                size={22}
+                className={`shrink-0 pointer-events-none select-none transition-colors ${pathname === "/subscription" ? 'text-[#007AFF]' : 'text-[#737373]'}`}
+              />
+              <span style={textRevealStyle} className={`text-[18px] ${pathname === "/subscription" ? "font-medium text-[#007AFF]" : "text-[#737373]"}`}>
+                Subscription
+              </span>
+            </div>
+          </Link>
+        </div>
 
         {/* Company Logo — same 44×44 as user avatar in collapsed, full card in expanded */}
         <div className="mt-2 relative">
@@ -631,37 +645,33 @@ export function Sidebar() {
             </div>
           )}
 
-          {isCollapsed ? (
-            /* Collapsed: show company logo as 44×44 rounded square — same size/style as user avatar */
-            <button
-              ref={companyCardRef}
-              onClick={() => setShowCompanyDropdown(p => !p)}
-              title={companyProfile.name}
-              className="flex items-center justify-center h-[44px] w-[44px] mx-auto rounded-[14px] bg-[#E5F1FF] dark:bg-[#0A84FF]/15 hover:ring-2 hover:ring-blue-200 transition-all overflow-hidden"
-            >
-              <img src={getCompanyLogoUrl(companyProfile.logoUrl, companyProfile.name)} alt="Logo" crossOrigin="anonymous" referrerPolicy="no-referrer" className="w-full h-full object-cover" />
-            </button>
-          ) : (
-            /* Expanded: full company card */
-            <button
-              ref={companyCardRef}
-              onClick={() => setShowCompanyDropdown(p => !p)}
-              className={`flex w-full items-center justify-between rounded-2xl bg-white dark:bg-[#0B0B0F] p-2.5 shadow-sm hover:bg-gray-50 dark:hover:bg-[#1C1C22] transition-colors border ${showCompanyDropdown ? 'border-[#007AFF]/30 ring-2 ring-[#007AFF]/10' : 'border-gray-100 dark:border-[#2A2A31]'}`}
-            >
-              <div className="flex items-center gap-3 flex-1 min-w-0">
-                <div className="h-8 w-8 rounded-[10px] bg-[#E5F1FF] dark:bg-[#0A84FF]/15 flex items-center justify-center shrink-0 overflow-hidden">
-                  <img src={getCompanyLogoUrl(companyProfile.logoUrl, companyProfile.name)} alt="Logo" crossOrigin="anonymous" referrerPolicy="no-referrer" className="w-full h-full object-cover" />
-                </div>
-                <div className="flex flex-col text-left flex-1 min-w-0">
-                  <span className="text-[14px] font-semibold text-[#161616] dark:text-white truncate">{companyProfile.name}</span>
-                  <span className="text-[12px] text-[#737373] truncate">{companyProfile.location}</span>
-                </div>
+          <button
+            ref={companyCardRef}
+            onClick={() => setShowCompanyDropdown(p => !p)}
+            title={isCollapsed ? companyProfile.name : undefined}
+            className={`flex items-center transition-colors border ${
+              isCollapsed 
+                ? 'w-11 h-11 mx-auto justify-center rounded-2xl bg-white dark:bg-[#0B0B0F] p-0' 
+                : 'w-full justify-between rounded-2xl bg-white dark:bg-[#0B0B0F] p-2.5 hover:bg-gray-50 dark:hover:bg-[#1C1C22]'
+            } ${
+              showCompanyDropdown ? 'border-[#007AFF] ring-2 ring-[#007AFF]/10' : 'border-[#E5E7EB] dark:border-[#2A2A31]'
+            }`}
+          >
+            <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'gap-3 flex-1 min-w-0'}`}>
+              <div className="h-8 w-8 rounded-[10px] bg-[#E5F1FF] dark:bg-[#0A84FF]/15 flex items-center justify-center shrink-0 overflow-hidden">
+                <img src={getCompanyLogoUrl(companyProfile.logoUrl, companyProfile.name)} alt="Logo" crossOrigin="anonymous" referrerPolicy="no-referrer" className="w-full h-full object-cover" />
               </div>
+              <div style={textRevealStyle} className="flex flex-col text-left flex-1 min-w-0">
+                <span className="text-[16px] font-semibold text-[#161616] dark:text-white truncate">{companyProfile.name}</span>
+                <span className="text-[12px] text-[#737373] truncate">{companyProfile.location}</span>
+              </div>
+            </div>
+            {isExpanded && (
               <ChevronsUpDown className={`h-4 w-4 shrink-0 ml-2 transition-colors ${showCompanyDropdown ? 'text-[#007AFF]' : 'text-gray-400'}`} />
-            </button>
-          )}
+            )}
+          </button>
         </div>
       </div>
-    </div>
+    </motion.aside>
   );
 }

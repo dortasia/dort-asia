@@ -194,7 +194,7 @@ export function SettingsRolesPage() {
           <span>/</span>
           <span className="text-[#161616] font-medium">Roles & Access</span>
         </div>
-        <h2 className="text-[28px] font-medium text-[#111827] tracking-tight font-sans">Roles & Access Control</h2>
+        <h2 className="type-h2 text-[#161616]">Roles & Access Control</h2>
         <p className="type-small text-[#737373] mt-1">Manage employee authentication methods and configure granular access permissions for your organization.</p>
       </div>
 

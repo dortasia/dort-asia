@@ -77,6 +77,7 @@ export default function EmployeesPage() {
             bg,
             date_of_birth: emp.date_of_birth,
             created_at: emp.date_of_joining || emp.created_at,
+            avatar_url: emp.avatar_url || null,
             rawData: emp
           };
         });
@@ -95,9 +96,9 @@ export default function EmployeesPage() {
 
   return (
     <div className="flex-1 flex flex-col overflow-y-auto page-scrollbar">
-      <header className="flex items-center justify-between px-6 py-8 font-sf">
+      <header className="flex items-center justify-between p-4 font-sf">
         <div>
-          <h1 className="text-[28px] font-semibold text-[#111827] dark:text-white leading-[34px] tracking-[-0.015em] font-sf">EMPLOYEES</h1>
+          <h1 className="text-[28px] font-medium text-[#111827] dark:text-white tracking-tight font-sans">Employees</h1>
           <p className="text-[14px] text-[#6B7280] dark:text-gray-400 font-medium mt-0.5 font-sf">Overview of Employees data</p>
         </div>
         
@@ -106,7 +107,7 @@ export default function EmployeesPage() {
         </div>
       </header>
 
-      <main className="flex-1 px-6 pb-8">
+      <main className="flex-1 p-4 pt-0">
         <div className="min-h-[500px] flex flex-col">
           {loading && employees.length === 0 ? (
             <div className="flex items-center justify-center py-12">

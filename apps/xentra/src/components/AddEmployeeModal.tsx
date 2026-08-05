@@ -8,6 +8,7 @@ import {
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
 import { getAvatarColor, getInitials, getUserAvatarUrl } from "@/utils/avatarColor";
+import { uploadEmployeeProfilePhoto } from "@/utils/storageHelper";
 import FormDropdown from "@/components/ui/FormDropdown";
 import FormDatePicker from "@/components/ui/FormDatePicker";
 
@@ -400,6 +401,26 @@ export default function AddEmployeeModal({ onClose, onSuccess }: Props) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!firstName.trim() || !lastName.trim() || !email.trim()) {
+      setError("First Name, Last Name and Email are required.");
+      return;
+    }
+
+    if (phone.trim()) {
+      const cleanPhone = phone.replace(/\D/g, "");
+      if (cleanPhone.length !== 8) {
+        setError("Singapore phone number must be exactly 8 digits.");
+        return;
+      }
+      if (!cleanPhone.startsWith("8") && !cleanPhone.startsWith("9")) {
+        setError("Singapore mobile number must start with 8 or 9.");
+        return;
+      }
+    }
+    if (!email.includes("@")) {
+      setError("Please enter a valid email address.");
+      return;
+    }
 
     setSaving(true);
     setError("");
@@ -479,26 +500,16 @@ export default function AddEmployeeModal({ onClose, onSuccess }: Props) {
       if (croppedUrl) {
         const res = await fetch(croppedUrl);
         const uploadBlob = await res.blob();
-        const companyName = comp?.company_name || "Dort Asia";
-        const companySlug = companyName.toLowerCase().replace(/[^a-z0-9]/g, "-");
-        const emailSlug = email.trim().toLowerCase().replace(/[^a-z0-9]/g, "-");
-        const avatarPath = `User_Avatar/${companySlug}/${emailSlug}.jpg`;
-
-        const { error: uploadError } = await supabase.storage
-          .from("public_assets")
-          .upload(avatarPath, uploadBlob, { upsert: true });
-
-        if (uploadError) throw uploadError;
-
-        const { data: publicUrlData } = supabase.storage
-          .from("public_assets")
-          .getPublicUrl(avatarPath);
-        avatarUrl = publicUrlData.publicUrl;
+        const targetCompanyId = companyId || user.id;
+        const empSlug = email.trim().toLowerCase().replace(/[^a-z0-9]/g, "-");
+        avatarUrl = await uploadEmployeeProfilePhoto(supabase, targetCompanyId, empSlug, uploadBlob, "webp");
       }
 
       let resolvedCompanyId = companyId || user.id;
+      let adminEmpId = null;
       if (!companyId) {
-        const { data: curEmp } = await supabase.from('employees').select('company_id').eq('user_id', user.id).maybeSingle();
+        const { data: curEmp } = await supabase.from('employees').select('id, company_id').eq('user_id', user.id).maybeSingle();
+        if (curEmp?.id) adminEmpId = curEmp.id;
         if (curEmp?.company_id) {
           resolvedCompanyId = curEmp.company_id;
         } else {
@@ -507,6 +518,9 @@ export default function AddEmployeeModal({ onClose, onSuccess }: Props) {
             resolvedCompanyId = adminComp.id;
           }
         }
+      } else {
+        const { data: curEmp } = await supabase.from('employees').select('id').eq('user_id', user.id).maybeSingle();
+        if (curEmp?.id) adminEmpId = curEmp.id;
       }
 
       const payload: any = {
@@ -543,6 +557,15 @@ export default function AddEmployeeModal({ onClose, onSuccess }: Props) {
       if (insertErr) throw insertErr;
       newlyCreatedEmployeeId = newEmp.id;
 
+      // Create notification for the admin who onboarded them
+      await supabase.from("notifications").insert({
+        employee_id: adminEmpId,
+        title: "New Employee Added",
+        message: `${`${firstName.trim()} ${lastName.trim()}`.trim() || 'New Employee'} has joined as ${payload.role || 'Employee'}.`,
+        type: "success",
+        is_read: false
+      });
+
       // Automatically invite the employee to Supabase Auth
       try {
         await fetch("/api/employee-credentials", {
@@ -560,14 +583,6 @@ export default function AddEmployeeModal({ onClose, onSuccess }: Props) {
       setSaved(true);
       if (newlyCreatedEmployeeId) {
         setCreatedEmpId(newlyCreatedEmployeeId);
-        setTimeout(() => {
-          setShowConfirmPopup(true);
-        }, 600);
-      } else {
-        setTimeout(() => {
-          onSuccess?.();
-          handleClose();
-        }, 1200);
       }
     } catch (err: any) {
       setError(err?.message || "Something went wrong.");
@@ -609,14 +624,21 @@ export default function AddEmployeeModal({ onClose, onSuccess }: Props) {
           </div>
         )}
 
-        {saved && !showConfirmPopup && (
-          <div className="absolute inset-0 bg-white/70 dark:bg-[#121217]/70 backdrop-blur-md z-[10001] flex flex-col items-center justify-center gap-4 animate-in fade-in duration-200">
-            <div className="h-14 w-14 bg-[#34C759]/10 rounded-full flex items-center justify-center animate-bounce">
-              <Check className="h-8 w-8 text-[#34C759]" strokeWidth={3} />
+        {saved && (
+          <div className="absolute inset-0 bg-white dark:bg-[#121217] z-[10001] flex flex-col items-center justify-center gap-6 animate-in fade-in duration-200 p-8 text-center">
+            <div className="h-20 w-20 bg-[#34C759]/10 border border-[#34C759]/20 rounded-full flex items-center justify-center animate-bounce">
+              <Check className="h-10 w-10 text-[#34C759]" strokeWidth={3} />
             </div>
-            <div className="flex flex-col items-center gap-1">
-              <span className="text-[15px] font-bold text-[#34C759] dark:text-[#34C759]">Employee Added Successfully!</span>
+            <div className="flex flex-col items-center gap-2">
+              <span className="text-[20px] font-bold text-[#111827] dark:text-white">Employee Added Successfully!</span>
+              <span className="text-[14px] text-gray-500 max-w-[300px]">The new employee has been successfully added to the company directory.</span>
             </div>
+            <button 
+              onClick={() => { onSuccess?.(); handleClose(); }}
+              className="mt-6 px-10 py-3 bg-[#0064E0] hover:bg-[#0052B8] text-white rounded-full font-medium transition-colors"
+            >
+              Done
+            </button>
           </div>
         )}
 
@@ -852,8 +874,8 @@ export default function AddEmployeeModal({ onClose, onSuccess }: Props) {
             <button
               type="submit"
               disabled={saving || saved}
-              className={`flex-1 py-3 transition-colors rounded-[14px] text-white type-body-medium font-semibold flex items-center justify-center gap-2 ${
-                saved ? "bg-[#34C759] hover:bg-[#2fb14e]" : "bg-[#007AFF] hover:bg-[#0062CC]"
+              className={`flex-1 py-3 transition-colors rounded-[14px] text-white text-[16px] font-sf-text font-medium leading-[1.3] flex items-center justify-center gap-2 ${
+                saved ? "bg-[#34C759] hover:bg-[#2fb14e]" : "bg-[#0064E0] hover:bg-[#0052B8]"
               }`}
             >
               {saving ? (

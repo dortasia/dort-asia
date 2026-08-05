@@ -1,9 +1,10 @@
-"use client";
+ "use client";
 
 import React, { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Search, Filter, Trash2, Edit, ChevronDown, Copy, CheckCircle2, FileSpreadsheet, FileText, Download } from "lucide-react";
+import { Search, Filter, Trash2, Edit, ChevronDown, Copy, CheckCircle2, FileSpreadsheet, FileText, Download, Plus, X } from "lucide-react";
 import { createClient } from "@/utils/supabase/client";
+import { getUserAvatarUrl } from "@/utils/avatarColor";
 import AddEmployeeModal from "@/components/AddEmployeeModal";
 
 type EmployeeData = {
@@ -22,6 +23,7 @@ type EmployeeData = {
   designation?: string;
   date_of_birth?: string;
   created_at?: string;
+  avatar_url?: string | null;
   rawData?: any;
 };
 
@@ -72,7 +74,7 @@ export default function EmployeeTableRenderer({ employees }: { employees: Employ
 
         let { data: comp } = await supabase
           .from('company_settings')
-          .select('attendance_settings')
+          .select('attendance_config')
           .eq('company_id', user.id)
           .maybeSingle();
 
@@ -85,15 +87,15 @@ export default function EmployeeTableRenderer({ employees }: { employees: Employ
           if (empRecord) {
             const { data: compEmp } = await supabase
               .from('company_settings')
-              .select('attendance_settings')
+              .select('attendance_config')
               .eq('company_id', empRecord.company_id)
               .maybeSingle();
             comp = compEmp;
           }
         }
 
-        if (comp?.attendance_settings?.projects) {
-          setRealProjects(comp.attendance_settings.projects);
+        if (comp?.attendance_config?.projects) {
+          setRealProjects(comp.attendance_config.projects);
         }
       } catch (e) {
         console.error("Error loading company projects in employee table:", e);
@@ -340,24 +342,39 @@ export default function EmployeeTableRenderer({ employees }: { employees: Employ
     }
   };
 
-  const handleDelete = async (id: string, name: string, email: string) => {
-    if (confirm(`Are you sure you want to permanently delete ${name}?`)) {
-      try {
-        await fetch('/api/employee-credentials', {
-          method: 'POST',
-          body: JSON.stringify({ action: 'delete', email, employeeId: id }),
-          headers: { 'Content-Type': 'application/json' }
-        });
+  const [employeeToDelete, setEmployeeToDelete] = useState<{ id: string; name: string; email: string; empId?: string | null } | null>(null);
+  const [deleteInputText, setDeleteInputText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [deleteModalError, setDeleteModalError] = useState("");
 
-        const supabase = createClient();
-        const { error } = await supabase.from('employees').delete().eq('id', id);
-        
-        if (error) throw error;
-        
-        window.location.reload();
-      } catch (err: any) {
-        alert("Failed to delete employee: " + (err.message || "Unknown error"));
-      }
+  const handleDelete = (id: string, name: string, email: string, empId?: string | null) => {
+    setEmployeeToDelete({ id, name, email, empId });
+    setDeleteInputText("");
+    setDeleteModalError("");
+  };
+
+  const confirmDeleteEmployee = async () => {
+    if (!employeeToDelete) return;
+    setIsDeleting(true);
+    setDeleteModalError("");
+
+    try {
+      await fetch('/api/employee-credentials', {
+        method: 'POST',
+        body: JSON.stringify({ action: 'delete', email: employeeToDelete.email, employeeId: employeeToDelete.id }),
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      const supabase = createClient();
+      const { error } = await supabase.from('employees').delete().eq('id', employeeToDelete.id);
+      
+      if (error) throw error;
+      
+      window.location.reload();
+    } catch (err: any) {
+      setDeleteModalError("Failed to delete employee: " + (err.message || "Unknown error"));
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -413,8 +430,9 @@ export default function EmployeeTableRenderer({ employees }: { employees: Employ
         <div className="flex items-center gap-3">
           <button 
             onClick={() => setShowAddModal(true)} 
-            className="px-6 py-2.5 bg-[#007AFF] text-white text-[14px] font-medium rounded-full hover:bg-blue-600 transition-colors font-sf shadow-sm"
+            className="flex items-center gap-2 px-6 py-2.5 bg-[#0064E0] text-white text-[16px] font-sf-text font-medium leading-[1.3] rounded-full hover:bg-[#0052B8] transition-colors shadow-sm cursor-pointer"
           >
+            <Plus size={18} strokeWidth={2} />
             Add Employee
           </button>
 
@@ -499,9 +517,12 @@ export default function EmployeeTableRenderer({ employees }: { employees: Employ
                   {/* Employee Name & ID */}
                   <div className="w-[26%] flex items-center gap-3 pr-2">
                     <div className="w-9 h-9 rounded-full bg-[#E5E7EB] dark:bg-white/10 border border-gray-200/80 dark:border-white/10 flex items-center justify-center shrink-0 overflow-hidden">
-                      <svg viewBox="0 0 24 24" fill="#9CA3AF" className="w-6 h-6 scale-110 translate-y-[2px]">
-                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                      </svg>
+                      <img 
+                        src={getUserAvatarUrl(emp.avatar_url || emp.rawData?.avatar_url)} 
+                        alt={emp.name} 
+                        className="h-full w-full object-cover"
+                        onError={(e) => { e.currentTarget.src = "/default-profile.svg"; e.currentTarget.onerror = null; }}
+                      />
                     </div>
                     <div className="overflow-hidden">
                       <p className="text-[14px] font-semibold text-[#111827] dark:text-white truncate leading-tight font-sf">{emp.name}</p>
@@ -593,7 +614,7 @@ export default function EmployeeTableRenderer({ employees }: { employees: Employ
                         </button>
                         <div className="h-[1px] bg-gray-100 dark:bg-white/10 my-1"></div>
                         <button 
-                          onClick={() => { setActiveActionMenuId(null); handleDelete(emp.id, emp.name, emp.email); }}
+                          onClick={() => { setActiveActionMenuId(null); handleDelete(emp.id, emp.name, emp.email, emp.empId); }}
                           className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-red-50 dark:hover:bg-red-950/40 text-red-600 dark:text-red-400 text-left w-full transition-colors"
                         >
                           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
@@ -708,6 +729,84 @@ export default function EmployeeTableRenderer({ employees }: { employees: Employ
         />
       )}
 
+      {/* Caution Delete Employee Modal */}
+      {employeeToDelete && (
+        <div 
+          className="fixed inset-0 z-[100000] bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200 font-sf-text"
+          onClick={() => {
+            setEmployeeToDelete(null);
+            setDeleteInputText("");
+            setDeleteModalError("");
+          }}
+        >
+          <div 
+            className="bg-white dark:bg-[#121217] border border-red-100 dark:border-red-900/30 rounded-[24px] w-full max-w-md overflow-hidden shadow-2xl animate-in zoom-in-95 duration-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="px-6 py-5 border-b border-red-50 dark:border-red-900/20 flex items-center justify-between">
+              <h3 className="text-[18px] font-bold text-red-600 dark:text-red-500">
+                Caution: Delete Employee
+              </h3>
+              <button 
+                onClick={() => {
+                  setEmployeeToDelete(null);
+                  setDeleteInputText("");
+                  setDeleteModalError("");
+                }} 
+                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            
+            <div className="p-6 flex flex-col gap-4">
+              <p className="text-[14px] text-gray-600 dark:text-gray-300 leading-relaxed font-medium">
+                Are you sure you want to permanently delete <strong className="text-gray-900 dark:text-white font-semibold">{employeeToDelete.name}</strong>? 
+                This action is irreversible and will delete all login credentials, timesheets, and records.
+              </p>
+              
+              <div className="flex flex-col gap-2">
+                <label className="text-[13px] font-medium text-gray-600 dark:text-gray-400">
+                  Type <strong className="text-red-600 dark:text-red-400 select-all font-semibold">DELETE</strong> to confirm:
+                </label>
+                <input 
+                  type="text"
+                  placeholder='Type "DELETE" here'
+                  className="w-full px-4 py-3 rounded-[14px] border border-gray-200 dark:border-[#2A2A31] bg-gray-50 dark:bg-[#1C1C22] text-gray-900 dark:text-white focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 text-[14px] font-medium transition-all"
+                  value={deleteInputText}
+                  onChange={(e) => setDeleteInputText(e.target.value)}
+                />
+              </div>
+
+              {deleteModalError && (
+                <p className="text-[13px] text-red-600 font-medium">{deleteModalError}</p>
+              )}
+            </div>
+
+            <div className="px-6 pb-6 pt-3 flex items-center justify-end gap-3 border-t border-gray-100 dark:border-white/5">
+              <button 
+                type="button" 
+                onClick={() => {
+                  setEmployeeToDelete(null);
+                  setDeleteInputText("");
+                  setDeleteModalError("");
+                }}
+                className="px-5 py-2.5 bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/20 text-gray-700 dark:text-gray-300 font-medium text-[14px] rounded-full transition-colors"
+              >
+                Cancel
+              </button>
+              <button 
+                type="button" 
+                disabled={isDeleting || (deleteInputText.trim().toUpperCase() !== "DELETE" && deleteInputText.trim() !== employeeToDelete.empId && deleteInputText.trim().toLowerCase() !== employeeToDelete.name.toLowerCase())}
+                onClick={confirmDeleteEmployee}
+                className="px-6 py-2.5 bg-red-600 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium text-[14px] rounded-full transition-colors flex items-center gap-2"
+              >
+                {isDeleting ? "Deleting..." : "Permanently Delete"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

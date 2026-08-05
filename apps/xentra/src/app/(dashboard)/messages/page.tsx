@@ -1354,7 +1354,7 @@ function MessagesContent() {
       {/* ── LEFT ─────────────────────────────────────────── */}
       <div className="w-[30%] min-w-[340px] max-w-[420px] shrink-0 flex flex-col bg-white dark:bg-[#0B0B0F] border-r border-[#E5E7EB] dark:border-[#2A2A31]">
         <div className="px-5 py-[14px] flex items-center justify-between bg-white dark:bg-[#0B0B0F]">
-          <h1 className="text-[22px] font-bold text-[#111b21] dark:text-white tracking-tight">Messages</h1>
+          <h1 className="text-[28px] font-medium text-[#111827] dark:text-white tracking-tight font-sans">Messages</h1>
           <div className="flex items-center gap-3">
             <button className="h-10 w-10 flex items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-[#54656f] dark:text-[#A1A1AA]">
               <Plus className="h-5 w-5" strokeWidth={2.5} />

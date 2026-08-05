@@ -1130,8 +1130,17 @@ export default function OnboardingModal() {
         const { data: newEmps, error: empErr } = await supabase.from('employees').insert(employeePayloads).select('id, email');
         if (empErr) throw empErr;
 
-        // Invite all newly added employees
-        if (newEmps) {
+        if (newEmps && newEmps.length > 0) {
+          const notifPayloads = newEmps.map((emp: any) => ({
+            employee_id: emp.id,
+            title: "New Employee Onboarded",
+            message: `Employee ${emp.email} has been onboarded.`,
+            type: "info",
+            is_read: false
+          }));
+          await supabase.from("notifications").insert(notifPayloads);
+
+          // Invite all newly added employees
           await Promise.allSettled(newEmps.map((emp: any) => 
             fetch("/api/employee-credentials", {
               method: "POST",

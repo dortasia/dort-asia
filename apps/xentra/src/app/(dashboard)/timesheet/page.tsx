@@ -1244,10 +1244,10 @@ export default function TimesheetPage() {
   return (
     <div className="flex-1 flex flex-col overflow-y-auto page-scrollbar bg-white">
       {/* Header */}
-      <header className="flex items-center justify-between px-2 pt-6 pb-4">
+      <header className="flex items-center justify-between p-4">
         <div>
-          <h1 className="type-h1 text-[#161616]">
-            Timesheet
+          <h1 className="text-[28px] font-medium text-[#111827] dark:text-white tracking-tight font-sans">
+            Timesheets
           </h1>
           <p className="type-body text-[#616161] mt-1">
             Track and manage employee work hours
@@ -1265,7 +1265,7 @@ export default function TimesheetPage() {
         </div>
       </header>
 
-      <main className="flex-1 px-2 pb-4 flex flex-col">
+      <main className="flex-1 p-4 pt-0 flex flex-col">
         {/* Stat Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
           {[

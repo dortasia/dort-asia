@@ -10,7 +10,7 @@ export function SettingsEmployeesPage() {
   return (
     <div className="flex flex-col gap-6 max-w-[800px]">
       <div>
-        <h2 className="text-[28px] font-medium text-[#111827] tracking-tight font-sans">Employees Settings</h2>
+        <h2 className="type-h2 text-[#161616]">Employees Settings</h2>
       </div>
 
       <div className="bg-white rounded-[24px] border border-[#E5E7EB] flex flex-col">

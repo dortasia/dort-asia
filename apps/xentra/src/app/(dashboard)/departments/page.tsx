@@ -19,6 +19,7 @@ import { createClient } from "@/utils/supabase/client";
 import HeaderSearchBar from "@/components/HeaderSearchBar";
 import { getAvatarColor, getDepartmentColor, getInitials } from "@/utils/avatarColor";
 import AddDepartmentSidebar from "@/components/AddDepartmentSidebar";
+import { CreateDepartmentDialog } from "@/components/CreateDepartmentDialog";
 import ConfigureDepartmentPanel from "@/components/ConfigureDepartmentPanel";
 import { getCompanyInitials, generateDeptId } from "@/utils/deptIdHelper";
 
@@ -134,6 +135,7 @@ export default function DepartmentsPage() {
   const [expandedRowId, setExpandedRowId] = useState<string | null>(null);
   const [userName, setUserName] = useState("Admin");
   const [showAddSidebar, setShowAddSidebar] = useState(false);
+  const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [openMenuId, setOpenMenuId] = useState<string | null>(null);
   const [selectedDeptId, setSelectedDeptId] = useState<string | null>(null);
   const [isConfigurePanelOpen, setIsConfigurePanelOpen] = useState(false);
@@ -681,7 +683,7 @@ export default function DepartmentsPage() {
       className="flex-1 flex flex-col overflow-y-auto page-scrollbar bg-white dark:bg-[#121217]"
       onClick={() => setOpenMenuId(null)}
     >
-      <main className="flex-1 px-10 pb-10 pt-8 flex flex-col">
+      <main className="flex-1 p-4 flex flex-col">
         {isLoading ? (
           <div className="flex items-center justify-center flex-1 min-h-[400px]">
              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#111827]"></div>
@@ -745,8 +747,8 @@ export default function DepartmentsPage() {
               {/* Right Group: Create Department Black Pill + Circular Filter */}
               <div className="flex items-center gap-3">
                 <button 
-                  onClick={() => setShowAddSidebar(true)}
-                  className="flex items-center gap-2 px-6 py-2.5 bg-[#111827] text-white rounded-full text-[14px] font-medium hover:bg-black transition-colors"
+                  onClick={() => setIsCreateDialogOpen(true)}
+                  className="flex items-center gap-2 px-6 py-2.5 bg-[#0064E0] text-white rounded-full text-[16px] font-sf-text font-medium leading-[1.3] hover:bg-[#0052B8] transition-colors"
                 >
                   <Plus size={18} strokeWidth={2} />
                   Create Department
@@ -930,6 +932,14 @@ export default function DepartmentsPage() {
           }}
         />
       )}
+
+      <CreateDepartmentDialog
+        open={isCreateDialogOpen}
+        onOpenChange={setIsCreateDialogOpen}
+        onSuccess={() => {
+          window.location.reload();
+        }}
+      />
 
       {isConfigurePanelOpen && selectedDeptId && (
         <ConfigureDepartmentPanel

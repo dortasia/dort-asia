@@ -69,7 +69,7 @@ function HierarchyContent() {
   return (
     <>
       {/* Header */}
-      <header className="px-6 py-4 flex items-center justify-between border-b border-gray-100 dark:border-white/5 shrink-0 bg-white dark:bg-[#0B0B0F]">
+      <header className="p-4 flex items-center justify-between border-b border-gray-100 dark:border-white/5 shrink-0 bg-white dark:bg-[#0B0B0F]">
         <div className="flex items-center gap-3.5">
           <div className="h-10 w-10 bg-[#EEF5FF] dark:bg-[#007AFF]/10 rounded-[10px] flex items-center justify-center text-[#007AFF]">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -80,7 +80,7 @@ function HierarchyContent() {
             </svg>
           </div>
           <div>
-            <h1 className="text-[18px] font-bold text-gray-900 dark:text-white leading-tight">Organization Chart</h1>
+            <h1 className="text-[28px] font-medium text-[#111827] dark:text-white tracking-tight font-sans">Organization Chart</h1>
             <p className="text-[12px] text-gray-400 font-medium mt-0.5">
               {employees.length} {employees.length === 1 ? "Employee" : "Employees"} · {activeCount} Active
             </p>

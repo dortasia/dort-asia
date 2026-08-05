@@ -269,7 +269,7 @@ export function SettingsAttendancePage() {
       {/* Header */}
       <div className="flex items-end justify-between">
         <div>
-          <h2 className="text-[28px] font-medium text-[#111827] tracking-tight font-sans">Attendance Settings</h2>
+          <h2 className="type-h2 text-[#161616]">Attendance Settings</h2>
           <p className="type-small text-[#737373] mt-1">Configure work sites, allowed clock-in methods, and auto clock-out rules.</p>
         </div>
         <button 

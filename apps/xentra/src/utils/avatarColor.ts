@@ -136,7 +136,7 @@ export const INSTAGRAM_DEFAULT_AVATAR = "/default-profile.svg";
  * If user uploaded a profile pic, show it; otherwise show Instagram-style default avatar.
  */
 export function getUserAvatarUrl(avatarUrl?: string | null): string {
-  if (avatarUrl && typeof avatarUrl === 'string' && avatarUrl.trim() !== "" && avatarUrl !== "..") {
+  if (avatarUrl && typeof avatarUrl === 'string' && avatarUrl.trim() !== "" && avatarUrl !== ".." && !avatarUrl.includes('dicebear') && !avatarUrl.includes('unsplash')) {
     return avatarUrl;
   }
   return INSTAGRAM_DEFAULT_AVATAR;
@@ -150,7 +150,6 @@ export function getCompanyLogoUrl(logoUrl?: string | null, companyName?: string 
   if (logoUrl && typeof logoUrl === 'string' && logoUrl.trim() !== "" && logoUrl !== "..") {
     return logoUrl;
   }
-  const seed = encodeURIComponent((companyName || "Dort Asia").trim());
-  return `https://api.dicebear.com/9.x/glass/svg?seed=${seed}`;
+  return "/default-profile.svg";
 }
 

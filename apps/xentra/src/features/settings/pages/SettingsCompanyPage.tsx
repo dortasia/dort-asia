@@ -73,16 +73,15 @@ const OnboardTimePicker = ({
 
 export function SettingsCompanyPage() {
   const { user } = useAuthStore()
-  const { company: globalCompany } = useCompanyStore()
   const queryClient = useQueryClient()
 
   // Grab cached data synchronously to prevent UI flash
-  const cachedData = queryClient.getQueryData<any>(['company_profile', user?.id, globalCompany?.id])
+  const cachedData = queryClient.getQueryData<any>(['company_profile', user?.id])
   const cCompany = cachedData?.company
   const cSettings = cachedData?.settings
 
-  const [companyId, setCompanyId] = useState<string | null>(cCompany?.id || globalCompany?.id || null)
-  const [companyName, setCompanyName] = useState(cCompany?.company_name || cCompany?.name || globalCompany?.company_name || globalCompany?.name || '')
+  const [companyId, setCompanyId] = useState<string | null>(cCompany?.id || null)
+  const [companyName, setCompanyName] = useState(cCompany?.company_name || cCompany?.name || 'Xentra Systems Pte. Ltd.')
   const [address, setAddress] = useState(cSettings?.address || cCompany?.address || cCompany?.corporate_address || '')
   const [phone, setPhone] = useState(cSettings?.phone || cCompany?.phone_number || '')
   const [email, setEmail] = useState(cCompany?.login_email || cCompany?.email || '')
@@ -211,74 +210,45 @@ export function SettingsCompanyPage() {
   const stopDrag = () => setIsDragging(false)
 
   const { data: companyData } = useQuery({
-    queryKey: ['company_profile', user?.id, globalCompany?.id],
+    queryKey: ['company_profile', user?.id],
     queryFn: async () => {
-      let currentUserId = user?.id
-      let currentUserEmail = user?.email
-      
-      if (!currentUserId) {
-        const { data: { user: authUser } } = await supabase.auth.getUser()
-        if (authUser) {
-          currentUserId = authUser.id
-          currentUserEmail = authUser.email
+      let activeUser = user
+      if (!activeUser) {
+        const { data: authData } = await supabase.auth.getUser()
+        if (authData?.user) {
+          activeUser = {
+            id: authData.user.id,
+            email: authData.user.email || '',
+            fullName: authData.user.user_metadata?.full_name || authData.user.user_metadata?.name || '',
+            avatarUrl: authData.user.user_metadata?.avatar_url || '',
+            role: 'super_admin' as const,
+            designation: '',
+            phone: ''
+          }
         }
-      }
-
-      if (!currentUserId) return { company: null, settings: null }
-
-      let targetCompanyId = companyId || globalCompany?.id
-
-      if (!targetCompanyId) {
-        const { data: emp } = await supabase
-          .from('employees')
-          .select('company_id')
-          .eq('user_id', currentUserId)
-          .maybeSingle()
-        if (emp?.company_id) targetCompanyId = emp.company_id
       }
 
       let company = null
-      if (targetCompanyId) {
-        const { data: c } = await supabase
+      if (activeUser?.id || activeUser?.email) {
+        const compOrConditions = []
+        if (activeUser.id) compOrConditions.push(`super_admin_id.eq.${activeUser.id}`)
+        if (activeUser.email) compOrConditions.push(`login_email.eq.${activeUser.email}`)
+
+        const { data: comp } = await supabase
           .from('companies')
           .select('*')
-          .eq('id', targetCompanyId)
+          .or(compOrConditions.join(','))
           .maybeSingle()
-        company = c
+        company = comp
       }
 
       if (!company) {
-        // Fallback: try finding by super_admin_id directly
-        const { data: c, error: cErr } = await supabase
+        const { data: firstComp } = await supabase
           .from('companies')
           .select('*')
-          .eq('super_admin_id', currentUserId)
-          .maybeSingle()
-          
-        if (cErr) {
-          console.error("Error fetching company by super_admin_id:", cErr)
-          // If maybeSingle fails (e.g. multiple rows), fallback to limit(1)
-          const { data: fallbackC } = await supabase
-            .from('companies')
-            .select('*')
-            .eq('super_admin_id', currentUserId)
-            .limit(1)
-            .maybeSingle()
-          company = fallbackC
-        } else {
-          company = c
-        }
-      }
-
-      if (!company && currentUserEmail) {
-        // Last resort: try by email
-        const { data: c } = await supabase
-          .from('companies')
-          .select('*')
-          .eq('login_email', currentUserEmail)
           .limit(1)
           .maybeSingle()
-        company = c
+        company = firstComp
       }
 
       let settings = null
@@ -290,7 +260,6 @@ export function SettingsCompanyPage() {
           .maybeSingle()
         settings = s
       }
-
       return { company, settings }
     }
   })
@@ -298,16 +267,16 @@ export function SettingsCompanyPage() {
   useEffect(() => {
     if (companyData?.company) {
       const { company, settings } = companyData
-      if (company.id) setCompanyId(company.id)
-      setCompanyName(company.company_name || company.name || '')
-      setAddress(settings?.address || company.address || company.corporate_address || '')
-      setPhone(settings?.phone || company.phone_number || '')
-      setEmail(company.login_email || company.email || user?.email || '')
-      setBranchLocation(company.branch_location || '')
-      setCompanyType(company.company_type || '')
-      setWebsite(company.website || '')
-      setSector(company.sector || '')
-      setLogoUrl(company.logo_url || null)
+      setCompanyId(company.id)
+      if (company.company_name || company.name) setCompanyName(company.company_name || company.name)
+      if (company.phone_number) setPhone(company.phone_number)
+      if (company.login_email || company.email) setEmail(company.login_email || company.email)
+      
+      if (company.branch_location) setBranchLocation(company.branch_location)
+      if (company.company_type) setCompanyType(company.company_type)
+      if (company.website) setWebsite(company.website)
+      if (company.sector) setSector(company.sector)
+      if (company.logo_url) setLogoUrl(company.logo_url)
 
       if (settings) {
         if (settings.shift_start) {
@@ -325,7 +294,7 @@ export function SettingsCompanyPage() {
         }
       }
     }
-  }, [companyData, user?.email])
+  }, [companyData])
 
   useEffect(() => {
     if (!user?.id) return
@@ -345,7 +314,15 @@ export function SettingsCompanyPage() {
 
   const { mutate: handleSave, isPending: isSaving } = useMutation({
     mutationFn: async () => {
-      if (!user) throw new Error('Not authenticated')
+      // Resolve active user — store may not be hydrated yet, fall back to live session
+      let activeUserId = user?.id
+      let activeUserEmail = user?.email
+      if (!activeUserId) {
+        const { data: authData } = await supabase.auth.getUser()
+        activeUserId = authData?.user?.id
+        activeUserEmail = authData?.user?.email
+      }
+      if (!activeUserId) throw new Error('Not authenticated')
       
       let finalLogoUrl = logoUrl
       
@@ -357,77 +334,48 @@ export function SettingsCompanyPage() {
         } else {
           uploadBlob = picFile!
         }
-        const fileExt = picFile ? picFile.name.split('.').pop() : 'jpg'
-        const filePath = `Company_Logo/${user.id}/${user.id}.${fileExt}`
+        const fileExt = picFile ? (picFile.name.split('.').pop() || 'jpg') : 'jpg'
+        const filePath = `Company_Logo/${activeUserId}/${activeUserId}.${fileExt}`
 
         const { error: uploadError } = await supabase.storage
-          .from('public_assets')
+          .from('company-assets')
           .upload(filePath, uploadBlob, { upsert: true })
 
         if (!uploadError) {
           const { data: publicUrlData } = supabase.storage
-            .from('public_assets')
+            .from('company-assets')
             .getPublicUrl(filePath)
           finalLogoUrl = publicUrlData.publicUrl
+        } else {
+          console.error('Logo upload error:', uploadError)
+          toast.error('Failed to upload logo: ' + uploadError.message)
         }
       }
 
-      const targetId = companyId || globalCompany?.id
-      const resolvedCompId = targetId || companyId
-      
-      let finalTargetId = resolvedCompId
+      const compOrConditions = [`super_admin_id.eq.${activeUserId}`]
+      if (activeUserEmail) compOrConditions.push(`login_email.eq.${activeUserEmail}`)
 
-      if (!finalTargetId) {
-        // Insert a new company since the user doesn't have one
-        const { data: newComp, error: insertError } = await supabase
-          .from('companies')
-          .insert({
-            super_admin_id: user.id,
-            login_email: email,
-            company_name: companyName,
-            phone_number: phone,
-            branch_location: branchLocation,
-            company_type: companyType,
-            website: website,
-            sector: sector,
-            logo_url: finalLogoUrl,
-            sign_in_method: 'email'
-          })
-          .select('id')
-          .single()
-          
-        if (insertError) throw insertError
-        if (newComp) finalTargetId = newComp.id
-      } else {
-        const compOrConditions: string[] = []
-        compOrConditions.push(`id.eq.${finalTargetId}`)
-        compOrConditions.push(`super_admin_id.eq.${user.id}`)
-        if (user.email) compOrConditions.push(`login_email.eq.${user.email}`)
+      const { error: compError } = await supabase
+        .from('companies')
+        .update({
+          company_name: companyName,
+          phone_number: phone,
+          login_email: email,
+          branch_location: branchLocation,
+          company_type: companyType,
+          website: website,
+          sector: sector,
+          logo_url: finalLogoUrl
+        })
+        .or(compOrConditions.join(','))
+        
+      if (compError) throw compError
 
-        const { error: compError } = await supabase
-          .from('companies')
-          .update({
-            company_name: companyName,
-            phone_number: phone,
-            login_email: email,
-            branch_location: branchLocation,
-            company_type: companyType,
-            website: website,
-            sector: sector,
-            logo_url: finalLogoUrl
-          })
-          .or(compOrConditions.join(','))
-          
-        if (compError) throw compError
-      }
-
-      if (finalTargetId) {
+      if (companyId) {
         const { error: settingsError } = await supabase
           .from('company_settings')
           .upsert({
-            company_id: resolvedCompId,
-            address: address,
-            phone: phone,
+            company_id: companyId,
             shift_start: convertTo24h(shiftStartTime, shiftStartAmPm),
             shift_end: convertTo24h(shiftEndTime, shiftEndAmPm),
             working_days: activeDays
@@ -441,8 +389,8 @@ export function SettingsCompanyPage() {
       }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['company_profile'] })
-      if (user) useCompanyStore.getState().fetchCompany(user.id, user.email || undefined)
+      queryClient.invalidateQueries({ queryKey: ['company_profile', user?.id] })
+      useCompanyStore.getState().fetchCompany(user?.id || '', user?.email || undefined)
       toast.success('Company profile saved successfully')
     },
     onError: (error: any) => {
@@ -457,7 +405,7 @@ export function SettingsCompanyPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-[28px] font-medium text-[#111827] tracking-tight font-sans">Company Profile</h2>
+          <h2 className="type-h2 text-[#161616]">Company Profile</h2>
           <p className="type-body text-[#737373] mt-1">Manage Singapore corporate identity and legal registrations.</p>
         </div>
         <button 
@@ -476,7 +424,7 @@ export function SettingsCompanyPage() {
           <div className={`w-16 h-16 rounded-[16px] overflow-hidden shrink-0 flex items-center justify-center ${croppedPreviewUrl || logoUrl ? 'bg-white border border-[#E5E7EB]' : 'bg-blue-500/20'}`}>
             {croppedPreviewUrl || logoUrl ? (
               <img 
-                src={(croppedPreviewUrl || logoUrl) ?? undefined} 
+                src={croppedPreviewUrl || logoUrl || undefined} 
                 alt="Company Logo" 
                 className="w-full h-full object-cover"
               />
@@ -487,7 +435,7 @@ export function SettingsCompanyPage() {
             )}
           </div>
           <div className="flex flex-col">
-            <span className="type-body-medium text-[#161616] uppercase font-semibold">{companyName || 'Company Name'}</span>
+            <span className="type-body-medium text-[#161616] uppercase font-semibold">{companyName}</span>
             <span className="type-small text-[#737373]">{sector || 'Sector'}</span>
           </div>
         </div>

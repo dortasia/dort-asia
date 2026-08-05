@@ -173,7 +173,7 @@ export function SettingsDepartmentPage() {
     <div className="flex flex-col gap-6 max-w-[800px]">
       <div className="flex items-end justify-between">
         <div>
-          <h2 className="text-[28px] font-medium text-[#111827] tracking-tight font-sans">Department Settings</h2>
+          <h2 className="type-h2 text-[#161616]">Department Settings</h2>
           <p className="type-small text-[#737373] mt-1">Manage cross-department reporting, timing rules, and profile editing limits.</p>
         </div>
         

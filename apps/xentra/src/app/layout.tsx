@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Noto_Color_Emoji } from "next/font/google";
 import { StoreHydration } from "@/components/StoreHydration";
+import QueryProvider from "@/components/QueryProvider";
 import "./globals.css";
 
 const inter = Inter({
@@ -58,7 +59,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body suppressHydrationWarning className="antialiased flex w-full overflow-hidden zoom-container">
+      <body suppressHydrationWarning className="antialiased font-sf-text flex w-full overflow-hidden zoom-container">
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -73,7 +74,9 @@ export default function RootLayout({
           }}
         />
         <StoreHydration />
-        {children}
+        <QueryProvider>
+          {children}
+        </QueryProvider>
       </body>
     </html>
   );

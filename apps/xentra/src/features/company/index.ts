@@ -1,0 +1,1 @@
+export const COMPANY_MODULE_STATUS = 'FUTURE_READY'

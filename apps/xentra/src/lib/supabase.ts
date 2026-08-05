@@ -1,7 +1,32 @@
-import { createClient } from "@supabase/supabase-js";
+import { createClient as createSSRClient } from "@/utils/supabase/client";
 
-// Uses fallback values during build if environment variables are not set
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://bwakqpptkwpcvgerayus.supabase.co";
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3YWtxcHB0a3dwY3ZnZXJheXVzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg2ODIyODIsImV4cCI6MjA5NDI1ODI4Mn0.WUz2ieMcP5BBFuDPotz5wfg1wUV03kBx4Tez-1ooTUc";
+/**
+ * Global authenticated Supabase client proxy that delegates to createBrowserClient,
+ * ensuring all database requests across the app automatically include current session cookies.
+ *
+ * On the server side, falls back to a standard @supabase/supabase-js client using
+ * environment variables — hardcoded credentials are never allowed.
+ */
+export const supabase = new Proxy({} as ReturnType<typeof createSSRClient>, {
+  get(_target, prop) {
+    if (typeof window === 'undefined') {
+      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+      const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+      if (!supabaseUrl || !supabaseAnonKey) {
+        throw new Error(
+          '[supabase] Missing environment variables: NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY must be set.'
+        );
+      }
+
+      const { createClient } = require("@supabase/supabase-js");
+      const instance = createClient(supabaseUrl, supabaseAnonKey);
+      const val = instance[prop as keyof typeof instance];
+      return typeof val === 'function' ? (val as Function).bind(instance) : val;
+    }
+
+    const client = createSSRClient();
+    const value = (client as any)[prop];
+    return typeof value === 'function' ? value.bind(client) : value;
+  }
+});

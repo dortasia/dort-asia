@@ -73,7 +73,7 @@ export default function DepartmentNotificationsPanel({
       // 1. Fetch real notifications from database
       const { data: dbNotifs } = await supabase
         .from("notifications")
-        .select("*, employees!fk_employees_department(name, emp_id, department_id)")
+        .select("*, employees(name, emp_id, department_id)")
         .order("created_at", { ascending: false });
 
       // Convert database notifications if any exist

@@ -125,12 +125,12 @@ export default function ExpiryAlertsPage() {
 
   return (
     <div className="flex-1 flex flex-col overflow-y-auto page-scrollbar bg-white dark:bg-[#121217] font-sans">
-      <main className="flex-1 px-10 pb-10 pt-8 flex flex-col space-y-6">
+      <main className="flex-1 p-4 flex flex-col space-y-6">
         
         {/* Top Header Bar */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-[28px] font-medium text-[#111827] dark:text-white tracking-tight">
+            <h1 className="text-[28px] font-medium text-[#111827] dark:text-white tracking-tight font-sans">
               Expiry Alerts
             </h1>
             <p className="text-[14px] text-gray-500 dark:text-gray-400 mt-1">

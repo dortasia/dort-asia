@@ -1,35 +1,92 @@
 /**
- * storageHelper.ts — Centralized Supabase Storage Utility
+ * storageHelper.ts — Standardized Supabase Storage Utility
  *
- * Provides standardized file naming and folder path generation
- * for all uploads to the `private_data` bucket.
+ * Bucket Structure:
  *
- * Folder Structure:
- *   Company_Storage/{companySlug}/Employees/{employeeName}/
- *   Company_Storage/{companySlug}/Payments/
- *   Company_Storage/{companySlug}/Projects/{projectName}/
- *   Company_Storage/{companySlug}/Company Storage/
- *   Company_Storage/{companySlug}/Attendance/
+ * 1. employee-profiles
+ *    └── {company_id}/{employee_id}/profile.webp
  *
- * File Naming:
- *   Employee-related: {companyId}_{empId}_{fileName}_{DDMMYYYY}.{ext}
- *   Non-employee:     {companyId}_{fileName}_{DDMMYYYY}.{ext}
+ * 2. employee-documents
+ *    └── {company_id}/{employee_id}/
+ *        ├── passport/
+ *        ├── visa/
+ *        ├── work-pass/
+ *        ├── education/
+ *        ├── certifications/
+ *        ├── training/
+ *        ├── contracts/
+ *        ├── medical/
+ *        ├── bank/
+ *        ├── government/
+ *        ├── insurance/
+ *        ├── payroll/
+ *        └── other/
+ *
+ * 3. company-assets
+ *    └── {company_id}/
+ *        ├── logo/
+ *        ├── favicon/
+ *        ├── letterhead/
+ *        ├── signature/
+ *        └── branding/
+ *
+ * 4. system-assets
+ *    ├── icons/
+ *    ├── templates/
+ *    ├── default-avatar/
+ *    ├── flags/
+ *    └── announcements/
+ *
+ * 5. temp-uploads
+ *    └── {user_id}/{upload_session}/
  */
 
-// ─── Constants ──────────────────────────────────────────
-export const PRIVATE_BUCKET = "private_data";
-export const PUBLIC_BUCKET = "public_assets";
+// ─── Bucket Constants ─────────────────────────────────────
+export const BUCKETS = {
+  EMPLOYEE_PROFILES: "employee-profiles",
+  EMPLOYEE_DOCUMENTS: "employee-documents",
+  COMPANY_ASSETS: "company-assets",
+  SYSTEM_ASSETS: "system-assets",
+  TEMP_UPLOADS: "temp-uploads",
+} as const;
 
-export type StorageCategory =
-  | "employees"
-  | "payments"
-  | "projects"
-  | "company-storage"
-  | "attendance";
+export type BucketName = typeof BUCKETS[keyof typeof BUCKETS];
 
-// ─── Helpers ────────────────────────────────────────────
+// Legacy bucket backwards compatibility
+export const PRIVATE_BUCKET = BUCKETS.EMPLOYEE_DOCUMENTS;
+export const PUBLIC_BUCKET = BUCKETS.COMPANY_ASSETS;
 
-/** Converts a company name to a URL-safe slug (e.g. "Dort Asia" → "dort-asia") */
+// ─── Subfolder Type Definitions ───────────────────────────
+export type EmployeeDocCategory =
+  | "passport"
+  | "visa"
+  | "work-pass"
+  | "education"
+  | "certifications"
+  | "training"
+  | "contracts"
+  | "medical"
+  | "bank"
+  | "government"
+  | "insurance"
+  | "payroll"
+  | "other";
+
+export type CompanyAssetCategory =
+  | "logo"
+  | "favicon"
+  | "letterhead"
+  | "signature"
+  | "branding";
+
+export type SystemAssetCategory =
+  | "icons"
+  | "templates"
+  | "default-avatar"
+  | "flags"
+  | "announcements";
+
+// ─── Helpers ──────────────────────────────────────────────
 export function toCompanySlug(companyName: string): string {
   return companyName
     .toLowerCase()
@@ -40,24 +97,7 @@ export function toCompanySlug(companyName: string): string {
     .replace(/^-|-$/g, "");
 }
 
-/** Returns the current date as DDMMYYYY string */
-export function getDateStamp(date?: Date): string {
-  const d = date || new Date();
-  const day = String(d.getDate()).padStart(2, "0");
-  const month = String(d.getMonth() + 1).padStart(2, "0");
-  const year = String(d.getFullYear());
-  return `${day}${month}${year}`;
-}
-
-/**
- * Sanitizes a filename for use in storage paths:
- * - Strips the file extension
- * - Replaces spaces and special characters with underscores
- * - Converts to uppercase
- * - Collapses multiple underscores
- */
 export function sanitizeFileName(name: string): string {
-  // Remove extension
   const dotIndex = name.lastIndexOf(".");
   const baseName = dotIndex > 0 ? name.substring(0, dotIndex) : name;
 
@@ -66,45 +106,38 @@ export function sanitizeFileName(name: string): string {
     .replace(/[\s-]+/g, "_")
     .replace(/_+/g, "_")
     .replace(/^_|_$/g, "")
-    .toUpperCase();
+    .toLowerCase();
 }
 
-/** Extracts the file extension from a filename */
 export function getFileExtension(filename: string): string {
   const ext = filename.split(".").pop()?.toLowerCase();
   return ext || "tmp";
 }
 
-// ─── Path Builders ──────────────────────────────────────
-
-interface FolderPathParams {
-  companySlug: string;
-  category: StorageCategory;
-  /** Required for "employees" category */
-  employeeName?: string;
-  /** Required for "projects" category */
-  projectName?: string;
+export function getDateStamp(date?: Date): string {
+  const d = date || new Date();
+  const day = String(d.getDate()).padStart(2, "0");
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const year = String(d.getFullYear());
+  return `${day}${month}${year}`;
 }
 
-/**
- * Returns the correct subfolder path within Company_Storage.
- * Always ends with a trailing slash.
- */
-export function getStorageFolderPath(params: FolderPathParams): string {
+export function getStorageFolderPath(params: {
+  companySlug: string;
+  category: string;
+  employeeName?: string;
+  projectName?: string;
+}): string {
   const { companySlug, category, employeeName, projectName } = params;
   const base = `Company_Storage/${companySlug}`;
 
   switch (category) {
-    case "employees": {
-      const empFolder = employeeName?.trim() || "Unknown";
-      return `${base}/Employees/${empFolder}/`;
-    }
+    case "employees":
+      return `${base}/Employees/${employeeName?.trim() || "Unknown"}/`;
     case "payments":
       return `${base}/Payments/`;
-    case "projects": {
-      const projFolder = projectName?.trim() || "Unknown";
-      return `${base}/Projects/${projFolder}/`;
-    }
+    case "projects":
+      return `${base}/Projects/${projectName?.trim() || "Unknown"}/`;
     case "company-storage":
       return `${base}/Company Storage/`;
     case "attendance":
@@ -114,23 +147,12 @@ export function getStorageFolderPath(params: FolderPathParams): string {
   }
 }
 
-interface FileNameParams {
+export function buildStorageFileName(params: {
   companyId: string;
-  /** The upload input's file name (original) */
   originalFileName: string;
-  /** Employee emp_id (e.g. RT0001VX26). Include for employee-related uploads. */
   empId?: string;
-  /** Override the date stamp if needed */
   date?: Date;
-}
-
-/**
- * Builds the standardized storage filename.
- *
- * Employee-related: {companyId}_{empId}_{sanitizedName}_{DDMMYYYY}.{ext}
- * Non-employee:     {companyId}_{sanitizedName}_{DDMMYYYY}.{ext}
- */
-export function buildStorageFileName(params: FileNameParams): string {
+}): string {
   const { companyId, originalFileName, empId, date } = params;
   const sanitized = sanitizeFileName(originalFileName);
   const dateStamp = getDateStamp(date);
@@ -142,71 +164,174 @@ export function buildStorageFileName(params: FileNameParams): string {
   return `${companyId}_${sanitized}_${dateStamp}.${ext}`;
 }
 
-// ─── Unified Upload Function ────────────────────────────
+// ─── Path Builders ────────────────────────────────────────
 
-interface UploadParams {
-  companyId: string;
-  companySlug: string;
-  category: StorageCategory;
-  file: File;
-  /** Custom category name to use instead of original filename (e.g. "NRIC_Front") */
-  categoryName?: string;
-  /** Employee's emp_id field (e.g. RT0001VX26) for employee-related uploads */
-  empId?: string;
-  /** Employee's display name (for folder path) */
-  employeeName?: string;
-  /** Project name (for folder path) */
-  projectName?: string;
+/**
+ * Generates path for `employee-profiles` bucket:
+ * `{company_id}/{employee_id}/profile.webp`
+ */
+export function getEmployeeProfilePath(
+  companyId: string,
+  employeeId: string,
+  extension: string = "webp"
+): string {
+  return `${companyId}/${employeeId}/profile.${extension}`;
 }
 
 /**
- * Uploads a file to Supabase storage using the standardized folder structure
- * and naming convention. Returns the full storage path on success.
+ * Generates path for `employee-documents` bucket:
+ * `{company_id}/{employee_id}/{docCategory}/{fileName}`
+ */
+export function getEmployeeDocumentPath(
+  companyId: string,
+  employeeId: string,
+  docCategory: EmployeeDocCategory,
+  fileName: string
+): string {
+  const sanitized = sanitizeFileName(fileName);
+  const ext = getFileExtension(fileName);
+  return `${companyId}/${employeeId}/${docCategory}/${sanitized}.${ext}`;
+}
+
+/**
+ * Generates path for `company-assets` bucket:
+ * `{company_id}/{assetCategory}/{fileName}`
+ */
+export function getCompanyAssetPath(
+  companyId: string,
+  assetCategory: CompanyAssetCategory,
+  fileName: string
+): string {
+  const sanitized = sanitizeFileName(fileName);
+  const ext = getFileExtension(fileName);
+  return `${companyId}/${assetCategory}/${sanitized}.${ext}`;
+}
+
+/**
+ * Generates path for `system-assets` bucket:
+ * `{systemCategory}/{fileName}`
+ */
+export function getSystemAssetPath(
+  systemCategory: SystemAssetCategory,
+  fileName: string
+): string {
+  const sanitized = sanitizeFileName(fileName);
+  const ext = getFileExtension(fileName);
+  return `${systemCategory}/${sanitized}.${ext}`;
+}
+
+/**
+ * Generates path for `temp-uploads` bucket:
+ * `{user_id}/{upload_session}/{fileName}`
+ */
+export function getTempUploadPath(
+  userId: string,
+  uploadSession: string,
+  fileName: string
+): string {
+  const sanitized = sanitizeFileName(fileName);
+  const ext = getFileExtension(fileName);
+  return `${userId}/${uploadSession}/${sanitized}.${ext}`;
+}
+
+// ─── Unified Upload Functions ─────────────────────────────
+
+/**
+ * Uploads an employee profile photo to `employee-profiles` bucket
+ */
+export async function uploadEmployeeProfilePhoto(
+  supabase: any,
+  companyId: string,
+  employeeId: string,
+  file: File | Blob,
+  extension: string = "webp"
+): Promise<string> {
+  const path = getEmployeeProfilePath(companyId, employeeId, extension);
+  const { error } = await supabase.storage
+    .from(BUCKETS.EMPLOYEE_PROFILES)
+    .upload(path, file, { upsert: true, contentType: `image/${extension}` });
+
+  if (error) {
+    console.error("Employee profile upload error:", error);
+    throw new Error(`Failed to upload profile picture: ${error.message}`);
+  }
+
+  const { data } = supabase.storage
+    .from(BUCKETS.EMPLOYEE_PROFILES)
+    .getPublicUrl(path);
+
+  return data.publicUrl;
+}
+
+/**
+ * Uploads an employee document to `employee-documents` bucket
+ */
+export async function uploadEmployeeDocument(
+  supabase: any,
+  companyId: string,
+  employeeId: string,
+  docCategory: EmployeeDocCategory,
+  file: File
+): Promise<string> {
+  const path = getEmployeeDocumentPath(companyId, employeeId, docCategory, file.name);
+  const { error } = await supabase.storage
+    .from(BUCKETS.EMPLOYEE_DOCUMENTS)
+    .upload(path, file, { upsert: true });
+
+  if (error) {
+    console.error("Employee document upload error:", error);
+    throw new Error(`Failed to upload document ${file.name}: ${error.message}`);
+  }
+
+  return path;
+}
+
+/**
+ * Uploads a company asset (logo, favicon, etc.) to `company-assets` bucket
+ */
+export async function uploadCompanyAsset(
+  supabase: any,
+  companyId: string,
+  assetCategory: CompanyAssetCategory,
+  file: File | Blob,
+  fileName: string
+): Promise<string> {
+  const path = getCompanyAssetPath(companyId, assetCategory, fileName);
+  const { error } = await supabase.storage
+    .from(BUCKETS.COMPANY_ASSETS)
+    .upload(path, file, { upsert: true });
+
+  if (error) {
+    console.error("Company asset upload error:", error);
+    throw new Error(`Failed to upload company asset ${fileName}: ${error.message}`);
+  }
+
+  const { data } = supabase.storage
+    .from(BUCKETS.COMPANY_ASSETS)
+    .getPublicUrl(path);
+
+  return data.publicUrl;
+}
+
+/**
+ * Legacy support for uploadToCompanyStorage
  */
 export async function uploadToCompanyStorage(
   supabase: any,
-  params: UploadParams
-): Promise<string> {
-  const {
-    companyId,
-    companySlug,
-    category,
-    file,
-    categoryName,
-    empId,
-    employeeName,
-    projectName,
-  } = params;
-
-  // Build the folder path
-  const folderPath = getStorageFolderPath({
-    companySlug,
-    category,
-    employeeName,
-    projectName,
-  });
-
-  // Build the filename — use categoryName if provided, else original filename
-  const nameForFile = categoryName
-    ? `${categoryName}.${getFileExtension(file.name)}`
-    : file.name;
-
-  const fileName = buildStorageFileName({
-    companyId,
-    originalFileName: nameForFile,
-    empId,
-  });
-
-  const fullPath = `${folderPath}${fileName}`;
-
-  const { error } = await supabase.storage
-    .from(PRIVATE_BUCKET)
-    .upload(fullPath, file, { upsert: true });
-
-  if (error) {
-    console.error(`Storage upload error [${category}]:`, error);
-    throw new Error(`Failed to upload ${file.name}: ${error.message}`);
+  params: {
+    companyId: string;
+    companySlug?: string;
+    category: string;
+    file: File;
+    categoryName?: string;
+    empId?: string;
+    employeeName?: string;
+    projectName?: string;
   }
-
-  return fullPath;
+): Promise<string> {
+  const { companyId, empId, file, categoryName } = params;
+  const targetDocType: EmployeeDocCategory = (categoryName?.toLowerCase() as EmployeeDocCategory) || "other";
+  const employeeId = empId || "general";
+  
+  return uploadEmployeeDocument(supabase, companyId, employeeId, targetDocType, file);
 }

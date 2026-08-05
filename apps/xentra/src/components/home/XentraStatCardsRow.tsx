@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
+import { useAppStore } from "@/store";
 
 interface StatData {
   employeeCount: number;
@@ -15,11 +16,16 @@ interface StatData {
 }
 
 export default function XentraStatCardsRow() {
+  const cachedSidebar = useAppStore((s) => s.cachedSidebar);
+  const isSuperAdmin: boolean | null = cachedSidebar
+    ? cachedSidebar.isSuperAdmin ?? false
+    : null;
+
   const [stats, setStats] = useState<StatData>({
     employeeCount: 28,
     employeeLimit: 50,
     storageUsedGB: 98,
-    storageLimitGB: 100,
+    storageLimitGB: 15,
     deptCount: 10,
     deptLimit: 15,
     alertsCount: 23,
@@ -27,6 +33,8 @@ export default function XentraStatCardsRow() {
   });
 
   useEffect(() => {
+    if (isSuperAdmin === null) return;
+
     const fetchStats = async () => {
       try {
         const supabase = createClient();
@@ -36,46 +44,106 @@ export default function XentraStatCardsRow() {
         if (!user) return;
 
         let companyId = user.id;
-        const { data: self } = await supabase
-          .from("employees")
-          .select("company_id")
-          .eq("email", user.email)
-          .maybeSingle();
+        let departmentId: string | null = null;
 
-        if (self && self.company_id) {
-          companyId = self.company_id;
+        if (!isSuperAdmin) {
+          const { data: self } = await supabase
+            .from("employees")
+            .select("company_id, department_id")
+            .eq("email", user.email)
+            .maybeSingle();
+
+          if (self && self.company_id) {
+            companyId = self.company_id;
+            departmentId = self.department_id;
+          }
         }
 
-        const [empResult, deptResult, compResult] = await Promise.all([
-          supabase
-            .from("employees")
-            .select("id", { count: "exact", head: true })
-            .eq("company_id", companyId),
-          supabase
-            .from("departments")
-            .select("id", { count: "exact", head: true })
-            .eq("company_id", companyId),
+        let empQuery = supabase
+          .from("employees")
+          .select("id, is_active, passport_expiry_date, work_pass_expiry_date")
+          .eq("company_id", companyId);
+        
+        let deptQuery = supabase
+          .from("departments")
+          .select("id", { count: "exact", head: true })
+          .eq("company_id", companyId);
+
+        let leaveQuery = supabase
+          .from("leave_requests")
+          .select("id", { count: "exact", head: true })
+          .eq("company_id", companyId)
+          .eq("status", "pending");
+
+        let claimsQuery = supabase
+          .from("claims")
+          .select("id", { count: "exact", head: true })
+          .eq("company_id", companyId)
+          .eq("status", "pending");
+
+        if (!isSuperAdmin && departmentId) {
+          empQuery = empQuery.eq("department_id", departmentId);
+          // Assuming leave and claims might not have department_id, we'll keep it simple or filter by employee IDs if needed
+          // Let's just use company_id for requests for now, or filter if necessary
+        }
+
+        const [empResult, deptResult, compResult, leaveResult, claimsResult] = await Promise.all([
+          empQuery,
+          deptQuery,
           supabase
             .from("company_settings")
             .select("storage_used_gb, seat_limit")
             .eq("company_id", companyId)
             .maybeSingle(),
+          leaveQuery,
+          claimsQuery,
         ]);
 
-        const realEmpCount = empResult.count ?? 28;
+        const employees = empResult.data || [];
+        const realEmpCount = employees.length;
         const realDeptCount = deptResult.count ?? 10;
         const realStorage = compResult.data?.storage_used_gb ?? 98;
         const realSeatLimit = compResult.data?.seat_limit ?? 50;
 
+        let alerts = 0;
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        for (const emp of employees) {
+          if (emp.is_active === false) continue;
+          
+          let alertAdded = false;
+          if (emp.passport_expiry_date) {
+            const end = new Date(emp.passport_expiry_date);
+            end.setHours(0, 0, 0, 0);
+            const daysLeft = Math.ceil((end.getTime() - today.getTime()) / 86_400_000);
+            if (daysLeft <= 90) {
+              alerts++;
+              alertAdded = true;
+            }
+          }
+          if (!alertAdded && emp.work_pass_expiry_date) {
+            const end = new Date(emp.work_pass_expiry_date);
+            end.setHours(0, 0, 0, 0);
+            const daysLeft = Math.ceil((end.getTime() - today.getTime()) / 86_400_000);
+            if (daysLeft <= 90) {
+              alerts++;
+            }
+          }
+        }
+
+        const realLeaveCount = leaveResult.count ?? 0;
+        const realClaimsCount = claimsResult.count ?? 0;
+
         setStats({
-          employeeCount: realEmpCount > 0 ? realEmpCount : 28,
+          employeeCount: realEmpCount > 0 ? realEmpCount : 0,
           employeeLimit: realSeatLimit,
           storageUsedGB: Math.round(realStorage),
-          storageLimitGB: 100,
-          deptCount: realDeptCount > 0 ? realDeptCount : 10,
+          storageLimitGB: 15,
+          deptCount: realDeptCount > 0 ? realDeptCount : 0,
           deptLimit: 15,
-          alertsCount: 23,
-          requestsCount: 4,
+          alertsCount: alerts,
+          requestsCount: realLeaveCount + realClaimsCount,
         });
       } catch (err) {
         console.error("Fetch stat cards error:", err);
@@ -83,7 +151,7 @@ export default function XentraStatCardsRow() {
     };
 
     fetchStats();
-  }, []);
+  }, [isSuperAdmin]);
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 my-4 font-sf">

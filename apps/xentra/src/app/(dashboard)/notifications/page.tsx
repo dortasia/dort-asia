@@ -103,11 +103,11 @@ export default function NotificationsPage() {
     <div className="flex-1 flex flex-col h-full bg-[#FAFAFA] dark:bg-[#0B0B0F] overflow-y-auto page-scrollbar">
 
       {/* Header */}
-      <header className="px-8 pt-8 pb-6 shrink-0 animate-in fade-in slide-in-from-bottom-4 duration-300">
+      <header className="p-4 shrink-0 animate-in fade-in slide-in-from-bottom-4 duration-300">
         <div className="flex items-start justify-between">
           <div>
             <div className="flex items-center gap-3 mb-1">
-              <h1 className="text-[28px] font-bold text-gray-900 dark:text-white leading-tight tracking-tight">
+              <h1 className="text-[28px] font-medium text-[#111827] dark:text-white tracking-tight font-sans">
                 Notifications
               </h1>
               {unreadCount > 0 && (
@@ -126,10 +126,9 @@ export default function NotificationsPage() {
             {unreadCount > 0 && (
               <button
                 onClick={markAllRead}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-[12px] bg-[#007AFF] text-white text-[13px] font-semibold hover:bg-[#0062CC] transition-colors shadow-sm"
+                className="px-4 py-2 text-[13px] font-semibold text-[#007AFF] hover:bg-[#007AFF]/10 rounded-full transition-colors"
               >
-                <CheckCheck className="h-4 w-4" />
-                Mark all read
+                Mark all as read
               </button>
             )}
             <button
@@ -160,7 +159,7 @@ export default function NotificationsPage() {
       </header>
 
       {/* Body */}
-      <main className="flex-1 px-8 pb-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <main className="flex-1 p-4 pt-0 animate-in fade-in slide-in-from-bottom-4 duration-500">
 
         {loading ? (
           <div className="flex flex-col items-center justify-center py-24 gap-4">

@@ -76,9 +76,9 @@ export default function SubscriptionPage() {
   return (
     <div className="flex-1 flex flex-col overflow-y-auto page-scrollbar">
       {/* Header */}
-      <header className="flex items-center justify-between px-6 py-8">
+      <header className="flex items-center justify-between p-4">
         <div>
-          <h1 className="text-[28px] font-bold text-gray-900 dark:text-white leading-tight tracking-tight">
+          <h1 className="text-[28px] font-medium text-[#111827] dark:text-white tracking-tight font-sans">
             Subscription
           </h1>
           <p className="text-[14px] text-gray-500 font-medium tracking-wide mt-1">
@@ -91,7 +91,7 @@ export default function SubscriptionPage() {
         </div>
       </header>
 
-      <main className="flex-1 px-6 pb-8 flex flex-col gap-5 max-w-[1600px] mx-auto w-full justify-center">
+      <main className="flex-1 p-4 pt-0 flex flex-col gap-5 max-w-[1600px] mx-auto w-full justify-center">
         
         {/* Top Section: Tracker */}
         <div className="bg-white/40 dark:bg-[#1C1C22]/40 backdrop-blur-xl rounded-[20px] p-5 border border-white/20 dark:border-white/5 shadow-sm flex flex-col gap-3">

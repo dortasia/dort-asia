@@ -12,7 +12,7 @@ function statusLabel(status: string) {
   }
 }
 
-import { getAvatarColor as getUniversalAvatarColor, getInitials as getAvatarInitials } from "@/utils/avatarColor";
+import { getAvatarColor as getUniversalAvatarColor, getInitials as getAvatarInitials, getUserAvatarUrl } from "@/utils/avatarColor";
 function initials(name: string) {
   return getAvatarInitials(name);
 }
@@ -48,10 +48,7 @@ export default function OrgSidePanel({ member, employeeDbId, onClose }: OrgSideP
           className="w-[88px] h-[88px] rounded-full overflow-hidden mb-4 shadow-lg border-4 border-white dark:border-[#1C1C1E] flex items-center justify-center text-white font-bold text-[24px]"
           style={{ backgroundColor: bg }}
         >
-          {member.avatar
-            ? <img src={member.avatar} alt={member.name} className="w-full h-full object-cover" />
-            : initials(member.name)
-          }
+          {<img src={getUserAvatarUrl(member.avatar)} alt={member.name} className="w-full h-full object-cover" />}
         </div>
 
         <h2 className="text-[18px] font-bold text-gray-900 dark:text-white leading-tight mb-1">

@@ -13,7 +13,7 @@ import { getUserAvatarUrl } from "@/utils/avatarColor";
 import Cropper from "react-easy-crop";
 import { calculateCPF, calculateSDL, calculateSHG } from "@/utils/taxCalculator";
 import { calculateFWL, QuotaCounts, FWLResult } from "@/utils/fwlCalculator";
-import { uploadToCompanyStorage } from "@/utils/storageHelper";
+import { uploadToCompanyStorage, uploadEmployeeProfilePhoto } from "@/utils/storageHelper";
 
 const calculateFWLWithDb = (
   counts: QuotaCounts,
@@ -1689,7 +1689,7 @@ export default function EditEmployeePage() {
       // 2. Fetch settings using the correct companyId
       const { data: compSettings } = await supabase
         .from('company_settings')
-        .select('app_config, attendance_settings')
+        .select('app_config')
         .eq('company_id', companyId)
         .maybeSingle();
 
@@ -1700,8 +1700,8 @@ export default function EditEmployeePage() {
         if (compSettings.app_config.custom_roles) {
           setAvailableRoles(["Admin", "Sub Admin", "Employee", ...compSettings.app_config.custom_roles]);
         }
-        if (compSettings.attendance_settings?.projects) {
-          setCompanyProjects(compSettings.attendance_settings.projects);
+        if (compSettings.app_config.attendance_config?.projects) {
+          setCompanyProjects(compSettings.app_config.attendance_config.projects);
         }
       }
 
@@ -2038,11 +2038,9 @@ export default function EditEmployeePage() {
   const uploadEmployeeFiles = async () => {
     const { data: compSettings } = await supabase.from('companies').select('company_name').eq('id', userCompanyId).maybeSingle();
     const companySlug = toCompanySlug(compSettings?.company_name || 'default');
-    const folderPath = `Company_Storage/${companySlug}/`;
     const empName = `${formData.firstName} ${formData.lastName}`.trim() || 'Employee';
 
     const uploadFile = async (file: any, categoryName: string, subCategory: string = "Documents") => {
-      // Skip if empty, already a string path, or not an actual browser File object
       if (!file || typeof file === 'string') return file;
       if (!(file instanceof File)) return typeof file === 'object' ? null : file;
 
@@ -2061,36 +2059,10 @@ export default function EditEmployeePage() {
       if (!file || typeof file === 'string') return file;
       if (!(file instanceof File)) return typeof file === 'object' ? null : file;
 
-      const avatarPath = `User_Avatar/${companySlug}/${employeeId}_profile.jpg`;
-
-      const { error } = await supabase.storage.from('public_assets').upload(avatarPath, file, { upsert: true, contentType: 'image/jpeg' });
-      if (error) {
-        console.error("Upload error for User Avatar", error);
-        throw new Error(`Failed to upload Profile Photo: ${error.message}`);
-      }
-
-      // Cleanup old avatar if it exists and has a different path
-      if (originalAvatarUrl && originalAvatarUrl.includes("User_Avatar/")) {
-        try {
-          const urlObj = new URL(originalAvatarUrl);
-          const parts = urlObj.pathname.split("public_assets/");
-          if (parts.length > 1) {
-            const oldPath = parts[1];
-            if (oldPath !== avatarPath) {
-              await supabase.storage.from("public_assets").remove([oldPath]);
-            }
-          }
-        } catch (err) {
-          console.error("Failed to delete old avatar", err);
-        }
-      }
-
-      const { data: publicUrlData } = supabase.storage.from('public_assets').getPublicUrl(avatarPath);
-      return `${publicUrlData.publicUrl}?t=${Date.now()}`;
+      return await uploadEmployeeProfilePhoto(supabase, userCompanyId, employeeId, file, "webp");
     };
 
     const updatedData = { ...formData };
-
     updatedData.profilePhotoUrl = await uploadAvatar(updatedData.profilePhotoUrl);
     updatedData.nricCopyUrl = await uploadFile(updatedData.nricCopyUrl, "NRIC Copy", "Identity");
     updatedData.finCardUrl = await uploadFile(updatedData.finCardUrl, "Pass Copy", "Pass Document");

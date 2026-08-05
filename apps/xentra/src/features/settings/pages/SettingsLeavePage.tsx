@@ -136,23 +136,23 @@ export function SettingsLeavePage() {
   return (
     <div className="flex flex-col gap-6 max-w-[800px]">
       <div>
-        <div className="flex items-center gap-2 text-xs text-[#737373] mb-3">
+        <div className="flex items-center gap-2 type-small text-[#737373] mb-4">
           <Link href="/settings/employees" className="hover:text-[#161616] transition-colors flex items-center gap-1">
-            <Icon icon="hugeicons:arrow-left-01" className="w-3.5 h-3.5" />
+            <Icon icon="hugeicons:arrow-left-01" className="w-4 h-4" />
             Employee Settings
           </Link>
           <span>/</span>
-          <span className="text-[#161616] font-medium">Leave Management</span>
+          <span className="text-[#161616]">Leave Management</span>
         </div>
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-[28px] font-medium text-[#111827] tracking-tight font-sans">Leave Management</h2>
-            <p className="text-xs text-[#737373] mt-1">Manage leave policy templates.</p>
+            <h2 className="type-h2 text-[#161616]">Leave Management</h2>
+            <p className="type-small text-[#737373] mt-1">Manage leave policy templates.</p>
           </div>
           <div className="flex items-center gap-2">
             <Link 
               href="/settings/leave/advanced"
-              className="flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-full transition-colors bg-white border border-[#E5E7EB] text-[#161616] hover:bg-neutral-50 cursor-pointer shadow-sm"
+              className="flex items-center gap-2 type-body-medium font-semibold px-4 py-2 rounded-full transition-colors bg-white border border-[#E5E7EB] text-[#161616] hover:bg-neutral-50 cursor-pointer"
             >
               <Icon icon="hugeicons:settings-02" className="w-4 h-4" />
               Advanced Settings
