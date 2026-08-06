@@ -43,7 +43,7 @@ export function DepartmentsPage() {
   })
 
   // Filter departments
-  const filteredDepts = departments.filter((dept) => {
+  const filteredDepts = (departments as any[]).filter((dept: any) => {
     const query = searchQuery.toLowerCase().trim()
     if (!query) return true
     return dept.department_name.toLowerCase().includes(query)

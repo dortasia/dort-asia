@@ -185,7 +185,7 @@ export function AttendancePage() {
   let currentDepartmentName = 'Loading...'
   if (!queryLoading) {
     if (isSuperAdmin) {
-      currentDepartmentName = departmentsData.find(d => d.id === selectedDepartmentId)?.department_name || 'Admin Department'
+      currentDepartmentName = (departmentsData as any[]).find((d: any) => d.id === selectedDepartmentId)?.department_name || 'Admin Department'
     } else {
       currentDepartmentName = user?.department || 'Your Department'
     }
@@ -312,7 +312,7 @@ export function AttendancePage() {
 
   useEffect(() => {
     if (departmentsData.length > 0 && !selectedDepartmentId) {
-      const adminDept = departmentsData.find(d => d.department_name?.toLowerCase().includes('admin'))
+      const adminDept = (departmentsData as any[]).find((d: any) => d.department_name?.toLowerCase().includes('admin'))
       if (adminDept) {
         setSelectedDepartmentId(adminDept.id)
       } else {

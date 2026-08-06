@@ -1,0 +1,3936 @@
+
+> employee-management_xa@0.1.0 build
+> next build
+
+▲ Next.js 16.2.12 (Turbopack)
+- Environments: .env.local, .env.production
+
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build failed with 170 errors:
+./src/app/globals.css
+Error evaluating Node.js code
+Error: Cannot find module 'picocolors'
+    at pico (node_modules/next/node_modules/postcss/lib/css-syntax-error.js:3:5) [C:\Users\Kriss\.gemini\antigravity-ide\scratch\Dort-Asia\apps\xentra\.next\build\chunks\0nn8_postcss_lib_0_cufay._.js:336:15]
+    at pico (node_modules/next/node_modules/postcss/lib/css-syntax-error.js:3:5) [C:\Users\Kriss\.gemini\antigravity-ide\scratch\Dort-Asia\apps\xentra\.next\build\chunks\0nn8_postcss_lib_0_cufay._.js:339:3]
+    at moduleFactory (turbopack:///[turbopack]/nodejs/runtime/build-base.ts:57:5) [C:\Users\Kriss\.gemini\antigravity-ide\scratch\Dort-Asia\apps\xentra\.next\build\chunks\[turbopack]_runtime.js:840:9]
+    at instantiateModule (turbopack:///[turbopack]/nodejs/runtime/build-base.ts:90:10) [C:\Users\Kriss\.gemini\antigravity-ide\scratch\Dort-Asia\apps\xentra\.next\build\chunks\[turbopack]_runtime.js:864:12]
+    at getOrInstantiateModuleFromParent (turbopack:///[turbopack]/shared/runtime/runtime-utils.ts:440:10) [C:\Users\Kriss\.gemini\antigravity-ide\scratch\Dort-Asia\apps\xentra\.next\build\chunks\[turbopack]_runtime.js:289:12]
+    at CssSyntaxError (node_modules/next/node_modules/postcss/lib/postcss.js:3:5) [C:\Users\Kriss\.gemini\antigravity-ide\scratch\Dort-Asia\apps\xentra\.next\build\chunks\0nn8_postcss_lib_0_cufay._.js:3686:44]
+    at moduleFactory (turbopack:///[turbopack]/nodejs/runtime/build-base.ts:57:5) [C:\Users\Kriss\.gemini\antigravity-ide\scratch\Dort-Asia\apps\xentra\.next\build\chunks\[turbopack]_runtime.js:840:9]
+    at instantiateModule (turbopack:///[turbopack]/nodejs/runtime/build-base.ts:90:10) [C:\Users\Kriss\.gemini\antigravity-ide\scratch\Dort-Asia\apps\xentra\.next\build\chunks\[turbopack]_runtime.js:864:12]
+    at getOrInstantiateModuleFromParent (turbopack:///[turbopack]/shared/runtime/runtime-utils.ts:398:18) [C:\Users\Kriss\.gemini\antigravity-ide\scratch\Dort-Asia\apps\xentra\.next\build\chunks\[turbopack]_runtime.js:268:20]
+    at module evaluation (node_modules/next/node_modules/postcss/lib/postcss.mjs:1:1) [C:\Users\Kriss\.gemini\antigravity-ide\scratch\Dort-Asia\apps\xentra\.next\build\chunks\0nn8_postcss_lib_0_cufay._.js:3824:188]
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+./src/components/home/home-rows.css
+Error evaluating Node.js code
+Error: Cannot find module 'picocolors'
+    at pico (node_modules/next/node_modules/postcss/lib/css-syntax-error.js:3:5) [C:\Users\Kriss\.gemini\antigravity-ide\scratch\Dort-Asia\apps\xentra\.next\build\chunks\0nn8_postcss_lib_0_cufay._.js:336:15]
+    at pico (node_modules/next/node_modules/postcss/lib/css-syntax-error.js:3:5) [C:\Users\Kriss\.gemini\antigravity-ide\scratch\Dort-Asia\apps\xentra\.next\build\chunks\0nn8_postcss_lib_0_cufay._.js:339:3]
+    at moduleFactory (turbopack:///[turbopack]/nodejs/runtime/build-base.ts:57:5) [C:\Users\Kriss\.gemini\antigravity-ide\scratch\Dort-Asia\apps\xentra\.next\build\chunks\[turbopack]_runtime.js:840:9]
+    at instantiateModule (turbopack:///[turbopack]/nodejs/runtime/build-base.ts:90:10) [C:\Users\Kriss\.gemini\antigravity-ide\scratch\Dort-Asia\apps\xentra\.next\build\chunks\[turbopack]_runtime.js:864:12]
+    at getOrInstantiateModuleFromParent (turbopack:///[turbopack]/shared/runtime/runtime-utils.ts:440:10) [C:\Users\Kriss\.gemini\antigravity-ide\scratch\Dort-Asia\apps\xentra\.next\build\chunks\[turbopack]_runtime.js:289:12]
+    at CssSyntaxError (node_modules/next/node_modules/postcss/lib/postcss.js:3:5) [C:\Users\Kriss\.gemini\antigravity-ide\scratch\Dort-Asia\apps\xentra\.next\build\chunks\0nn8_postcss_lib_0_cufay._.js:3686:44]
+    at moduleFactory (turbopack:///[turbopack]/nodejs/runtime/build-base.ts:57:5) [C:\Users\Kriss\.gemini\antigravity-ide\scratch\Dort-Asia\apps\xentra\.next\build\chunks\[turbopack]_runtime.js:840:9]
+    at instantiateModule (turbopack:///[turbopack]/nodejs/runtime/build-base.ts:90:10) [C:\Users\Kriss\.gemini\antigravity-ide\scratch\Dort-Asia\apps\xentra\.next\build\chunks\[turbopack]_runtime.js:864:12]
+    at getOrInstantiateModuleFromParent (turbopack:///[turbopack]/shared/runtime/runtime-utils.ts:398:18) [C:\Users\Kriss\.gemini\antigravity-ide\scratch\Dort-Asia\apps\xentra\.next\build\chunks\[turbopack]_runtime.js:268:20]
+    at module evaluation (node_modules/next/node_modules/postcss/lib/postcss.mjs:1:1) [C:\Users\Kriss\.gemini\antigravity-ide\scratch\Dort-Asia\apps\xentra\.next\build\chunks\0nn8_postcss_lib_0_cufay._.js:3824:188]
+
+Import trace:
+  Client Component Browser:
+    ./src/components/home/home-rows.css [Client Component Browser]
+    ./src/app/(dashboard)/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/page.tsx [Server Component]
+
+
+./src/app/(dashboard)/settings/layout.tsx:6:1
+Module not found: Can't resolve '@iconify/react'
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m5 |[0m [36mimport[0m { usePathname } [36mfrom[0m [32m'next/navigation'[0m
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m [36mimport[0m { [33mSearch[0m } [36mfrom[0m [32m'lucide-react'[0m
+  [90m8 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m9 |[0m [36mimport[0m { cn } [36mfrom[0m [32m'@/lib/utils'[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/(dashboard)/settings/layout.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/(dashboard)/settings/layout.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/ui/FormDatePicker.tsx:6:1
+Module not found: Can't resolve '@iconify/react'
+  [90m4 |[0m [36mimport[0m { [33mChevronLeft[0m, [33mChevronRight[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m5 |[0m [36mimport[0m { createPortal } [36mfrom[0m [32m"react-dom"[0m;
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m [36mimport[0m { motion, [33mAnimatePresence[0m } [36mfrom[0m [32m"motion/react"[0m;
+  [90m8 |[0m [36mimport[0m { cn } [36mfrom[0m [32m"@/lib/utils"[0m;
+  [90m9 |[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/FormDatePicker.tsx [Client Component Browser]
+    ./src/components/CreateDepartmentDialog.tsx [Client Component Browser]
+    ./src/app/(dashboard)/departments/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/departments/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/FormDatePicker.tsx [Client Component SSR]
+    ./src/components/CreateDepartmentDialog.tsx [Client Component SSR]
+    ./src/app/(dashboard)/departments/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/departments/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/ui/FormDropdown.tsx:5:1
+Module not found: Can't resolve '@iconify/react'
+  [90m3 |[0m [36mimport[0m [33mReact[0m, { useState, useRef, useEffect } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m { [33mCheck[0m } [36mfrom[0m [32m"lucide-react"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { createPortal } [36mfrom[0m [32m"react-dom"[0m;
+  [90m7 |[0m [36mimport[0m { motion, [33mAnimatePresence[0m } [36mfrom[0m [32m"motion/react"[0m;
+  [90m8 |[0m [36mimport[0m { cn } [36mfrom[0m [32m"@/lib/utils"[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/FormDropdown.tsx [Client Component Browser]
+    ./src/components/AddEmployeeModal.tsx [Client Component Browser]
+    ./src/app/(dashboard)/employees/EmployeeTableRenderer.tsx [Client Component Browser]
+    ./src/app/(dashboard)/employees/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/FormDropdown.tsx [Client Component SSR]
+    ./src/components/AddEmployeeModal.tsx [Client Component SSR]
+    ./src/app/(dashboard)/employees/EmployeeTableRenderer.tsx [Client Component SSR]
+    ./src/app/(dashboard)/employees/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/ui/dialog.tsx:3:1
+Module not found: Can't resolve '@iconify/react'
+  [90m1 |[0m [36mimport[0m * [36mas[0m [33mReact[0m [36mfrom[0m [32m'react'[0m
+  [90m2 |[0m [36mimport[0m * [36mas[0m [33mDialogPrimitive[0m [36mfrom[0m [32m'@radix-ui/react-dialog'[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { cn } [36mfrom[0m [32m'@/lib/utils'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mDialog[0m = [33mDialogPrimitive[0m.[33mRoot[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/dialog.tsx [Client Component Browser]
+    ./src/features/settings/pages/SettingsLeavePage.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/leave/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/leave/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/dialog.tsx [Client Component SSR]
+    ./src/features/settings/pages/SettingsLeavePage.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/leave/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/leave/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/ui/dropdown-menu.tsx:3:1
+Module not found: Can't resolve '@iconify/react'
+  [90m1 |[0m [36mimport[0m * [36mas[0m [33mReact[0m [36mfrom[0m [32m'react'[0m
+  [90m2 |[0m [36mimport[0m * [36mas[0m [33mDropdownMenuPrimitive[0m [36mfrom[0m [32m'@radix-ui/react-dropdown-menu'[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { cn } [36mfrom[0m [32m'@/lib/utils'[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m [33mDropdownMenu[0m = [33mDropdownMenuPrimitive[0m.[33mRoot[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/dropdown-menu.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/dropdown-menu.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/departments/components/AdvancedDepartmentSettingsDialog.tsx:13:1
+Module not found: Can't resolve '@iconify/react'
+  [90m11 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+  [90m12 |[0m [36mimport[0m { useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+[31m[1m>[0m [90m13 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m14 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m15 |[0m [36mimport[0m { getAvatarUrl } [36mfrom[0m [32m'@/lib/utils'[0m
+  [90m16 |[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/departments/components/AdvancedDepartmentSettingsDialog.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/departments/components/AdvancedDepartmentSettingsDialog.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/departments/components/ChangeDesignationDialog.tsx:7:1
+Module not found: Can't resolve '@iconify/react'
+  [90m 5 |[0m [36mimport[0m { useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m 6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m 9 |[0m [36mimport[0m { getAvatarUrl } [36mfrom[0m [32m'@/lib/utils'[0m
+  [90m10 |[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/departments/components/ChangeDesignationDialog.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/departments/components/ChangeDesignationDialog.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/departments/components/ChangeReporteeDialog.tsx:7:1
+Module not found: Can't resolve '@iconify/react'
+  [90m 5 |[0m [36mimport[0m { useQuery } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m 6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m 9 |[0m [36mimport[0m { getAvatarUrl } [36mfrom[0m [32m'@/lib/utils'[0m
+  [90m10 |[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/departments/components/ChangeReporteeDialog.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/departments/components/ChangeReporteeDialog.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/departments/components/TransferEmployeeDialog.tsx:7:1
+Module not found: Can't resolve '@iconify/react'
+  [90m 5 |[0m [36mimport[0m { useQuery, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m 6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m 9 |[0m [36mimport[0m { getAvatarUrl } [36mfrom[0m [32m'@/lib/utils'[0m
+  [90m10 |[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/departments/components/TransferEmployeeDialog.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/departments/components/TransferEmployeeDialog.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/departments/pages/DepartmentDetailsPage.tsx:5:1
+Module not found: Can't resolve '@iconify/react'
+  [90m3 |[0m [36mimport[0m [33mReact[0m, { useState } [36mfrom[0m [32m'react'[0m
+  [90m4 |[0m [36mimport[0m { useParams, useRouter } [36mfrom[0m [32m'next/navigation'[0m
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { useQuery } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m7 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m8 |[0m [36mimport[0m { createClient } [36mfrom[0m [32m'@/utils/supabase/client'[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx
+    ./src/app/(dashboard)/departments/[id]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsAttendanceMethodsPage.tsx:4:1
+Module not found: Can't resolve '@iconify/react'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m [33mReact[0m, { useState, useEffect } [36mfrom[0m [32m'react'[0m
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+  [90m7 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsAttendanceMethodsPage.tsx
+    ./src/app/(dashboard)/settings/attendance/methods/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsAttendancePage.tsx:4:1
+Module not found: Can't resolve '@iconify/react'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m [33mReact[0m, { useState, useEffect } [36mfrom[0m [32m'react'[0m
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+  [90m7 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsAttendancePage.tsx
+    ./src/app/(dashboard)/settings/attendance/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsAttendanceSiteDetailPage.tsx:4:1
+Module not found: Can't resolve '@iconify/react'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m [33mReact[0m, { useState, useEffect } [36mfrom[0m [32m'react'[0m
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m6 |[0m [36mimport[0m { createPortal } [36mfrom[0m [32m'react-dom'[0m
+  [90m7 |[0m [36mimport[0m { useParams, useRouter } [36mfrom[0m [32m'next/navigation'[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsAttendanceSiteDetailPage.tsx
+    ./src/app/(dashboard)/settings/attendance/sites/[id]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsAttendanceSiteGeofencePage.tsx:5:1
+Module not found: Can't resolve '@iconify/react'
+  [90m3 |[0m [36mimport[0m [33mReact[0m, { useState, useEffect } [36mfrom[0m [32m'react'[0m
+  [90m4 |[0m [36mimport[0m { createPortal } [36mfrom[0m [32m'react-dom'[0m
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m7 |[0m [36mimport[0m { useParams } [36mfrom[0m [32m'next/navigation'[0m
+  [90m8 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsAttendanceSiteGeofencePage.tsx
+    ./src/app/(dashboard)/settings/attendance/sites/[id]/geofence/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsAttendanceSitePassPage.tsx:4:1
+Module not found: Can't resolve '@iconify/react'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m [33mReact[0m, { useState, useEffect } [36mfrom[0m [32m'react'[0m
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m6 |[0m [36mimport[0m { useParams } [36mfrom[0m [32m'next/navigation'[0m
+  [90m7 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsAttendanceSitePassPage.tsx
+    ./src/app/(dashboard)/settings/attendance/sites/[id]/pass/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsAttendanceSitesPage.tsx:4:1
+Module not found: Can't resolve '@iconify/react'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m [33mReact[0m, { useState, useEffect } [36mfrom[0m [32m'react'[0m
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m6 |[0m [36mimport[0m { createPortal } [36mfrom[0m [32m'react-dom'[0m
+  [90m7 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsAttendanceSitesPage.tsx
+    ./src/app/(dashboard)/settings/attendance/sites/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsAuthenticatePage.tsx:5:1
+Module not found: Can't resolve '@iconify/react'
+  [90m3 |[0m [36mimport[0m [33mReact[0m, { useState, useEffect } [36mfrom[0m [32m'react'[0m
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { useQuery } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m7 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+  [90m8 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsAuthenticatePage.tsx
+    ./src/app/(dashboard)/settings/roles/authenticate/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsClaimAdvancedPage.tsx:4:1
+Module not found: Can't resolve '@iconify/react'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m [33mReact[0m, { useState, useEffect } [36mfrom[0m [32m'react'[0m
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+  [90m7 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsClaimAdvancedPage.tsx
+    ./src/app/(dashboard)/settings/claims/advanced/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsClaimHierarchyPage.tsx:4:1
+Module not found: Can't resolve '@iconify/react'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m [33mReact[0m, { useState, useEffect } [36mfrom[0m [32m'react'[0m
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+  [90m7 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsClaimHierarchyPage.tsx
+    ./src/app/(dashboard)/settings/claims/hierarchy/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsCompanyPage.tsx:3:1
+Module not found: Can't resolve '@iconify/react'
+  [90m1 |[0m [36mimport[0m [33mReact[0m, { useState, useEffect, useRef } [36mfrom[0m [32m'react'[0m
+  [90m2 |[0m [36mimport[0m { createPortal } [36mfrom[0m [32m'react-dom'[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m5 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+  [90m6 |[0m [36mimport[0m { useAuthStore } [36mfrom[0m [32m'@/store/useAuthStore'[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/settings/pages/SettingsCompanyPage.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/company/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/company/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/settings/pages/SettingsCompanyPage.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/company/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/company/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsDepartmentPage.tsx:4:1
+Module not found: Can't resolve '@iconify/react'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m [33mReact[0m, { useState, useEffect } [36mfrom[0m [32m'react'[0m
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+  [90m7 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsDepartmentPage.tsx
+    ./src/app/(dashboard)/settings/departments/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsEmployeesPage.tsx:4:1
+Module not found: Can't resolve '@iconify/react'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m [33mReact[0m, { useState } [36mfrom[0m [32m'react'[0m
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mexport[0m [36mfunction[0m [33mSettingsEmployeesPage[0m() {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/settings/pages/SettingsEmployeesPage.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/employees/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/settings/pages/SettingsEmployeesPage.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/employees/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsLeaveAdvancedPage.tsx:4:1
+Module not found: Can't resolve '@iconify/react'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m [33mReact[0m, { useState, useEffect } [36mfrom[0m [32m'react'[0m
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+  [90m7 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsLeaveAdvancedPage.tsx
+    ./src/app/(dashboard)/settings/leave/advanced/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsLeaveHierarchyPage.tsx:4:1
+Module not found: Can't resolve '@iconify/react'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m [33mReact[0m, { useState, useEffect } [36mfrom[0m [32m'react'[0m
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+  [90m7 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsLeaveHierarchyPage.tsx
+    ./src/app/(dashboard)/settings/leave/hierarchy/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsLeavePage.tsx:4:1
+Module not found: Can't resolve '@iconify/react'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m [33mReact[0m, { useState } [36mfrom[0m [32m'react'[0m
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m6 |[0m [36mimport[0m {
+  [90m7 |[0m   [33mDialog[0m,
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/settings/pages/SettingsLeavePage.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/leave/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/leave/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/settings/pages/SettingsLeavePage.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/leave/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/leave/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsLeaveTemplatePage.tsx:4:1
+Module not found: Can't resolve '@iconify/react'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m [33mReact[0m, { useState } [36mfrom[0m [32m'react'[0m
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m6 |[0m [36mimport[0m { useParams, useRouter } [36mfrom[0m [32m'next/navigation'[0m
+  [90m7 |[0m [36mimport[0m {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/settings/pages/SettingsLeaveTemplatePage.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/leave/[id]/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/leave/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/settings/pages/SettingsLeaveTemplatePage.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/leave/[id]/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/leave/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsOvertimeAdvancedPage.tsx:4:1
+Module not found: Can't resolve '@iconify/react'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m [33mReact[0m, { useState, useEffect } [36mfrom[0m [32m'react'[0m
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+  [90m7 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsOvertimeAdvancedPage.tsx
+    ./src/app/(dashboard)/settings/overtime/advanced/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsOvertimeHierarchyPage.tsx:4:1
+Module not found: Can't resolve '@iconify/react'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m [33mReact[0m, { useState, useEffect } [36mfrom[0m [32m'react'[0m
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+  [90m7 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsOvertimeHierarchyPage.tsx
+    ./src/app/(dashboard)/settings/overtime/hierarchy/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsProfilePage.tsx:2:1
+Module not found: Can't resolve '@iconify/react'
+  [90m1 |[0m [36mimport[0m [33mReact[0m, { useState, useRef, useEffect } [36mfrom[0m [32m'react'[0m
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m4 |[0m [36mimport[0m { useAuthStore } [36mfrom[0m [32m'@/store/useAuthStore'[0m
+  [90m5 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/settings/pages/SettingsProfilePage.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/profile/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/profile/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/settings/pages/SettingsProfilePage.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/profile/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/profile/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsRoleDetailPage.tsx:4:1
+Module not found: Can't resolve '@iconify/react'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m [33mReact[0m, { useState, useEffect } [36mfrom[0m [32m'react'[0m
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m6 |[0m [36mimport[0m { useParams, useRouter } [36mfrom[0m [32m'next/navigation'[0m
+  [90m7 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/settings/pages/SettingsRoleDetailPage.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/roles/[role]/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/roles/[role]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/settings/pages/SettingsRoleDetailPage.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/roles/[role]/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/roles/[role]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsRolesPage.tsx:4:1
+Module not found: Can't resolve '@iconify/react'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m [33mReact[0m, { useState, useEffect } [36mfrom[0m [32m'react'[0m
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+  [90m7 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/settings/pages/SettingsRolesPage.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/roles/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/roles/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/settings/pages/SettingsRolesPage.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/roles/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/roles/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/ui/dialog.tsx:2:1
+Module not found: Can't resolve '@radix-ui/react-dialog'
+  [90m1 |[0m [36mimport[0m * [36mas[0m [33mReact[0m [36mfrom[0m [32m'react'[0m
+[31m[1m>[0m [90m2 |[0m [36mimport[0m * [36mas[0m [33mDialogPrimitive[0m [36mfrom[0m [32m'@radix-ui/react-dialog'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m4 |[0m [36mimport[0m { cn } [36mfrom[0m [32m'@/lib/utils'[0m
+  [90m5 |[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/dialog.tsx [Client Component Browser]
+    ./src/features/settings/pages/SettingsLeavePage.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/leave/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/leave/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/dialog.tsx [Client Component SSR]
+    ./src/features/settings/pages/SettingsLeavePage.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/leave/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/leave/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/ui/dropdown-menu.tsx:2:1
+Module not found: Can't resolve '@radix-ui/react-dropdown-menu'
+  [90m1 |[0m [36mimport[0m * [36mas[0m [33mReact[0m [36mfrom[0m [32m'react'[0m
+[31m[1m>[0m [90m2 |[0m [36mimport[0m * [36mas[0m [33mDropdownMenuPrimitive[0m [36mfrom[0m [32m'@radix-ui/react-dropdown-menu'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m4 |[0m [36mimport[0m { cn } [36mfrom[0m [32m'@/lib/utils'[0m
+  [90m5 |[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/dropdown-menu.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/dropdown-menu.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/components/GeofenceMap.tsx:4:1
+Module not found: Can't resolve '@react-google-maps/api'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m [33mReact[0m, { useCallback, useRef, useEffect } [36mfrom[0m [32m'react'[0m
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mGoogleMap[0m, useJsApiLoader, [33mMarker[0m } [36mfrom[0m [32m'@react-google-maps/api'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m
+  [90m6 |[0m [36minterface[0m [33mSite[0m {
+  [90m7 |[0m   id: string
+
+
+
+Import trace:
+  Client Component Browser:
+    ./src/features/settings/components/GeofenceMap.tsx [Client Component Browser]
+    ./src/features/settings/pages/SettingsAttendanceSiteGeofencePage.tsx [Client Component Browser]
+    ./src/features/settings/pages/SettingsAttendanceSiteGeofencePage.tsx [Server Component]
+    ./src/app/(dashboard)/settings/attendance/sites/[id]/geofence/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/@supabase/ssr/dist/module/createBrowserClient.js:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+[31m[1m>[0m [90m1 |[0m [36mimport[0m { createClient, } [36mfrom[0m [32m"@supabase/supabase-js"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m2 |[0m [36mimport[0m { createStorageFromOptions } [36mfrom[0m [32m"./cookies"[0m;
+  [90m3 |[0m [36mimport[0m { isBrowser } [36mfrom[0m [32m"./utils"[0m;
+  [90m4 |[0m [36mimport[0m { [33mVERSION[0m } [36mfrom[0m [32m"./version"[0m;
+
+
+
+Import traces:
+  App Route:
+    ./node_modules/@supabase/ssr/dist/module/createBrowserClient.js
+    ./src/utils/supabase/client.ts
+    ./src/lib/supabase.ts
+    ./src/app/api/seed/route.ts
+
+  Client Component Browser:
+    ./node_modules/@supabase/ssr/dist/module/createBrowserClient.js [Client Component Browser]
+    ./src/utils/supabase/client.ts [Client Component Browser]
+    ./src/lib/supabase.ts [Client Component Browser]
+    ./src/features/settings/pages/SettingsClaimHierarchyPage.tsx [Client Component Browser]
+    ./src/features/settings/pages/SettingsClaimHierarchyPage.tsx [Server Component]
+    ./src/app/(dashboard)/settings/claims/hierarchy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/@supabase/ssr/dist/module/createBrowserClient.js [Client Component SSR]
+    ./src/utils/supabase/client.ts [Client Component SSR]
+    ./src/lib/supabase.ts [Client Component SSR]
+    ./src/features/settings/pages/SettingsClaimHierarchyPage.tsx [Client Component SSR]
+    ./src/features/settings/pages/SettingsClaimHierarchyPage.tsx [Server Component]
+    ./src/app/(dashboard)/settings/claims/hierarchy/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/@supabase/ssr/dist/module/createServerClient.js:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+[31m[1m>[0m [90m1 |[0m [36mimport[0m { createClient, } [36mfrom[0m [32m"@supabase/supabase-js"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m2 |[0m [36mimport[0m { applyServerStorage, createStorageFromOptions } [36mfrom[0m [32m"./cookies"[0m;
+  [90m3 |[0m [36mimport[0m { memoryLocalStorageAdapter } [36mfrom[0m [32m"./utils/helpers"[0m;
+  [90m4 |[0m [36mimport[0m { [33mVERSION[0m } [36mfrom[0m [32m"./version"[0m;
+
+
+
+Import traces:
+  App Route:
+    ./node_modules/@supabase/ssr/dist/module/createServerClient.js
+    ./src/app/api/auth/callback/route.ts
+
+  Edge Middleware:
+    ./node_modules/@supabase/ssr/dist/module/createServerClient.js
+    ./src/utils/supabase/middleware.ts
+    ./src/middleware.ts
+
+  Server Component:
+    ./node_modules/@supabase/ssr/dist/module/createServerClient.js
+    ./src/utils/supabase/server.ts
+    ./src/app/(dashboard)/attendance/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/api/auth/device/initiate/route.ts:2:1
+Module not found: Can't resolve '@supabase/supabase-js'
+  [90m1 |[0m [36mimport[0m { [33mNextResponse[0m } [36mfrom[0m [32m"next/server"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { createClient } [36mfrom[0m [32m"@supabase/supabase-js"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m
+  [90m4 |[0m [36mexport[0m [36masync[0m [36mfunction[0m [33mPOST[0m(req: [33mRequest[0m) {
+  [90m5 |[0m   [36mtry[0m {
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/api/auth/device/verify/route.ts:2:1
+Module not found: Can't resolve '@supabase/supabase-js'
+  [90m1 |[0m [36mimport[0m { [33mNextResponse[0m } [36mfrom[0m [32m"next/server"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { createClient } [36mfrom[0m [32m"@supabase/supabase-js"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m
+  [90m4 |[0m [36mexport[0m [36masync[0m [36mfunction[0m [33mPOST[0m(req: [33mRequest[0m) {
+  [90m5 |[0m   [36mtry[0m {
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/api/auth/otp/generate/route.ts:2:1
+Module not found: Can't resolve '@supabase/supabase-js'
+  [90m1 |[0m [36mimport[0m { [33mNextResponse[0m } [36mfrom[0m [32m"next/server"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { createClient } [36mfrom[0m [32m"@supabase/supabase-js"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m
+  [90m4 |[0m [90m// In-memory store for OTPs (for dev/demo purposes)[0m
+  [90m5 |[0m [90m// In production, use a database table like `verification_otps`[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/api/oauth/dropbox/callback/route.ts:2:1
+Module not found: Can't resolve '@supabase/supabase-js'
+  [90m1 |[0m [36mimport[0m { [33mNextRequest[0m, [33mNextResponse[0m } [36mfrom[0m [32m"next/server"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { createClient } [36mfrom[0m [32m"@supabase/supabase-js"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m
+  [90m4 |[0m [90m// ── Dropbox OAuth Callback ────────────────────────────────────────[0m
+  [90m5 |[0m [36mexport[0m [36masync[0m [36mfunction[0m [33mGET[0m(req: [33mNextRequest[0m) {
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/api/oauth/google/callback/route.ts:2:1
+Module not found: Can't resolve '@supabase/supabase-js'
+  [90m1 |[0m [36mimport[0m { [33mNextRequest[0m, [33mNextResponse[0m } [36mfrom[0m [32m"next/server"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { createClient } [36mfrom[0m [32m"@supabase/supabase-js"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m
+  [90m4 |[0m [36mexport[0m [36masync[0m [36mfunction[0m [33mGET[0m(req: [33mNextRequest[0m) {
+  [90m5 |[0m   [36mconst[0m url = [36mnew[0m [33mURL[0m(req.url);
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/api/oauth/google/route.ts:2:1
+Module not found: Can't resolve '@supabase/supabase-js'
+  [90m1 |[0m [36mimport[0m { [33mNextRequest[0m, [33mNextResponse[0m } [36mfrom[0m [32m"next/server"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { createClient } [36mfrom[0m [32m"@supabase/supabase-js"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m
+  [90m4 |[0m [90m// ── Google Drive OAuth Initiation ─────────────────────────────────[0m
+  [90m5 |[0m [90m// Step 1: Redirect user to Google's OAuth consent screen[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/api/oauth/microsoft/callback/route.ts:2:1
+Module not found: Can't resolve '@supabase/supabase-js'
+  [90m1 |[0m [36mimport[0m { [33mNextRequest[0m, [33mNextResponse[0m } [36mfrom[0m [32m"next/server"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { createClient } [36mfrom[0m [32m"@supabase/supabase-js"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m
+  [90m4 |[0m [90m// ── Microsoft OneDrive OAuth Callback ────────────────────────────[0m
+  [90m5 |[0m [36mexport[0m [36masync[0m [36mfunction[0m [33mGET[0m(req: [33mNextRequest[0m) {
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/device-login/page.tsx:4:1
+Module not found: Can't resolve '@supabase/supabase-js'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { useState, useEffect, useRef } [36mfrom[0m [32m"react"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { createClient } [36mfrom[0m [32m"@supabase/supabase-js"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m { [33mSmartphone[0m, [33mCheckCircle[0m, [33mRefreshCw[0m, [33mShield[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m6 |[0m
+  [90m7 |[0m [36mconst[0m supabaseUrl = process.env.[33mNEXT_PUBLIC_SUPABASE_URL[0m!;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/device-login/page.tsx [Client Component Browser]
+    ./src/app/device-login/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/device-login/page.tsx [Client Component SSR]
+    ./src/app/device-login/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/lib/supabase.ts:22:32
+Module not found: Can't resolve '@supabase/supabase-js'
+  [90m20 |[0m       }
+  [90m21 |[0m
+[31m[1m>[0m [90m22 |[0m       [36mconst[0m { createClient } = require([32m"@supabase/supabase-js"[0m);
+  [90m   |[0m                                [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m23 |[0m       [36mconst[0m instance = createClient(supabaseUrl, supabaseAnonKey);
+  [90m24 |[0m       [36mconst[0m val = instance[prop [36mas[0m keyof [36mtypeof[0m instance];
+  [90m25 |[0m       [36mreturn[0m [36mtypeof[0m val === [32m'function'[0m ? (val [36mas[0m [33mFunction[0m).bind(instance) : val;
+
+
+
+Import traces:
+  App Route:
+    ./src/lib/supabase.ts
+    ./src/app/api/seed/route.ts
+
+  Client Component Browser:
+    ./src/lib/supabase.ts [Client Component Browser]
+    ./src/app/(dashboard)/settings/layout.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/supabase.ts [Client Component SSR]
+    ./src/app/(dashboard)/settings/layout.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/utils/supabase/admin.ts:1:1
+Module not found: Can't resolve '@supabase/supabase-js'
+[31m[1m>[0m [90m1 |[0m [36mimport[0m { createClient } [36mfrom[0m [32m"@supabase/supabase-js"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m2 |[0m
+  [90m3 |[0m /**
+  [90m4 |[0m  * [33mSupabase[0m [33mAdmin[0m client — uses the [33mSERVICE[0m [33mROLE[0m [33mKEY[0m.
+
+
+
+Import trace:
+  App Route:
+    ./src/utils/supabase/admin.ts
+    ./src/app/api/employee-credentials/route.ts
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/app-index.js:11:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+Import trace:
+  Client Component Browser:
+    ./node_modules/next/dist/client/app-index.js
+    ./node_modules/next/dist/client/app-next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/components/app-router.js:11:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+Import trace:
+  Client Component Browser:
+    ./node_modules/next/dist/client/components/app-router.js
+    ./node_modules/next/dist/client/app-index.js
+    ./node_modules/next/dist/client/app-next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/components/builtin/app-error.js:11:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/components/builtin/error-styles.js:27:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+Import traces:
+  Server Component:
+    ./node_modules/next/dist/client/components/builtin/error-styles.js
+    ./node_modules/next/dist/client/components/builtin/app-error.js
+
+  Client Component SSR:
+    ./node_modules/next/dist/client/components/builtin/error-styles.js [Client Component SSR]
+    ./node_modules/next/dist/client/components/builtin/global-error.js [Client Component SSR]
+    ./node_modules/next/dist/client/components/builtin/global-error.js [Server Component]
+
+  Client Component Browser:
+    ./node_modules/next/dist/client/components/builtin/error-styles.js
+    ./node_modules/next/dist/client/components/builtin/global-error.js
+    ./node_modules/next/dist/client/components/app-router.js
+    ./node_modules/next/dist/client/app-index.js
+    ./node_modules/next/dist/client/app-next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/components/builtin/global-error.js:14:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+Import traces:
+  Client Component SSR:
+    ./node_modules/next/dist/client/components/builtin/global-error.js [Client Component SSR]
+    ./node_modules/next/dist/client/components/builtin/global-error.js [Server Component]
+
+  Client Component Browser:
+    ./node_modules/next/dist/client/components/builtin/global-error.js
+    ./node_modules/next/dist/client/components/app-router.js
+    ./node_modules/next/dist/client/app-index.js
+    ./node_modules/next/dist/client/app-next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/components/errors/root-error-boundary.js:12:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+Import trace:
+  Client Component Browser:
+    ./node_modules/next/dist/client/components/errors/root-error-boundary.js
+    ./node_modules/next/dist/client/components/app-router.js
+    ./node_modules/next/dist/client/app-index.js
+    ./node_modules/next/dist/client/app-next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/components/layout-router.js:27:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+Import trace:
+  Client Component Browser:
+    ./node_modules/next/dist/client/components/layout-router.js [Client Component Browser]
+    ./node_modules/next/dist/esm/client/components/layout-router.js [Server Component]
+    ./node_modules/next/dist/esm/server/app-render/entry-base.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/image-component.js:12:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/next/dist/client/image-component.js [Client Component Browser]
+    ./node_modules/next/dist/shared/lib/image-external.js [Client Component Browser]
+    ./node_modules/next/image.js [Client Component Browser]
+    ./src/app/(dashboard)/storage/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/storage/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/next/dist/client/image-component.js [Client Component SSR]
+    ./node_modules/next/dist/shared/lib/image-external.js [Client Component SSR]
+    ./node_modules/next/image.js [Client Component SSR]
+    ./src/app/(dashboard)/storage/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/storage/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/index.js:36:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+Import trace:
+  Browser:
+    ./node_modules/next/dist/client/index.js
+    ./node_modules/next/dist/client/next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/page-loader.js:11:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+Import trace:
+  Browser:
+    ./node_modules/next/dist/client/page-loader.js
+    ./node_modules/next/dist/client/index.js
+    ./node_modules/next/dist/client/next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/react-client-callbacks/error-boundary-callbacks.js:24:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+Import trace:
+  Client Component Browser:
+    ./node_modules/next/dist/client/react-client-callbacks/error-boundary-callbacks.js
+    ./node_modules/next/dist/client/app-index.js
+    ./node_modules/next/dist/client/app-next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/react-client-callbacks/on-recoverable-error.js:24:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/next/dist/client/react-client-callbacks/on-recoverable-error.js
+    ./node_modules/next/dist/client/app-next-turbopack.js
+
+  Browser:
+    ./node_modules/next/dist/client/react-client-callbacks/on-recoverable-error.js
+    ./node_modules/next/dist/client/index.js
+    ./node_modules/next/dist/client/next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/route-announcer.js:23:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+Import trace:
+  Browser:
+    ./node_modules/next/dist/client/route-announcer.js
+    ./node_modules/next/dist/client/index.js
+    ./node_modules/next/dist/client/next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/route-loader.js:31:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+Import trace:
+  Browser:
+    ./node_modules/next/dist/client/route-loader.js
+    ./node_modules/next/dist/client/page-loader.js
+    ./node_modules/next/dist/client/index.js
+    ./node_modules/next/dist/client/next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/router.js:40:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+Import trace:
+  Browser:
+    ./node_modules/next/dist/client/router.js
+    ./node_modules/next/dist/client/index.js
+    ./node_modules/next/dist/client/next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/script.js:28:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+Import trace:
+  Browser:
+    ./node_modules/next/dist/client/script.js
+    ./node_modules/next/dist/client/index.js
+    ./node_modules/next/dist/client/next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/tracing/tracer.js:11:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+Import trace:
+  Browser:
+    ./node_modules/next/dist/client/tracing/tracer.js
+    ./node_modules/next/dist/client/index.js
+    ./node_modules/next/dist/client/next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/with-router.js:11:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+Import trace:
+  Browser:
+    ./node_modules/next/dist/client/with-router.js
+    ./node_modules/next/dist/client/router.js
+    ./node_modules/next/dist/client/index.js
+    ./node_modules/next/dist/client/next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/pages/_app.js:11:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+Import trace:
+  Browser:
+    ./node_modules/next/dist/pages/_app.js
+    ./node_modules/next/dist/client/index.js
+    ./node_modules/next/dist/client/next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/pages/_error.js:13:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+Import trace:
+  Browser:
+    ./node_modules/next/dist/pages/_error.js
+    ./node_modules/next/dist/client/index.js
+    ./node_modules/next/dist/client/next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/shared/lib/app-dynamic.js:11:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/next/dist/shared/lib/app-dynamic.js [Client Component Browser]
+    ./src/features/settings/pages/SettingsAttendanceSiteGeofencePage.tsx [Client Component Browser]
+    ./src/features/settings/pages/SettingsAttendanceSiteGeofencePage.tsx [Server Component]
+    ./src/app/(dashboard)/settings/attendance/sites/[id]/geofence/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/next/dist/shared/lib/app-dynamic.js [Client Component SSR]
+    ./src/features/settings/pages/SettingsAttendanceSiteGeofencePage.tsx [Client Component SSR]
+    ./src/features/settings/pages/SettingsAttendanceSiteGeofencePage.tsx [Server Component]
+    ./src/app/(dashboard)/settings/attendance/sites/[id]/geofence/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/shared/lib/app-router-context.shared-runtime.js:36:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+Import traces:
+  Browser:
+    ./node_modules/next/dist/shared/lib/app-router-context.shared-runtime.js
+    ./node_modules/next/dist/client/index.js
+    ./node_modules/next/dist/client/next-turbopack.js
+
+  Client Component Browser:
+    ./node_modules/next/dist/shared/lib/app-router-context.shared-runtime.js
+    ./node_modules/next/dist/client/app-index.js
+    ./node_modules/next/dist/client/app-next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/shared/lib/constants.js:291:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+Import trace:
+  Browser:
+    ./node_modules/next/dist/shared/lib/constants.js
+    ./node_modules/next/dist/client/page-loader.js
+    ./node_modules/next/dist/client/index.js
+    ./node_modules/next/dist/client/next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/shared/lib/head-manager-context.shared-runtime.js:11:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+Import traces:
+  Browser:
+    ./node_modules/next/dist/shared/lib/head-manager-context.shared-runtime.js
+    ./node_modules/next/dist/client/index.js
+    ./node_modules/next/dist/client/next-turbopack.js
+
+  Client Component Browser:
+    ./node_modules/next/dist/shared/lib/head-manager-context.shared-runtime.js
+    ./node_modules/next/dist/client/app-index.js
+    ./node_modules/next/dist/client/app-next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/shared/lib/head.js:24:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+Import traces:
+  Browser:
+    ./node_modules/next/dist/shared/lib/head.js
+    ./node_modules/next/dist/pages/_error.js
+    ./node_modules/next/dist/client/index.js
+    ./node_modules/next/dist/client/next-turbopack.js
+
+  Client Component Browser:
+    ./node_modules/next/dist/shared/lib/head.js [Client Component Browser]
+    ./node_modules/next/dist/client/image-component.js [Client Component Browser]
+    ./node_modules/next/dist/shared/lib/image-external.js [Client Component Browser]
+    ./node_modules/next/image.js [Client Component Browser]
+    ./src/app/(dashboard)/storage/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/storage/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/next/dist/shared/lib/head.js [Client Component SSR]
+    ./node_modules/next/dist/client/image-component.js [Client Component SSR]
+    ./node_modules/next/dist/shared/lib/image-external.js [Client Component SSR]
+    ./node_modules/next/image.js [Client Component SSR]
+    ./src/app/(dashboard)/storage/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/storage/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/shared/lib/image-config-context.shared-runtime.js:11:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+Import traces:
+  Browser:
+    ./node_modules/next/dist/shared/lib/image-config-context.shared-runtime.js
+    ./node_modules/next/dist/client/index.js
+    ./node_modules/next/dist/client/next-turbopack.js
+
+  Client Component Browser:
+    ./node_modules/next/dist/shared/lib/image-config-context.shared-runtime.js [Client Component Browser]
+    ./node_modules/next/dist/client/image-component.js [Client Component Browser]
+    ./node_modules/next/dist/shared/lib/image-external.js [Client Component Browser]
+    ./node_modules/next/image.js [Client Component Browser]
+    ./src/app/(dashboard)/storage/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/storage/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/shared/lib/image-external.js:23:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/next/dist/shared/lib/image-external.js [Client Component Browser]
+    ./node_modules/next/image.js [Client Component Browser]
+    ./src/app/(dashboard)/storage/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/storage/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/next/dist/shared/lib/image-external.js [Client Component SSR]
+    ./node_modules/next/image.js [Client Component SSR]
+    ./src/app/(dashboard)/storage/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/storage/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/shared/lib/router-context.shared-runtime.js:11:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+Import traces:
+  Browser:
+    ./node_modules/next/dist/shared/lib/router-context.shared-runtime.js
+    ./node_modules/next/dist/client/index.js
+    ./node_modules/next/dist/client/next-turbopack.js
+
+  Client Component Browser:
+    ./node_modules/next/dist/shared/lib/router-context.shared-runtime.js [Client Component Browser]
+    ./node_modules/next/dist/client/image-component.js [Client Component Browser]
+    ./node_modules/next/dist/shared/lib/image-external.js [Client Component Browser]
+    ./node_modules/next/image.js [Client Component Browser]
+    ./src/app/(dashboard)/storage/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/storage/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/shared/lib/router/router.js:27:34
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_default'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_default' inside of [project]/node_modules/next
+
+
+Import trace:
+  Browser:
+    ./node_modules/next/dist/shared/lib/router/router.js
+    ./node_modules/next/dist/client/router.js
+    ./node_modules/next/dist/client/index.js
+    ./node_modules/next/dist/client/next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/app-dir/link.js:33:35
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_wildcard'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_wildcard' inside of [project]/node_modules/next
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/next/dist/client/app-dir/link.js [Client Component Browser]
+    ./src/app/(dashboard)/logs/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/logs/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/next/dist/client/app-dir/link.js [Client Component SSR]
+    ./src/app/(dashboard)/logs/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/logs/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/components/app-router.js:12:35
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_wildcard'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_wildcard' inside of [project]/node_modules/next
+
+
+Import trace:
+  Client Component Browser:
+    ./node_modules/next/dist/client/components/app-router.js
+    ./node_modules/next/dist/client/app-index.js
+    ./node_modules/next/dist/client/app-next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/components/error-boundary.js:24:35
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_wildcard'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_wildcard' inside of [project]/node_modules/next
+
+
+Import trace:
+  Client Component Browser:
+    ./node_modules/next/dist/client/components/error-boundary.js
+    ./node_modules/next/dist/client/react-client-callbacks/error-boundary-callbacks.js
+    ./node_modules/next/dist/client/app-index.js
+    ./node_modules/next/dist/client/app-next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/components/http-access-fallback/error-boundary.js:12:35
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_wildcard'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_wildcard' inside of [project]/node_modules/next
+
+
+Import trace:
+  Client Component Browser:
+    ./node_modules/next/dist/client/components/http-access-fallback/error-boundary.js [Client Component Browser]
+    ./node_modules/next/dist/esm/client/components/http-access-fallback/error-boundary.js [Server Component]
+    ./node_modules/next/dist/esm/server/app-render/entry-base.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/components/layout-router.js:28:35
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_wildcard'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_wildcard' inside of [project]/node_modules/next
+
+
+Import trace:
+  Client Component Browser:
+    ./node_modules/next/dist/client/components/layout-router.js [Client Component Browser]
+    ./node_modules/next/dist/esm/client/components/layout-router.js [Server Component]
+    ./node_modules/next/dist/esm/server/app-render/entry-base.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/components/navigation.js:85:35
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_wildcard'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_wildcard' inside of [project]/node_modules/next
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/next/dist/client/components/navigation.js
+    ./node_modules/next/dist/client/components/redirect-boundary.js
+    ./node_modules/next/dist/client/components/app-router.js
+    ./node_modules/next/dist/client/app-index.js
+    ./node_modules/next/dist/client/app-next-turbopack.js
+
+  Client Component SSR:
+    ./node_modules/next/dist/client/components/navigation.js [Client Component SSR]
+    ./node_modules/next/navigation.js [Client Component SSR]
+    ./src/components/Sidebar.tsx [Client Component SSR]
+    ./src/components/Sidebar.tsx [Server Component]
+    ./src/app/(dashboard)/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/components/redirect-boundary.js:24:35
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_wildcard'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_wildcard' inside of [project]/node_modules/next
+
+
+Import trace:
+  Client Component Browser:
+    ./node_modules/next/dist/client/components/redirect-boundary.js
+    ./node_modules/next/dist/client/components/app-router.js
+    ./node_modules/next/dist/client/app-index.js
+    ./node_modules/next/dist/client/app-next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/components/render-from-template-context.js:12:35
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_wildcard'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_wildcard' inside of [project]/node_modules/next
+
+
+Import trace:
+  Client Component Browser:
+    ./node_modules/next/dist/client/components/render-from-template-context.js [Client Component Browser]
+    ./node_modules/next/dist/esm/client/components/render-from-template-context.js [Server Component]
+    ./node_modules/next/dist/esm/server/app-render/entry-base.js [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/components/use-action-queue.js:31:35
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_wildcard'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_wildcard' inside of [project]/node_modules/next
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/next/dist/client/components/use-action-queue.js
+    ./node_modules/next/dist/client/components/app-router.js
+    ./node_modules/next/dist/client/app-index.js
+    ./node_modules/next/dist/client/app-next-turbopack.js
+
+  Client Component SSR:
+    ./node_modules/next/dist/client/components/use-action-queue.js [Client Component SSR]
+    ./node_modules/next/dist/client/components/segment-cache/navigation-testing-lock.js [Client Component SSR]
+    ./node_modules/next/dist/client/components/segment-cache/navigation.js [Client Component SSR]
+    ./node_modules/next/dist/client/components/segment-cache/cache.js [Client Component SSR]
+    ./node_modules/next/dist/client/components/segment-cache/scheduler.js [Client Component SSR]
+    ./node_modules/next/dist/client/components/links.js [Client Component SSR]
+    ./node_modules/next/dist/client/app-dir/link.js [Client Component SSR]
+    ./src/components/HeaderSearchBar.tsx [Client Component SSR]
+    ./src/app/(dashboard)/employees/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/image-component.js:13:35
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_wildcard'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_wildcard' inside of [project]/node_modules/next
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/next/dist/client/image-component.js [Client Component Browser]
+    ./node_modules/next/dist/shared/lib/image-external.js [Client Component Browser]
+    ./node_modules/next/image.js [Client Component Browser]
+    ./src/app/(dashboard)/storage/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/storage/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/next/dist/client/image-component.js [Client Component SSR]
+    ./node_modules/next/dist/shared/lib/image-external.js [Client Component SSR]
+    ./node_modules/next/image.js [Client Component SSR]
+    ./src/app/(dashboard)/storage/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/storage/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/client/script.js:29:35
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_wildcard'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_wildcard' inside of [project]/node_modules/next
+
+
+Import trace:
+  Browser:
+    ./node_modules/next/dist/client/script.js
+    ./node_modules/next/dist/client/index.js
+    ./node_modules/next/dist/client/next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/shared/lib/head.js:25:35
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_wildcard'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_wildcard' inside of [project]/node_modules/next
+
+
+Import traces:
+  Browser:
+    ./node_modules/next/dist/shared/lib/head.js
+    ./node_modules/next/dist/pages/_error.js
+    ./node_modules/next/dist/client/index.js
+    ./node_modules/next/dist/client/next-turbopack.js
+
+  Client Component Browser:
+    ./node_modules/next/dist/shared/lib/head.js [Client Component Browser]
+    ./node_modules/next/dist/client/image-component.js [Client Component Browser]
+    ./node_modules/next/dist/shared/lib/image-external.js [Client Component Browser]
+    ./node_modules/next/image.js [Client Component Browser]
+    ./src/app/(dashboard)/storage/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/storage/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/next/dist/shared/lib/head.js [Client Component SSR]
+    ./node_modules/next/dist/client/image-component.js [Client Component SSR]
+    ./node_modules/next/dist/shared/lib/image-external.js [Client Component SSR]
+    ./node_modules/next/image.js [Client Component SSR]
+    ./src/app/(dashboard)/storage/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/storage/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/shared/lib/router/adapters.js:31:35
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_wildcard'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_wildcard' inside of [project]/node_modules/next
+
+
+Import trace:
+  Browser:
+    ./node_modules/next/dist/shared/lib/router/adapters.js
+    ./node_modules/next/dist/client/index.js
+    ./node_modules/next/dist/client/next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/shared/lib/router/router.js:28:35
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_wildcard'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_wildcard' inside of [project]/node_modules/next
+
+
+Import trace:
+  Browser:
+    ./node_modules/next/dist/shared/lib/router/router.js
+    ./node_modules/next/dist/client/router.js
+    ./node_modules/next/dist/client/index.js
+    ./node_modules/next/dist/client/next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/shared/lib/router/utils/format-url.js:48:35
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_wildcard'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_wildcard' inside of [project]/node_modules/next
+
+
+Import traces:
+  Server Component:
+    ./node_modules/next/dist/shared/lib/router/utils/format-url.js
+    ./node_modules/next/dist/server/server-utils.js
+    ./node_modules/next/dist/lib/metadata/get-metadata-route.js
+
+  Client Component Browser:
+    ./node_modules/next/dist/shared/lib/router/utils/format-url.js [Client Component Browser]
+    ./node_modules/next/dist/client/app-dir/link.js [Client Component Browser]
+    ./src/app/(dashboard)/logs/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/logs/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/next/dist/shared/lib/router/utils/format-url.js [Client Component SSR]
+    ./node_modules/next/dist/client/app-dir/link.js [Client Component SSR]
+    ./src/app/(dashboard)/logs/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/logs/page.tsx [Server Component]
+
+  Browser:
+    ./node_modules/next/dist/shared/lib/router/utils/format-url.js
+    ./node_modules/next/dist/shared/lib/router/router.js
+    ./node_modules/next/dist/client/router.js
+    ./node_modules/next/dist/client/index.js
+    ./node_modules/next/dist/client/next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/dist/shared/lib/server-inserted-html.shared-runtime.js:24:35
+Module not found: Can't resolve '@swc/helpers/_/_interop_require_wildcard'
+Import map: aliased to module '@swc/helpers' with subpath '/_/_interop_require_wildcard' inside of [project]/node_modules/next
+
+
+Import trace:
+  Client Component Browser:
+    ./node_modules/next/dist/shared/lib/server-inserted-html.shared-runtime.js
+    ./node_modules/next/dist/client/components/navigation.js
+    ./node_modules/next/dist/client/components/redirect-boundary.js
+    ./node_modules/next/dist/client/components/app-router.js
+    ./node_modules/next/dist/client/app-index.js
+    ./node_modules/next/dist/client/app-next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/(dashboard)/settings/layout.tsx:8:1
+Module not found: Can't resolve '@tanstack/react-query'
+  [90m 6 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m 7 |[0m [36mimport[0m { [33mSearch[0m } [36mfrom[0m [32m'lucide-react'[0m
+[31m[1m>[0m [90m 8 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 9 |[0m [36mimport[0m { cn } [36mfrom[0m [32m'@/lib/utils'[0m
+  [90m10 |[0m [36mimport[0m { useAuthStore } [36mfrom[0m [32m'@/store/useAuthStore'[0m
+  [90m11 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/(dashboard)/settings/layout.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/(dashboard)/settings/layout.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/QueryProvider.tsx:3:1
+Module not found: Can't resolve '@tanstack/react-query'
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mQueryClient[0m, [33mQueryClientProvider[0m } [36mfrom[0m [32m"@tanstack/react-query"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useState } [36mfrom[0m [32m"react"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mQueryProvider[0m({ children }: { children: [33mReact[0m.[33mReactNode[0m }) {
+
+
+
+Import trace:
+  Server Component:
+    ./src/components/QueryProvider.tsx
+    ./src/app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/departments/components/AdvancedDepartmentSettingsDialog.tsx:12:1
+Module not found: Can't resolve '@tanstack/react-query'
+  [90m10 |[0m } [36mfrom[0m [32m'@/components/ui/dialog'[0m
+  [90m11 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+[31m[1m>[0m [90m12 |[0m [36mimport[0m { useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m13 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m14 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m15 |[0m [36mimport[0m { getAvatarUrl } [36mfrom[0m [32m'@/lib/utils'[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/departments/components/AdvancedDepartmentSettingsDialog.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/departments/components/AdvancedDepartmentSettingsDialog.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/departments/components/ChangeDesignationDialog.tsx:5:1
+Module not found: Can't resolve '@tanstack/react-query'
+  [90m3 |[0m [36mimport[0m [33mReact[0m, { useState, useEffect } [36mfrom[0m [32m'react'[0m
+  [90m4 |[0m [36mimport[0m { [33mDialog[0m, [33mDialogContent[0m, [33mDialogHeader[0m, [33mDialogTitle[0m } [36mfrom[0m [32m'@/components/ui/dialog'[0m
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+  [90m7 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m8 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/departments/components/ChangeDesignationDialog.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/departments/components/ChangeDesignationDialog.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/departments/components/ChangeReporteeDialog.tsx:5:1
+Module not found: Can't resolve '@tanstack/react-query'
+  [90m3 |[0m [36mimport[0m [33mReact[0m, { useState, useEffect } [36mfrom[0m [32m'react'[0m
+  [90m4 |[0m [36mimport[0m { [33mDialog[0m, [33mDialogContent[0m, [33mDialogHeader[0m, [33mDialogTitle[0m } [36mfrom[0m [32m'@/components/ui/dialog'[0m
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { useQuery } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+  [90m7 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m8 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/departments/components/ChangeReporteeDialog.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/departments/components/ChangeReporteeDialog.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/departments/components/EditDepartmentDialog.tsx:12:1
+Module not found: Can't resolve '@tanstack/react-query'
+  [90m10 |[0m } [36mfrom[0m [32m'@/components/ui/dialog'[0m
+  [90m11 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+[31m[1m>[0m [90m12 |[0m [36mimport[0m { useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m13 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m14 |[0m [36mimport[0m [33mFormDatePicker[0m [36mfrom[0m [32m'@/components/ui/FormDatePicker'[0m
+  [90m15 |[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/departments/components/EditDepartmentDialog.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/departments/components/EditDepartmentDialog.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/departments/components/TransferEmployeeDialog.tsx:5:1
+Module not found: Can't resolve '@tanstack/react-query'
+  [90m3 |[0m [36mimport[0m [33mReact[0m, { useState, useEffect } [36mfrom[0m [32m'react'[0m
+  [90m4 |[0m [36mimport[0m { [33mDialog[0m, [33mDialogContent[0m, [33mDialogHeader[0m, [33mDialogTitle[0m } [36mfrom[0m [32m'@/components/ui/dialog'[0m
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { useQuery, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+  [90m7 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+  [90m8 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/departments/components/TransferEmployeeDialog.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/departments/components/TransferEmployeeDialog.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/departments/pages/DepartmentDetailsPage.tsx:6:1
+Module not found: Can't resolve '@tanstack/react-query'
+  [90m4 |[0m [36mimport[0m { useParams, useRouter } [36mfrom[0m [32m'next/navigation'[0m
+  [90m5 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { useQuery } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m8 |[0m [36mimport[0m { createClient } [36mfrom[0m [32m'@/utils/supabase/client'[0m
+  [90m9 |[0m [36mimport[0m { getAvatarUrl } [36mfrom[0m [32m'@/lib/utils'[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx
+    ./src/app/(dashboard)/departments/[id]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsAttendanceMethodsPage.tsx:9:1
+Module not found: Can't resolve '@tanstack/react-query'
+  [90m 7 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m 8 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+[31m[1m>[0m [90m 9 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m10 |[0m
+  [90m11 |[0m [36minterface[0m [33mAttendanceMethods[0m {
+  [90m12 |[0m   mobileGps: boolean
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsAttendanceMethodsPage.tsx
+    ./src/app/(dashboard)/settings/attendance/methods/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsAttendancePage.tsx:9:1
+Module not found: Can't resolve '@tanstack/react-query'
+  [90m 7 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m 8 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+[31m[1m>[0m [90m 9 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m10 |[0m
+  [90m11 |[0m [36mconst[0m formatTimeInput = (val: string) => {
+  [90m12 |[0m   [36mlet[0m digits = val.replace([35m/\D/g[0m, [32m''[0m).slice([35m0[0m, [35m4[0m)
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsAttendancePage.tsx
+    ./src/app/(dashboard)/settings/attendance/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsAttendanceSiteDetailPage.tsx:11:1
+Module not found: Can't resolve '@tanstack/react-query'
+  [90m 9 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m10 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+[31m[1m>[0m [90m11 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m12 |[0m
+  [90m13 |[0m [36minterface[0m [33mSite[0m {
+  [90m14 |[0m   id: string
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsAttendanceSiteDetailPage.tsx
+    ./src/app/(dashboard)/settings/attendance/sites/[id]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsAttendanceSiteGeofencePage.tsx:11:1
+Module not found: Can't resolve '@tanstack/react-query'
+  [90m 9 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m10 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+[31m[1m>[0m [90m11 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m12 |[0m [36mimport[0m dynamic [36mfrom[0m [32m'next/dynamic'[0m
+  [90m13 |[0m
+  [90m14 |[0m [90m// Dynamically import Map component (SSR disabled for Leaflet)[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsAttendanceSiteGeofencePage.tsx
+    ./src/app/(dashboard)/settings/attendance/sites/[id]/geofence/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsAttendanceSitePassPage.tsx:10:1
+Module not found: Can't resolve '@tanstack/react-query'
+  [90m 8 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m 9 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+[31m[1m>[0m [90m10 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m11 |[0m
+  [90m12 |[0m [36minterface[0m [33mCustomPersonnel[0m {
+  [90m13 |[0m   id: string
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsAttendanceSitePassPage.tsx
+    ./src/app/(dashboard)/settings/attendance/sites/[id]/pass/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsAttendanceSitesPage.tsx:10:1
+Module not found: Can't resolve '@tanstack/react-query'
+  [90m 8 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m 9 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+[31m[1m>[0m [90m10 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m11 |[0m
+  [90m12 |[0m [36minterface[0m [33mSite[0m {
+  [90m13 |[0m   id: string
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsAttendanceSitesPage.tsx
+    ./src/app/(dashboard)/settings/attendance/sites/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsAuthenticatePage.tsx:6:1
+Module not found: Can't resolve '@tanstack/react-query'
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m5 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { useQuery } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+  [90m8 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+  [90m9 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsAuthenticatePage.tsx
+    ./src/app/(dashboard)/settings/roles/authenticate/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsClaimAdvancedPage.tsx:9:1
+Module not found: Can't resolve '@tanstack/react-query'
+  [90m 7 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m 8 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+[31m[1m>[0m [90m 9 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m10 |[0m
+  [90m11 |[0m [36mexport[0m [36mfunction[0m [33mSettingsClaimAdvancedPage[0m() {
+  [90m12 |[0m   [36mconst[0m { company } = useCompanyStore()
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsClaimAdvancedPage.tsx
+    ./src/app/(dashboard)/settings/claims/advanced/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsClaimHierarchyPage.tsx:10:1
+Module not found: Can't resolve '@tanstack/react-query'
+  [90m 8 |[0m [36mimport[0m { getAvatarUrl } [36mfrom[0m [32m'@/lib/utils'[0m
+  [90m 9 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+[31m[1m>[0m [90m10 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m11 |[0m
+  [90m12 |[0m [36mexport[0m [36minterface[0m [33mApprovalLevelConfig[0m {
+  [90m13 |[0m   level: number
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsClaimHierarchyPage.tsx
+    ./src/app/(dashboard)/settings/claims/hierarchy/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsCompanyPage.tsx:8:1
+Module not found: Can't resolve '@tanstack/react-query'
+  [90m 6 |[0m [36mimport[0m { useAuthStore } [36mfrom[0m [32m'@/store/useAuthStore'[0m
+  [90m 7 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+[31m[1m>[0m [90m 8 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 9 |[0m
+  [90m10 |[0m [36mconst[0m formatTimeInput = (val: string) => {
+  [90m11 |[0m   [36mlet[0m digits = val.replace([35m/\D/g[0m, [32m''[0m).slice([35m0[0m, [35m4[0m)
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/settings/pages/SettingsCompanyPage.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/company/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/company/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/settings/pages/SettingsCompanyPage.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/company/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/company/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsDepartmentPage.tsx:9:1
+Module not found: Can't resolve '@tanstack/react-query'
+  [90m 7 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m 8 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+[31m[1m>[0m [90m 9 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m10 |[0m
+  [90m11 |[0m [36mexport[0m [36mfunction[0m [33mSettingsDepartmentPage[0m() {
+  [90m12 |[0m   [36mconst[0m { company } = useCompanyStore()
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsDepartmentPage.tsx
+    ./src/app/(dashboard)/settings/departments/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsLeaveAdvancedPage.tsx:9:1
+Module not found: Can't resolve '@tanstack/react-query'
+  [90m 7 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m 8 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+[31m[1m>[0m [90m 9 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m10 |[0m
+  [90m11 |[0m [36mexport[0m [36mfunction[0m [33mSettingsLeaveAdvancedPage[0m() {
+  [90m12 |[0m   [36mconst[0m { company } = useCompanyStore()
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsLeaveAdvancedPage.tsx
+    ./src/app/(dashboard)/settings/leave/advanced/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsLeaveHierarchyPage.tsx:10:1
+Module not found: Can't resolve '@tanstack/react-query'
+  [90m 8 |[0m [36mimport[0m { getAvatarUrl } [36mfrom[0m [32m'@/lib/utils'[0m
+  [90m 9 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+[31m[1m>[0m [90m10 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m11 |[0m
+  [90m12 |[0m [36mexport[0m [36minterface[0m [33mApprovalLevelConfig[0m {
+  [90m13 |[0m   level: number
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsLeaveHierarchyPage.tsx
+    ./src/app/(dashboard)/settings/leave/hierarchy/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsLeavePage.tsx:16:1
+Module not found: Can't resolve '@tanstack/react-query'
+  [90m14 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+  [90m15 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+[31m[1m>[0m [90m16 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m17 |[0m
+  [90m18 |[0m [36minterface[0m [33mLeavePolicy[0m {
+  [90m19 |[0m   id: string
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/settings/pages/SettingsLeavePage.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/leave/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/leave/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/settings/pages/SettingsLeavePage.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/leave/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/leave/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsLeaveTemplatePage.tsx:16:1
+Module not found: Can't resolve '@tanstack/react-query'
+  [90m14 |[0m } [36mfrom[0m [32m'@/components/ui/dialog'[0m
+  [90m15 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+[31m[1m>[0m [90m16 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m17 |[0m
+  [90m18 |[0m [36minterface[0m [33mLeaveType[0m {
+  [90m19 |[0m   id: string
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/settings/pages/SettingsLeaveTemplatePage.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/leave/[id]/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/leave/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/settings/pages/SettingsLeaveTemplatePage.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/leave/[id]/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/leave/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsOvertimeAdvancedPage.tsx:9:1
+Module not found: Can't resolve '@tanstack/react-query'
+  [90m 7 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m 8 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+[31m[1m>[0m [90m 9 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m10 |[0m
+  [90m11 |[0m [36mexport[0m [36mfunction[0m [33mSettingsOvertimeAdvancedPage[0m() {
+  [90m12 |[0m   [36mconst[0m { company } = useCompanyStore()
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsOvertimeAdvancedPage.tsx
+    ./src/app/(dashboard)/settings/overtime/advanced/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsOvertimeHierarchyPage.tsx:10:1
+Module not found: Can't resolve '@tanstack/react-query'
+  [90m 8 |[0m [36mimport[0m { getAvatarUrl } [36mfrom[0m [32m'@/lib/utils'[0m
+  [90m 9 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+[31m[1m>[0m [90m10 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m11 |[0m
+  [90m12 |[0m [36mexport[0m [36minterface[0m [33mApprovalLevelConfig[0m {
+  [90m13 |[0m   level: number
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsOvertimeHierarchyPage.tsx
+    ./src/app/(dashboard)/settings/overtime/hierarchy/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsProfilePage.tsx:6:1
+Module not found: Can't resolve '@tanstack/react-query'
+  [90m4 |[0m [36mimport[0m { useAuthStore } [36mfrom[0m [32m'@/store/useAuthStore'[0m
+  [90m5 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mfunction[0m [33mSettingsProfilePage[0m() {
+  [90m9 |[0m   [36mconst[0m { user, setUser } = useAuthStore()
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/settings/pages/SettingsProfilePage.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/profile/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/profile/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/settings/pages/SettingsProfilePage.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/profile/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/profile/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsRoleDetailPage.tsx:10:1
+Module not found: Can't resolve '@tanstack/react-query'
+  [90m 8 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m 9 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+[31m[1m>[0m [90m10 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m11 |[0m [36mimport[0m { 
+  [90m12 |[0m   [33mRoleType[0m, 
+  [90m13 |[0m   [33mALL_PERMISSIONS[0m,
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/settings/pages/SettingsRoleDetailPage.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/roles/[role]/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/roles/[role]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/settings/pages/SettingsRoleDetailPage.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/roles/[role]/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/roles/[role]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsRolesPage.tsx:8:1
+Module not found: Can't resolve '@tanstack/react-query'
+  [90m 6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+  [90m 7 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+[31m[1m>[0m [90m 8 |[0m [36mimport[0m { useQuery } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 9 |[0m
+  [90m10 |[0m [36mexport[0m [36mtype[0m [33mRoleType[0m = [32m'admin'[0m | [32m'sub_admin'[0m | [32m'employee'[0m
+  [90m11 |[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/settings/pages/SettingsRolesPage.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/roles/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/roles/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/settings/pages/SettingsRolesPage.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/roles/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/roles/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/lib/utils.ts:1:1
+Module not found: Can't resolve 'clsx'
+[31m[1m>[0m [90m1 |[0m [36mimport[0m { clsx, [36mtype[0m [33mClassValue[0m } [36mfrom[0m [32m'clsx'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m2 |[0m [36mimport[0m { twMerge } [36mfrom[0m [32m'tailwind-merge'[0m
+  [90m3 |[0m
+  [90m4 |[0m [36mexport[0m [36mfunction[0m cn(...inputs: [33mClassValue[0m[]) {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/utils.ts [Client Component Browser]
+    ./src/app/(dashboard)/settings/layout.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/utils.ts [Client Component SSR]
+    ./src/app/(dashboard)/settings/layout.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/@supabase/ssr/dist/module/cookies.js:1:1
+Module not found: Can't resolve 'cookie'
+[31m[1m>[0m [90m1 |[0m [36mimport[0m { parse, serialize } [36mfrom[0m [32m"cookie"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m2 |[0m [36mimport[0m { [33mDEFAULT_COOKIE_OPTIONS[0m, combineChunks, createChunks, isBrowser, isChunkLike, strin...
+  [90m3 |[0m [36mconst[0m [33mBASE64_PREFIX[0m = [32m"base64-"[0m;
+  [90m4 |[0m /**
+
+
+
+Import traces:
+  App Route:
+    ./node_modules/@supabase/ssr/dist/module/cookies.js
+    ./node_modules/@supabase/ssr/dist/module/createServerClient.js
+    ./src/app/api/auth/callback/route.ts
+
+  Edge Middleware:
+    ./node_modules/@supabase/ssr/dist/module/cookies.js
+    ./node_modules/@supabase/ssr/dist/module/createServerClient.js
+    ./src/utils/supabase/middleware.ts
+    ./src/middleware.ts
+
+  Server Component:
+    ./node_modules/@supabase/ssr/dist/module/cookies.js
+    ./node_modules/@supabase/ssr/dist/module/createServerClient.js
+    ./src/utils/supabase/server.ts
+    ./src/app/(dashboard)/attendance/page.tsx
+
+  Client Component Browser:
+    ./node_modules/@supabase/ssr/dist/module/cookies.js [Client Component Browser]
+    ./node_modules/@supabase/ssr/dist/module/createBrowserClient.js [Client Component Browser]
+    ./src/utils/supabase/client.ts [Client Component Browser]
+    ./src/lib/supabase.ts [Client Component Browser]
+    ./src/features/settings/pages/SettingsClaimHierarchyPage.tsx [Client Component Browser]
+    ./src/features/settings/pages/SettingsClaimHierarchyPage.tsx [Server Component]
+    ./src/app/(dashboard)/settings/claims/hierarchy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/@supabase/ssr/dist/module/cookies.js [Client Component SSR]
+    ./node_modules/@supabase/ssr/dist/module/createBrowserClient.js [Client Component SSR]
+    ./src/utils/supabase/client.ts [Client Component SSR]
+    ./src/lib/supabase.ts [Client Component SSR]
+    ./src/features/settings/pages/SettingsClaimHierarchyPage.tsx [Client Component SSR]
+    ./src/features/settings/pages/SettingsClaimHierarchyPage.tsx [Server Component]
+    ./src/app/(dashboard)/settings/claims/hierarchy/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/@supabase/ssr/dist/module/utils/helpers.js:1:1
+Module not found: Can't resolve 'cookie'
+[31m[1m>[0m [90m1 |[0m [36mimport[0m * [36mas[0m cookie [36mfrom[0m [32m"cookie"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m2 |[0m /**
+  [90m3 |[0m  * @deprecated [33mSince[0m v0[35m.4[0m[35m.0[0m: [33mPlease[0m use {@link parseCookieHeader}. [32m`parse`[0m will
+  [90m4 |[0m  * not be available [36mfor[0m [36mimport[0m starting v1[35m.0[0m[35m.0[0m [36mof[0m [32m`@supabase/ssr`[0m.
+
+
+
+Import traces:
+  App Route:
+    ./node_modules/@supabase/ssr/dist/module/utils/helpers.js
+    ./node_modules/@supabase/ssr/dist/module/createServerClient.js
+    ./src/app/api/auth/callback/route.ts
+
+  Edge Middleware:
+    ./node_modules/@supabase/ssr/dist/module/utils/helpers.js
+    ./node_modules/@supabase/ssr/dist/module/createServerClient.js
+    ./src/utils/supabase/middleware.ts
+    ./src/middleware.ts
+
+  Server Component:
+    ./node_modules/@supabase/ssr/dist/module/utils/helpers.js
+    ./node_modules/@supabase/ssr/dist/module/createServerClient.js
+    ./src/utils/supabase/server.ts
+    ./src/app/(dashboard)/attendance/page.tsx
+
+  Client Component Browser:
+    ./node_modules/@supabase/ssr/dist/module/utils/helpers.js [Client Component Browser]
+    ./node_modules/@supabase/ssr/dist/module/createBrowserClient.js [Client Component Browser]
+    ./src/utils/supabase/client.ts [Client Component Browser]
+    ./src/lib/supabase.ts [Client Component Browser]
+    ./src/features/settings/pages/SettingsClaimHierarchyPage.tsx [Client Component Browser]
+    ./src/features/settings/pages/SettingsClaimHierarchyPage.tsx [Server Component]
+    ./src/app/(dashboard)/settings/claims/hierarchy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/@supabase/ssr/dist/module/utils/helpers.js [Client Component SSR]
+    ./node_modules/@supabase/ssr/dist/module/createBrowserClient.js [Client Component SSR]
+    ./src/utils/supabase/client.ts [Client Component SSR]
+    ./src/lib/supabase.ts [Client Component SSR]
+    ./src/features/settings/pages/SettingsClaimHierarchyPage.tsx [Client Component SSR]
+    ./src/features/settings/pages/SettingsClaimHierarchyPage.tsx [Server Component]
+    ./src/app/(dashboard)/settings/claims/hierarchy/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/hierarchy/OrgChartEngine.tsx:3:1
+Module not found: Can't resolve 'd3-hierarchy'
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m [36mimport[0m [33mReact[0m, { useMemo, useState, useCallback } [36mfrom[0m [32m"react"[0m;
+[31m[1m>[0m [90m3 |[0m [36mimport[0m * [36mas[0m d3h [36mfrom[0m [32m"d3-hierarchy"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { [33mTransformWrapper[0m, [33mTransformComponent[0m, useControls } [36mfrom[0m [32m"react-zoom-pan-pinch"[0m;
+  [90m5 |[0m [36mimport[0m { [33mChevronDown[0m, [33mChevronRight[0m, [33mBuilding2[0m, [33mMinus[0m, [33mPlus[0m, [33mRotateCcw[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m6 |[0m [36mimport[0m { [33mOrgNode[0m, getAncestorIds, getDescendantIds } [36mfrom[0m [32m"@/lib/orgChartUtils"[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/hierarchy/OrgChartEngine.tsx [Client Component Browser]
+    ./src/app/(dashboard)/hierarchy/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/hierarchy/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/hierarchy/OrgChartEngine.tsx [Client Component SSR]
+    ./src/app/(dashboard)/hierarchy/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/hierarchy/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/(dashboard)/employees/[id]/edit/page.tsx:10:1
+Module not found: Can't resolve 'framer-motion'
+  [90m 8 |[0m   [33mCircleUser[0m, [33mFingerprint[0m, [33mBriefcaseBusiness[0m, [33mWallet[0m, [33mPhone[0m, [33mShieldAlert[0m, [33mGraduationCap[0m, [33mA...[0m
+  [90m 9 |[0m } [36mfrom[0m [32m"lucide-react"[0m;
+[31m[1m>[0m [90m10 |[0m [36mimport[0m { motion, [33mAnimatePresence[0m } [36mfrom[0m [32m"framer-motion"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m11 |[0m [36mimport[0m { createClient } [36mfrom[0m [32m"@/utils/supabase/client"[0m;
+  [90m12 |[0m [36mimport[0m { getUserAvatarUrl } [36mfrom[0m [32m"@/utils/avatarColor"[0m;
+  [90m13 |[0m [36mimport[0m [33mCropper[0m [36mfrom[0m [32m"react-easy-crop"[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/(dashboard)/employees/[id]/edit/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/employees/[id]/edit/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/(dashboard)/employees/[id]/edit/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/employees/[id]/edit/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/(dashboard)/timesheet/edit/page.tsx:6:1
+Module not found: Can't resolve 'framer-motion'
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m [36mimport[0m { useSearchParams } [36mfrom[0m [32m"next/navigation"[0m;
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { motion, [33mAnimatePresence[0m } [36mfrom[0m [32m"framer-motion"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m [36mimport[0m { [33mPieChart[0m, [33mPie[0m, [33mCell[0m, [33mResponsiveContainer[0m } [36mfrom[0m [32m"recharts"[0m;
+  [90m8 |[0m [36mimport[0m { 
+  [90m9 |[0m   [33mClock[0m [36mas[0m [33mTime02Icon[0m,
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/(dashboard)/timesheet/edit/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/timesheet/edit/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/(dashboard)/timesheet/edit/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/timesheet/edit/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/(dashboard)/timesheet/page.tsx:7:1
+Module not found: Can't resolve 'framer-motion'
+  [90m 5 |[0m [36mimport[0m { useRouter } [36mfrom[0m [32m"next/navigation"[0m;
+  [90m 6 |[0m [36mimport[0m { createPortal } [36mfrom[0m [32m"react-dom"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { motion, [33mAnimatePresence[0m } [36mfrom[0m [32m"framer-motion"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m [36mimport[0m { 
+  [90m 9 |[0m   [33mSearch[0m, 
+  [90m10 |[0m   [33mFilter[0m,
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/(dashboard)/timesheet/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/timesheet/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/(dashboard)/timesheet/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/timesheet/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/(dashboard)/timesheet/view/[id]/page.tsx:5:1
+Module not found: Can't resolve 'framer-motion'
+  [90m3 |[0m [36mimport[0m [33mReact[0m, { useState, useRef, useEffect } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { motion, [33mAnimatePresence[0m } [36mfrom[0m [32m"framer-motion"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { 
+  [90m7 |[0m   [33mArrowLeft[0m, 
+  [90m8 |[0m   [33mClock[0m,
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/(dashboard)/timesheet/view/[id]/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/timesheet/view/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/(dashboard)/timesheet/view/[id]/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/timesheet/view/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/Sidebar.tsx:6:1
+Module not found: Can't resolve 'framer-motion'
+  [90m4 |[0m [36mimport[0m { usePathname } [36mfrom[0m [32m"next/navigation"[0m;
+  [90m5 |[0m [36mimport[0m { useState, useEffect, useRef } [36mfrom[0m [32m"react"[0m;
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { motion } [36mfrom[0m [32m"framer-motion"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m [36mimport[0m { [33mChevronsUpDown[0m, [33mX[0m, [33mUsers[0m, [33mPlusCircle[0m, [33mLogOut[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m8 |[0m [36mimport[0m { createClient } [36mfrom[0m [32m"@/utils/supabase/client"[0m;
+  [90m9 |[0m [36mimport[0m { getAvatarColor, getInitials, getUserAvatarUrl, getCompanyLogoUrl } [36mfrom[0m [32m"@/utils/a...[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/components/Sidebar.tsx
+    ./src/app/(dashboard)/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/(dashboard)/attendance/AttendanceList.tsx:4:1
+Module not found: Can't resolve 'hugeicons-react'
+  [90m 2 |[0m
+  [90m 3 |[0m [36mimport[0m [33mReact[0m, { useState, useEffect, useCallback } [36mfrom[0m [32m"react"[0m;
+[31m[1m>[0m [90m 4 |[0m [36mimport[0m { 
+  [90m   |[0m [31m[1m^^^^^^^^[0m
+[31m[1m>[0m [90m 5 |[0m   [33mCalendar03Icon[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m 6 |[0m   [33mSearch01Icon[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m 7 |[0m   [33mFilterIcon[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m 8 |[0m   [33mDownload01Icon[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m 9 |[0m   [33mFile02Icon[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m10 |[0m   [33mUserCheck01Icon[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m11 |[0m } [36mfrom[0m [32m'hugeicons-react'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m12 |[0m [36mimport[0m [33mHeaderSearchBar[0m [36mfrom[0m [32m"@/components/HeaderSearchBar"[0m;
+  [90m13 |[0m [36mimport[0m { createClient } [36mfrom[0m [32m"@/utils/supabase/client"[0m;
+  [90m14 |[0m [36mimport[0m { getAvatarColor, getInitials [36mas[0m getAvatarInitials } [36mfrom[0m [32m"@/utils/avatarColor"[0m;
+
+
+
+Import trace:
+  Server Component:
+    ./src/app/(dashboard)/attendance/AttendanceList.tsx
+    ./src/app/(dashboard)/attendance/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/HeaderSearchBar.tsx:10:1
+Module not found: Can't resolve 'hugeicons-react'
+  [90m 8 |[0m [36mimport[0m { createClient } [36mfrom[0m [32m"@/utils/supabase/client"[0m;
+  [90m 9 |[0m [36mimport[0m { getUserAvatarUrl } [36mfrom[0m [32m"@/utils/avatarColor"[0m;
+[31m[1m>[0m [90m10 |[0m [36mimport[0m { 
+  [90m   |[0m [31m[1m^^^^^^^^[0m
+[31m[1m>[0m [90m11 |[0m   [33mNotification01Icon[0m, 
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m12 |[0m   [33mUserIcon[0m, 
+  [90m   |[0m [31m[1m^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m13 |[0m   [33mDiamond01Icon[0m, 
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m14 |[0m   [33mMagicWand01Icon[0m, 
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m15 |[0m   [33mToggleOffIcon[0m, 
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m16 |[0m   [33mCheckmarkCircle01Icon[0m, 
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m17 |[0m   [33mLogout01Icon[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m18 |[0m   [33mLuggage01Icon[0m 
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m19 |[0m } [36mfrom[0m [32m'hugeicons-react'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m20 |[0m [36mimport[0m { [33mStreamlineNotifications[0m } [36mfrom[0m [32m"@/components/StreamlineIcons"[0m;
+  [90m21 |[0m
+  [90m22 |[0m [36mtype[0m [33mRecentNotification[0m = {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/HeaderSearchBar.tsx [Client Component Browser]
+    ./src/app/(dashboard)/storage/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/storage/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/HeaderSearchBar.tsx [Client Component SSR]
+    ./src/app/(dashboard)/storage/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/storage/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/ui/FormDatePicker.tsx:7:1
+Module not found: Can't resolve 'motion/react'
+  [90m 5 |[0m [36mimport[0m { createPortal } [36mfrom[0m [32m"react-dom"[0m;
+  [90m 6 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { motion, [33mAnimatePresence[0m } [36mfrom[0m [32m"motion/react"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m [36mimport[0m { cn } [36mfrom[0m [32m"@/lib/utils"[0m;
+  [90m 9 |[0m
+  [90m10 |[0m [36minterface[0m [33mFormDatePickerProps[0m {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/FormDatePicker.tsx [Client Component Browser]
+    ./src/components/CreateDepartmentDialog.tsx [Client Component Browser]
+    ./src/app/(dashboard)/departments/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/departments/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/FormDatePicker.tsx [Client Component SSR]
+    ./src/components/CreateDepartmentDialog.tsx [Client Component SSR]
+    ./src/app/(dashboard)/departments/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/departments/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/ui/FormDropdown.tsx:7:1
+Module not found: Can't resolve 'motion/react'
+  [90m 5 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m;
+  [90m 6 |[0m [36mimport[0m { createPortal } [36mfrom[0m [32m"react-dom"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { motion, [33mAnimatePresence[0m } [36mfrom[0m [32m"motion/react"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m [36mimport[0m { cn } [36mfrom[0m [32m"@/lib/utils"[0m;
+  [90m 9 |[0m
+  [90m10 |[0m [36mexport[0m [36minterface[0m [33mDropdownOption[0m {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/FormDropdown.tsx [Client Component Browser]
+    ./src/components/AddEmployeeModal.tsx [Client Component Browser]
+    ./src/app/(dashboard)/employees/EmployeeTableRenderer.tsx [Client Component Browser]
+    ./src/app/(dashboard)/employees/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/FormDropdown.tsx [Client Component SSR]
+    ./src/components/AddEmployeeModal.tsx [Client Component SSR]
+    ./src/app/(dashboard)/employees/EmployeeTableRenderer.tsx [Client Component SSR]
+    ./src/app/(dashboard)/employees/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/node_modules/postcss/lib/input.js:6:18
+Module not found: Can't resolve 'nanoid/non-secure'
+
+
+Import trace:
+  postcss:
+    ./node_modules/next/node_modules/postcss/lib/input.js
+    ./node_modules/next/node_modules/postcss/lib/postcss.js
+    ./node_modules/next/node_modules/postcss/lib/postcss.mjs
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/node_modules/postcss/lib/css-syntax-error.js:3:12
+Module not found: Can't resolve 'picocolors'
+
+
+Import trace:
+  postcss:
+    ./node_modules/next/node_modules/postcss/lib/css-syntax-error.js
+    ./node_modules/next/node_modules/postcss/lib/postcss.js
+    ./node_modules/next/node_modules/postcss/lib/postcss.mjs
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/node_modules/postcss/lib/terminal-highlight.js:3:12
+Module not found: Can't resolve 'picocolors'
+
+
+Import trace:
+  postcss:
+    ./node_modules/next/node_modules/postcss/lib/terminal-highlight.js
+    ./node_modules/next/node_modules/postcss/lib/input.js
+    ./node_modules/next/node_modules/postcss/lib/postcss.js
+    ./node_modules/next/node_modules/postcss/lib/postcss.mjs
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/(dashboard)/employees/[id]/edit/page.tsx:13:1
+Module not found: Can't resolve 'react-easy-crop'
+  [90m11 |[0m [36mimport[0m { createClient } [36mfrom[0m [32m"@/utils/supabase/client"[0m;
+  [90m12 |[0m [36mimport[0m { getUserAvatarUrl } [36mfrom[0m [32m"@/utils/avatarColor"[0m;
+[31m[1m>[0m [90m13 |[0m [36mimport[0m [33mCropper[0m [36mfrom[0m [32m"react-easy-crop"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m14 |[0m [36mimport[0m { calculateCPF, calculateSDL, calculateSHG } [36mfrom[0m [32m"@/utils/taxCalculator"[0m;
+  [90m15 |[0m [36mimport[0m { calculateFWL, [33mQuotaCounts[0m, [33mFWLResult[0m } [36mfrom[0m [32m"@/utils/fwlCalculator"[0m;
+  [90m16 |[0m [36mimport[0m { uploadToCompanyStorage, uploadEmployeeProfilePhoto } [36mfrom[0m [32m"@/utils/storageHelper"[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/(dashboard)/employees/[id]/edit/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/employees/[id]/edit/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/(dashboard)/employees/[id]/edit/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/employees/[id]/edit/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/(dashboard)/employees/[id]/page.tsx:17:1
+Module not found: Can't resolve 'react-qr-code'
+  [90m15 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m16 |[0m [36mimport[0m [33mImage[0m [36mfrom[0m [32m"next/image"[0m;
+[31m[1m>[0m [90m17 |[0m [36mimport[0m [33mQRCode[0m [36mfrom[0m [32m"react-qr-code"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m18 |[0m [36mimport[0m { getAvatarColor, getInitials, getUserAvatarUrl } [36mfrom[0m [32m"@/utils/avatarColor"[0m;
+  [90m19 |[0m [36mimport[0m { uploadToCompanyStorage, toCompanySlug [36mas[0m storageSlug } [36mfrom[0m [32m"@/utils/storageHelper"[0m;
+  [90m20 |[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/(dashboard)/employees/[id]/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/employees/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/(dashboard)/employees/[id]/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/employees/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/(dashboard)/timesheet/edit/page.tsx:7:1
+Module not found: Can't resolve 'recharts'
+  [90m 5 |[0m [36mimport[0m { useSearchParams } [36mfrom[0m [32m"next/navigation"[0m;
+  [90m 6 |[0m [36mimport[0m { motion, [33mAnimatePresence[0m } [36mfrom[0m [32m"framer-motion"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { [33mPieChart[0m, [33mPie[0m, [33mCell[0m, [33mResponsiveContainer[0m } [36mfrom[0m [32m"recharts"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m [36mimport[0m { 
+  [90m 9 |[0m   [33mClock[0m [36mas[0m [33mTime02Icon[0m,
+  [90m10 |[0m   [33mInfo[0m [36mas[0m [33mInformationCircleIcon[0m,
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/(dashboard)/timesheet/edit/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/timesheet/edit/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/(dashboard)/timesheet/edit/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/timesheet/edit/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/react-dom/cjs/react-dom-client.production.js:15:17
+Module not found: Can't resolve 'scheduler'
+
+
+Import trace:
+  Browser:
+    ./node_modules/react-dom/cjs/react-dom-client.production.js
+    ./node_modules/react-dom/client.js
+    ./node_modules/next/dist/client/index.js
+    ./node_modules/next/dist/client/next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/departments/components/AdvancedDepartmentSettingsDialog.tsx:14:1
+Module not found: Can't resolve 'sonner'
+  [90m12 |[0m [36mimport[0m { useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m13 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+[31m[1m>[0m [90m14 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m15 |[0m [36mimport[0m { getAvatarUrl } [36mfrom[0m [32m'@/lib/utils'[0m
+  [90m16 |[0m
+  [90m17 |[0m [90m// Custom 12-hour time picker with manual inputs and inbuilt AM/PM[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/departments/components/AdvancedDepartmentSettingsDialog.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/departments/components/AdvancedDepartmentSettingsDialog.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/departments/components/ChangeDesignationDialog.tsx:8:1
+Module not found: Can't resolve 'sonner'
+  [90m 6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+  [90m 7 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+[31m[1m>[0m [90m 8 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 9 |[0m [36mimport[0m { getAvatarUrl } [36mfrom[0m [32m'@/lib/utils'[0m
+  [90m10 |[0m
+  [90m11 |[0m [36minterface[0m [33mChangeDesignationDialogProps[0m {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/departments/components/ChangeDesignationDialog.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/departments/components/ChangeDesignationDialog.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/departments/components/ChangeReporteeDialog.tsx:8:1
+Module not found: Can't resolve 'sonner'
+  [90m 6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+  [90m 7 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+[31m[1m>[0m [90m 8 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 9 |[0m [36mimport[0m { getAvatarUrl } [36mfrom[0m [32m'@/lib/utils'[0m
+  [90m10 |[0m
+  [90m11 |[0m [36minterface[0m [33mChangeReporteeDialogProps[0m {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/departments/components/ChangeReporteeDialog.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/departments/components/ChangeReporteeDialog.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/departments/components/TransferEmployeeDialog.tsx:8:1
+Module not found: Can't resolve 'sonner'
+  [90m 6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+  [90m 7 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+[31m[1m>[0m [90m 8 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 9 |[0m [36mimport[0m { getAvatarUrl } [36mfrom[0m [32m'@/lib/utils'[0m
+  [90m10 |[0m
+  [90m11 |[0m [36minterface[0m [33mTransferEmployeeDialogProps[0m {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/departments/components/TransferEmployeeDialog.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component Browser]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/departments/components/TransferEmployeeDialog.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Client Component SSR]
+    ./src/features/departments/pages/DepartmentDetailsPage.tsx [Server Component]
+    ./src/app/(dashboard)/departments/[id]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsAttendanceMethodsPage.tsx:7:1
+Module not found: Can't resolve 'sonner'
+  [90m 5 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m 6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+  [90m 9 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m10 |[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsAttendanceMethodsPage.tsx
+    ./src/app/(dashboard)/settings/attendance/methods/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsAttendancePage.tsx:7:1
+Module not found: Can't resolve 'sonner'
+  [90m 5 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m 6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+  [90m 9 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m10 |[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsAttendancePage.tsx
+    ./src/app/(dashboard)/settings/attendance/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsAttendanceSiteDetailPage.tsx:9:1
+Module not found: Can't resolve 'sonner'
+  [90m 7 |[0m [36mimport[0m { useParams, useRouter } [36mfrom[0m [32m'next/navigation'[0m
+  [90m 8 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+[31m[1m>[0m [90m 9 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m10 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+  [90m11 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m12 |[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsAttendanceSiteDetailPage.tsx
+    ./src/app/(dashboard)/settings/attendance/sites/[id]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsAttendanceSiteGeofencePage.tsx:9:1
+Module not found: Can't resolve 'sonner'
+  [90m 7 |[0m [36mimport[0m { useParams } [36mfrom[0m [32m'next/navigation'[0m
+  [90m 8 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+[31m[1m>[0m [90m 9 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m10 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+  [90m11 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m12 |[0m [36mimport[0m dynamic [36mfrom[0m [32m'next/dynamic'[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsAttendanceSiteGeofencePage.tsx
+    ./src/app/(dashboard)/settings/attendance/sites/[id]/geofence/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsAttendanceSitePassPage.tsx:8:1
+Module not found: Can't resolve 'sonner'
+  [90m 6 |[0m [36mimport[0m { useParams } [36mfrom[0m [32m'next/navigation'[0m
+  [90m 7 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+[31m[1m>[0m [90m 8 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 9 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+  [90m10 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m11 |[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsAttendanceSitePassPage.tsx
+    ./src/app/(dashboard)/settings/attendance/sites/[id]/pass/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsAttendanceSitesPage.tsx:8:1
+Module not found: Can't resolve 'sonner'
+  [90m 6 |[0m [36mimport[0m { createPortal } [36mfrom[0m [32m'react-dom'[0m
+  [90m 7 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+[31m[1m>[0m [90m 8 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 9 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+  [90m10 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m11 |[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsAttendanceSitesPage.tsx
+    ./src/app/(dashboard)/settings/attendance/sites/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsAuthenticatePage.tsx:9:1
+Module not found: Can't resolve 'sonner'
+  [90m 7 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+  [90m 8 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+[31m[1m>[0m [90m 9 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m10 |[0m [36mimport[0m { [33mButton[0m } [36mfrom[0m [32m'@/components/ui/button'[0m
+  [90m11 |[0m
+  [90m12 |[0m [36mconst[0m [33mLS_KEY[0m = [32m'xentra_authenticate_selected_employee'[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsAuthenticatePage.tsx
+    ./src/app/(dashboard)/settings/roles/authenticate/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsClaimAdvancedPage.tsx:7:1
+Module not found: Can't resolve 'sonner'
+  [90m 5 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m 6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+  [90m 9 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m10 |[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsClaimAdvancedPage.tsx
+    ./src/app/(dashboard)/settings/claims/advanced/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsClaimHierarchyPage.tsx:7:1
+Module not found: Can't resolve 'sonner'
+  [90m 5 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m 6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m [36mimport[0m { getAvatarUrl } [36mfrom[0m [32m'@/lib/utils'[0m
+  [90m 9 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+  [90m10 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsClaimHierarchyPage.tsx
+    ./src/app/(dashboard)/settings/claims/hierarchy/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsCompanyPage.tsx:4:1
+Module not found: Can't resolve 'sonner'
+  [90m2 |[0m [36mimport[0m { createPortal } [36mfrom[0m [32m'react-dom'[0m
+  [90m3 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+  [90m6 |[0m [36mimport[0m { useAuthStore } [36mfrom[0m [32m'@/store/useAuthStore'[0m
+  [90m7 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/settings/pages/SettingsCompanyPage.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/company/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/company/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/settings/pages/SettingsCompanyPage.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/company/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/company/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsDepartmentPage.tsx:7:1
+Module not found: Can't resolve 'sonner'
+  [90m 5 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m 6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+  [90m 9 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m10 |[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsDepartmentPage.tsx
+    ./src/app/(dashboard)/settings/departments/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsLeaveAdvancedPage.tsx:7:1
+Module not found: Can't resolve 'sonner'
+  [90m 5 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m 6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+  [90m 9 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m10 |[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsLeaveAdvancedPage.tsx
+    ./src/app/(dashboard)/settings/leave/advanced/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsLeaveHierarchyPage.tsx:7:1
+Module not found: Can't resolve 'sonner'
+  [90m 5 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m 6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m [36mimport[0m { getAvatarUrl } [36mfrom[0m [32m'@/lib/utils'[0m
+  [90m 9 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+  [90m10 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsLeaveHierarchyPage.tsx
+    ./src/app/(dashboard)/settings/leave/hierarchy/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsOvertimeAdvancedPage.tsx:7:1
+Module not found: Can't resolve 'sonner'
+  [90m 5 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m 6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+  [90m 9 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m10 |[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsOvertimeAdvancedPage.tsx
+    ./src/app/(dashboard)/settings/overtime/advanced/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsOvertimeHierarchyPage.tsx:7:1
+Module not found: Can't resolve 'sonner'
+  [90m 5 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m
+  [90m 6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m [36mimport[0m { getAvatarUrl } [36mfrom[0m [32m'@/lib/utils'[0m
+  [90m 9 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+  [90m10 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+
+
+
+Import trace:
+  Server Component:
+    ./src/features/settings/pages/SettingsOvertimeHierarchyPage.tsx
+    ./src/app/(dashboard)/settings/overtime/hierarchy/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsProfilePage.tsx:3:1
+Module not found: Can't resolve 'sonner'
+  [90m1 |[0m [36mimport[0m [33mReact[0m, { useState, useRef, useEffect } [36mfrom[0m [32m'react'[0m
+  [90m2 |[0m [36mimport[0m { [33mIcon[0m } [36mfrom[0m [32m'@iconify/react'[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { useAuthStore } [36mfrom[0m [32m'@/store/useAuthStore'[0m
+  [90m5 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+  [90m6 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/settings/pages/SettingsProfilePage.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/profile/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/profile/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/settings/pages/SettingsProfilePage.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/profile/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/profile/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/features/settings/pages/SettingsRoleDetailPage.tsx:8:1
+Module not found: Can't resolve 'sonner'
+  [90m 6 |[0m [36mimport[0m { useParams, useRouter } [36mfrom[0m [32m'next/navigation'[0m
+  [90m 7 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+[31m[1m>[0m [90m 8 |[0m [36mimport[0m { toast } [36mfrom[0m [32m'sonner'[0m
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 9 |[0m [36mimport[0m { useCompanyStore } [36mfrom[0m [32m'@/store/useCompanyStore'[0m
+  [90m10 |[0m [36mimport[0m { useQuery, useMutation, useQueryClient } [36mfrom[0m [32m'@tanstack/react-query'[0m
+  [90m11 |[0m [36mimport[0m {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/features/settings/pages/SettingsRoleDetailPage.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/roles/[role]/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/roles/[role]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/features/settings/pages/SettingsRoleDetailPage.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/roles/[role]/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/roles/[role]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/node_modules/postcss/lib/input.js:3:49
+Module not found: Can't resolve 'source-map-js'
+
+
+Import trace:
+  postcss:
+    ./node_modules/next/node_modules/postcss/lib/input.js
+    ./node_modules/next/node_modules/postcss/lib/postcss.js
+    ./node_modules/next/node_modules/postcss/lib/postcss.mjs
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/node_modules/postcss/lib/map-generator.js:3:49
+Module not found: Can't resolve 'source-map-js'
+
+
+Import trace:
+  postcss:
+    ./node_modules/next/node_modules/postcss/lib/map-generator.js
+    ./node_modules/next/node_modules/postcss/lib/lazy-result.js
+    ./node_modules/next/node_modules/postcss/lib/postcss.js
+    ./node_modules/next/node_modules/postcss/lib/postcss.mjs
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/next/node_modules/postcss/lib/previous-map.js:3:49
+Module not found: Can't resolve 'source-map-js'
+
+
+Import trace:
+  postcss:
+    ./node_modules/next/node_modules/postcss/lib/previous-map.js
+    ./node_modules/next/node_modules/postcss/lib/input.js
+    ./node_modules/next/node_modules/postcss/lib/postcss.js
+    ./node_modules/next/node_modules/postcss/lib/postcss.mjs
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/lib/utils.ts:2:1
+Module not found: Can't resolve 'tailwind-merge'
+  [90m1 |[0m [36mimport[0m { clsx, [36mtype[0m [33mClassValue[0m } [36mfrom[0m [32m'clsx'[0m
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { twMerge } [36mfrom[0m [32m'tailwind-merge'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m
+  [90m4 |[0m [36mexport[0m [36mfunction[0m cn(...inputs: [33mClassValue[0m[]) {
+  [90m5 |[0m   [36mreturn[0m twMerge(clsx(inputs))
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/utils.ts [Client Component Browser]
+    ./src/app/(dashboard)/settings/layout.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/utils.ts [Client Component SSR]
+    ./src/app/(dashboard)/settings/layout.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/store/index.ts:1:1
+Module not found: Can't resolve 'zustand'
+[31m[1m>[0m [90m1 |[0m [36mimport[0m { create } [36mfrom[0m [32m"zustand"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m2 |[0m [36mimport[0m { persist } [36mfrom[0m [32m"zustand/middleware"[0m;
+  [90m3 |[0m
+  [90m4 |[0m [36mtype[0m [33mTheme[0m = [32m"light"[0m | [32m"dark"[0m | [32m"system"[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/store/index.ts [Client Component Browser]
+    ./src/app/(dashboard)/employees/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/store/index.ts [Client Component SSR]
+    ./src/app/(dashboard)/employees/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/store/useAuthStore.ts:1:1
+Module not found: Can't resolve 'zustand'
+[31m[1m>[0m [90m1 |[0m [36mimport[0m { create } [36mfrom[0m [32m'zustand'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m2 |[0m [36mimport[0m { [33mUserRole[0m, [33mSYSTEM_ROLES[0m } [36mfrom[0m [32m'@/config/constants'[0m
+  [90m3 |[0m [36mimport[0m { hasPermission, [33mPermission[0m } [36mfrom[0m [32m'@/config/permissions'[0m
+  [90m4 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/store/useAuthStore.ts [Client Component Browser]
+    ./src/app/(dashboard)/settings/layout.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/store/useAuthStore.ts [Client Component SSR]
+    ./src/app/(dashboard)/settings/layout.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/store/useCompanyStore.ts:1:1
+Module not found: Can't resolve 'zustand'
+[31m[1m>[0m [90m1 |[0m [36mimport[0m { create } [36mfrom[0m [32m'zustand'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m2 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+  [90m3 |[0m
+  [90m4 |[0m [36mexport[0m [36minterface[0m [33mCompanyProfile[0m {
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/store/useCompanyStore.ts [Client Component Browser]
+    ./src/features/settings/pages/SettingsLeavePage.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/leave/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/settings/leave/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/store/useCompanyStore.ts [Client Component SSR]
+    ./src/features/settings/pages/SettingsLeavePage.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/leave/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/settings/leave/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/store/index.ts:2:1
+Module not found: Can't resolve 'zustand/middleware'
+  [90m1 |[0m [36mimport[0m { create } [36mfrom[0m [32m"zustand"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { persist } [36mfrom[0m [32m"zustand/middleware"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m
+  [90m4 |[0m [36mtype[0m [33mTheme[0m = [32m"light"[0m | [32m"dark"[0m | [32m"system"[0m;
+  [90m5 |[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/store/index.ts [Client Component Browser]
+    ./src/app/(dashboard)/employees/page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/store/index.ts [Client Component SSR]
+    ./src/app/(dashboard)/employees/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at moduleFactory (turbopack:///[turbopack]/nodejs/runtime/build-base.ts:57:5) [C:\Users\Kriss\.gemini\antigravity-ide\scratch\Dort-Asia\apps\xentra\.next\build\chunks\[turbopack]_runtime.js:840:9])
+    at instantiateModule (turbopack:///[turbopack]/nodejs/runtime/build-base.ts:90:10) [C:\Users\Kriss\.gemini\antigravity-ide\scratch\Dort-Asia\apps\xentra\.next\build\chunks\[turbopack]_runtime.js:864:12])
+    at getOrInstantiateModuleFromParent (turbopack:///[turbopack]/shared/runtime/runtime-utils.ts:440:10) [C:\Users\Kriss\.gemini\antigravity-ide\scratch\Dort-Asia\apps\xentra\.next\build\chunks\[turbopack]_runtime.js:289:12])
+    at moduleFactory (turbopack:///[turbopack]/nodejs/runtime/build-base.ts:57:5) [C:\Users\Kriss\.gemini\antigravity-ide\scratch\Dort-Asia\apps\xentra\.next\build\chunks\[turbopack]_runtime.js:840:9])
+    at instantiateModule (turbopack:///[turbopack]/nodejs/runtime/build-base.ts:90:10) [C:\Users\Kriss\.gemini\antigravity-ide\scratch\Dort-Asia\apps\xentra\.next\build\chunks\[turbopack]_runtime.js:864:12])
+    at getOrInstantiateModuleFromParent (turbopack:///[turbopack]/shared/runtime/runtime-utils.ts:398:18) [C:\Users\Kriss\.gemini\antigravity-ide\scratch\Dort-Asia\apps\xentra\.next\build\chunks\[turbopack]_runtime.js:268:20])
+    ... collapsed 6 duplicate lines matching above lines ...
+    at <unknown> (./src/app/(dashboard)/settings/layout.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/ui/FormDatePicker.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/ui/FormDropdown.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/ui/dialog.tsx:3:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/ui/dropdown-menu.tsx:3:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/departments/components/AdvancedDepartmentSettingsDialog.tsx:13:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/departments/components/ChangeDesignationDialog.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/departments/components/ChangeReporteeDialog.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/departments/components/TransferEmployeeDialog.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/departments/pages/DepartmentDetailsPage.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsAttendanceMethodsPage.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsAttendancePage.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsAttendanceSiteDetailPage.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsAttendanceSiteGeofencePage.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsAttendanceSitePassPage.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsAttendanceSitesPage.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsAuthenticatePage.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsClaimAdvancedPage.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsClaimHierarchyPage.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsCompanyPage.tsx:3:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsDepartmentPage.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsEmployeesPage.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsLeaveAdvancedPage.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsLeaveHierarchyPage.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsLeavePage.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsLeaveTemplatePage.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsOvertimeAdvancedPage.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsOvertimeHierarchyPage.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsProfilePage.tsx:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsRoleDetailPage.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsRolesPage.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/ui/dialog.tsx:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/ui/dropdown-menu.tsx:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/components/GeofenceMap.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at ./node_modules/ (supabase/ssr/dist/module/createBrowserClient.js:1:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at ./node_modules/ (supabase/ssr/dist/module/createServerClient.js:1:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/api/auth/device/initiate/route.ts:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/api/auth/device/verify/route.ts:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/api/auth/otp/generate/route.ts:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/api/oauth/dropbox/callback/route.ts:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/api/oauth/google/callback/route.ts:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/api/oauth/google/route.ts:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/api/oauth/microsoft/callback/route.ts:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/device-login/page.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/lib/supabase.ts:22:32)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/utils/supabase/admin.ts:1:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    ... collapsed 45 duplicate lines matching above 1 lines 45 times...
+    at <unknown> (./src/app/(dashboard)/settings/layout.tsx:8:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/QueryProvider.tsx:3:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/departments/components/AdvancedDepartmentSettingsDialog.tsx:12:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/departments/components/ChangeDesignationDialog.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/departments/components/ChangeReporteeDialog.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/departments/components/EditDepartmentDialog.tsx:12:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/departments/components/TransferEmployeeDialog.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/departments/pages/DepartmentDetailsPage.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsAttendanceMethodsPage.tsx:9:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsAttendancePage.tsx:9:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsAttendanceSiteDetailPage.tsx:11:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsAttendanceSiteGeofencePage.tsx:11:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsAttendanceSitePassPage.tsx:10:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsAttendanceSitesPage.tsx:10:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsAuthenticatePage.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsClaimAdvancedPage.tsx:9:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsClaimHierarchyPage.tsx:10:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsCompanyPage.tsx:8:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsDepartmentPage.tsx:9:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsLeaveAdvancedPage.tsx:9:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsLeaveHierarchyPage.tsx:10:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsLeavePage.tsx:16:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsLeaveTemplatePage.tsx:16:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsOvertimeAdvancedPage.tsx:9:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsOvertimeHierarchyPage.tsx:10:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsProfilePage.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsRoleDetailPage.tsx:10:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsRolesPage.tsx:8:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/lib/utils.ts:1:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at ./node_modules/ (supabase/ssr/dist/module/cookies.js:1:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at ./node_modules/ (supabase/ssr/dist/module/utils/helpers.js:1:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/hierarchy/OrgChartEngine.tsx:3:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/(dashboard)/employees/[id]/edit/page.tsx:10:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/(dashboard)/timesheet/edit/page.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/(dashboard)/timesheet/page.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/(dashboard)/timesheet/view/[id]/page.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/Sidebar.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/(dashboard)/attendance/AttendanceList.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/HeaderSearchBar.tsx:10:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/ui/FormDatePicker.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/ui/FormDropdown.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    ... collapsed 3 duplicate lines matching above 1 lines 3 times...
+    at <unknown> (./src/app/(dashboard)/employees/[id]/edit/page.tsx:13:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/(dashboard)/employees/[id]/page.tsx:17:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/(dashboard)/timesheet/edit/page.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/departments/components/AdvancedDepartmentSettingsDialog.tsx:14:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/departments/components/ChangeDesignationDialog.tsx:8:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/departments/components/ChangeReporteeDialog.tsx:8:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/departments/components/TransferEmployeeDialog.tsx:8:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsAttendanceMethodsPage.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsAttendancePage.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsAttendanceSiteDetailPage.tsx:9:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsAttendanceSiteGeofencePage.tsx:9:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsAttendanceSitePassPage.tsx:8:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsAttendanceSitesPage.tsx:8:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsAuthenticatePage.tsx:9:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsClaimAdvancedPage.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsClaimHierarchyPage.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsCompanyPage.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsDepartmentPage.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsLeaveAdvancedPage.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsLeaveHierarchyPage.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsOvertimeAdvancedPage.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsOvertimeHierarchyPage.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsProfilePage.tsx:3:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/features/settings/pages/SettingsRoleDetailPage.tsx:8:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    ... collapsed 3 duplicate lines matching above 1 lines 3 times...
+    at <unknown> (./src/lib/utils.ts:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/store/index.ts:1:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/store/useAuthStore.ts:1:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/store/useCompanyStore.ts:1:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/store/index.ts:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+npm error Lifecycle script `build` failed with error:
+npm error code 1
+npm error path C:\Users\Kriss\.gemini\antigravity-ide\scratch\Dort-Asia\apps\xentra
+npm error workspace employee-management_xa@0.1.0
+npm error location C:\Users\Kriss\.gemini\antigravity-ide\scratch\Dort-Asia\apps\xentra
+npm error command failed
+npm error command C:\WINDOWS\system32\cmd.exe /d /s /c next build

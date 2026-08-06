@@ -69,8 +69,8 @@ export function ChangeReporteeDialog({ open, onOpenChange, employee }: ChangeRep
     setIsSearching(prev => ({ ...prev, [field]: true }))
     
     setTimeout(() => {
-      const found = allEmployees.find(
-        emp => emp.email?.toLowerCase() === query.toLowerCase()
+      const found = (allEmployees as any[]).find(
+        (emp: any) => emp.email?.toLowerCase() === query.toLowerCase()
       )
       
       if (found) {
@@ -108,7 +108,7 @@ export function ChangeReporteeDialog({ open, onOpenChange, employee }: ChangeRep
 
   const renderSelect = (label: string, field: keyof typeof formData) => {
     const selectedId = formData[field]
-    const selectedEmp = selectedId ? allEmployees.find(e => e.id === selectedId) : null
+    const selectedEmp = selectedId ? (allEmployees as any[]).find((e: any) => e.id === selectedId) : null
     
     return (
       <div className="flex flex-col gap-2 relative">
