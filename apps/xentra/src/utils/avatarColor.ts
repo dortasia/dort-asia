@@ -146,7 +146,7 @@ export function getUserAvatarUrl(avatarUrl?: string | null): string {
  * Returns the company profile logo URL.
  * If company uploaded a logo, show it; otherwise show Dicebear (glass) avatar based on company name.
  */
-export function getCompanyLogoUrl(logoUrl?: string | null, companyName?: string | null): string {
+export function getCompanyLogoUrl(logoUrl?: string | null, _companyName?: string | null): string {
   if (logoUrl && typeof logoUrl === 'string' && logoUrl.trim() !== "" && logoUrl !== "..") {
     return logoUrl;
   }

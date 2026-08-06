@@ -13,12 +13,12 @@ const formatTimeInput = (val: string) => {
   if (!digits) return ''
   if (digits.length === 1 && parseInt(digits[0], 10) > 1) digits = '0' + digits[0]
   if (digits.length >= 2) {
-    let hh = parseInt(digits.slice(0, 2), 10)
+    const hh = parseInt(digits.slice(0, 2), 10)
     if (hh > 12) digits = '12' + digits.slice(2)
     if (hh === 0 && digits.length >= 2) digits = '12' + digits.slice(2)
   }
   if (digits.length >= 4) {
-    let mm = parseInt(digits.slice(2, 4), 10)
+    const mm = parseInt(digits.slice(2, 4), 10)
     if (mm > 59) digits = digits.slice(0, 2) + '59'
   }
   if (digits.length > 2) return `${digits.slice(0, 2)} : ${digits.slice(2, 4)}`

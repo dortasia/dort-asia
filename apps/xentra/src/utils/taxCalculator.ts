@@ -84,13 +84,25 @@ export const calculateSHG = (salary: number, shgType: string): number => {
   return 0;
 };
 
+// Employee shape used by the tax calculation engine
+interface EmployeeTaxRecord {
+  pass_type?: string
+  nric_number?: string
+  date_of_birth?: string
+  nationality?: string
+  race?: string
+  religion?: string
+  is_tax_edited?: boolean
+  custom_fields?: Record<string, string | undefined>
+}
+
 // Original function extracted from payroll engine, modified to use new logic
-export const getEmployeeProfileTaxes = (emp: any, baseSalary: number) => {
+export const getEmployeeProfileTaxes = (emp: EmployeeTaxRecord, baseSalary: number) => {
   const isForeign = !!(emp.pass_type || emp.custom_fields?.identityType === "FIN") && !emp.nric_number && !emp.custom_fields?.nricNumber;
   const isSPassOrWorkPermit = (emp.pass_type || "").toLowerCase().includes("s pass") || (emp.pass_type || "").toLowerCase().includes("work permit");
 
   // 1. Base calculations
-  const defaultCpf = !isForeign ? calculateCPF(baseSalary, emp.date_of_birth) : { employee: 0, employer: 0, age: 0 };
+  const defaultCpf = !isForeign ? calculateCPF(baseSalary, emp.date_of_birth ?? null) : { employee: 0, employer: 0, age: 0 };
   const defaultSdl = calculateSDL(baseSalary);
 
   // Determine if it was edited

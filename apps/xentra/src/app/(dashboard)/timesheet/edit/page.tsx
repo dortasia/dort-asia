@@ -304,15 +304,15 @@ function EditTimesheetContent() {
   };
 
   const handleSiteTimeValBlur = (dayIdx: number, siteIdx: number, field: "entryTimeVal" | "exitTimeVal", val: string) => {
-    let clean = val.replace(/[^0-9:]/g, "");
+    const clean = val.replace(/[^0-9:]/g, "");
     if (!clean) {
       updateSiteField(dayIdx, siteIdx, field, "12:00");
       recalculateRowWork(dayIdx);
       return;
     }
     const parts = clean.split(":");
-    let hh = parts[0] || "12";
-    let mm = parts[1] || "00";
+    const hh = parts[0] || "12";
+    const mm = parts[1] || "00";
     let hNum = parseInt(hh, 10) || 12;
     let mNum = parseInt(mm, 10) || 0;
     

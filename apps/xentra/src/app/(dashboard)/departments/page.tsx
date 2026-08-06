@@ -490,8 +490,9 @@ export default function DepartmentsPage() {
       }
 
       // Fetch literal employees, departments, and company_settings scoped to resolvedCompanyId
-      let [
-        { data: deps },
+      let deps: any;
+      const [
+        { data: depsResult },
         { data: emps },
         { count },
         { data: compSettings },
@@ -503,6 +504,7 @@ export default function DepartmentsPage() {
         supabase.from('company_settings').select('super_admin_name, super_admin_role, super_admin_avatar_url').eq('company_id', resolvedCompanyId).maybeSingle(),
         supabase.from('company_settings').select('company_name').eq('company_id', resolvedCompanyId).maybeSingle()
       ]);
+      deps = depsResult;
 
       // Normalize department names (handle name vs department_name)
       if (deps) {

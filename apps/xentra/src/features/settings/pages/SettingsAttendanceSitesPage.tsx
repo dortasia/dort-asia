@@ -207,7 +207,7 @@ export function SettingsAttendanceSitesPage() {
   const [deleteSiteId, setDeleteSiteId] = useState<string | null>(null)
   const [deleteConfirmText, setDeleteConfirmText] = useState('')
 
-  const siteToDelete = sites.find(s => s.id === deleteSiteId)
+  const siteToDelete = sites.find((s: { id: string; name: string }) => s.id === deleteSiteId)
   const canDeleteSite = siteToDelete?.name === deleteConfirmText
 
   return (

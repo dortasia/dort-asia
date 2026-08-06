@@ -137,7 +137,7 @@ export default function EmployeeProfileView() {
  const joinDate = new Date(doj);
  if (isNaN(joinDate.getTime())) return "N/A";
  const today = new Date();
- let exp = today.getFullYear() - joinDate.getFullYear();
+ const exp = today.getFullYear() - joinDate.getFullYear();
  if (exp <= 0) return "Less than 1 Year";
  return `${exp} ${exp === 1 ? 'Year' : 'Years'}`;
  };
@@ -397,7 +397,7 @@ export default function EmployeeProfileView() {
  if (!emp) return;
  setIsSavingTransfer(true);
  try {
- let updateData: any = {};
+ const updateData: any = {};
  if (type === 'team') {
  updateData.department_id = tempTransferDeptId || null;
  updateData.custom_fields = {

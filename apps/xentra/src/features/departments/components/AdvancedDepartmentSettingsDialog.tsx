@@ -19,7 +19,7 @@ const TimeInput12Hour = ({ value, onChange }: { value: string, onChange: (val: s
   const parse = (v: string) => {
     if (!v) return { h: '', m: '', p: 'AM' }
     const [hr, min] = v.split(':')
-    let h24 = parseInt(hr, 10)
+    const h24 = parseInt(hr, 10)
     const p = h24 >= 12 ? 'PM' : 'AM'
     let h12 = h24 % 12
     if (h12 === 0) h12 = 12

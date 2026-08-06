@@ -121,7 +121,7 @@ export function SettingsAuthenticatePage() {
 
   useEffect(() => {
     fetchAuthUsers()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+   
   }, [])
 
   // Sync search input text when selected employee changes

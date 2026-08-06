@@ -546,7 +546,7 @@ export default function StoragePage() {
 
     // Initial load (no toast)
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, []);
 
   /* ── Disconnect ── */

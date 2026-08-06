@@ -1026,7 +1026,7 @@ function MessagesContent() {
     const lines = selectedText.split('\n');
     const processed = lines.map((line, i) => {
       // Always strip existing custom markers first (e.g. "1. ", "a. ", "• ")
-      let cleanLine = line.replace(/^([0-9]+\.|[a-zA-Z]\.|[•\-])\s*/, '');
+      const cleanLine = line.replace(/^([0-9]+\.|[a-zA-Z]\.|[•\-])\s*/, '');
       if (isTogglingOff) {
         return cleanLine; // Just return cleaned line to toggle off
       }
@@ -1324,7 +1324,7 @@ function MessagesContent() {
   const sendVoiceMessage = (capturedWaveform: number[]) => {
     const dur = Math.max(1, recElapsed);
     const newMsg: Message = {
-      id: Date.now(),
+      id: parseInt(crypto.randomUUID().replace(/-/g, '').slice(0, 12), 16),
       type: "voice",
       sender: "me",
       time: new Date().toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }),

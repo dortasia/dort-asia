@@ -312,10 +312,12 @@ export default function AddEmployeeModal({ onClose, onSuccess }: Props) {
       setCompanyId(resolvedCompanyId);
 
       // Load departments
-      let { data: depts, error: deptsErr } = await supabase
+      let depts: any;
+      const { data: deptsResult, error: deptsErr } = await supabase
         .from("departments")
         .select("id, department_name, designations")
         .eq("company_id", resolvedCompanyId);
+      depts = deptsResult;
 
       if (deptsErr) console.error("Error fetching departments:", deptsErr);
 

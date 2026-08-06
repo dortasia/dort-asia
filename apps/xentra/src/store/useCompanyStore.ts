@@ -7,7 +7,7 @@ export interface CompanyProfile {
   company_name?: string
   logo_url?: string
   branch_location?: string
-  [key: string]: any
+  [key: string]: unknown
 }
 
 interface CompanyState {

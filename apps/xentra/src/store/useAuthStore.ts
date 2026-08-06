@@ -27,15 +27,6 @@ interface AuthState {
   can: (permission: Permission) => boolean
 }
 
-const mockDefaultUser: UserProfile = {
-  id: 'usr_mock_01',
-  email: 'alex.tan@xentra.io',
-  fullName: 'Alex Tan',
-  role: SYSTEM_ROLES.SUPER_ADMIN,
-  avatarUrl: '',
-  department: 'People Operations',
-  jobTitle: 'VP of Human Resources',
-}
 
 export const useAuthStore = create<AuthState>((set, get) => ({
   user: null,

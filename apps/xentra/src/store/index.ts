@@ -58,7 +58,7 @@ export interface CachedEmployee {
   date_of_birth?: string;
   created_at?: string;
   avatar_url?: string | null;
-  rawData?: any;
+  rawData?: Record<string, unknown>;
 }
 
 interface AppState {

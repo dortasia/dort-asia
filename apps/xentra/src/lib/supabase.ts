@@ -1,4 +1,5 @@
 import { createClient as createSSRClient } from "@/utils/supabase/client";
+import { createClient as createServerSupabase } from "@supabase/supabase-js";
 
 /**
  * Global authenticated Supabase client proxy that delegates to createBrowserClient,
@@ -19,14 +20,13 @@ export const supabase = new Proxy({} as ReturnType<typeof createSSRClient>, {
         );
       }
 
-      const { createClient } = require("@supabase/supabase-js");
-      const instance = createClient(supabaseUrl, supabaseAnonKey);
+      const instance = createServerSupabase(supabaseUrl, supabaseAnonKey);
       const val = instance[prop as keyof typeof instance];
-      return typeof val === 'function' ? (val as Function).bind(instance) : val;
+      return typeof val === 'function' ? (val as (...args: unknown[]) => unknown).bind(instance) : val;
     }
 
     const client = createSSRClient();
-    const value = (client as any)[prop];
-    return typeof value === 'function' ? value.bind(client) : value;
+    const value = (client as Record<string | symbol, unknown>)[prop];
+    return typeof value === 'function' ? (value as (...args: unknown[]) => unknown).bind(client) : value;
   }
 });

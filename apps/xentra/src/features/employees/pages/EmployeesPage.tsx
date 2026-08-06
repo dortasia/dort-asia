@@ -118,7 +118,7 @@ export function EmployeesPage() {
       }
 
       // Step 2: Fetch contact details separately (non-blocking — if it fails we still show employees)
-      let contactMap: Record<string, { mobile_code: string; current_mobile_number: string }> = {}
+      const contactMap: Record<string, { mobile_code: string; current_mobile_number: string }> = {}
       try {
         const { data: contactData } = await supabase
           .from('employee_contact_details')
@@ -133,7 +133,7 @@ export function EmployeesPage() {
       }
 
       // Step 3: Fetch department list separately for name lookup
-      let deptMap: Record<string, string> = {}
+      const deptMap: Record<string, string> = {}
       try {
         const { data: deptData } = await supabase
           .from('departments')

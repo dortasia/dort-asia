@@ -162,13 +162,13 @@ export default function OnboardingModal() {
     }
     // Limit HH to 12
     if (digits.length >= 2) {
-      let hh = parseInt(digits.slice(0, 2), 10);
+      const hh = parseInt(digits.slice(0, 2), 10);
       if (hh > 12) digits = '12' + digits.slice(2);
       if (hh === 0 && digits.length >= 2) digits = '12' + digits.slice(2); // 00 -> 12
     }
     // Limit MM to 59
     if (digits.length >= 4) {
-      let mm = parseInt(digits.slice(2, 4), 10);
+      const mm = parseInt(digits.slice(2, 4), 10);
       if (mm > 59) digits = digits.slice(0, 2) + '59';
     }
 
@@ -944,7 +944,7 @@ export default function OnboardingModal() {
     }
 
     if (!hasSkippedEmployees) {
-      let totalEmployees = deployedEmployees.length;
+      const totalEmployees = deployedEmployees.length;
       if (totalEmployees === 0) {
         setErrorLine("You must add at least 1 employee to proceed.");
         return;

@@ -2105,7 +2105,7 @@ export default function EditEmployeePage() {
       is_active: data.isActive ?? true,
     };
 
-    let newCustomFields: any = {};
+    const newCustomFields: any = {};
     if (customFieldsConfig && customFieldsConfig.length > 0) {
       customFieldsConfig.forEach((field: any) => {
         if (data[field.id] !== undefined) {
@@ -2421,15 +2421,15 @@ export default function EditEmployeePage() {
   };
 
   const getCalculatedTax = () => {
-    let salaryNum = parseFloat((formData.salary || "0").replace(/,/g, ''));
-    let sdl = Math.max(2, Math.min(11.25, salaryNum * 0.0025));
+    const salaryNum = parseFloat((formData.salary || "0").replace(/,/g, ''));
+    const sdl = Math.max(2, Math.min(11.25, salaryNum * 0.0025));
 
     if (formData.identityType === "FIN" || !formData.identityType) {
       return { cpfEmployee: 0, cpfEmployer: 0, sdl };
     }
 
-    let age = getAge(formData.dob);
-    let cappedSalary = Math.min(salaryNum, 6800);
+    const age = getAge(formData.dob);
+    const cappedSalary = Math.min(salaryNum, 6800);
 
     let empRate = 0;
     let employerRate = 0;
@@ -3681,7 +3681,7 @@ export default function EditEmployeePage() {
                                       type="text" 
                                       value={formData.customCpfEmployeeRate !== undefined ? formData.customCpfEmployeeRate : displayCpfEmployeeRate} 
                                       onChange={(e) => { 
-                                        let r = e.target.value; 
+                                        const r = e.target.value; 
                                         handleChange("customCpfEmployeeRate", r); 
                                         if (r === "") { 
                                           handleChange("customCpfEmployee", ""); 
@@ -3698,7 +3698,7 @@ export default function EditEmployeePage() {
                                     type="text" 
                                     value={formData.customCpfEmployee !== undefined ? formData.customCpfEmployee : displayCpfEmployee.toFixed(2)} 
                                     onChange={(e) => { 
-                                      let a = e.target.value; 
+                                      const a = e.target.value; 
                                       handleChange("customCpfEmployee", a); 
                                       if (a === "") { 
                                         handleChange("customCpfEmployeeRate", ""); 
@@ -3728,7 +3728,7 @@ export default function EditEmployeePage() {
                                     type="text" 
                                     value={formData.customCdacRate !== undefined ? formData.customCdacRate : (formData.shgContribution === "CDAC" ? displayCdacRate : "0.00")} 
                                     onChange={(e) => { 
-                                      let r = e.target.value; 
+                                      const r = e.target.value; 
                                       handleChange("customCdacRate", r); 
                                       if (formData.shgContribution !== "CDAC") handleChange("shgContribution", "CDAC"); 
                                       if (r !== "" && grossSalaryNum > 0) { 
@@ -3744,7 +3744,7 @@ export default function EditEmployeePage() {
                                   type="text" 
                                   value={formData.customCdacAmount !== undefined ? formData.customCdacAmount : (formData.shgContribution === "CDAC" ? formData.shgAmount : "0.00")} 
                                   onChange={(e) => { 
-                                    let a = e.target.value; 
+                                    const a = e.target.value; 
                                     if (formData.shgContribution !== "CDAC") handleChange("shgContribution", "CDAC"); 
                                     handleChange("customCdacAmount", a); 
                                     if (a !== "" && grossSalaryNum > 0) { 
@@ -3773,7 +3773,7 @@ export default function EditEmployeePage() {
                                     type="text" 
                                     value={formData.customSindaRate !== undefined ? formData.customSindaRate : (formData.shgContribution === "SINDA" ? displaySindaRate : "0.00")} 
                                     onChange={(e) => { 
-                                      let r = e.target.value; 
+                                      const r = e.target.value; 
                                       handleChange("customSindaRate", r); 
                                       if (formData.shgContribution !== "SINDA") handleChange("shgContribution", "SINDA"); 
                                       if (r !== "" && grossSalaryNum > 0) { 
@@ -3789,7 +3789,7 @@ export default function EditEmployeePage() {
                                   type="text" 
                                   value={formData.customSindaAmount !== undefined ? formData.customSindaAmount : (formData.shgContribution === "SINDA" ? formData.shgAmount : "0.00")} 
                                   onChange={(e) => { 
-                                    let a = e.target.value; 
+                                    const a = e.target.value; 
                                     if (formData.shgContribution !== "SINDA") handleChange("shgContribution", "SINDA"); 
                                     handleChange("customSindaAmount", a); 
                                     if (a !== "" && grossSalaryNum > 0) { 
@@ -3818,7 +3818,7 @@ export default function EditEmployeePage() {
                                     type="text" 
                                     value={formData.customMbmfRate !== undefined ? formData.customMbmfRate : (formData.shgContribution === "MBMF" ? displayMbmfRate : "0.00")} 
                                     onChange={(e) => { 
-                                      let r = e.target.value; 
+                                      const r = e.target.value; 
                                       handleChange("customMbmfRate", r); 
                                       if (formData.shgContribution !== "MBMF") handleChange("shgContribution", "MBMF"); 
                                       if (r !== "" && grossSalaryNum > 0) { 
@@ -3834,7 +3834,7 @@ export default function EditEmployeePage() {
                                   type="text" 
                                   value={formData.customMbmfAmount !== undefined ? formData.customMbmfAmount : (formData.shgContribution === "MBMF" ? formData.shgAmount : "0.00")} 
                                   onChange={(e) => { 
-                                    let a = e.target.value; 
+                                    const a = e.target.value; 
                                     if (formData.shgContribution !== "MBMF") handleChange("shgContribution", "MBMF"); 
                                     handleChange("customMbmfAmount", a); 
                                     if (a !== "" && grossSalaryNum > 0) { 
@@ -3863,7 +3863,7 @@ export default function EditEmployeePage() {
                                     type="text" 
                                     value={formData.customEcfRate !== undefined ? formData.customEcfRate : (formData.shgContribution === "ECF" ? displayEcfRate : "0.00")} 
                                     onChange={(e) => { 
-                                      let r = e.target.value; 
+                                      const r = e.target.value; 
                                       handleChange("customEcfRate", r); 
                                       if (formData.shgContribution !== "ECF") handleChange("shgContribution", "ECF"); 
                                       if (r !== "" && grossSalaryNum > 0) { 
@@ -3879,7 +3879,7 @@ export default function EditEmployeePage() {
                                   type="text" 
                                   value={formData.customEcfAmount !== undefined ? formData.customEcfAmount : (formData.shgContribution === "ECF" ? formData.shgAmount : "0.00")} 
                                   onChange={(e) => { 
-                                    let a = e.target.value; 
+                                    const a = e.target.value; 
                                     if (formData.shgContribution !== "ECF") handleChange("shgContribution", "ECF"); 
                                     handleChange("customEcfAmount", a); 
                                     if (a !== "" && grossSalaryNum > 0) { 
@@ -3936,7 +3936,7 @@ export default function EditEmployeePage() {
                                       type="text" 
                                       value={formData.customCpfEmployerRate !== undefined ? formData.customCpfEmployerRate : displayCpfEmployerRate} 
                                       onChange={(e) => { 
-                                        let r = e.target.value; 
+                                        const r = e.target.value; 
                                         handleChange("customCpfEmployerRate", r); 
                                         if (r === "") { 
                                           handleChange("customCpfEmployer", ""); 
@@ -3953,7 +3953,7 @@ export default function EditEmployeePage() {
                                     type="text" 
                                     value={formData.customCpfEmployer !== undefined ? formData.customCpfEmployer : displayCpfEmployer.toFixed(2)} 
                                     onChange={(e) => { 
-                                      let a = e.target.value; 
+                                      const a = e.target.value; 
                                       handleChange("customCpfEmployer", a); 
                                       if (a === "") { 
                                         handleChange("customCpfEmployerRate", ""); 
@@ -3983,7 +3983,7 @@ export default function EditEmployeePage() {
                                     type="text" 
                                     value={formData.customSdlRate !== undefined ? formData.customSdlRate : displaySdlRate} 
                                     onChange={(e) => { 
-                                      let r = e.target.value; 
+                                      const r = e.target.value; 
                                       handleChange("customSdlRate", r); 
                                       if (r === "") { 
                                         handleChange("customSdl", ""); 
@@ -4000,7 +4000,7 @@ export default function EditEmployeePage() {
                                   type="text" 
                                   value={formData.customSdl !== undefined ? formData.customSdl : displaySdl.toFixed(2)} 
                                   onChange={(e) => { 
-                                    let a = e.target.value; 
+                                    const a = e.target.value; 
                                     handleChange("customSdl", a); 
                                     if (a === "") { 
                                       handleChange("customSdlRate", ""); 

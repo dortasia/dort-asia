@@ -170,9 +170,9 @@ export function DepartmentsPage() {
             <div className="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-6 items-start">
               {filteredDepts.map((dept, index) => {
                 // Get employees for this dept
-                const deptEmps = employees.filter(e => e.department_id === dept.id)
+                const deptEmps = employees.filter((e: any) => e.department_id === dept.id)
                 // Get unique designations
-                const uniqueDesignations = Array.from(new Set(deptEmps.map(e => e.designation).filter(Boolean)))
+                const uniqueDesignations = Array.from(new Set(deptEmps.map((e: any) => e.designation).filter(Boolean)))
                 
                 // Dynamic Colors from DB with fallback
                 const fallbackThemes = [

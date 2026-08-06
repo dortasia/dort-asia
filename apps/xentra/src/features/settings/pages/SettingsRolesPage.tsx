@@ -138,7 +138,7 @@ export function SettingsRolesPage() {
   }, [company?.id])
 
   // 2. Fetch Company Settings
-  const { data: roleSettingsData = {}, isLoading: isQueryLoading } = useQuery<any>({
+  const { data: roleSettingsData = {}, isLoading: isQueryLoading } = useQuery<Record<string, Record<string, boolean>>>({
     queryKey: ['company_settings', 'roles', companyId],
     queryFn: async () => {
       if (!companyId) return {}

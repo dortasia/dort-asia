@@ -76,7 +76,7 @@ export function useOrgChart(): UseOrgChartResult {
       const _hasAvatarUrl = "avatar_url" in firstRow;
       const _hasIsHead    = "is_head" in firstRow;
 
-      const mapped: OrgEmployee[] = rows.map((row: any) => ({
+      const mapped: OrgEmployee[] = rows.map((row: Record<string, unknown> & { departments?: { department_name?: string } }) => ({
         id: row.id,
         full_name: row.name ?? row.full_name ?? "",
         role: row.role ?? row.designation ?? "",

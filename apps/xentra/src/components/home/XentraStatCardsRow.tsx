@@ -64,18 +64,18 @@ export default function XentraStatCardsRow() {
           .select("id, is_active, passport_expiry_date, work_pass_expiry_date")
           .eq("company_id", companyId);
         
-        let deptQuery = supabase
+        const deptQuery = supabase
           .from("departments")
           .select("id", { count: "exact", head: true })
           .eq("company_id", companyId);
 
-        let leaveQuery = supabase
+        const leaveQuery = supabase
           .from("leave_requests")
           .select("id", { count: "exact", head: true })
           .eq("company_id", companyId)
           .eq("status", "pending");
 
-        let claimsQuery = supabase
+        const claimsQuery = supabase
           .from("claims")
           .select("id", { count: "exact", head: true })
           .eq("company_id", companyId)

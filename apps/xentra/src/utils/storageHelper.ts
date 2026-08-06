@@ -1,3 +1,5 @@
+import type { SupabaseClient } from '@supabase/supabase-js';
+
 /**
  * storageHelper.ts — Standardized Supabase Storage Utility
  *
@@ -240,7 +242,7 @@ export function getTempUploadPath(
  * Uploads an employee profile photo to `employee-profiles` bucket
  */
 export async function uploadEmployeeProfilePhoto(
-  supabase: any,
+  supabase: SupabaseClient,
   companyId: string,
   employeeId: string,
   file: File | Blob,
@@ -267,7 +269,7 @@ export async function uploadEmployeeProfilePhoto(
  * Uploads an employee document to `employee-documents` bucket
  */
 export async function uploadEmployeeDocument(
-  supabase: any,
+  supabase: SupabaseClient,
   companyId: string,
   employeeId: string,
   docCategory: EmployeeDocCategory,
@@ -290,7 +292,7 @@ export async function uploadEmployeeDocument(
  * Uploads a company asset (logo, favicon, etc.) to `company-assets` bucket
  */
 export async function uploadCompanyAsset(
-  supabase: any,
+  supabase: SupabaseClient,
   companyId: string,
   assetCategory: CompanyAssetCategory,
   file: File | Blob,
@@ -317,7 +319,7 @@ export async function uploadCompanyAsset(
  * Legacy support for uploadToCompanyStorage
  */
 export async function uploadToCompanyStorage(
-  supabase: any,
+  supabase: SupabaseClient,
   params: {
     companyId: string;
     companySlug?: string;

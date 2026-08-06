@@ -66,7 +66,7 @@ export function SettingsLeavePage() {
   const [deleteTemplateId, setDeleteTemplateId] = useState<string | null>(null)
   const [deleteConfirmText, setDeleteConfirmText] = useState('')
 
-  const templateToDelete = templates.find(t => t.id === deleteTemplateId)
+  const templateToDelete = templates.find((t: any) => t.id === deleteTemplateId)
   const canDelete = templateToDelete?.template_name === deleteConfirmText
 
   const [isAddTemplateOpen, setIsAddTemplateOpen] = useState(false)

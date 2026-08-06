@@ -89,7 +89,7 @@ export default function GeofenceMap({ currentSite, allSites, showOtherSites, onL
       fillOpacity: 0.15,
       visible: hasPos,
     })
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+   
   }, [])
 
   const onUnmount = useCallback(() => {
