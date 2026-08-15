@@ -2,13 +2,14 @@ import { NextResponse } from 'next/server';
 import { stripe } from '@/utils/stripe/config';
 import { createClient } from '@supabase/supabase-js';
 
-// We need a service role key to bypass RLS and insert/update the subscriptions table
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-
-const supabase = createClient(supabaseUrl, supabaseServiceRoleKey);
+export const dynamic = 'force-dynamic';
 
 export async function POST(req: Request) {
+  // Initialize inside handler so env vars are available at runtime, not build time
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
   const body = await req.text();
   const signature = req.headers.get('stripe-signature') as string;
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
