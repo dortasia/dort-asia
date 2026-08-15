@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
+import { getURL } from '@/lib/utils';
 import { stripe } from '@/utils/stripe/config';
 import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 
@@ -93,7 +94,9 @@ export async function POST(req: Request) {
       });
     }
 
-    const origin = req.headers.get('origin') || process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+    // Use getURL() and remove trailing slash since success_url/cancel_url paths start with /
+    const origin = getURL(req).replace(/\/$/, '');
+
 
     const sessionParams: any = {
       payment_method_types: ['card'], 

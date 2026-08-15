@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Your One Time Password</title>
+  
+  <!-- Fallback for Windows Outlook -->
+  <!--[if mso]>
+  <noscript>
+    <xml>
+      <o:OfficeDocumentSettings>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
+  </noscript>
+  <![endif]-->
+
+  <style type="text/css">
+    /* Email Reset Styles */
+    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+    table { border-collapse: collapse !important; }
+    body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; background-color: #f4f5f7; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+    
+    /* Responsive Styles for Mobile */
+    @media screen and (max-width: 600px) {
+      .otp-box { width: 40px !important; height: 48px !important; font-size: 24px !important; }
+      .otp-space { width: 5px !important; }
+      .main-card { width: 100% !important; border-radius: 0 !important; box-shadow: none !important; border: none !important; }
+      .wrapper { padding: 0 !important; }
+      .content-padding { padding: 40px 20px 30px 20px !important; }
+      .header-padding { padding: 25px 20px !important; }
+    }
+  </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f4f5f7; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+
+  <!-- Outer Wrapper -->
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f4f5f7; padding: 40px 20px;" class="wrapper">
+    <tr>
+      <td align="center" style="padding: 40px 20px;" class="wrapper">
+        
+        <!-- Main Content Card (Inspired by Image 2 floating layout) -->
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" style="background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.04); border: 1px solid #e5e7eb; margin: 0 auto;" class="main-card">
+          
+          <!-- Black Header (Inspired by Image 1) -->
+          <tr>
+            <td align="center" style="background-color: #000000; padding: 35px 20px;" class="header-padding">
+              <!-- DORT ASIA Logo -->
+              <img src="https://zirmlijktxaboztjojed.supabase.co/storage/v1/object/public/Dort%20Asia%20Stocks/Dort-asia-full-white-logo.png" alt="DORT ASIA" width="160" style="display: block; max-width: 100%; height: auto; color: #ffffff; font-size: 24px; font-weight: bold; text-decoration: none; letter-spacing: 2px;" />
+            </td>
+          </tr>
+          
+          <!-- Body Content -->
+          <tr>
+            <td align="center" style="padding: 45px 30px 40px 30px;" class="content-padding">
+              
+              <h1 style="margin: 0 0 35px 0; color: #4b5563; font-size: 24px; font-weight: 600; letter-spacing: -0.5px;">Your One Time Password!</h1>
+              
+              <!-- OTP Box (Single Gray Card) -->
+              <!-- In Supabase Dashboard, {{ .Token }} is the 6-digit OTP code -->
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0" style="margin: 0 auto;">
+                <tr>
+                  <td align="center" valign="middle" style="background-color: #e5e7eb; border-radius: 12px; padding: 20px 50px; font-size: 36px; font-weight: bold; color: #2b7fff; text-align: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; letter-spacing: 16px;">
+                    {{ .Token }}
+                  </td>
+                </tr>
+              </table>
+              
+              <div style="height: 40px; font-size: 1px; line-height: 1px;">&nbsp;</div>
+
+              <p style="margin: 0; color: #6b7280; font-size: 14px; line-height: 1.6; font-weight: 400;">
+                This OTP is valid for 5 minutes. Please do not share this OTP with anyone.
+              </p>
+              
+            </td>
+          </tr>
+          
+          <!-- Bottom Contact Line & Social Links -->
+          <tr>
+            <td align="center" style="padding: 0 30px 40px 30px;">
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td style="border-top: 1px solid #f3f4f6; padding-top: 25px;" align="center">
+                    <p style="margin: 0 0 15px 0; color: #9ca3af; font-size: 13px; line-height: 1.5;">
+                      Contact email: <a href="mailto:enquiry@dortasia.com" style="color: #6b7280; text-decoration: none;">enquiry@dortasia.com</a>, <a href="mailto:support@dortasia.com" style="color: #6b7280; text-decoration: none;">support@dortasia.com</a>
+                    </p>
+                    
+                    <!-- Social Icons (Inline SVG - no external requests) -->
+                    <table role="presentation" border="0" cellpadding="0" cellspacing="0" style="margin: 0 auto;">
+                      <tr>
+                        <!-- Instagram -->
+                        <td align="center" style="padding: 0 10px;">
+                          <a href="https://www.instagram.com/dortasiaig?igsh=MThwaGNkMWVlaDl0Yg==" target="_blank" style="text-decoration: none; display: inline-block;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                          </a>
+                        </td>
+                        <!-- LinkedIn -->
+                        <td align="center" style="padding: 0 10px;">
+                          <a href="https://www.linkedin.com/company/dort-asia/" target="_blank" style="text-decoration: none; display: inline-block;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                              <rect x="2" y="9" width="4" height="12"></rect>
+                              <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                          </a>
+                        </td>
+                        <!-- X / Twitter -->
+                        <td align="center" style="padding: 0 10px;">
+                          <a href="https://x.com/dortasia?s=11" target="_blank" style="text-decoration: none; display: inline-block;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#9ca3af">
+                              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L2.025 2.25H8.28l4.255 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/>
+                            </svg>
+                          </a>
+                        </td>
+                        <!-- YouTube -->
+                        <td align="center" style="padding: 0 10px;">
+                          <a href="https://youtube.com/@dortasiayt?si=4W9whVtgUmn1UsXh" target="_blank" style="text-decoration: none; display: inline-block;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.97C5.12 20 12 20 12 20s6.88 0 8.59-.45a2.78 2.78 0 0 0 1.95-1.97A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"></path>
+                              <polygon fill="#9ca3af" stroke="none" points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon>
+                            </svg>
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+        </table>
+        
+        <!-- Bottom Space Padding -->
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+          <tr><td height="40" style="font-size: 1px; line-height: 1px;">&nbsp;</td></tr>
+        </table>
+
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>

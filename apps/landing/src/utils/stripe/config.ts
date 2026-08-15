@@ -8,7 +8,7 @@ export const stripe = new Stripe(
     apiVersion: '2026-07-29.dahlia', // Explicit version
     appInfo: {
       name: 'Dort Asia',
-      url: 'https://dortasia.com',
+      url: process.env.NEXT_PUBLIC_SITE_URL || 'https://dortasia.com',
     },
   }
 );

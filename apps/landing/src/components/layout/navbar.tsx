@@ -24,6 +24,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { AuthModal } from "@/components/auth/AuthModal";
 
+import { getCrossAppUrl } from "@/config/urls";
+
 const NAV_LINKS = [
   { name: "Services", href: "/#services", icon: ServiceIcon, hasDropdown: false },
   { name: "About us", href: "/#about", icon: OfficeIcon, hasDropdown: false },
@@ -38,7 +40,7 @@ const PRODUCTS = [
     description: "Complete HR, Payroll & Workforce Management",
     logoSrc: "/apps-logo/xentra-bluelogo.svg",
     icon: UserGroupIcon,
-    url: "https://xentrapeople.dortasia.com",
+    url: getCrossAppUrl('xentraPeople'),
   },
   {
     name: "Xentra Paynote",
@@ -47,7 +49,7 @@ const PRODUCTS = [
     logoSrc: "/apps-logo/xentra_paynote.svg",
     bgClass: "bg-gradient-to-b from-[#27272a] via-[#18181b] to-[#09090b] border-zinc-700/60",
     icon: Wallet02Icon,
-    url: "https://xentrapaynote.dortasia.com",
+    url: getCrossAppUrl('xentraPaynote'),
   },
 ];
 

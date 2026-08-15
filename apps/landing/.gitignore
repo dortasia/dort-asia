@@ -40,6 +40,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-public/fonts/SF-Pro.otf
 .vercel
 .env*

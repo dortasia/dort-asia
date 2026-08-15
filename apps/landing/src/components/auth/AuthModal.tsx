@@ -6,6 +6,7 @@ import Image from "next/image";
 import { XIcon, Eye, EyeOff, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
+import { getURL } from "@/lib/utils";
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -124,7 +125,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${window.location.origin}/auth/callback?next=/dashboard`,
+        redirectTo: `${getURL()}auth/callback?next=/dashboard`,
       },
     });
   };
