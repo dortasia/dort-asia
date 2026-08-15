@@ -5,6 +5,9 @@ import { ApproachSection } from "@/components/sections/approach";
 import { SoftwareProductsSection } from "@/components/sections/software-products";
 import { CustomTechnologySection } from "@/components/sections/custom-technology";
 
+export const dynamic = 'force-dynamic';
+
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-white">
