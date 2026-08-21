@@ -136,18 +136,18 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-6 sm:mt-7 flex items-center bg-white rounded-full p-1 sm:p-1.5 shadow-[0_2px_14px_rgba(0,0,0,0.08)] md:shadow-none border border-gray-100 max-w-md w-full mx-auto"
+            className="mt-6 sm:mt-7 hidden md:flex items-center bg-white rounded-full p-1.5 md:shadow-none max-w-md w-full mx-auto"
           >
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email..."
-              className="flex-1 bg-transparent border-none outline-none text-[13.5px] sm:text-[14.5px] font-medium text-gray-800 placeholder:text-gray-400 px-3.5 sm:px-5 py-1.5 sm:py-2 min-w-0"
+              className="flex-1 bg-transparent border-none outline-none text-[14.5px] font-medium text-gray-800 placeholder:text-gray-400 px-5 py-2 min-w-0"
             />
             <button
               type="submit"
-              className="bg-[#2b7fff] hover:bg-[#1a6eff] text-white px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-semibold text-[13.5px] sm:text-[14.5px] tracking-tight transition-colors whitespace-nowrap shadow-none cursor-pointer"
+              className="bg-[#2b7fff] hover:bg-[#1a6eff] text-white px-6 py-2.5 rounded-full font-semibold text-[14.5px] tracking-tight transition-colors whitespace-nowrap shadow-none cursor-pointer"
             >
               Request
             </button>
