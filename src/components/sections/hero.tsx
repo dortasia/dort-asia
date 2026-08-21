@@ -74,8 +74,8 @@ export function Hero() {
           quality={100}
         />
 
-        {/* Mobile portrait hero background image (Bottom Cropped) */}
-        <div className="w-full h-[520px] xs:h-[580px] sm:h-[640px] overflow-hidden relative block md:hidden rounded-b-2xl">
+        {/* Mobile portrait hero background image (Slightly Increased Bottom) */}
+        <div className="w-full h-[580px] xs:h-[640px] sm:h-[700px] overflow-hidden relative block md:hidden rounded-b-2xl">
           <Image
             src="/img_assets/hero-section-mobile.avif"
             alt="Dort Asia Hero Section"
@@ -87,8 +87,8 @@ export function Hero() {
           />
         </div>
 
-        {/* Hero Content Overlay */}
-        <div className="absolute top-[11%] xs:top-[13%] sm:top-[15%] md:top-[22%] lg:top-[20%] left-0 right-0 px-4 sm:px-6 flex flex-col items-center z-10">
+        {/* Hero Content Overlay (Centered in upper region) */}
+        <div className="absolute top-[13%] xs:top-[15%] sm:top-[17%] md:top-[22%] lg:top-[20%] left-0 right-0 px-4 sm:px-6 flex flex-col items-center justify-center z-10">
           <h1 className="sr-only">
             One Platform. Every Business. Infinite Possibilities.
           </h1>
