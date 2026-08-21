@@ -54,12 +54,12 @@ export function Hero() {
   const currentWord = ANIMATED_WORDS[wordIndex];
 
   return (
-    <section className="relative w-full pt-0 pb-8 px-0 md:px-[16px] bg-white">
+    <section className="relative w-full pt-0 pb-0 md:pb-8 px-0 md:px-[16px] bg-white">
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="relative w-full bg-white flex items-center justify-center min-h-[580px] xs:min-h-[640px] sm:min-h-[720px] md:min-h-0 overflow-hidden md:overflow-visible rounded-none md:rounded-b-2xl border-none outline-none ring-0 shadow-none"
+        className="relative w-full bg-white flex flex-col items-center justify-start pt-[105px] xs:pt-[115px] sm:pt-[125px] md:pt-0 md:justify-center min-h-[100dvh] md:min-h-0 overflow-hidden md:overflow-visible rounded-none md:rounded-b-2xl border-none outline-none ring-0 shadow-none"
       >
         {/* Desktop landscape hero background image */}
         <Image
@@ -72,21 +72,21 @@ export function Hero() {
           quality={100}
         />
 
-        {/* Mobile portrait hero background image (Full-Fit) */}
+        {/* Mobile portrait hero background image (Full-Page 100dvh) */}
         <div className="absolute inset-0 w-full h-full md:hidden pointer-events-none">
           <Image
             src="/img_assets/hero-section-mobile.avif"
             alt="Dort Asia Hero Section"
             fill
             sizes="100vw"
-            className="object-cover object-center"
+            className="object-cover object-bottom"
             priority
             quality={100}
           />
         </div>
 
         {/* Hero Content Overlay */}
-        <div className="relative md:absolute z-10 w-full md:top-[22%] lg:top-[20%] left-0 right-0 px-4 sm:px-6 py-14 sm:py-16 md:py-0 flex flex-col items-center">
+        <div className="relative md:absolute z-10 w-full md:top-[22%] lg:top-[20%] left-0 right-0 px-4 sm:px-6 flex flex-col items-center">
           <h1 className="sr-only">
             One Platform. Every Business. Infinite Possibilities.
           </h1>
@@ -95,9 +95,9 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-[21px] sm:text-2xl md:text-3xl lg:text-[40px] font-bold text-[#0a1128] tracking-tight text-center leading-[1.3] flex flex-wrap items-center justify-center gap-y-1.5"
+            className="text-[22px] xs:text-[24px] sm:text-2xl md:text-3xl lg:text-[40px] font-bold text-[#0a1128] tracking-tight text-center leading-[1.26] flex flex-wrap items-center justify-center gap-x-1.5 gap-y-2 max-w-[340px] xs:max-w-sm sm:max-w-xl md:max-w-none"
           >
-            <span className="mr-1.5 sm:mr-2">One Platform. Every</span>
+            <span>One Platform. Every</span>
 
             {/* Apple-styled Tumbler Animated Pill Bar */}
             <span className="inline-flex items-center relative overflow-hidden h-[38px] sm:h-[44px] md:h-[50px] lg:h-[54px] px-3.5 sm:px-4 md:px-5 py-1 rounded-full bg-white shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-gray-100/60 align-middle">
@@ -119,14 +119,14 @@ export function Hero() {
               </AnimatePresence>
             </span>
 
-            <span className="ml-1 sm:ml-0.5">. Infinite Possibilities.</span>
+            <span>Infinite Possibilities.</span>
           </motion.div>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-[13.5px] sm:text-[14px] md:text-[16px] text-gray-500 max-w-[760px] text-center mt-3 sm:mt-3.5 leading-relaxed font-medium px-2 sm:px-0"
+            className="text-[13.5px] sm:text-[14px] md:text-[16px] text-gray-600 md:text-gray-500 max-w-[330px] sm:max-w-[480px] md:max-w-[760px] text-center mt-3 sm:mt-3.5 leading-relaxed font-medium px-2 sm:px-0"
           >
             We deliver business software, digital solutions, and skilled technology professionals that help organizations strengthen operations, accelerate innovation, and scale.
           </motion.p>
