@@ -1,0 +1,83 @@
+| Section           | Field                 | Input Type        | Applies To       | Required |
+| ----------------- | --------------------- | ----------------- | ---------------- | -------- |
+| **Employee Type** | Employee Type         | Dropdown          | Everyone         | ✅        |
+|                   | Employment Type       | Dropdown          | Everyone         | ✅        |
+| **Personal**      | Legal Full Name       | Text              | Everyone         | ✅        |
+|                   | Preferred Name        | Text              | Everyone         | ❌        |
+|                   | Date of Birth         | Date              | Everyone         | ✅        |
+|                   | Gender                | Dropdown          | Everyone         | ✅        |
+|                   | Nationality           | Country Dropdown  | Everyone         | ✅        |
+|                   | Country of Birth      | Country Dropdown  | Everyone         | ❌        |
+|                   | Mobile Number         | Phone             | Everyone         | ✅        |
+|                   | Personal Email        | Email             | Everyone         | ✅        |
+|                   | Residential Address   | Address           | Everyone         | ✅        |
+|                   | Postal Code           | Text              | Everyone         | ✅        |
+|                   | Marital Status        | Dropdown          | Everyone         | ❌        |
+| **Identity**      | ID Type               | Auto/Dropdown     | Everyone         | ✅        |
+|                   | NRIC Number           | Text              | Citizen / PR     | ✅        |
+|                   | FIN Number            | Text              | Foreign Employee | ✅        |
+|                   | Passport Number       | Text              | Foreign Employee | ✅        |
+|                   | Passport Expiry       | Date              | Foreign Employee | ✅        |
+| **Employment**    | Employee ID           | Auto-generated    | Everyone         | ✅        |
+|                   | Company               | Dropdown          | Everyone         | ✅        |
+|                   | Site / Location       | Dropdown          | Everyone         | ❌        |
+|                   | Department            | Dropdown          | Everyone         | ✅        |
+|                   | Designation           | Dropdown/Text     | Everyone         | ✅        |
+|                   | Reporting Manager     | Employee Dropdown | Everyone         | ❌        |
+|                   | Date Joined           | Date              | Everyone         | ✅        |
+|                   | Probation End Date    | Date              | Everyone         | ❌        |
+|                   | Confirmation Date     | Date              | Everyone         | ❌        |
+|                   | Contract Start Date   | Date              | Contract         | ✅        |
+|                   | Contract End Date     | Date              | Contract         | ❌        |
+| **Work Pass**     | Work Pass Type        | Dropdown          | Foreign Employee | ✅        |
+|                   | Work Pass Number      | Text              | Foreign Employee | ✅        |
+|                   | Issue Date            | Date              | Foreign Employee | ❌        |
+|                   | Expiry Date           | Date              | Foreign Employee | ✅        |
+|                   | Pass Status           | Auto              | Foreign Employee | ✅        |
+| **Payroll**       | Salary Type           | Dropdown          | Everyone         | ✅        |
+|                   | Basic Salary          | Currency          | Everyone         | ✅        |
+|                   | Pay Frequency         | Dropdown          | Everyone         | ✅        |
+|                   | Payment Method        | Dropdown          | Everyone         | ✅        |
+|                   | Allowances            | Currency/Repeater | Everyone         | ❌        |
+|                   | Overtime Eligibility  | Toggle            | Everyone         | ❌        |
+|                   | Bonus / Commission    | Currency/Rules    | Applicable       | ❌        |
+| **CPF**           | CPF Applicable        | Auto              | Citizen / PR     | ✅        |
+|                   | PR Effective Date     | Date              | PR               | ❌        |
+| **Bank**          | Bank Name             | Dropdown          | Everyone         | ✅        |
+|                   | Account Holder Name   | Text              | Everyone         | ✅        |
+|                   | Account Number        | Text              | Everyone         | ✅        |
+| **Emergency**     | Contact Name          | Text              | Everyone         | ✅        |
+|                   | Relationship          | Dropdown          | Everyone         | ✅        |
+|                   | Contact Number        | Phone             | Everyone         | ✅        |
+|                   | Email                 | Email             | Everyone         | ❌        |
+| **Education**     | Highest Qualification | Dropdown          | Everyone         | ❌        |
+|                   | Institution           | Text              | Everyone         | ❌        |
+|                   | Field of Study        | Text              | Everyone         | ❌        |
+|                   | Graduation Year       | Year              | Everyone         | ❌        |
+| **Documents**     | Document Type         | Dropdown          | Everyone         | ❌        |
+|                   | Document Number       | Text              | Applicable       | ❌        |
+|                   | Issue Date            | Date              | Applicable       | ❌        |
+|                   | Expiry Date           | Date              | Applicable       | ❌        |
+|                   | Document File         | File Upload       | Applicable       | ❌        |
+|                   | Verification Status   | Auto/Dropdown     | HR               | ❌        |
+
+
+schema 
+| Table                | Fields from your form                                                                           | Purpose                           |
+| -------------------- | ----------------------------------------------------------------------------------------------- | --------------------------------- |
+| `employees`          | Employee ID, Employee Type, Employment Type, status                                             | Core employee identity            |
+| `personal_details`   | Legal Name, Preferred Name, DOB, Gender, Nationality, Country of Birth, Marital Status          | Personal information              |
+| `contact_details`    | Mobile, Personal Email                                                                          | Contact information               |
+| `addresses`          | Residential Address, Postal Code                                                                | Address                           |
+| `identity_details`   | ID Type, NRIC, FIN, Passport Number, Passport Expiry                                            | Identity                          |
+| `employment_details` | Company, Site, Department, Designation, Reporting Manager, Date Joined, Probation, Confirmation | Employment                        |
+| `contracts`          | Contract Start, Contract End                                                                    | Contract-specific data            |
+| `work_passes`        | Pass Type, Pass Number, Issue Date, Expiry Date, Pass Status                                    | Foreign employee immigration data |
+| `salary_details`     | Salary Type, Basic Salary, Pay Frequency                                                        | Current salary configuration      |
+| `salary_components`  | Allowances, Bonus, Commission, Overtime Eligibility                                             | Salary components                 |
+| `cpf_details`        | CPF Applicable, PR Effective Date                                                               | CPF information                   |
+| `bank_details`       | Bank Name, Account Holder, Account Number, Payment Method                                       | Salary payment                    |
+| `emergency_contacts` | Contact Name, Relationship, Contact Number, Email                                               | Emergency contacts                |
+| `education`          | Qualification, Institution, Field, Graduation Year                                              | Education                         |
+| `documents`          | Document Type, Number, Issue/Expiry Date, File, Verification Status                             | Document metadata                 |
+

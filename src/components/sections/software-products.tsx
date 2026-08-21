@@ -117,7 +117,6 @@ export function SoftwareProductsSection() {
                 alt="Xentra People Platform"
                 fill
                 className="object-contain object-center p-2 sm:p-4"
-                priority
               />
             </div>
 

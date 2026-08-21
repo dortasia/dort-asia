@@ -3,7 +3,9 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { XIcon, Eye, EyeOff, Loader2 } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { UserRemove01Icon, UserAdd01Icon, Cancel01Icon } from "@hugeicons/core-free-icons";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 import { getURL } from "@/lib/utils";
@@ -11,11 +13,22 @@ import { getURL } from "@/lib/utils";
 interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
+  initialTab?: "signin" | "signup" | "otp";
+  initialEmail?: string;
+  redirectUrl?: string;
+  promptAccountNotFound?: boolean;
 }
 
-export function AuthModal({ isOpen, onClose }: AuthModalProps) {
-  const [activeTab, setActiveTab] = useState<"signin" | "signup" | "otp">("signin");
-  const [email, setEmail] = useState("");
+export function AuthModal({ 
+  isOpen, 
+  onClose,
+  initialTab = "signin",
+  initialEmail = "",
+  redirectUrl = "/dashboard",
+  promptAccountNotFound = false,
+}: AuthModalProps) {
+  const [activeTab, setActiveTab] = useState<"signin" | "signup" | "otp">(initialTab);
+  const [email, setEmail] = useState(initialEmail);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -25,11 +38,18 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
   
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [isUserNotFound, setIsUserNotFound] = useState(promptAccountNotFound);
   const supabase = createClient();
   const router = useRouter();
   
   const [timer, setTimer] = useState(0);
   const [resendAttempt, setResendAttempt] = useState(0);
+
+  useEffect(() => {
+    if (initialEmail) setEmail(initialEmail);
+    if (initialTab) setActiveTab(initialTab);
+    if (promptAccountNotFound) setIsUserNotFound(true);
+  }, [initialEmail, initialTab, promptAccountNotFound]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -41,8 +61,19 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
     return () => clearInterval(interval);
   }, [activeTab, timer]);
 
+  const handleNavigateRedirect = (url: string) => {
+    onClose();
+    if (url.startsWith("http://") || url.startsWith("https://")) {
+      window.location.href = url;
+    } else {
+      router.push(url);
+      router.refresh();
+    }
+  };
+
   const handleContinue = async () => {
     setErrorMsg("");
+    setIsUserNotFound(false);
     setIsLoading(true);
 
     if (activeTab === "signup") {
@@ -80,15 +111,18 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
           setResendAttempt(1);
           setActiveTab("otp");
           setErrorMsg("Email not confirmed yet. Please enter the OTP code.");
-        } else if (error.message.toLowerCase().includes("invalid login credentials")) {
-          setErrorMsg("Company has no account. Please check your credentials or sign up.");
+        } else if (
+          error.message.toLowerCase().includes("invalid login credentials") || 
+          error.message.toLowerCase().includes("user not found") ||
+          error.message.toLowerCase().includes("invalid grant")
+        ) {
+          setIsUserNotFound(true);
+          setErrorMsg("Uh oh! User account not found. Please sign in with valid credentials or create a new account.");
         } else {
           setErrorMsg(error.message);
         }
       } else {
-        router.push("/dashboard");
-        router.refresh();
-        onClose();
+        handleNavigateRedirect(redirectUrl);
       }
     }
     setIsLoading(false);
@@ -114,18 +148,17 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
     if (error) {
       setErrorMsg(error.message);
     } else {
-      router.push("/dashboard");
-      router.refresh();
-      onClose();
+      handleNavigateRedirect(redirectUrl);
     }
     setIsLoading(false);
   };
 
   const handleGoogleSignIn = async () => {
+    const nextPath = encodeURIComponent(redirectUrl);
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${getURL()}auth/callback?next=/dashboard`,
+        redirectTo: `${getURL()}auth/callback?next=${nextPath}`,
       },
     });
   };
@@ -161,7 +194,26 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
   };
 
   const handleOtpChange = (index: number, value: string) => {
-    const char = value.slice(-1);
+    const cleaned = value.replace(/\D/g, "");
+    if (!cleaned) {
+      const newOtpValues = [...otpValues];
+      newOtpValues[index] = "";
+      setOtpValues(newOtpValues);
+      return;
+    }
+
+    if (cleaned.length > 1) {
+      const newOtpValues = [...otpValues];
+      for (let i = 0; i < cleaned.length && index + i < 6; i++) {
+        newOtpValues[index + i] = cleaned[i];
+      }
+      setOtpValues(newOtpValues);
+      const nextIndex = Math.min(index + cleaned.length, 5);
+      otpInputRefs.current[nextIndex]?.focus();
+      return;
+    }
+
+    const char = cleaned.slice(-1);
     const newOtpValues = [...otpValues];
     newOtpValues[index] = char;
     setOtpValues(newOtpValues);
@@ -172,14 +224,20 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
   };
 
   const handleOtpKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Backspace" && !otpValues[index] && index > 0) {
+    if (e.key === "Backspace") {
+      if (!otpValues[index] && index > 0) {
+        otpInputRefs.current[index - 1]?.focus();
+      }
+    } else if (e.key === "ArrowLeft" && index > 0) {
       otpInputRefs.current[index - 1]?.focus();
+    } else if (e.key === "ArrowRight" && index < 5) {
+      otpInputRefs.current[index + 1]?.focus();
     }
   };
 
   const handleOtpPaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
     e.preventDefault();
-    const pastedData = e.clipboardData.getData("text").trim().slice(0, 6);
+    const pastedData = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, 6);
     if (!pastedData) return;
 
     const newOtpValues = [...otpValues];
@@ -222,7 +280,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 }}
                 className="absolute top-6 right-6 z-20 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 transition-colors pointer-events-auto cursor-pointer"
               >
-                <XIcon className="w-5 h-5" />
+                <HugeiconsIcon icon={Cancel01Icon} size={18} strokeWidth={2} />
               </button>
 
               {/* Left Pane - Image */}
@@ -264,6 +322,9 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                             otpInputRefs.current[index] = el;
                           }}
                           type="text"
+                          inputMode="numeric"
+                          pattern="[0-9]*"
+                          autoComplete="one-time-code"
                           maxLength={1}
                           value={otpValues[index]}
                           onChange={(e) => handleOtpChange(index, e.target.value)}
@@ -341,10 +402,40 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                       </span>
                     </div>
 
-                    {errorMsg && (
-                      <div className="mb-4 text-center text-sm text-red-500 font-medium">
-                        {errorMsg}
-                      </div>
+                    {isUserNotFound ? (
+                      <motion.div
+                        initial={{ opacity: 0, y: -6, scale: 0.98 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        className="mb-5 p-3.5 sm:p-4 rounded-2xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200/90 dark:border-rose-800/60 flex flex-col gap-2 text-left"
+                      >
+                        <div className="flex items-center gap-2 text-rose-600 dark:text-rose-400">
+                          <div className="w-5 h-5 rounded-full bg-rose-100 dark:bg-rose-900/50 flex items-center justify-center shrink-0">
+                            <HugeiconsIcon icon={UserRemove01Icon} size={15} strokeWidth={2} />
+                          </div>
+                          <span className="text-[13.5px] font-semibold">Uh oh! User account not found</span>
+                        </div>
+                        <p className="text-[12px] sm:text-[12.5px] text-gray-600 dark:text-gray-300 leading-relaxed">
+                          We couldn&apos;t find an account matching {email ? <span className="font-semibold text-gray-900 dark:text-white">{email}</span> : "your credentials"}. Please sign in to your DORT Asia account or register a new one.
+                        </p>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setIsUserNotFound(false);
+                            setErrorMsg("");
+                            setActiveTab("signup");
+                          }}
+                          className="mt-1 py-2 px-3 bg-rose-600 hover:bg-rose-700 active:bg-rose-800 text-white rounded-xl text-[12.5px] font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-xs"
+                        >
+                          <HugeiconsIcon icon={UserAdd01Icon} size={15} strokeWidth={2} />
+                          <span>Sign up for DORT Asia with this email</span>
+                        </button>
+                      </motion.div>
+                    ) : (
+                      errorMsg && (
+                        <div className="mb-4 text-center text-sm text-red-500 font-medium">
+                          {errorMsg}
+                        </div>
+                      )
                     )}
 
                     {/* Google Button */}

@@ -33,7 +33,6 @@ export function AboutBentoSection() {
                   width={600} 
                   height={400} 
                   className="w-full h-auto object-cover"
-                  priority
                 />
               </motion.div>
             </div>
@@ -46,7 +45,7 @@ export function AboutBentoSection() {
               </p>
               
               <div className="mt-8">
-                <Link href="/contact" className="inline-flex items-center gap-3 bg-[#1d1d1f] hover:bg-black text-white px-5 py-3 rounded-full transition-colors font-medium text-[15px] group">
+                <Link href="/contact" className="inline-flex items-center gap-3 bg-[#1d1d1f] hover:bg-black text-white px-5 py-3 rounded-full transition-colors font-semibold text-[15px] group">
                   Work With Us
                   <div className="bg-white text-black rounded-full p-1 group-hover:scale-105 transition-transform">
                     <ArrowRight className="w-4 h-4 stroke-[2.5]" />

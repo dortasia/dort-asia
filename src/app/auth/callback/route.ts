@@ -13,7 +13,10 @@ export async function GET(request: Request) {
       const supabase = await createClient()
       const { error } = await supabase.auth.exchangeCodeForSession(code)
       if (!error) {
-        return NextResponse.redirect(`${origin}${next}`)
+        if (next.startsWith('http://') || next.startsWith('https://')) {
+          return NextResponse.redirect(next)
+        }
+        return NextResponse.redirect(`${origin}${next.startsWith('/') ? next : `/${next}`}`)
       } else {
         console.error('Auth callback error:', error.message)
       }

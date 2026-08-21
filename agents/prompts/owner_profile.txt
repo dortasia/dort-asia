@@ -1,0 +1,16 @@
+| Field                    | Input Type     | Mandatory | Condition                            |
+| ------------------------ | -------------- | --------: | ------------------------------------ |
+| First Name               | Text           |         ✅ | 1–50 characters                      |
+| Middle Name              | Text           |         ❌ | Optional                             |
+| Last Name                | Text           |         ✅ | 1–50 characters                      |
+| Nick Name                | Text           |         ❌ | Optional                             |
+| Profile Photo            | File Upload    |         ❌ | JPG/PNG/WebP                         |
+| Work Email               | Email          |         ✅ | Must be verified                     |
+| Mobile Number            | Phone          |         ✅ | Country code                         |
+| Designation              | Text           |         ❌ | e.g. Founder, Director               |
+| Date of Birth            | Date           |         ❌ | Only if required by business process |
+| Nationality              | Country Select |         ❌ | Only if required                     |
+| Address                  | Address Group  |         ❌ | Only if required                     |
+| Preferred Language       | Select         |         ❌ | Default English                      |
+| Timezone                 | Select         |         ✅ | Default based on company             |
+| Communication Preference | Select         |         ❌ | Email / SMS / WhatsApp               |

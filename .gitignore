@@ -44,3 +44,15 @@ next-env.d.ts
 .env*
 check_*.js
 public/fonts/SF-Pro.otf
+
+# scratch & temporary files
+scratch/
+erroe-log.md
+generate-*.js
+search.js
+test.mjs
+*.zip
+privacy-policy-unzipped/
+privacy-policy*.txt
+terms-condition*.txt
+pricing.txt

@@ -1,3 +1,7 @@
+export const getSiteUrl = (): string => {
+  return process.env.NEXT_PUBLIC_SITE_URL || 'https://dortasia.com';
+};
+
 export const getCrossAppUrl = (appName: 'xentraPeople' | 'xentraPaynote'): string => {
   if (appName === 'xentraPeople') {
     return process.env.NEXT_PUBLIC_XENTRA_PEOPLE_URL || 'https://xentrapeople.dortasia.com';

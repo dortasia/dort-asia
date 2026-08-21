@@ -1,0 +1,51 @@
+Supabase Storage
+│
+├── company-assets
+│   └── {company_id}/
+│       ├── branding/
+│       │   ├── logo/
+│       │   │   ├── original.webp
+│       │   │   └── 512.webp
+│       │   ├── favicon/
+│       │   └── documents/
+│       │
+│       └── settings/
+│           └── ...
+│
+├── employee-files
+│   └── {company_id}/
+│       └── {employee_id}/
+│           ├── profile/
+│           │   └── photo.webp
+│           │
+│           ├── personal/
+│           │   ├── identity/
+│           │   ├── passport/
+│           │   └── address/
+│           │
+│           ├── employment/
+│           │   ├── contract/
+│           │   ├── offer-letter/
+│           │   ├── appointment-letter/
+│           │   └── confirmation/
+│           │
+│           ├── education/
+│           │   ├── certificates/
+│           │   └── qualifications/
+│           │
+│           └── other/
+│
+├── payroll-files
+│   └── {company_id}/
+│       └── {employee_id}/
+│           ├── payslips/
+│           ├── tax/
+│           └── payroll-documents/
+│
+└── company-documents
+    └── {company_id}/
+        ├── registration/
+        ├── compliance/
+        ├── contracts/
+        ├── policies/
+        └── other/

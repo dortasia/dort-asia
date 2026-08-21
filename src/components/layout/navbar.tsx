@@ -14,20 +14,16 @@ import {
   PackageIcon,
   Wallet02Icon,
   UserGroupIcon,
-  Money02Icon,
-  KanbanIcon,
   BookOpen01Icon,
   CustomerServiceIcon,
   Calendar01Icon,
   ArrowDown01Icon,
 } from "@hugeicons/core-free-icons";
 import { Button } from "@/components/ui/button";
-import { AuthModal } from "@/components/auth/AuthModal";
 
-import { getCrossAppUrl } from "@/config/urls";
 
 const NAV_LINKS = [
-  { name: "Services", href: "/#services", icon: ServiceIcon, hasDropdown: false },
+  { name: "Services", href: "/services", icon: ServiceIcon, hasDropdown: false },
   { name: "About us", href: "/about", icon: OfficeIcon, hasDropdown: false },
   { name: "Products", href: "#", icon: PackageIcon, hasDropdown: true },
   { name: "Pricings", href: "/pricing", icon: Wallet02Icon, hasDropdown: false },
@@ -40,7 +36,6 @@ const PRODUCTS = [
     description: "Complete HR, Payroll & Workforce Management",
     logoSrc: "/apps-logo/xentra-bluelogo.svg",
     icon: UserGroupIcon,
-    url: getCrossAppUrl('xentraPeople'),
   },
   {
     name: "Xentra Paynote",
@@ -49,7 +44,6 @@ const PRODUCTS = [
     logoSrc: "/apps-logo/xentra_paynote.svg",
     bgClass: "bg-gradient-to-b from-[#27272a] via-[#18181b] to-[#09090b] border-zinc-700/60",
     icon: Wallet02Icon,
-    url: getCrossAppUrl('xentraPaynote'),
   },
 ];
 
@@ -58,7 +52,7 @@ let cachedAuthState: boolean | null = null;
 export function Navbar({ theme = "light" }: { theme?: "light" | "dark" } = {}) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(cachedAuthState);
   const router = useRouter();
   const pathname = usePathname();
@@ -89,7 +83,7 @@ export function Navbar({ theme = "light" }: { theme?: "light" | "dark" } = {}) {
     if (isAuthenticated) {
       router.push('/dashboard');
     } else {
-      setIsAuthModalOpen(true);
+      router.push('/auth');
     }
   };
 
@@ -123,24 +117,14 @@ export function Navbar({ theme = "light" }: { theme?: "light" | "dark" } = {}) {
         <nav className="hidden lg:flex items-center gap-1.5 absolute left-1/2 -translate-x-1/2 rounded-full bg-[#18181b]/85 backdrop-blur-2xl border border-white/20 shadow-none p-1.5 z-50">
           {NAV_LINKS.map((link) => {
             const isActive = 
-              (link.href === "/about" && pathname === "/about") ||
+              (link.href === "/services" && (pathname === "/services" || pathname?.startsWith("/services/"))) ||
+              (link.href === "/about" && (pathname === "/about" || pathname?.startsWith("/about/"))) ||
               (link.href === "/pricing" && pathname === "/pricing") ||
-              (link.href === "/#services" && (pathname === "/" || pathname === "")) ||
+              (link.href === "/work-with-us" && (pathname === "/work-with-us" || pathname === "/contact")) ||
               (link.hasDropdown && activeDropdown === link.name);
 
-            return (
-              <div
-                key={link.name}
-                onClick={() => {
-                  if (link.hasDropdown) {
-                    toggleDropdown(link.name);
-                  } else if (link.href) {
-                    setActiveDropdown(null);
-                    router.push(link.href);
-                  }
-                }}
-                className="relative cursor-pointer group rounded-full px-4 py-2 hover:bg-white/10 transition-colors flex items-center gap-2 select-none"
-              >
+            const innerContent = (
+              <>
                 {isActive && (
                   <motion.div
                     layoutId="activeNavSlider"
@@ -167,7 +151,30 @@ export function Navbar({ theme = "light" }: { theme?: "light" | "dark" } = {}) {
                     }`}
                   />
                 )}
-              </div>
+              </>
+            );
+
+            if (link.hasDropdown) {
+              return (
+                <button
+                  key={link.name}
+                  onClick={() => toggleDropdown(link.name)}
+                  className="relative cursor-pointer group rounded-full px-4 py-2 hover:bg-white/10 transition-colors flex items-center gap-2 select-none outline-none border-none bg-transparent"
+                >
+                  {innerContent}
+                </button>
+              );
+            }
+
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                onClick={() => setActiveDropdown(null)}
+                className="relative cursor-pointer group rounded-full px-4 py-2 hover:bg-white/10 transition-colors flex items-center gap-2 select-none outline-none"
+              >
+                {innerContent}
+              </Link>
             );
           })}
         </nav>
@@ -202,7 +209,7 @@ export function Navbar({ theme = "light" }: { theme?: "light" | "dark" } = {}) {
                     duration: 0.35,
                     ease: [0.16, 1, 0.3, 1],
                   }}
-                  className="font-medium whitespace-nowrap overflow-hidden select-none inline-block"
+                  className="font-semibold whitespace-nowrap overflow-hidden select-none inline-block"
                 >
                   {isAuthenticated ? "Dashboard" : "Get Started"}
                 </motion.span>
@@ -245,10 +252,8 @@ export function Navbar({ theme = "light" }: { theme?: "light" | "dark" } = {}) {
                   PRODUCTS
                 </span>
                 {PRODUCTS.map((prod) => (
-                  <Link
+                  <div
                     key={prod.name}
-                    href={prod.url}
-                    onClick={() => setActiveDropdown(null)}
                     className="flex items-start gap-3.5 p-2.5 rounded-2xl hover:bg-[#f5f5f7] transition-colors group/item"
                   >
                     <div className={`w-[42px] h-[42px] rounded-[11px] border transition-all shrink-0 p-2 flex items-center justify-center ${prod.bgClass || "border-gray-200/80 bg-white text-gray-700"}`}>
@@ -272,7 +277,7 @@ export function Navbar({ theme = "light" }: { theme?: "light" | "dark" } = {}) {
                         {prod.description}
                       </p>
                     </div>
-                  </Link>
+                  </div>
                 ))}
               </div>
 
@@ -306,7 +311,7 @@ export function Navbar({ theme = "light" }: { theme?: "light" | "dark" } = {}) {
 
                     {/* Contact */}
                     <Link
-                      href="#"
+                      href="/work-with-us"
                       onClick={() => setActiveDropdown(null)}
                       className="group/exp block bg-white p-3 rounded-xl border border-slate-200/60 hover:border-gray-300 transition-all"
                     >
@@ -385,26 +390,14 @@ export function Navbar({ theme = "light" }: { theme?: "light" | "dark" } = {}) {
           >
             {NAV_LINKS.map((link) => {
               const isActive = 
-                (link.href === "/about" && pathname === "/about") ||
+                (link.href === "/services" && (pathname === "/services" || pathname?.startsWith("/services/"))) ||
+                (link.href === "/about" && (pathname === "/about" || pathname?.startsWith("/about/"))) ||
                 (link.href === "/pricing" && pathname === "/pricing") ||
-                (link.href === "/#services" && (pathname === "/" || pathname === "")) ||
+                (link.href === "/work-with-us" && (pathname === "/work-with-us" || pathname === "/contact")) ||
                 (link.hasDropdown && activeDropdown === link.name);
 
-              return (
-                <div key={link.name} className="border-b border-border/50 py-2">
-                  <div
-                    onClick={() => {
-                      if (link.hasDropdown) {
-                        toggleDropdown(link.name);
-                      } else if (link.href) {
-                        setIsMobileMenuOpen(false);
-                        router.push(link.href);
-                      }
-                    }}
-                    className={`flex items-center justify-between py-2 px-2.5 rounded-xl cursor-pointer transition-colors ${
-                      isActive ? "bg-blue-50/80" : "hover:bg-gray-50"
-                    }`}
-                  >
+                const innerContent = (
+                  <>
                     <div className="flex items-center gap-3">
                       <HugeiconsIcon icon={link.icon} className={`w-5 h-5 ${isActive ? "text-[#2b7fff]" : "text-gray-600"}`} />
                       <span className={`text-base font-semibold ${isActive ? "text-[#2b7fff]" : "text-[#1a1a1a]"}`}>{link.name}</span>
@@ -417,16 +410,38 @@ export function Navbar({ theme = "light" }: { theme?: "light" | "dark" } = {}) {
                         }`}
                       />
                     )}
-                  </div>
+                  </>
+                );
+
+                return (
+                  <div key={link.name} className="border-b border-border/50 py-2">
+                    {link.hasDropdown ? (
+                      <button
+                        onClick={() => toggleDropdown(link.name)}
+                        className={`w-full flex items-center justify-between py-2 px-2.5 rounded-xl cursor-pointer transition-colors outline-none border-none bg-transparent ${
+                          isActive ? "bg-blue-50/80" : "hover:bg-gray-50"
+                        }`}
+                      >
+                        {innerContent}
+                      </button>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className={`flex items-center justify-between py-2 px-2.5 rounded-xl cursor-pointer transition-colors outline-none ${
+                          isActive ? "bg-blue-50/80" : "hover:bg-gray-50"
+                        }`}
+                      >
+                        {innerContent}
+                      </Link>
+                    )}
 
                 {/* Mobile Dropdown Submenu */}
                 {link.hasDropdown && activeDropdown === link.name && (
                   <div className="pl-8 pt-2 pb-2 flex flex-col gap-3">
                     {PRODUCTS.map((prod) => (
-                      <Link
+                      <div
                         key={prod.name}
-                        href={prod.url}
-                        onClick={() => setIsMobileMenuOpen(false)}
                         className="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-50"
                       >
                         <div className={`w-10 h-10 rounded-[10px] border transition-all shrink-0 p-1.5 flex items-center justify-center ${prod.bgClass || "border-gray-200/80 bg-white text-[#2b7fff]"}`}>
@@ -446,7 +461,7 @@ export function Navbar({ theme = "light" }: { theme?: "light" | "dark" } = {}) {
                           <span className="text-sm font-bold text-[#1a1a1a] block">{prod.name}</span>
                           <span className="text-[11px] text-gray-400 block">{prod.domain}</span>
                         </div>
-                      </Link>
+                      </div>
                     ))}
                   </div>
                 )}
@@ -454,7 +469,7 @@ export function Navbar({ theme = "light" }: { theme?: "light" | "dark" } = {}) {
             );
           })}
             <div className="flex flex-col mt-4">
-              <Button onClick={handlePrimaryAction} className="group w-full rounded-full bg-[#2b7fff] hover:bg-[#1a6eff] text-white font-medium text-base pl-6 pr-2 py-2.5 h-auto flex items-center justify-between transition-all">
+              <Button onClick={handlePrimaryAction} className="group w-full rounded-full bg-[#2b7fff] hover:bg-[#1a6eff] text-white font-semibold text-base pl-6 pr-2 py-2.5 h-auto flex items-center justify-between transition-all">
                 <span>{isAuthenticated ? "Dashboard" : "Get Started"}</span>
                 <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center text-black">
                   <ArrowUpRight className="w-5 h-5 text-black stroke-[2.5]" />
@@ -466,7 +481,7 @@ export function Navbar({ theme = "light" }: { theme?: "light" | "dark" } = {}) {
       </AnimatePresence>
       
       {/* Auth Modal */}
-      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
+
     </header>
   );
 }

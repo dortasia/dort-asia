@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { HugeiconsIcon } from "@hugeicons/react";
@@ -31,6 +32,8 @@ const ANIMATED_WORDS = [
 
 export function Hero() {
   const [wordIndex, setWordIndex] = useState(0);
+  const [email, setEmail] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -38,6 +41,15 @@ export function Hero() {
     }, 2400);
     return () => clearInterval(interval);
   }, []);
+
+  const handleRequest = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email.trim()) {
+      router.push(`/work-with-us?email=${encodeURIComponent(email.trim())}`);
+    } else {
+      router.push('/work-with-us');
+    }
+  };
 
   const currentWord = ANIMATED_WORDS[wordIndex];
 
@@ -62,7 +74,11 @@ export function Hero() {
 
         {/* Hero Content Overlay */}
         <div className="absolute top-[24%] md:top-[22%] lg:top-[20%] left-0 right-0 px-6 flex flex-col items-center">
-          <motion.h1
+          <h1 className="sr-only">
+            One Platform. Every Business. Infinite Possibilities.
+          </h1>
+          <motion.div
+            aria-hidden="true"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -79,7 +95,7 @@ export function Hero() {
                   animate={{ y: 0, opacity: 1, scale: 1 }}
                   exit={{ y: -35, opacity: 0, scale: 0.96 }}
                   transition={{ type: "spring", stiffness: 350, damping: 26 }}
-                  className="flex items-center gap-2.5 whitespace-nowrap text-[#2b7fff] font-semibold text-2xl md:text-3xl lg:text-[38px] [font-family:var(--font-sf-pro-rounded)] tracking-normal"
+                  className="flex items-center gap-2.5 whitespace-nowrap text-[#2b7fff] font-semibold text-2xl md:text-3xl lg:text-[38px] tracking-normal"
                 >
                   <HugeiconsIcon
                     icon={currentWord.icon}
@@ -91,7 +107,7 @@ export function Hero() {
             </span>
 
             <span className="ml-0.5">. Infinite Possibilities.</span>
-          </motion.h1>
+          </motion.div>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -102,7 +118,8 @@ export function Hero() {
             We deliver business software, digital solutions, and skilled technology professionals that help organizations strengthen operations, accelerate innovation, and scale.
           </motion.p>
 
-          <motion.div
+          <motion.form
+            onSubmit={handleRequest}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -110,13 +127,18 @@ export function Hero() {
           >
             <input
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email..."
               className="flex-1 bg-transparent border-none outline-none text-[14.5px] font-medium text-gray-800 placeholder:text-gray-400 px-5 py-2 min-w-0"
             />
-            <button className="bg-[#2b7fff] hover:bg-[#1a6eff] text-white px-6 py-2.5 rounded-full font-medium text-[14.5px] tracking-tight transition-colors whitespace-nowrap shadow-none">
+            <button
+              type="submit"
+              className="bg-[#2b7fff] hover:bg-[#1a6eff] text-white px-6 py-2.5 rounded-full font-semibold text-[14.5px] tracking-tight transition-colors whitespace-nowrap shadow-none cursor-pointer"
+            >
               Request
             </button>
-          </motion.div>
+          </motion.form>
         </div>
       </motion.div>
     </section>

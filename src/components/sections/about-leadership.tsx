@@ -16,7 +16,7 @@ interface LeadershipProps {
 export function AboutLeadershipSection({
   name = "Dinesh",
   designation = "Founder",
-  bio = "Architecting high-velocity engineering teams and scalable digital ecosystems. Dinesh leads DORT Asia with a simple conviction: technology shouldn't just run operations—it should unlock unfair competitive advantages.",
+  bio = "Dinesh founded DORT Asia with a simple ambition: to build a technology company that creates practical solutions for the way businesses operate today. Bridging SaaS products, digital solutions, and technology talent to solve real operational challenges across Singapore and Asia.",
   profileUrl = "/about/leadership/dinesh",
   imageSrc = "/assets/dinesh_PP.avif",
 }: LeadershipProps) {
@@ -54,7 +54,7 @@ export function AboutLeadershipSection({
             <div className="mt-8">
               <Link 
                 href={profileUrl}
-                className="inline-flex items-center gap-3 bg-[#1d1d1f] hover:bg-black text-white px-5 py-3 rounded-full transition-colors font-medium text-[15px] group"
+                className="inline-flex items-center gap-3 bg-[#1d1d1f] hover:bg-black text-white px-5 py-3 rounded-full transition-colors font-semibold text-[15px] group"
               >
                 <span>View Profile</span>
                 <div className="bg-white text-black rounded-full p-1 group-hover:scale-105 transition-transform">
@@ -72,7 +72,6 @@ export function AboutLeadershipSection({
                 alt={name}
                 fill
                 className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                priority
               />
             ) : (
               <div className="flex flex-col items-center justify-center text-center p-6">

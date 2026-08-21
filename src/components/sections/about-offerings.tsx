@@ -109,7 +109,7 @@ export function AboutOfferingsSection() {
               <div className="mt-8">
                 <Link 
                   href="/contact" 
-                  className="inline-flex items-center gap-3 bg-[#1d1d1f] hover:bg-black text-white px-5 py-3 rounded-full transition-all font-medium text-[15px] group"
+                  className="inline-flex items-center gap-3 bg-[#1d1d1f] hover:bg-black text-white px-5 py-3 rounded-full transition-all font-semibold text-[15px] group"
                 >
                   <span>Work With Us</span>
                   <div className="bg-white text-black rounded-full p-1 group-hover:scale-105 transition-transform">
@@ -190,7 +190,7 @@ export function AboutOfferingsSection() {
               <div className="mt-8">
                 <Link 
                   href="/contact" 
-                  className="inline-flex items-center gap-3 bg-[#1d1d1f] hover:bg-black text-white px-5 py-3 rounded-full transition-all font-medium text-[15px] group"
+                  className="inline-flex items-center gap-3 bg-[#1d1d1f] hover:bg-black text-white px-5 py-3 rounded-full transition-all font-semibold text-[15px] group"
                 >
                   <span>Work With Us</span>
                   <div className="bg-white text-black rounded-full p-1 group-hover:scale-105 transition-transform">
@@ -303,7 +303,7 @@ export function AboutOfferingsSection() {
               <div className="mt-8">
                 <Link 
                   href="/pricing" 
-                  className="inline-flex items-center gap-3 bg-[#1d1d1f] hover:bg-black text-white px-5 py-3 rounded-full transition-all font-medium text-[15px] group"
+                  className="inline-flex items-center gap-3 bg-[#1d1d1f] hover:bg-black text-white px-5 py-3 rounded-full transition-all font-semibold text-[15px] group"
                 >
                   <span>Work With Us</span>
                   <div className="bg-white text-black rounded-full p-1 group-hover:scale-105 transition-transform">

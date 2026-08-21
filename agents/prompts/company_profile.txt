@@ -1,0 +1,25 @@
+|  # | Field                         | Input Type                 |  Mandatory  | Condition / Validation Rule                                                                          |
+| -: | ----------------------------- | -------------------------- | :---------: | ---------------------------------------------------------------------------------------------------- |
+|  1 | **Company Name**              | Text                       |      ✅      | 2–150 characters; operating/display name                                                             |
+|  2 | **Legal / Registered Name**   | Text                       |      ✅      | Official legal name; required for registered entities                                                |
+|  3 | **UEN / Registration No.**    | Text                       |      ✅      | Required for registered entities; country/entity-specific validation                                 |
+|  4 | **Company Type**              | Select                     |      ✅      | `Pte Ltd`, `LLP`, `Sole Proprietorship`, `Partnership`, `Other`                                      |
+|  5 | **Industry**                  | Select / Searchable Select |      ✅      | Select from predefined industry list; support SSIC mapping for Singapore                             |
+|  6 | **Business Email**            | Email                      |      ✅      | Valid email format; normalize to lowercase                                                           |
+|  7 | **Business Phone**            | International Phone        |      ✅      | Country code required; store in E.164 format                                                         |
+|  8 | **Website**                   | URL                        |      ❌      | Valid URL; preferably HTTPS; normalize before storage                                                |
+|  9 | **Company Logo**              | File Upload                |      ❌      | PNG/JPEG/WebP; recommended 512×512; validate MIME type and file size                                 |
+| 10 | **Country**                   | Country Select             |      ✅      | ISO 3166-1 country; default based on onboarding country                                              |
+| 11 | **Postal Code**               | Text                       |      ✅      | Country-specific validation; Singapore = exactly 6 numeric digits                                    |
+| 12 | **Address Line 1**            | Text                       | Conditional | Required for international addresses; generated/derived from structured SG address where appropriate |
+| 13 | **Address Line 2**            | Text                       |      ❌      | Optional additional address information                                                              |
+| 14 | **Block / House No.**         | Text                       | Conditional | **Required for Singapore**; e.g. `10`                                                                |
+| 15 | **Street Name**               | Text                       | Conditional | **Required for Singapore**; e.g. `Eunos Road 8`                                                      |
+| 16 | **Unit No.**                  | Text                       |      ❌      | Singapore unit number; e.g. `#03-25`                                                                 |
+| 17 | **Building Name**             | Text                       |      ❌      | Singapore building name; e.g. `Singapore Post Centre`                                                |
+| 18 | **City**                      | Text                       | Conditional | Required where applicable; **not required for Singapore**                                            |
+| 19 | **State / Province / Region** | Select / Text              | Conditional | Required only where applicable; **not required for Singapore**                                       |
+| 20 | **Company Size**              | Select                     |      ❌      | `1–10`, `11–50`, `51–200`, `201–500`, `501–1000`, `1001+`                                            |
+| 21 | **Founded Year**              | Number                     |      ❌      | 4-digit year; must be ≤ current year                                                                 |
+| 22 | **Description**               | Textarea                   |      ❌      | Maximum 500 characters                                                                               |
+| 23 | **Address Lookup**            | Postal Code Lookup         | Conditional | Enabled for Singapore; postal code should resolve/verify address where possible                      |

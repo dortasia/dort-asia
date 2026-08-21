@@ -32,7 +32,9 @@ export function Footer() {
               <span className="text-[#1d1d1f] font-medium text-sm">Social Media</span>
               <div className="flex items-center gap-2">
                 <a 
-                  href="#" 
+                  href="https://x.com/dortasia?s=11"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label="X (Twitter)"
                   className="w-9 h-9 rounded-xl border border-gray-200/90 flex items-center justify-center text-[#1d1d1f] hover:bg-gray-50 hover:border-gray-300 transition-all shadow-[0_1px_2px_rgba(0,0,0,0.04)]"
                 >
@@ -42,7 +44,9 @@ export function Footer() {
                   </svg>
                 </a>
                 <a 
-                  href="#" 
+                  href="https://www.instagram.com/dortasiasg?igsh=MThwaGNkMWVlaDl0Yg=="
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label="Instagram"
                   className="w-9 h-9 rounded-xl border border-gray-200/90 flex items-center justify-center text-[#1d1d1f] hover:bg-gray-50 hover:border-gray-300 transition-all shadow-[0_1px_2px_rgba(0,0,0,0.04)]"
                 >
@@ -54,44 +58,59 @@ export function Footer() {
                   </svg>
                 </a>
                 <a 
-                  href="#" 
+                  href="https://www.linkedin.com/company/dort-asia/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label="LinkedIn"
                   className="w-9 h-9 rounded-xl border border-gray-200/90 flex items-center justify-center text-[#1d1d1f] hover:bg-gray-50 hover:border-gray-300 transition-all shadow-[0_1px_2px_rgba(0,0,0,0.04)]"
                 >
                   {/* LinkedIn Icon */}
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
                     <rect x="2" y="9" width="4" height="12"></rect>
                     <circle cx="4" cy="4" r="2"></circle>
                   </svg>
                 </a>
+                <a 
+                  href="https://youtube.com/@dortasiayt?si=4W9whVtgUmn1UsXh"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="YouTube"
+                  className="w-9 h-9 rounded-xl border border-gray-200/90 flex items-center justify-center text-[#1d1d1f] hover:bg-gray-50 hover:border-gray-300 transition-all shadow-[0_1px_2px_rgba(0,0,0,0.04)]"
+                >
+                  {/* YouTube Icon */}
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.17 1 12 1 12s0 3.83.46 5.58a2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.83 23 12 23 12s0-3.83-.46-5.58z"></path>
+                    <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon>
+                  </svg>
+                </a>
               </div>
             </div>
 
-            {/* 3 Categories / Link Columns - anchored right-to-left against the right edge */}
             <div className="flex flex-wrap sm:flex-nowrap justify-start md:justify-end gap-10 sm:gap-14 md:gap-16 lg:gap-20 w-full sm:w-auto self-start md:self-end">
               <div className="text-left">
                 <h4 className="text-[#1d1d1f] font-semibold text-[15px] mb-3.5">Features</h4>
                 <ul className="space-y-2.5">
-                  <li><Link href="#" className="text-[#86868b] hover:text-[#1d1d1f] text-[14px] transition-colors whitespace-nowrap">Subscription Management</Link></li>
-                  <li><Link href="#" className="text-[#86868b] hover:text-[#1d1d1f] text-[14px] transition-colors whitespace-nowrap">Custom checkout</Link></li>
-                  <li><Link href="#" className="text-[#86868b] hover:text-[#1d1d1f] text-[14px] transition-colors whitespace-nowrap">Champaign strategy</Link></li>
+                  <li><span className="text-[#86868b] text-[14px] transition-colors whitespace-nowrap">Subscription Management</span></li>
+                  <li><span className="text-[#86868b] text-[14px] transition-colors whitespace-nowrap">Custom checkout</span></li>
+                  <li><span className="text-[#86868b] text-[14px] transition-colors whitespace-nowrap">Campaign strategy</span></li>
                 </ul>
               </div>
               <div className="text-left">
                 <h4 className="text-[#1d1d1f] font-semibold text-[15px] mb-3.5">Explore</h4>
                 <ul className="space-y-2.5">
-                  <li><Link href="#" className="text-[#86868b] hover:text-[#1d1d1f] text-[14px] transition-colors whitespace-nowrap">Features</Link></li>
+                  <li><Link href="/services" className="text-[#86868b] hover:text-[#1d1d1f] text-[14px] transition-colors whitespace-nowrap">Services</Link></li>
+                  <li><Link href="/work-with-us" className="text-[#86868b] hover:text-[#1d1d1f] text-[14px] transition-colors whitespace-nowrap">Work With Us</Link></li>
+                  <li><Link href="/about" className="text-[#86868b] hover:text-[#1d1d1f] text-[14px] transition-colors whitespace-nowrap">About Us</Link></li>
                   <li><Link href="/pricing" className="text-[#86868b] hover:text-[#1d1d1f] text-[14px] transition-colors whitespace-nowrap">Pricing</Link></li>
-                  <li><Link href="#" className="text-[#86868b] hover:text-[#1d1d1f] text-[14px] transition-colors whitespace-nowrap">Calculator</Link></li>
                 </ul>
               </div>
               <div className="text-left">
                 <h4 className="text-[#1d1d1f] font-semibold text-[15px] mb-3.5">Help</h4>
                 <ul className="space-y-2.5">
-                  <li><Link href="#" className="text-[#86868b] hover:text-[#1d1d1f] text-[14px] transition-colors whitespace-nowrap">FAQs</Link></li>
-                  <li><Link href="#" className="text-[#86868b] hover:text-[#1d1d1f] text-[14px] transition-colors whitespace-nowrap">Email</Link></li>
-                  <li><Link href="#" className="text-[#86868b] hover:text-[#1d1d1f] text-[14px] transition-colors whitespace-nowrap">Help centre</Link></li>
+                  <li><Link href="/work-with-us" className="text-[#86868b] hover:text-[#1d1d1f] text-[14px] transition-colors whitespace-nowrap">FAQs</Link></li>
+                  <li><a href="mailto:enquiry@dortasia.com" className="text-[#86868b] hover:text-[#1d1d1f] text-[14px] transition-colors whitespace-nowrap">Email</a></li>
+                  <li><span className="text-[#86868b] text-[14px] transition-colors whitespace-nowrap">Help centre</span></li>
                 </ul>
               </div>
             </div>
@@ -102,9 +121,9 @@ export function Footer() {
         <div className="w-full flex flex-col sm:flex-row justify-between items-center gap-4 text-[#676767] text-[13px] pt-4 mt-auto relative z-30">
           <p className="font-normal text-[#676767]">@2026 Dort Asia all rights reserved.</p>
           <div className="flex flex-wrap items-center justify-center gap-6 text-[#676767]">
-            <Link href="#" className="hover:text-[#1d1d1f] transition-colors">Terms of service</Link>
-            <Link href="#" className="hover:text-[#1d1d1f] transition-colors">Privacy Policy</Link>
-            <Link href="#" className="hover:text-[#1d1d1f] transition-colors">Cookie Policy</Link>
+            <Link href="/terms-and-conditions" className="transition-colors hover:text-[#1d1d1f]">Terms and Conditions</Link>
+            <Link href="/privacy-policy" className="transition-colors hover:text-[#1d1d1f]">Privacy Policy</Link>
+            <span className="transition-colors">Cookie Policy</span>
           </div>
         </div>
       </div>

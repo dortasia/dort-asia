@@ -11,13 +11,11 @@ import { AboutApproachSection } from "@/components/sections/about-approach";
 import { AboutWhyUsSection } from "@/components/sections/about-why-us";
 import { AboutLeadershipSection } from "@/components/sections/about-leadership";
 import { AboutCtaSection } from "@/components/sections/about-cta";
-import { PageSynopsisCard } from "@/components/ui/page-synopsis";
 
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-white font-text flex flex-col justify-between relative">
       <Navbar />
-      <PageSynopsisCard />
 
       {/* Body 1: Our Purpose (Hero Section) */}
       <section id="purpose" className="relative w-full py-24 md:py-32 px-6 md:px-10 overflow-hidden isolate min-h-[900px] md:min-h-[1020px] flex flex-col justify-center">
