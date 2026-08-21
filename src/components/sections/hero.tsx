@@ -74,33 +74,24 @@ export function Hero() {
           quality={100}
         />
 
-        {/* Mobile portrait hero background image */}
-        <Image
-          src="/img_assets/hero-section-mobile.avif"
-          alt="Dort Asia Hero Section"
-          width={941}
-          height={1672}
-          className="w-full h-auto object-contain block md:hidden border-none outline-none ring-0 shadow-none"
-          priority
-          quality={100}
-        />
+        {/* Mobile portrait hero background image (Bottom Cropped) */}
+        <div className="w-full h-[520px] xs:h-[580px] sm:h-[640px] overflow-hidden relative block md:hidden rounded-b-2xl">
+          <Image
+            src="/img_assets/hero-section-mobile.avif"
+            alt="Dort Asia Hero Section"
+            fill
+            sizes="100vw"
+            className="object-cover object-top border-none outline-none ring-0"
+            priority
+            quality={100}
+          />
+        </div>
 
         {/* Hero Content Overlay */}
-        <div className="absolute top-[6%] xs:top-[7%] sm:top-[9%] md:top-[22%] lg:top-[20%] left-0 right-0 px-4 sm:px-6 flex flex-col items-center z-10">
+        <div className="absolute top-[11%] xs:top-[13%] sm:top-[15%] md:top-[22%] lg:top-[20%] left-0 right-0 px-4 sm:px-6 flex flex-col items-center z-10">
           <h1 className="sr-only">
             One Platform. Every Business. Infinite Possibilities.
           </h1>
-
-          {/* Mobile Apple-style Eyebrow Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="md:hidden inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md border border-gray-200/80 text-[11px] xs:text-[12px] font-semibold text-[#1d1d1f] tracking-wide uppercase mb-2.5 shadow-2xs"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-[#2b7fff]" />
-            <span>Software & Tech Talent</span>
-          </motion.div>
 
           {/* Mobile-Optimized Clean Typography Layout */}
           <motion.div
@@ -110,7 +101,7 @@ export function Hero() {
             transition={{ duration: 0.55, delay: 0.08 }}
             className="md:hidden flex flex-col items-center text-center"
           >
-            <span className="text-[25px] xs:text-[29px] font-bold text-[#0a1128] tracking-tight leading-tight">
+            <span className="text-[26px] xs:text-[30px] font-bold text-[#0a1128] tracking-tight leading-tight">
               One Platform.
             </span>
 
