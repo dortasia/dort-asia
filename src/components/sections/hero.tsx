@@ -54,12 +54,12 @@ export function Hero() {
   const currentWord = ANIMATED_WORDS[wordIndex];
 
   return (
-    <section className="relative w-full pt-0 pb-0 md:pb-8 px-0 md:px-[16px] bg-white">
+    <section className="relative w-full pt-0 pb-4 md:pb-8 px-0 md:px-[16px] bg-white">
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="relative w-full bg-white flex flex-col items-center justify-start pt-[105px] xs:pt-[115px] sm:pt-[125px] md:pt-0 md:justify-center min-h-[100dvh] md:min-h-0 overflow-hidden md:overflow-visible rounded-none md:rounded-b-2xl border-none outline-none ring-0 shadow-none"
+        className="relative w-full bg-white flex justify-center border-none outline-none ring-0 shadow-none"
       >
         {/* Desktop landscape hero background image */}
         <Image
@@ -72,21 +72,19 @@ export function Hero() {
           quality={100}
         />
 
-        {/* Mobile portrait hero background image (Full-Page 100dvh) */}
-        <div className="absolute inset-0 w-full h-full md:hidden pointer-events-none">
-          <Image
-            src="/img_assets/hero-section-mobile.avif"
-            alt="Dort Asia Hero Section"
-            fill
-            sizes="100vw"
-            className="object-cover object-bottom"
-            priority
-            quality={100}
-          />
-        </div>
+        {/* Mobile portrait hero background image */}
+        <Image
+          src="/img_assets/hero-section-mobile.avif"
+          alt="Dort Asia Hero Section"
+          width={941}
+          height={1672}
+          className="w-full h-auto object-contain block md:hidden border-none outline-none ring-0 shadow-none"
+          priority
+          quality={100}
+        />
 
         {/* Hero Content Overlay */}
-        <div className="relative md:absolute z-10 w-full md:top-[22%] lg:top-[20%] left-0 right-0 px-4 sm:px-6 flex flex-col items-center">
+        <div className="absolute top-[8%] xs:top-[9%] sm:top-[11%] md:top-[22%] lg:top-[20%] left-0 right-0 px-4 sm:px-6 flex flex-col items-center">
           <h1 className="sr-only">
             One Platform. Every Business. Infinite Possibilities.
           </h1>
@@ -95,38 +93,38 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-[28px] xs:text-[32px] sm:text-[36px] md:text-3xl lg:text-[40px] font-bold text-[#0a1128] tracking-tight text-center leading-[1.22] flex flex-wrap items-center justify-center gap-x-2 gap-y-2.5 max-w-[360px] xs:max-w-md sm:max-w-xl md:max-w-none"
+            className="text-[22px] xs:text-[25px] sm:text-[29px] md:text-3xl lg:text-[40px] font-bold text-[#0a1128] tracking-tight text-center leading-[1.24] flex flex-wrap items-center justify-center gap-x-1.5 gap-y-1.5 max-w-[340px] xs:max-w-[380px] sm:max-w-xl md:max-w-none"
           >
-            <span>One Platform. Every</span>
+            <span className="whitespace-nowrap">One Platform. Every</span>
 
             {/* Apple-styled Tumbler Animated Pill Bar */}
-            <span className="inline-flex items-center relative overflow-hidden h-[44px] xs:h-[48px] sm:h-[50px] lg:h-[54px] px-4 xs:px-4.5 sm:px-5 py-1 rounded-full bg-white shadow-[0_4px_24px_rgba(0,0,0,0.08)] border border-gray-100/80 align-middle">
+            <span className="inline-flex items-center relative overflow-hidden h-[36px] xs:h-[40px] sm:h-[46px] lg:h-[54px] px-3 xs:px-4 sm:px-5 py-0.5 rounded-full bg-white shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-gray-100/80 align-middle">
               <AnimatePresence mode="wait">
                 <motion.span
                   key={currentWord.text}
-                  initial={{ y: 28, opacity: 0, scale: 0.96 }}
+                  initial={{ y: 22, opacity: 0, scale: 0.96 }}
                   animate={{ y: 0, opacity: 1, scale: 1 }}
-                  exit={{ y: -28, opacity: 0, scale: 0.96 }}
+                  exit={{ y: -22, opacity: 0, scale: 0.96 }}
                   transition={{ type: "spring", stiffness: 350, damping: 26 }}
-                  className="flex items-center gap-2 sm:gap-2.5 whitespace-nowrap text-[#2b7fff] font-semibold text-[22px] xs:text-[25px] sm:text-2xl md:text-3xl lg:text-[38px] tracking-normal"
+                  className="flex items-center gap-1.5 sm:gap-2.5 whitespace-nowrap text-[#2b7fff] font-semibold text-[17px] xs:text-[20px] sm:text-2xl md:text-3xl lg:text-[38px] tracking-normal"
                 >
                   <HugeiconsIcon
                     icon={currentWord.icon}
-                    className="w-5 h-5 xs:w-5.5 xs:h-5.5 sm:w-6 sm:h-6 text-[#2b7fff] shrink-0 stroke-[2.2]"
+                    className="w-4 h-4 xs:w-4.5 xs:h-4.5 sm:w-6 sm:h-6 text-[#2b7fff] shrink-0 stroke-[2.2]"
                   />
                   <span>{currentWord.text}</span>
                 </motion.span>
               </AnimatePresence>
             </span>
 
-            <span>Infinite Possibilities.</span>
+            <span>. Infinite Possibilities.</span>
           </motion.div>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-[15px] xs:text-[16px] sm:text-[17px] md:text-[16px] text-[#374151] md:text-gray-500 max-w-[360px] xs:max-w-[420px] sm:max-w-[540px] md:max-w-[760px] text-center mt-4 sm:mt-4 leading-relaxed font-medium px-2 sm:px-0"
+            className="text-[12.5px] xs:text-[13.5px] sm:text-[15px] md:text-[16px] text-[#4b5563] md:text-gray-500 max-w-[320px] xs:max-w-[360px] sm:max-w-[500px] md:max-w-[760px] text-center mt-2.5 xs:mt-3 leading-relaxed font-medium px-1 sm:px-0"
           >
             We deliver business software, digital solutions, and skilled technology professionals that help organizations strengthen operations, accelerate innovation, and scale.
           </motion.p>
