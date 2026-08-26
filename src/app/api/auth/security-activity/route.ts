@@ -14,7 +14,13 @@ export async function GET(req: NextRequest) {
     const limit = Math.min(Math.max(parseInt(searchParams.get("limit") || "10", 10), 1), 50);
     const cursor = searchParams.get("cursor"); // ISO timestamp of the oldest item in current page
 
-    let query = supabase
+    const { createClient: createSupabaseAdmin } = await import("@supabase/supabase-js");
+    const supabaseAdmin = createSupabaseAdmin(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
+
+    let query = supabaseAdmin
       .schema("identity")
       .from("login_events")
       .select("id, created_at, event_type, device_type, browser, os, city, country_name, ip_address, is_new_device, is_new_location")

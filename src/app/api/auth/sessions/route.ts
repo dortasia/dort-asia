@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
 import { createClient as createSupabaseAdmin } from "@supabase/supabase-js";
 import { getDeviceIdentity } from "@/lib/security/device";
+import { processLoginSecurityEvent } from "@/services/security";
 
 export async function GET(req: NextRequest) {
   try {
@@ -14,8 +15,13 @@ export async function GET(req: NextRequest) {
 
     const currentDeviceId = await getDeviceIdentity();
 
-    // Fetch active sessions from our tracking table (uses authenticated RLS)
-    const { data: sessions, error } = await supabase
+    const supabaseAdmin = createSupabaseAdmin(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
+
+    // Fetch active sessions from our tracking table with admin client for reliability
+    let { data: sessions, error } = await supabaseAdmin
       .schema("identity")
       .from("account_sessions")
       .select("id, device_id, device_name, device_type, browser, os, city, country_name, last_seen_at")
@@ -34,7 +40,27 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "Failed to fetch sessions", details: error }, { status: 500 });
     }
 
-    const formattedSessions = sessions.map((s) => ({
+    // Self-healing: if no active session exists or current device is missing, record the current device
+    if (!sessions || sessions.length === 0 || !sessions.some(s => s.device_id === currentDeviceId)) {
+      try {
+        await processLoginSecurityEvent({ user, userId: user.id });
+        const { data: refetched } = await supabaseAdmin
+          .schema("identity")
+          .from("account_sessions")
+          .select("id, device_id, device_name, device_type, browser, os, city, country_name, last_seen_at")
+          .eq("user_id", user.id)
+          .eq("is_active", true)
+          .order("last_seen_at", { ascending: false })
+          .limit(20);
+        if (refetched) {
+          sessions = refetched;
+        }
+      } catch (err) {
+        console.warn("Auto-register current session notice:", err);
+      }
+    }
+
+    const formattedSessions = (sessions || []).map((s) => ({
       ...s,
       is_current: s.device_id === currentDeviceId,
     }));

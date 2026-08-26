@@ -205,15 +205,20 @@ export function ActiveSessionsList() {
 
       {/* Sessions List */}
       <div className="space-y-3">
-        {sessions.map((session) => (
-          <div
-            key={session.id}
-            className={`flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-white dark:bg-zinc-900 border rounded-xl transition-all ${
-              session.is_current
-                ? "border-gray-300 dark:border-zinc-700 shadow-2xs"
-                : "border-gray-200 dark:border-zinc-800"
-            }`}
-          >
+        {sessions.length === 0 ? (
+          <div className="p-8 text-center bg-gray-50 dark:bg-zinc-900/50 border border-gray-200 dark:border-zinc-800 rounded-xl">
+            <p className="text-sm text-gray-500">No active sessions found.</p>
+          </div>
+        ) : (
+          sessions.map((session) => (
+            <div
+              key={session.id}
+              className={`flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-white dark:bg-zinc-900 border rounded-xl transition-all ${
+                session.is_current
+                  ? "border-gray-300 dark:border-zinc-700 shadow-2xs"
+                  : "border-gray-200 dark:border-zinc-800"
+              }`}
+            >
             <div className="flex items-start gap-4">
               <div className="p-2.5 bg-gray-50 dark:bg-zinc-800 rounded-lg shrink-0">
                 {session.device_type === "mobile" || session.device_type === "tablet" ? (
@@ -258,8 +263,9 @@ export function ActiveSessionsList() {
                 Sign out
               </button>
             )}
-          </div>
-        ))}
+            </div>
+          ))
+        )}
       </div>
 
       {/* ------------------------------------------------------------------ */}

@@ -6,11 +6,14 @@ import { sendSecurityAlertNotification } from "@/services/notifications";
 
 export interface SecurityEventOptions {
   authMethod?: string;
+  user?: any;
+  userId?: string;
+  session?: any;
+  accessToken?: string;
 }
 
 export async function processLoginSecurityEvent(options?: SecurityEventOptions) {
   console.log("[SECURITY_DIAG] processLoginSecurityEvent started");
-  const supabase = await createClient();
   
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -23,22 +26,28 @@ export async function processLoginSecurityEvent(options?: SecurityEventOptions) 
   );
 
   // 1. Get authenticated user and session
-  const {
-    data: { session },
-    error: sessionError,
-  } = await supabase.auth.getSession();
+  let user = options?.user;
+  let userId = options?.userId || user?.id;
+  let authSessionId = options?.accessToken || options?.session?.access_token;
 
-  if (sessionError || !session?.user) {
-    console.error("[SECURITY_DIAG] No active session found during security event processing.");
+  if (!userId) {
+    const supabase = await createClient();
+    const { data: userData, error: userError } = await supabase.auth.getUser();
+    if (!userError && userData?.user) {
+      user = userData.user;
+      userId = user.id;
+    }
+  }
+
+  if (!userId) {
+    console.error("[SECURITY_DIAG] No active user found during security event processing.");
     return null;
   }
 
-  const userId = session.user.id;
-  const authSessionId = session.access_token;
   console.log("[SECURITY_DIAG] Authenticated user ID:", userId);
 
-  // Get account_id using authenticated client
-  const { data: account, error: accountError } = await supabase
+  // Get account_id using admin client
+  const { data: account, error: accountError } = await supabaseAdmin
     .schema("identity")
     .from("accounts")
     .select("id")
@@ -64,7 +73,7 @@ export async function processLoginSecurityEvent(options?: SecurityEventOptions) 
   const geo = await getGeoLocation();
 
   // 3. Evaluate Security Rules (Check past successful logins)
-  const { data: pastLogins, error: pastLoginsError } = await supabase
+  const { data: pastLogins, error: pastLoginsError } = await supabaseAdmin
     .schema("identity")
     .from("login_events")
     .select("device_id, country_code")
@@ -96,33 +105,39 @@ export async function processLoginSecurityEvent(options?: SecurityEventOptions) 
 
   // 4. Update or Create Account Session
   // Find if this device already has an active session record
-  const { data: existingSession, error: existingError } = await supabase
+  const { data: existingSession, error: existingError } = await supabaseAdmin
     .schema("identity")
     .from("account_sessions")
     .select("id")
     .eq("account_id", accountId)
     .eq("device_id", deviceId)
-    .single();
+    .maybeSingle();
 
   if (existingError && existingError.code !== "PGRST116") {
     console.warn("[SECURITY_DIAG] existingSession lookup notice:", existingError.code, existingError.message);
   }
 
+  let supabaseSessionId: string | null = null;
+  if (authSessionId && authSessionId.includes('.')) {
+    try {
+      const payloadBase64 = authSessionId.split('.')[1];
+      const payload = JSON.parse(Buffer.from(payloadBase64, 'base64').toString());
+      supabaseSessionId = payload.session_id || null;
+    } catch {
+      // Ignore
+    }
+  }
+
   let internalSessionId;
 
   if (existingSession) {
-    // Decode the Supabase JWT payload to get the true session_id
-    const payloadBase64 = authSessionId.split('.')[1];
-    const payload = JSON.parse(Buffer.from(payloadBase64, 'base64').toString());
-    const supabaseSessionId = payload.session_id;
-
     // Update existing session with admin client
     const { data: updatedSession, error: updateError } = await supabaseAdmin
       .schema("identity")
       .from("account_sessions")
       .update({
         is_active: true,
-        supabase_session_id: supabaseSessionId,
+        ...(supabaseSessionId ? { supabase_session_id: supabaseSessionId } : {}),
         ip_address: geo.ipAddress,
         user_agent: parsedUa.rawString,
         device_name: parsedUa.deviceName,
@@ -150,11 +165,6 @@ export async function processLoginSecurityEvent(options?: SecurityEventOptions) 
     }
     internalSessionId = updatedSession?.id;
   } else {
-    // Decode the Supabase JWT payload to get the true session_id
-    const payloadBase64 = authSessionId.split('.')[1];
-    const payload = JSON.parse(Buffer.from(payloadBase64, 'base64').toString());
-    const supabaseSessionId = payload.session_id;
-
     // Insert new session with admin client
     const { data: newSession, error: insertError } = await supabaseAdmin
       .schema("identity")
@@ -191,9 +201,9 @@ export async function processLoginSecurityEvent(options?: SecurityEventOptions) 
     internalSessionId = newSession?.id;
   }
 
-  // Securely determine the authentication method from the session token
+  // Securely determine the authentication method from the user / session token
   let finalAuthMethod = options?.authMethod || "email_password";
-  const amr = (session.user as any).amr;
+  const amr = (user as any)?.amr;
   
   if (amr && Array.isArray(amr)) {
     const methods = amr.map((m: any) => m.method);
@@ -208,9 +218,9 @@ export async function processLoginSecurityEvent(options?: SecurityEventOptions) 
     } else if (methods.includes('oauth')) {
       finalAuthMethod = 'google_oauth';
     }
-  } else if (session.user.app_metadata?.provider === 'google') {
+  } else if (user?.app_metadata?.provider === 'google') {
     finalAuthMethod = 'google_oauth';
-  } else if (session.user.app_metadata?.provider === 'sso') {
+  } else if (user?.app_metadata?.provider === 'sso') {
     finalAuthMethod = 'sso';
   }
 

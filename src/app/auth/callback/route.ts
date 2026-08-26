@@ -220,7 +220,13 @@ export async function GET(request: Request) {
 
         // Fire login security event asynchronously so it doesn't block routing
         console.log("[DIAG] auth callback invoking processLoginSecurityEvent");
-        processLoginSecurityEvent({ authMethod: loginMethod }).then(res => {
+        processLoginSecurityEvent({
+          authMethod: loginMethod,
+          user: sessionData.session.user,
+          userId: sessionData.session.user.id,
+          session: sessionData.session,
+          accessToken: sessionData.session.access_token,
+        }).then(res => {
           console.log("[DIAG] auth callback processLoginSecurityEvent result:", res);
         }).catch(err => {
           console.error("Failed to process login security event:", err);
