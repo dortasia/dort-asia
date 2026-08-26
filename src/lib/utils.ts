@@ -23,9 +23,9 @@ export const getURL = (req?: Request | string) => {
   }
 
   if (!url) {
-    // If in Vercel preview (beta), prioritize the preview URL
-    if (process?.env?.NEXT_PUBLIC_VERCEL_ENV === 'preview' && process?.env?.NEXT_PUBLIC_VERCEL_URL) {
-      url = process.env.NEXT_PUBLIC_VERCEL_URL;
+    // If in Vercel preview (beta), prioritize the beta/preview URL
+    if (process?.env?.NEXT_PUBLIC_VERCEL_ENV === 'preview') {
+      url = process?.env?.NEXT_BETA_SITE_URL ?? process?.env?.NEXT_PUBLIC_VERCEL_URL;
     }
     // Otherwise, use the explicitly set SITE_URL (production)
     else if (process?.env?.NEXT_PUBLIC_SITE_URL) {
@@ -35,10 +35,11 @@ export const getURL = (req?: Request | string) => {
     else if (process?.env?.NEXT_PUBLIC_VERCEL_URL) {
       url = process.env.NEXT_PUBLIC_VERCEL_URL;
     }
-    // Default to local development
-    else {
-      url = 'http://localhost:3001';
-    }
+  }
+
+  // Final fallback to ensure url is never undefined
+  if (!url) {
+    url = 'http://localhost:3001';
   }
 
   url = url.includes('http') ? url : `https://${url}`;

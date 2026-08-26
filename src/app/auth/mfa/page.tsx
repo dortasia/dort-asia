@@ -35,7 +35,10 @@ function MFAChallengeForm() {
 
   const router = useRouter();
   const searchParams = useSearchParams();
-  const nextUrl = searchParams.get("next") || "/dashboard";
+  const rawNext = searchParams.get("next");
+  const nextUrl = (rawNext && rawNext.startsWith("/") && !rawNext.startsWith("//")) 
+    ? rawNext 
+    : "/dashboard";
 
   const supabase = createClient();
 
