@@ -14,110 +14,156 @@ export async function GET(request: Request) {
     const flow = searchParams.get('flow');
 
     if (code) {
-      const cookieStore = await cookies();
-      const isReauthFlow = cookieStore.has('dort_reauth_transaction') || flow === 'reauth';
-
-      if (isReauthFlow) {
+      if (flow === 'reauth') {
         console.log('[REAUTH CALLBACK] flow: reauth');
 
-        // 1. Read and Validate Transaction Cookie
+        const cookieStore = await cookies();
+        
+        // 1. Capture Original User BEFORE code exchange
+        const supabase = await createClient(); // Interacts with real cookies
+        const { data: { user: originalUser } } = await supabase.auth.getUser();
+
+        if (!originalUser) {
+          // No original session
+          const html = `
+            <script>
+              window.opener.postMessage({ type: "DORT_REAUTH_RESULT", success: false, reason: "original_session_missing" }, "${origin}");
+              window.close();
+            </script>
+          `;
+          return new NextResponse(html, { headers: { 'Content-Type': 'text/html' } });
+        }
+
+        console.log(`[REAUTH CALLBACK] original session user: ${originalUser.id}`);
+        console.log(`[REAUTH CALLBACK] original email: ${originalUser.email}`);
+
+        // 2. Read and Validate Transaction Cookie
         const transactionCookie = cookieStore.get('dort_reauth_transaction')?.value;
         if (!transactionCookie) {
           console.log('[REAUTH CALLBACK] transaction missing');
-          const returnUrl = new URL('/dashboard/settings/account', origin);
-          returnUrl.searchParams.set('reauth', 'error');
-          returnUrl.searchParams.set('reauth_error', 'reauth_session_expired');
-          return NextResponse.redirect(returnUrl.toString());
+          const html = `
+            <script>
+              window.opener.postMessage({ type: "DORT_REAUTH_RESULT", success: false, reason: "reauth_session_expired" }, "${origin}");
+              window.close();
+            </script>
+          `;
+          return new NextResponse(html, { headers: { 'Content-Type': 'text/html' } });
         }
 
         const [payloadB64, signature] = transactionCookie.split('.');
-        if (!payloadB64 || !signature) {
-          cookieStore.delete('dort_reauth_transaction');
-          const returnUrl = new URL('/dashboard/settings/account', origin);
-          returnUrl.searchParams.set('reauth', 'error');
-          returnUrl.searchParams.set('reauth_error', 'reauth_session_expired');
-          return NextResponse.redirect(returnUrl.toString());
-        }
-
         const payloadString = Buffer.from(payloadB64, 'base64').toString('utf-8');
+        
         const secret = process.env.SUPABASE_SERVICE_ROLE_KEY || 'default-secret';
         const expectedSignature = crypto.createHmac('sha256', secret).update(payloadString).digest('hex');
 
         if (signature !== expectedSignature) {
           console.log('[REAUTH CALLBACK] transaction signature invalid');
           cookieStore.delete('dort_reauth_transaction');
-          const returnUrl = new URL('/dashboard/settings/account', origin);
-          returnUrl.searchParams.set('reauth', 'error');
-          returnUrl.searchParams.set('reauth_error', 'reauth_session_expired');
-          return NextResponse.redirect(returnUrl.toString());
+          const html = `
+            <script>
+              window.opener.postMessage({ type: "DORT_REAUTH_RESULT", success: false, reason: "reauth_session_expired" }, "${origin}");
+              window.close();
+            </script>
+          `;
+          return new NextResponse(html, { headers: { 'Content-Type': 'text/html' } });
         }
 
-        let transaction: any;
-        try {
-          transaction = JSON.parse(payloadString);
-        } catch {
-          cookieStore.delete('dort_reauth_transaction');
-          const returnUrl = new URL('/dashboard/settings/account', origin);
-          returnUrl.searchParams.set('reauth', 'error');
-          returnUrl.searchParams.set('reauth_error', 'reauth_session_expired');
-          return NextResponse.redirect(returnUrl.toString());
-        }
-
-        const safeNext = (transaction?.next && typeof transaction.next === 'string' && transaction.next.startsWith('/') && !transaction.next.startsWith('//'))
-          ? transaction.next
-          : '/dashboard/settings/account';
+        const transaction = JSON.parse(payloadString);
 
         if (Date.now() > transaction.expiresAt) {
           console.log('[REAUTH CALLBACK] transaction expired');
           cookieStore.delete('dort_reauth_transaction');
-          const returnUrl = new URL(safeNext, origin);
-          returnUrl.searchParams.set('reauth', 'error');
-          returnUrl.searchParams.set('reauth_error', 'reauth_session_expired');
-          return NextResponse.redirect(returnUrl.toString());
+          const html = `
+            <script>
+              window.opener.postMessage({ type: "DORT_REAUTH_RESULT", success: false, reason: "reauth_session_expired" }, "${origin}");
+              window.close();
+            </script>
+          `;
+          return new NextResponse(html, { headers: { 'Content-Type': 'text/html' } });
         }
 
-        console.log(`[REAUTH CALLBACK] transaction exists: true, user: ${transaction.userId}, next: ${safeNext}`);
+        if (transaction.userId !== originalUser.id) {
+          console.log('[REAUTH CALLBACK] transaction userId mismatch');
+          cookieStore.delete('dort_reauth_transaction');
+          const html = `
+            <script>
+              window.opener.postMessage({ type: "DORT_REAUTH_RESULT", success: false, reason: "reauth_session_expired" }, "${origin}");
+              window.close();
+            </script>
+          `;
+          return new NextResponse(html, { headers: { 'Content-Type': 'text/html' } });
+        }
 
-        // 2. Exchange OAuth Code using standard SSR client to refresh session cookies
-        const supabase = await createClient();
-        const { data: sessionData, error } = await supabase.auth.exchangeCodeForSession(code);
+        console.log(`[REAUTH CALLBACK] transaction exists: true`);
+        console.log(`[REAUTH CALLBACK] transaction user: ${transaction.userId}`);
+        console.log(`[REAUTH CALLBACK] transaction next: ${transaction.next}`);
+
+        // 3. Exchange OAuth Code Safely
+        const { createServerClient } = await import('@supabase/ssr');
+        const tempSupabase = createServerClient(
+          process.env.NEXT_PUBLIC_SUPABASE_URL!,
+          process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+          {
+            cookies: {
+              get(name: string) { return cookieStore.get(name)?.value; }, // Need to read PKCE verifier
+              set(name: string, value: string, options: any) {}, // DO NOT overwrite real cookies
+              remove(name: string, options: any) {} // DO NOT remove real cookies
+            }
+          }
+        );
+
+        const { data: sessionData, error } = await tempSupabase.auth.exchangeCodeForSession(code);
         
         if (error || !sessionData?.session) {
-          console.error('[REAUTH CALLBACK] Exchange failed:', error?.message);
           cookieStore.delete('dort_reauth_transaction');
-          const returnUrl = new URL(safeNext, origin);
-          returnUrl.searchParams.set('reauth', 'error');
-          returnUrl.searchParams.set('reauth_error', 'exchange_failed');
-          return NextResponse.redirect(returnUrl.toString());
+          const html = `
+            <script>
+              window.opener.postMessage({ type: "DORT_REAUTH_RESULT", success: false, reason: "exchange_failed" }, "${origin}");
+              window.close();
+            </script>
+          `;
+          return new NextResponse(html, { headers: { 'Content-Type': 'text/html' } });
         }
 
         const newUser = sessionData.session.user;
-        console.log(`[REAUTH CALLBACK] new user: ${newUser.id}, email: ${newUser.email}`);
+        console.log(`[REAUTH CALLBACK] new user: ${newUser.id}`);
+        console.log(`[REAUTH CALLBACK] new email: ${newUser.email}`);
 
         const sameUser = newUser.id === transaction.userId;
-        const sameEmail = newUser.email?.toLowerCase() === transaction.email?.toLowerCase();
+        const sameEmail = newUser.email?.toLowerCase() === originalUser.email?.toLowerCase();
         
+        console.log(`[REAUTH CALLBACK] same user: ${sameUser}`);
+        console.log(`[REAUTH CALLBACK] same email: ${sameEmail}`);
         console.log(`[REAUTH CALLBACK] identity match: ${sameUser && sameEmail}`);
 
-        // 3. Strict Identity Verification
+        // 4. Strict Identity Verification
         if (!sameUser || !sameEmail) {
-          console.log('[REAUTH CALLBACK] REAUTH FAILURE: google_account_mismatch');
+          // Reject re-authentication safely
+          console.log('[REAUTH CALLBACK] REAUTH FAILURE');
+          console.log('[REAUTH CALLBACK] reason: google_account_mismatch');
           cookieStore.delete('dort_reauth_transaction');
           
-          const returnUrl = new URL(safeNext, origin);
-          returnUrl.searchParams.set('reauth', 'error');
-          returnUrl.searchParams.set('reauth_error', 'google_account_mismatch');
-          return NextResponse.redirect(returnUrl.toString());
+          const html = `
+            <script>
+              window.opener.postMessage({ type: "DORT_REAUTH_RESULT", success: false, reason: "google_account_mismatch" }, "${origin}");
+              window.close();
+            </script>
+          `;
+          return new NextResponse(html, { headers: { 'Content-Type': 'text/html' } });
         }
 
-        // 4. Success - Clear reauth transaction and redirect back
+        // 5. Success
         console.log('[REAUTH CALLBACK] REAUTH SUCCESS');
         cookieStore.delete('dort_reauth_transaction');
         
-        const returnUrl = new URL(safeNext, origin);
-        returnUrl.searchParams.set('reauth', 'success');
-        returnUrl.searchParams.set('reauth_success', 'true');
-        return NextResponse.redirect(returnUrl.toString());
+        // DO NOT overwrite the primary session. The popup is merely for verification.
+        const html = `
+          <script>
+            window.opener.postMessage({ type: "DORT_REAUTH_RESULT", success: true }, "${origin}");
+            window.close();
+          </script>
+        `;
+        return new NextResponse(html, { headers: { 'Content-Type': 'text/html' } });
       }
 
       // Standard Auth Flow
@@ -234,15 +280,18 @@ export async function GET(request: Request) {
     const oauthError = searchParams.get('error');
     const oauthErrorDescription = searchParams.get('error_description');
     if (oauthError) {
-      const cookieStore = await cookies();
-      const isReauth = cookieStore.has('dort_reauth_transaction') || flow === 'reauth';
-      if (isReauth) {
+      if (flow === 'reauth') {
         console.log('[REAUTH CALLBACK] OAuth cancelled/failed');
+        const cookieStore = await cookies();
         cookieStore.delete('dort_reauth_transaction');
-        const returnUrl = new URL('/dashboard/settings/account', origin);
-        returnUrl.searchParams.set('reauth', 'error');
-        returnUrl.searchParams.set('reauth_error', oauthError || 'cancelled');
-        return NextResponse.redirect(returnUrl.toString());
+        
+        const html = `
+          <script>
+            window.opener.postMessage({ type: "DORT_REAUTH_RESULT", success: false, reason: "cancelled" }, "${origin}");
+            window.close();
+          </script>
+        `;
+        return new NextResponse(html, { headers: { 'Content-Type': 'text/html' } });
       }
       return NextResponse.redirect(
         `${origin}/?error=${encodeURIComponent(oauthError)}&error_description=${encodeURIComponent(oauthErrorDescription || '')}`

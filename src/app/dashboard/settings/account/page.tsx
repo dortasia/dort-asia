@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { 
@@ -115,7 +114,7 @@ function AccountSettingsSkeleton() {
   );
 }
 
-function AccountSettingsContent() {
+export default function AccountSettingsPage() {
   const [twoFactorEnabled, setTwoFactorEnabled] = useState(
     cachedAccountSettings ? cachedAccountSettings.twoFactorEnabled : false
   );
@@ -145,58 +144,10 @@ function AccountSettingsContent() {
   const [isLoading, setIsLoading] = useState(!cachedAccountSettings);
 
   const supabase = createClient();
-  const router = useRouter();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
     loadSettings();
-
-    // Handle OAuth reauth callback
-    const isReauthSuccess = searchParams.get("reauth_success") === "true" || searchParams.get("reauth") === "success";
-    const reauthErr = searchParams.get("reauth_error") || (searchParams.get("reauth") === "error" ? "failed" : null);
-    const action = searchParams.get("action");
-
-    if (isReauthSuccess && action) {
-      setIsReauthOpen(false);
-      if (action === "enable_2fa") {
-        setIs2FAModalOpen(true);
-      } else if (action === "disable_2fa") {
-        setIsDisable2FAModalOpen(true);
-      } else if (action === "add_passkey") {
-        performRegisterPasskey();
-      }
-      
-      // Clean up URL parameters cleanly
-      const newUrl = new URL(window.location.href);
-      newUrl.searchParams.delete("reauth_success");
-      newUrl.searchParams.delete("reauth");
-      newUrl.searchParams.delete("action");
-      window.history.replaceState({}, '', newUrl.pathname);
-    } else if (reauthErr) {
-      setIsReauthOpen(false);
-      const friendlyMsg = reauthErr === "google_account_mismatch"
-        ? "Please use the Google account associated with this Dort Asia account."
-        : reauthErr === "reauth_session_expired"
-        ? "Re-authentication session expired. Please try again."
-        : "Re-authentication failed. Please try again.";
-      
-      setTimeout(() => {
-        alert(friendlyMsg);
-      }, 300);
-      
-      // Clean up URL parameters cleanly
-      const newUrl = new URL(window.location.href);
-      newUrl.searchParams.delete("reauth_error");
-      newUrl.searchParams.delete("reauth");
-      newUrl.searchParams.delete("action");
-      window.history.replaceState({}, '', newUrl.pathname);
-    } else if (action && !isReauthSuccess && !reauthErr) {
-      if (action === "enable_2fa" || action === "disable_2fa") {
-        setActionIntent(action);
-        setIsReauthOpen(true);
-      }
-    }
-  }, [searchParams]);
+  }, []);
 
   const loadSettings = async (force = false) => {
     if (cachedAccountSettings && !force) {
@@ -294,7 +245,7 @@ function AccountSettingsContent() {
     }
   };
 
-  async function performRegisterPasskey() {
+  const performRegisterPasskey = async () => {
     try {
       setIsLoading(true);
       const res = await supabase.auth.registerPasskey();
@@ -310,7 +261,7 @@ function AccountSettingsContent() {
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
   const handleRemovePasskey = async (passkeyId: string) => {
     if (!confirm("Are you sure you want to remove this passkey?")) return;
@@ -582,13 +533,5 @@ function AccountSettingsContent() {
         }}
       />
     </>
-  );
-}
-
-export default function AccountSettingsPage() {
-  return (
-    <Suspense fallback={<AccountSettingsSkeleton />}>
-      <AccountSettingsContent />
-    </Suspense>
   );
 }

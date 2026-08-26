@@ -59,21 +59,21 @@ export function ReauthModal({ isOpen, onClose, onSuccess, userEmail, hasEmailPas
     setIsLoading(true);
     setErrorMsg("");
     try {
-      const destination = `${window.location.pathname}?action=${encodeURIComponent(actionIntent)}`;
       const res = await fetch("/api/auth/reauth/start", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ next: destination })
+        body: JSON.stringify({ next: window.location.pathname })
       });
       
       if (!res.ok) {
         throw new Error("Failed to initialize secure re-authentication.");
       }
 
-      const { error } = await supabase.auth.signInWithOAuth({
+      const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${window.location.origin}/auth/callback`,
+          skipBrowserRedirect: true,
+          redirectTo: `${window.location.origin}/auth/callback?flow=reauth`,
           queryParams: {
             prompt: "select_account",
             ...(userEmail ? { login_hint: userEmail } : {}),
@@ -82,6 +82,49 @@ export function ReauthModal({ isOpen, onClose, onSuccess, userEmail, hasEmailPas
       });
 
       if (error) throw error;
+
+      if (data?.url) {
+        const popup = window.open(
+          data.url,
+          "dort-asia-google-reauth",
+          "width=500,height=700,resizable=yes,scrollbars=yes"
+        );
+
+        // Polling to detect if user manually closed the popup
+        const checkClosed = setInterval(() => {
+          if (popup && popup.closed) {
+            clearInterval(checkClosed);
+            window.removeEventListener("message", handleMessage);
+            setIsLoading(false);
+            // Optionally set error msg, or just leave it silently cancelled
+          }
+        }, 500);
+
+        // Strict postMessage listener
+        const handleMessage = (event: MessageEvent) => {
+          if (event.origin !== window.location.origin) return;
+          if (event.data?.type !== "DORT_REAUTH_RESULT") return;
+
+          window.removeEventListener("message", handleMessage);
+          clearInterval(checkClosed);
+          if (popup && !popup.closed) popup.close();
+
+          if (event.data.success) {
+            onSuccess();
+          } else {
+            setErrorMsg(
+              event.data.reason === "google_account_mismatch"
+                ? "Please use the Google account associated with this Dort Asia account."
+                : "Google verification failed."
+            );
+            setIsLoading(false);
+          }
+        };
+
+        window.addEventListener("message", handleMessage);
+      } else {
+        throw new Error("Could not retrieve authorization URL.");
+      }
     } catch (err: any) {
       setErrorMsg(err.message || "Failed to re-authenticate with Google.");
       setIsLoading(false);
