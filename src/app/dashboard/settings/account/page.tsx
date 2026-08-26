@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
@@ -115,7 +115,7 @@ function AccountSettingsSkeleton() {
   );
 }
 
-export default function AccountSettingsPage() {
+function AccountSettingsContent() {
   const [twoFactorEnabled, setTwoFactorEnabled] = useState(
     cachedAccountSettings ? cachedAccountSettings.twoFactorEnabled : false
   );
@@ -567,5 +567,13 @@ export default function AccountSettingsPage() {
         }}
       />
     </>
+  );
+}
+
+export default function AccountSettingsPage() {
+  return (
+    <Suspense fallback={<AccountSettingsSkeleton />}>
+      <AccountSettingsContent />
+    </Suspense>
   );
 }
