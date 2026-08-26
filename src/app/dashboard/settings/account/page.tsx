@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { 
@@ -144,10 +145,43 @@ export default function AccountSettingsPage() {
   const [isLoading, setIsLoading] = useState(!cachedAccountSettings);
 
   const supabase = createClient();
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     loadSettings();
-  }, []);
+
+    // Handle OAuth reauth callback
+    const reauthSuccess = searchParams.get("reauth_success");
+    const reauthError = searchParams.get("reauth_error");
+    const action = searchParams.get("action");
+
+    if (reauthSuccess === "true" && action) {
+      if (action === "enable_2fa") {
+        setIs2FAModalOpen(true);
+      } else if (action === "disable_2fa") {
+        setIsDisable2FAModalOpen(true);
+      } else if (action === "add_passkey") {
+        performRegisterPasskey();
+      }
+      
+      // Clean up URL
+      const newUrl = new URL(window.location.href);
+      newUrl.searchParams.delete("reauth_success");
+      newUrl.searchParams.delete("action");
+      window.history.replaceState({}, '', newUrl.toString());
+    } else if (reauthError) {
+      setTimeout(() => {
+        alert(`Authentication failed: ${reauthError}`);
+      }, 500);
+      
+      // Clean up URL
+      const newUrl = new URL(window.location.href);
+      newUrl.searchParams.delete("reauth_error");
+      newUrl.searchParams.delete("action");
+      window.history.replaceState({}, '', newUrl.toString());
+    }
+  }, [searchParams]);
 
   const loadSettings = async (force = false) => {
     if (cachedAccountSettings && !force) {
@@ -245,7 +279,7 @@ export default function AccountSettingsPage() {
     }
   };
 
-  const performRegisterPasskey = async () => {
+  async function performRegisterPasskey() {
     try {
       setIsLoading(true);
       const res = await supabase.auth.registerPasskey();
@@ -261,7 +295,7 @@ export default function AccountSettingsPage() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }
 
   const handleRemovePasskey = async (passkeyId: string) => {
     if (!confirm("Are you sure you want to remove this passkey?")) return;

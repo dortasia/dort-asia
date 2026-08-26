@@ -1,0 +1,164 @@
+The main issue is NOT the Google login screen itself.
+
+The Google OAuth authentication succeeds, but after authentication the application returns to the public Dort Asia homepage (`https://beta.dortasia.com/`) while the "Verify it's you" MFA modal remains stuck on an infinite loading spinner.
+
+Screenshots confirm the exact flow:
+
+1. User is already authenticated on `beta.dortasia.com`.
+2. User opens Security settings.
+3. User clicks Enable 2FA.
+4. "Verify it's you" modal opens.
+5. User starts Google re-authentication.
+6. Google displays:
+   "Choose an account to continue to [Supabase project]."
+7. Google authentication succeeds.
+8. The application returns to `https://beta.dortasia.com/`.
+9. The original MFA verification flow is lost.
+10. The "Verify it's you" modal remains loading indefinitely.
+
+FIX THE AUTHENTICATION FLOW, NOT JUST THE UI.
+
+IMPORTANT ARCHITECTURE:
+
+This Google OAuth action is NOT a normal login.
+
+The user is already logged in.
+
+The purpose of Google authentication here is:
+
+AUTHENTICATED USER
+→ SENSITIVE ACTION
+→ RE-AUTHENTICATION
+→ CONTINUE MFA ENROLLMENT
+
+Therefore the application must preserve the authentication intent throughout the OAuth redirect.
+
+Implement a flow identifier such as:
+
+`mfa_enable`
+
+or an equivalent secure state mechanism.
+
+Before starting Google OAuth, preserve the intended destination and authentication purpose.
+
+For example:
+
+`next=/settings/security`
+`authFlow=mfa_enable`
+
+Use the application's existing auth/callback architecture if one already exists.
+
+Do NOT simply redirect OAuth callbacks to `/`.
+
+The callback must:
+
+1. Complete the Supabase OAuth code/session exchange using the existing architecture.
+2. Restore the authenticated session.
+3. Determine why the OAuth flow was initiated.
+4. Detect that this was an MFA enable/re-authentication flow.
+5. Safely redirect back to the Security/MFA page.
+6. Resume the MFA enrollment process.
+7. Stop the loading spinner.
+8. Continue to the TOTP enrollment UI.
+
+The expected result is:
+
+`beta.dortasia.com/settings/security`
+
+or the application's existing Security route,
+
+NOT:
+
+`beta.dortasia.com/`
+
+IMPORTANT:
+
+Do not use an arbitrary browser-provided `next` URL.
+
+Only allow safe same-origin internal paths to prevent an open redirect vulnerability.
+
+Also inspect whether the application currently has code such as:
+
+`redirect("/")`
+
+inside the OAuth callback.
+
+If so, determine whether that redirect is incorrectly catching the MFA re-authentication flow.
+
+Also inspect:
+
+* `/auth/callback`
+* Google OAuth implementation
+* Supabase `signInWithOAuth`
+* `redirectTo`
+* auth state listeners
+* middleware
+* authentication provider/context
+* Security settings page
+* MFA enrollment component
+* modal loading state
+* environment URL configuration
+
+The Google OAuth request should use the correct beta callback URL.
+
+Do NOT hardcode localhost.
+
+Do NOT hardcode production.
+
+For beta, the flow should remain within:
+
+`https://beta.dortasia.com`
+
+Verify that the Supabase Auth configuration allows the beta callback URL.
+
+Also check whether the current implementation is incorrectly treating the re-authentication as a normal login.
+
+NORMAL LOGIN:
+
+Google
+→ OAuth callback
+→ application home/dashboard
+
+MFA RE-AUTHENTICATION:
+
+Google
+→ OAuth callback
+→ restore session
+→ return to Security/MFA flow
+→ continue MFA enrollment
+
+These two flows must be distinguishable.
+
+IMPORTANT SECURITY REQUIREMENTS:
+
+* Do not disable re-authentication.
+* Do not bypass MFA.
+* Do not mark MFA as enabled merely because Google authentication succeeded.
+* MFA must only become enabled after successful TOTP verification.
+* Do not expose service-role credentials to the browser.
+* Do not create duplicate Supabase sessions unnecessarily.
+* Do not break the existing Google login flow.
+* Do not leave the UI in an infinite loading state when OAuth fails.
+* On OAuth failure, display an error and allow the user to retry/cancel.
+
+After fixing, test this exact scenario:
+
+1. Open `https://beta.dortasia.com`.
+2. Sign in normally with Google.
+3. Open Settings → Security.
+4. Click Enable 2FA.
+5. Click Verify it's you / Google.
+6. Complete Google authentication.
+7. Confirm the browser returns to the Security/MFA flow.
+8. Confirm the public Dort Asia landing page is NOT displayed.
+9. Confirm the loading spinner disappears.
+10. Confirm the TOTP QR-code enrollment screen appears.
+11. Complete authenticator setup.
+12. Enter the six-digit TOTP code.
+13. Verify the MFA factor.
+14. Confirm 2FA is enabled.
+15. Refresh the page and confirm the MFA status remains enabled.
+
+Also test normal Google sign-in separately to make sure the callback change does not break normal authentication.
+
+Do not redesign the UI. Fix the OAuth state, callback, session restoration, and MFA flow.

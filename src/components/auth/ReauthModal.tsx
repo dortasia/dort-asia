@@ -62,7 +62,7 @@ export function ReauthModal({ isOpen, onClose, onSuccess, userEmail, hasEmailPas
       const res = await fetch("/api/auth/reauth/start", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ next: window.location.pathname })
+        body: JSON.stringify({ next: `${window.location.pathname}?action=${actionIntent}` })
       });
       
       if (!res.ok) {
@@ -73,7 +73,7 @@ export function ReauthModal({ isOpen, onClose, onSuccess, userEmail, hasEmailPas
         provider: "google",
         options: {
           skipBrowserRedirect: true,
-          redirectTo: `${window.location.origin}/auth/callback?flow=reauth`,
+          redirectTo: `${window.location.origin}/auth/callback`,
           queryParams: {
             prompt: "select_account",
             ...(userEmail ? { login_hint: userEmail } : {}),
