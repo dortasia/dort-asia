@@ -16,21 +16,10 @@ export async function getDeviceIdentity(): Promise<string> {
     return existingId;
   }
 
-  // Generate a new secure UUID for this device
-  const newDeviceId = randomUUID();
-
-  // Set it as an HTTP-only persistent cookie
-  cookieStore.set({
-    name: DEVICE_COOKIE_NAME,
-    value: newDeviceId,
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    path: "/",
-    maxAge: 60 * 60 * 24 * 365, // 1 year
-  });
-
-  return newDeviceId;
+  // Fallback: If middleware somehow failed to set it, return a temporary one.
+  // We do not try to set() it here because Next.js blocks set() in GET Route Handlers.
+  console.warn("[SECURITY] getDeviceIdentity fallback: missing dort_device_id cookie, generating temporary UUID");
+  return randomUUID();
 }
 
 export interface ParsedUserAgent {

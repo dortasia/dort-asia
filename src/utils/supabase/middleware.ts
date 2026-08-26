@@ -6,6 +6,19 @@ export async function updateSession(request: NextRequest) {
     request,
   });
 
+  // Ensure every request has a persistent device ID before reaching route handlers
+  if (!request.cookies.has("dort_device_id")) {
+    const newDeviceId = crypto.randomUUID();
+    request.cookies.set("dort_device_id", newDeviceId);
+    supabaseResponse.cookies.set("dort_device_id", newDeviceId, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 365, // 1 year
+    });
+  }
+
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
