@@ -37,6 +37,14 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
+  // Redirect /admin to /dashboard/admin
+  if (request.nextUrl.pathname === "/admin" || request.nextUrl.pathname.startsWith("/admin/")) {
+    const url = request.nextUrl.clone();
+    const rest = request.nextUrl.pathname.replace(/^\/admin/, "");
+    url.pathname = "/dashboard/admin" + rest;
+    return NextResponse.redirect(url);
+  }
+
   const isAuthRoute = request.nextUrl.pathname.startsWith("/auth");
   const isProtected = request.nextUrl.pathname.startsWith("/dashboard");
 
@@ -49,11 +57,33 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
+  if (user && isProtected) {
+    // Enforce MFA if the user has a verified factor but hasn't completed it this session
+    const { data: aal, error: aalError } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+    if (!aalError && aal) {
+      if (aal.currentLevel === "aal1" && aal.nextLevel === "aal2") {
+        const url = request.nextUrl.clone();
+        url.pathname = "/auth/mfa";
+        url.searchParams.set("next", request.nextUrl.pathname);
+        return NextResponse.redirect(url);
+      }
+    }
+  }
+
   // Optional: If user is logged in and trying to access /auth, redirect to dashboard
-  if (user && isAuthRoute) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/dashboard";
-    return NextResponse.redirect(url);
+  // IMPORTANT: Do not redirect /auth/callback or /auth/mfa because they are needed for authentication flows
+  if (user && isAuthRoute && request.nextUrl.pathname !== "/auth/callback" && request.nextUrl.pathname !== "/auth/mfa") {
+    // Before redirecting to dashboard, check if they need MFA
+    const { data: aal } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+    if (aal && aal.currentLevel === "aal1" && aal.nextLevel === "aal2") {
+      const url = request.nextUrl.clone();
+      url.pathname = "/auth/mfa";
+      return NextResponse.redirect(url);
+    } else {
+      const url = request.nextUrl.clone();
+      url.pathname = "/dashboard";
+      return NextResponse.redirect(url);
+    }
   }
 
   return supabaseResponse;

@@ -18,40 +18,85 @@ export async function POST(req: Request) {
       process.env.SUPABASE_SERVICE_ROLE_KEY!
     );
 
-    // 1. Find user's company
-    const { data: userCompanies } = await supabaseAdmin
-      .from('company_users')
-      .select('company_id')
-      .eq('user_id', user.id)
-      .limit(1);
+    let companyId: string | null = null;
 
-    if (!userCompanies || userCompanies.length === 0) {
-      return NextResponse.json({ error: 'Company not found' }, { status: 404 });
+    // 1. Resolve Company ID securely from session hierarchy
+    try {
+      const { data: account } = await supabaseAdmin
+        .schema('identity')
+        .from('accounts')
+        .select('id')
+        .eq('auth_user_id', user.id)
+        .maybeSingle();
+
+      if (account) {
+        const { data: company } = await supabaseAdmin
+          .schema('company')
+          .from('companies')
+          .select('id')
+          .eq('account_id', account.id)
+          .maybeSingle();
+
+        if (company) {
+          companyId = company.id;
+        }
+      }
+    } catch (e) {
+      console.error('Error resolving company hierarchy:', e);
     }
 
-    const companyId = userCompanies[0].company_id;
+    if (!companyId) {
+      return NextResponse.json({ error: 'Company profile not found' }, { status: 404 });
+    }
 
-    // 2. Find active subscription to get stripe_customer_id
-    const { data: subscriptions } = await supabaseAdmin
-      .from('subscriptions')
-      .select('stripe_customer_id')
-      .eq('company_id', companyId)
-      .in('status', ['active', 'trialing'])
-      .order('created_at', { ascending: false })
-      .limit(1);
+    let stripeCustomerId: string | null = null;
 
-    if (!subscriptions || subscriptions.length === 0 || !subscriptions[0].stripe_customer_id) {
-      return NextResponse.json({ error: 'No active subscription found to upgrade' }, { status: 404 });
+    // 2. Resolve Stripe Customer ID from billing_customers
+    try {
+      const { data: billingCustomer } = await supabaseAdmin
+        .from('billing_customers')
+        .select('stripe_customer_id')
+        .eq('organization_id', companyId)
+        .maybeSingle();
+
+      if (billingCustomer?.stripe_customer_id) {
+        stripeCustomerId = billingCustomer.stripe_customer_id;
+      }
+    } catch {
+      // Ignore
+    }
+
+    // 2b. Fallback: Find from subscriptions schema
+    if (!stripeCustomerId) {
+      try {
+        const { data: subscriptions } = await supabaseAdmin
+          .schema('subscriptions')
+          .from('subscriptions')
+          .select('stripe_customer_id')
+          .eq('company_id', companyId)
+          .not('stripe_customer_id', 'is', null)
+          .order('created_at', { ascending: false })
+          .limit(1);
+
+        if (subscriptions && subscriptions.length > 0 && subscriptions[0].stripe_customer_id) {
+          stripeCustomerId = subscriptions[0].stripe_customer_id;
+        }
+      } catch {
+        // Ignore
+      }
+    }
+
+    if (!stripeCustomerId) {
+      return NextResponse.json({ error: 'No active subscription or customer profile found to manage' }, { status: 404 });
     }
 
     // Use getURL() and remove trailing slash since return_url paths start with /
     const origin = getURL(req).replace(/\/$/, "");
 
-
     // 3. Create Stripe Billing Portal session
     const portalSession = await stripe.billingPortal.sessions.create({
-      customer: subscriptions[0].stripe_customer_id,
-      return_url: `${origin}/pricing?updated=true`,
+      customer: stripeCustomerId,
+      return_url: `${origin}/dashboard/settings/billing`,
     });
 
     return NextResponse.json({ url: portalSession.url });
@@ -63,3 +108,4 @@ export async function POST(req: Request) {
     );
   }
 }
+

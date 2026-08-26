@@ -7,5 +7,11 @@ export function createClient() {
   const finalUrl = (url && url !== '[SENSITIVE]') ? url : 'https://dummy.supabase.co';
   const finalKey = (key && key !== '[SENSITIVE]') ? key : 'dummy_anon_key';
 
-  return createBrowserClient(finalUrl, finalKey)
+  return createBrowserClient(finalUrl, finalKey, {
+    auth: {
+      experimental: {
+        passkey: true
+      }
+    }
+  })
 }

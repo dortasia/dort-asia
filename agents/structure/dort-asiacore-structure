@@ -1,0 +1,34 @@
+                         DORT ASIA CORE
+                              │
+                ┌─────────────┴─────────────┐
+                │                           │
+          🔐 IDENTITY                  🏢 COMPANY
+                │                           │
+                ▼                           ▼
+          Account Identity            Company Account
+                │                           │
+                └──────────────┬────────────┘
+                               │
+                               ▼
+                        📱 APP PLATFORM
+                               │
+                  ┌────────────┼────────────┐
+                  ▼            ▼            ▼
+                Apps       App Features   App Plans
+                  │
+                  ▼
+             🛒 PURCHASE
+                  │
+                  ▼
+           💳 SUBSCRIPTION
+                  │
+                  ▼
+            🔑 ENTITLEMENT
+                  │
+                  ▼
+            🚀 APP ACCESS
+                  │
+             ┌────┴────┐
+             ▼         ▼
+          Xentra     Xentra
+          People     Paynote  

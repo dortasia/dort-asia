@@ -60,7 +60,9 @@ export default function RootLayout({
       <head>
         <JsonLd data={jsonLd} />
       </head>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+      </body>
     </html>
   );
 }

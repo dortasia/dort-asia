@@ -1,0 +1,388 @@
+Fix the infinite "Processing subscription, please wait..." state after successful Stripe Checkout.
+
+CURRENT UI:
+
+After the user successfully completes Stripe Checkout, Xentra redirects back to:
+
+/dashboard/subscriptions/[app_slug]
+
+The page remains indefinitely on:
+
+"Processing subscription, please wait..."
+
+The frontend must NOT remain in this state indefinitely.
+
+IMPORTANT:
+
+Do not add a fake timeout that assumes the subscription succeeded.
+
+Do not create a fake frontend subscription state.
+
+Stripe remains the billing source of truth and the local subscriptions database remains the authoritative application state after webhook synchronization.
+
+TRACE THE COMPLETE FLOW:
+
+Stripe Checkout
+→ checkout.session.completed
+→ /api/stripe/webhook
+→ subscriptions.subscriptions
+→ get_app_subscription_details
+→ frontend polling
+→ successful subscription UI
+
+FIRST INVESTIGATE THE ACTUAL FAILURE.
+
+Check the Stripe CLI logs for the checkout session and all related events.
+
+Check:
+
+checkout.session.completed
+customer.subscription.created
+payment_intent.succeeded
+invoice.paid
+invoice.payment_succeeded
+
+Verify the webhook response for each event.
+
+Then query:
+
+subscriptions.subscriptions
+
+and verify that the newly purchased subscription exists.
+
+For the new checkout, the expected record should contain:
+
+company_id:
+b8103013-e49b-40e2-b32a-8011f07547d0
+
+app_id:
+8a8d68d4-25f0-493b-b7e9-3f0f87e1ab04
+
+plan_id:
+f8714185-3088-48b4-ac6d-24f82e895704
+
+stripe_subscription_id:
+sub_...
+
+status:
+active
+
+If this row does not exist, FIX THE WEBHOOK FIRST.
+
+If the row exists, inspect:
+
+public/subscriptions.get_app_subscription_details
+
+and verify that it returns the subscription to the authenticated user.
+
+FRONTEND POLLING:
+
+Inspect:
+
+src/app/dashboard/subscriptions/[app_slug]/page.tsx
+
+Specifically inspect:
+
+- fetchDetails
+- get_app_subscription_details
+- polling interval
+- isSuccess
+- details
+- loading
+- cleanup
+- app_slug resolution
+
+The polling should stop when the database returns a valid active subscription.
+
+The logic should conceptually be:
+
+if subscription exists and status is active/trialing:
+    setDetails(data)
+    setIsSuccess(true)
+    setLoading(false)
+    stopPolling()
+
+If subscription is not found yet:
+    continue polling
+
+If the backend returns an actual error:
+    stop polling and display the error
+
+Do NOT silently treat every error as "subscription still processing."
+
+IMPORTANT:
+
+Currently the UI can apparently remain in the processing state indefinitely.
+
+Add a bounded polling strategy.
+
+For example:
+
+- poll every 2 seconds
+- maximum 30 attempts
+- approximately 60 seconds total
+
+If the subscription is still not synchronized after the timeout:
+
+Show a professional recovery state:
+
+"Your payment was received, but we're still confirming your subscription."
+
+"Your account has not been charged again. Please refresh in a moment."
+
+Buttons:
+
+[ Refresh status ]
+
+[ Back to subscriptions ]
+
+Do not mark the subscription active from the frontend.
+
+IMPORTANT ERROR HANDLING:
+
+The frontend currently appears to use:
+
+isSuccess
+
+to determine whether to leave the processing state.
+
+Make sure isSuccess is set based on the ACTUAL subscription returned by the database.
+
+Do not set isSuccess merely because the Checkout API returned a URL.
+
+Stripe Checkout returning successfully only means Checkout was created.
+
+The subscription becomes active after Stripe payment/webhook synchronization.
+
+ALSO CHECK THE RETURN URL.
+
+Verify that Stripe redirects to the correct Xentra route after checkout.
+
+The success URL should preserve the correct app slug:
+
+/dashboard/subscriptions/xentra-people
+
+and should not lose:
+
+app_slug
+company context
+authenticated session
+
+If the Checkout Session ID is available in the success URL, use it only as a correlation identifier.
+
+Do not trust it as proof that payment succeeded.
+
+DATABASE CHECK:
+
+Run:
+
+SELECT
+    id,
+    company_id,
+    app_id,
+    plan_id,
+    stripe_subscription_id,
+    status,
+    created_at
+FROM subscriptions.subscriptions
+ORDER BY created_at DESC
+LIMIT 10;
+
+Then inspect the newest row.
+
+If the newest subscription exists and is active, but the frontend continues polling, the problem is definitely in:
+
+get_app_subscription_details
+
+or the frontend interpretation of its response.
+
+RPC CHECK:
+
+Call the same RPC that the frontend uses:
+
+get_app_subscription_details
+
+for the authenticated company/app.
+
+Verify the returned JSON structure.
+
+Compare the actual returned structure with what page.tsx expects.
+
+For example, determine whether the RPC returns:
+
+{
+  subscription: {...}
+}
+
+or:
+
+{
+  id: "...",
+  status: "active",
+  ...
+}
+
+Do not assume the response structure.
+
+Fix the frontend based on the actual RPC response.
+
+IMPORTANT:
+
+The frontend must also correctly handle:
+
+status = active
+status = trialing
+status = past_due
+status = canceled
+cancel_at_period_end = true
+
+For a successful new subscription:
+
+active/trialing → success state
+
+For a cancellation scheduled subscription:
+
+active + cancel_at_period_end=true
+→ subscription page
+→ show "Cancellation scheduled"
+
+Do not confuse cancel_at_period_end with status=canceled.
+
+WEBHOOK IDEMPOTENCY:
+
+Preserve the existing stripe_event_id idempotency mechanism.
+
+Do not remove it.
+
+Ensure checkout.session.completed can successfully create/update the subscription even if:
+
+customer.subscription.created
+
+arrives before or after it.
+
+Stripe webhook event ordering must NOT be assumed.
+
+The local subscription synchronization should be idempotent.
+
+IMPORTANT PLAN RESOLUTION:
+
+The subscription must continue to use:
+
+plan_id =
+f8714185-3088-48b4-ac6d-24f82e895704
+
+Do not replace it with:
+
+plus
+
+and do not replace it with:
+
+xentra-people
+
+The canonical relationships are:
+
+app slug:
+xentra-people
+
+app UUID:
+8a8d68d4-25f0-493b-b7e9-3f0f87e1ab04
+
+plan code:
+plus
+
+plan UUID:
+f8714185-3088-48b4-ac6d-24f82e895704
+
+Stripe subscription:
+sub_...
+
+Do not mix these identifiers.
+
+IMPORTANT COUPON/DISCOUNT:
+
+The newly introduced Stripe coupon/promotion-code changes must not break subscription synchronization.
+
+The webhook must obtain the actual Stripe subscription from the Checkout Session/customer subscription data.
+
+Do not assume that the presence of a coupon changes the subscription ID.
+
+Do not use the Stripe Price amount to determine whether the subscription is active.
+
+The subscription status must come from Stripe's subscription object.
+
+LOGGING:
+
+Add safe temporary logs around:
+
+[Subscription Flow]
+checkout session completed
+
+[Subscription Flow]
+stripe subscription ID
+
+[Subscription Flow]
+resolved app ID
+
+[Subscription Flow]
+resolved plan ID
+
+[Subscription Flow]
+local subscription upserted
+
+[Subscription Flow]
+get_app_subscription_details result
+
+[Subscription Flow]
+frontend polling attempt
+
+Do NOT log:
+
+- Stripe secret keys
+- access tokens
+- refresh tokens
+- card details
+- payment method details
+- full JWTs
+
+EXPECTED FINAL BEHAVIOR:
+
+1. User selects Xentra Plus.
+2. Stripe Checkout opens.
+3. User completes payment.
+4. Stripe sends webhook.
+5. Webhook successfully creates/updates subscriptions.subscriptions.
+6. Xentra redirects to:
+
+   /dashboard/subscriptions/xentra-people
+
+7. Page initially shows:
+
+   Processing subscription, please wait...
+
+8. Within a few seconds the database reflects:
+
+   status = active
+
+9. Polling detects the subscription.
+10. Polling stops.
+11. Processing screen disappears.
+12. User sees the normal subscription page:
+
+   Xentra Plus
+   Active Plan
+   Monthly Cost
+   Billing Cycle
+   Team Size
+   Storage Limit
+   Renewal Date
+   Payment History
+
+NO INFINITE LOADING.
+
+Also make the timeout/recovery state professional rather than using alert().
+
+After fixing:
+
+npx tsc --noEmit
+
+Then perform a completely fresh checkout with a new account and verify the entire flow from Stripe payment through database synchronization to the final subscription page.

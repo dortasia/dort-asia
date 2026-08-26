@@ -6,7 +6,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { UserRemove01Icon, UserAdd01Icon, Shield01Icon } from "@hugeicons/core-free-icons";
+import { UserRemove01Icon, UserAdd01Icon, Shield01Icon, FingerPrintIcon } from "@hugeicons/core-free-icons";
 import { createClient } from "@/utils/supabase/client";
 import { getURL } from "@/lib/utils";
 function AuthContent() {
@@ -21,6 +21,9 @@ function AuthContent() {
 
   const [activeTab, setActiveTab] = useState<"signin" | "signup" | "otp">(initialTabParam);
   const [email, setEmail] = useState(initialEmailParam);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [companyName, setCompanyName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -67,6 +70,12 @@ function AuthContent() {
     setIsLoading(true);
 
     if (activeTab === "signup") {
+      if (!firstName.trim() || !lastName.trim() || !companyName.trim()) {
+        setErrorMsg("Please fill in your first name, last name, and company name.");
+        setIsLoading(false);
+        return;
+      }
+      
       if (password !== confirmPassword) {
         setErrorMsg("Passwords do not match");
         setIsLoading(false);
@@ -76,6 +85,13 @@ function AuthContent() {
       const { error } = await supabase.auth.signUp({
         email,
         password,
+        options: {
+          data: {
+            firstName: firstName.trim(),
+            lastName: lastName.trim(),
+            companyName: companyName.trim(),
+          },
+        },
       });
 
       if (error) {
@@ -95,9 +111,23 @@ function AuthContent() {
       }
     } else {
       const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
+        email: email,
+        password: password,
       });
+
+      if (!error) {
+        await fetch("/api/auth/login-method", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ provider: "email" }),
+        }).catch(err => console.error("Failed to set login method cookie", err));
+
+        await fetch("/api/auth/record-login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ authMethod: "email_password" }),
+        }).catch(err => console.error("Failed to record login security event", err));
+      }
 
       if (error) {
         if (error.message.toLowerCase().includes("email not confirmed")) {
@@ -116,6 +146,11 @@ function AuthContent() {
           setErrorMsg(error.message);
         }
       } else {
+        const { data: aalData } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+        if (aalData?.nextLevel === 'aal2' && aalData.currentLevel === 'aal1') {
+          window.location.href = "/auth/mfa";
+          return;
+        }
         handleNavigateNext(nextUrl);
       }
     }
@@ -142,6 +177,12 @@ function AuthContent() {
     if (error) {
       setErrorMsg(error.message);
     } else {
+      await fetch("/api/auth/record-login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ authMethod: "otp" }),
+      }).catch(err => console.error("Failed to record login security event", err));
+      
       handleNavigateNext(nextUrl);
     }
     setIsLoading(false);
@@ -155,6 +196,33 @@ function AuthContent() {
         redirectTo: `${getURL()}auth/callback?next=${nextPath}`,
       },
     });
+  };
+
+  const handlePasskeySignIn = async () => {
+    try {
+      setIsLoading(true);
+      setErrorMsg("");
+      const { data, error } = await supabase.auth.signInWithPasskey();
+      if (error) throw error;
+
+      await fetch("/api/auth/record-login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ authMethod: "passkey" }),
+      }).catch(err => console.error("Failed to record login security event", err));
+
+      const { data: aalData } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+      if (aalData?.nextLevel === 'aal2' && aalData.currentLevel === 'aal1') {
+        window.location.href = "/auth/mfa";
+        return;
+      }
+      handleNavigateNext(nextUrl);
+    } catch (err: any) {
+      console.error(err);
+      setErrorMsg(err.message || "Failed to sign in with passkey");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const formatTime = (seconds: number) => {
@@ -345,14 +413,23 @@ function AuthContent() {
         {/* Title */}
         <h1 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white mb-2 text-center">
           {activeTab === "otp"
-            ? "Enter OTP"
+            ? (
+                <div className="flex items-center justify-center gap-2">
+                  <span className="text-emerald-500">✅</span> Account created
+                </div>
+              )
             : activeTab === "signin"
             ? "Sign in to DORT Asia"
             : "Create your DORT Asia account"}
         </h1>
         <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 text-center">
           {activeTab === "otp"
-            ? "Enter the 6-digit verification code sent to your email."
+            ? (
+                <>
+                  We've sent a verification email to: <span className="font-semibold text-gray-900 dark:text-white">{email}</span><br />
+                  Please verify your email to continue.
+                </>
+              )
             : activeTab === "signin"
             ? "Authenticate to access all connected applications."
             : "Get started with your universal DORT Asia identity."}
@@ -427,7 +504,7 @@ function AuthContent() {
             <button
               type="button"
               onClick={handleGoogleSignIn}
-              className="w-full h-11 flex items-center justify-center gap-3 bg-[#f5f5f7] hover:bg-[#e8e8ed] dark:bg-zinc-800 dark:hover:bg-zinc-700 rounded-xl transition-colors mb-5 cursor-pointer text-sm font-semibold text-gray-700 dark:text-gray-200"
+              className="w-full h-11 flex items-center justify-center gap-3 bg-[#f5f5f7] hover:bg-[#e8e8ed] dark:bg-zinc-800 dark:hover:bg-zinc-700 rounded-xl transition-colors mb-3 cursor-pointer text-sm font-semibold text-gray-700 dark:text-gray-200"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                 <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -436,6 +513,16 @@ function AuthContent() {
                 <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
               </svg>
               <span>Continue with Google</span>
+            </button>
+            
+            {/* Passkey / Biometrics Button */}
+            <button
+              type="button"
+              onClick={handlePasskeySignIn}
+              className="w-full h-11 flex items-center justify-center gap-3 bg-[#f5f5f7] hover:bg-[#e8e8ed] dark:bg-zinc-800 dark:hover:bg-zinc-700 rounded-xl transition-colors mb-5 cursor-pointer text-sm font-semibold text-gray-700 dark:text-gray-200"
+            >
+              <HugeiconsIcon icon={FingerPrintIcon} className="w-5 h-5" />
+              <span>Sign in with Passkey / Biometrics</span>
             </button>
 
             {/* Divider */}
@@ -446,12 +533,42 @@ function AuthContent() {
 
             {/* Email & Password */}
             <div className="space-y-3 mb-6">
+              {activeTab === "signup" && (
+                <>
+                  <div className="grid grid-cols-2 gap-3">
+                    <input
+                      type="text"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      placeholder="First Name"
+                      className="w-full h-11 px-4 rounded-xl border border-gray-200 dark:border-zinc-700 bg-transparent focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none text-sm text-gray-900 dark:text-white placeholder:text-gray-400"
+                    />
+                    <input
+                      type="text"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      placeholder="Last Name"
+                      className="w-full h-11 px-4 rounded-xl border border-gray-200 dark:border-zinc-700 bg-transparent focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none text-sm text-gray-900 dark:text-white placeholder:text-gray-400"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="text"
+                      value={companyName}
+                      onChange={(e) => setCompanyName(e.target.value)}
+                      placeholder="Company Name"
+                      className="w-full h-11 px-4 rounded-xl border border-gray-200 dark:border-zinc-700 bg-transparent focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none text-sm text-gray-900 dark:text-white placeholder:text-gray-400"
+                    />
+                  </div>
+                </>
+              )}
+
               <div>
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Email Address"
+                  placeholder="Company Email"
                   className="w-full h-11 px-4 rounded-xl border border-gray-200 dark:border-zinc-700 bg-transparent focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none text-sm text-gray-900 dark:text-white placeholder:text-gray-400"
                 />
               </div>
@@ -500,7 +617,7 @@ function AuthContent() {
               disabled={isLoading}
               className="w-full h-11 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white flex items-center justify-center font-semibold rounded-xl transition-colors text-sm cursor-pointer disabled:opacity-70 shadow-xs"
             >
-              {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : activeTab === "signin" ? "Sign In" : "Create Account"}
+              {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : activeTab === "signin" ? "Sign In" : "Create Dort Asia Account"}
             </button>
           </div>
         )}

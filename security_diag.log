@@ -1,0 +1,10 @@
+
+[DIAG] processLoginSecurityEvent executing
+[DIAG] supabaseAdmin client created
+[DIAG] User ID from session: 047c6019-1574-4ad0-a15a-6dee52027b63
+[DIAG] identity.accounts lookup result: null error: {"code":"PGRST205","details":null,"hint":null,"message":"Could not find the table 'public.identity.accounts' in the schema cache"}
+
+[DIAG] processLoginSecurityEvent executing
+[DIAG] supabaseAdmin client created
+[DIAG] User ID from session: 047c6019-1574-4ad0-a15a-6dee52027b63
+[DIAG] identity.accounts lookup result: null error: {"code":"PGRST205","details":null,"hint":null,"message":"Could not find the table 'public.identity.accounts' in the schema cache"}

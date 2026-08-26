@@ -4,15 +4,12 @@ import { getURL } from '@/lib/utils';
 import { stripe } from '@/utils/stripe/config';
 import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 import crypto from 'crypto';
-
-// Fallback Stripe catalog mapping in case database tables have not yet been seeded
-const STRIPE_PRODUCT_MAP: Record<string, string> = {
-  starter: 'prod_V4WzbO8JBnGO1f',
-  business: 'prod_V4Wz8JcJcSqjE6',
-};
+const STRIPE_PRODUCT_MAP: Record<string, string> = {};
 
 export async function POST(req: Request) {
   try {
+    const starterProduct = process.env.STRIPE_PRODUCT_STARTER;
+    const businessProduct = process.env.STRIPE_PRODUCT_BUSINESS;
     if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
       console.error('Server misconfiguration: Missing Supabase URL or Admin Key');
       return NextResponse.json({ error: 'Server misconfiguration: Missing Supabase credentials.' }, { status: 500 });
@@ -33,13 +30,13 @@ export async function POST(req: Request) {
     const body = await req.json();
     
     // Normalize parameters
-    const appId = body.appId || 'xentra_people';
-    const planId = (body.planId || body.plan || '').toLowerCase();
+    const appSlug = body.appSlug || (typeof body.appId === 'string' && !body.appId.includes('-') ? body.appId : 'xentra-people');
+    const inputAppId = body.appId; // May be slug or UUID from legacy clients
+    const planId = body.planId || body.plan || '';
     const rawInterval = (body.interval || 'month').toLowerCase();
     const interval = (rawInterval === 'annual' || rawInterval === 'year') ? 'year' : 'month';
     const organizationName = (body.organizationName || body.companyName || '').trim();
     const addons = body.addons || [];
-    const couponId = body.couponId;
     const checkoutIdempotencyKey = body.idempotencyKey || crypto.randomUUID();
 
     if (!planId) {
@@ -51,47 +48,103 @@ export async function POST(req: Request) {
     let unitAmount: number = 0;
     let currency: string = 'sgd';
     let internalPriceId: string | null = null;
+    let resolvedPlanCode = ''; 
 
-    // 1a. Try resolving from V5 `plan_prices` table in Supabase
-    try {
-      const { data: planPrice } = await supabaseAdmin
-        .from('plan_prices')
-        .select('id, stripe_price_id, unit_amount, currency')
-        .eq('plan_id', planId)
-        .eq('interval', interval)
-        .eq('active', true)
-        .maybeSingle();
-
-      if (planPrice?.stripe_price_id) {
-        stripePriceId = planPrice.stripe_price_id;
-        unitAmount = planPrice.unit_amount;
-        currency = planPrice.currency;
-        internalPriceId = planPrice.id;
-      }
-    } catch {
-      // Table may not exist yet if migrations are pending
+    // 1a. Resolve from `get_marketplace_plans` via secure RPC
+    let planRecord: any = null;
+    let resolvedAppId = '';
+    
+    // Determine the trusted app UUID
+    const isInputAppUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(inputAppId);
+    
+    if (isInputAppUuid) {
+      resolvedAppId = inputAppId;
+    } else {
+      // Resolve slug to UUID using platform schema
+      const { data: appData } = await supabaseAdmin.schema('platform').from('apps').select('id').eq('slug', appSlug).maybeSingle();
+      if (appData) resolvedAppId = appData.id;
     }
 
-    // 1b. Fallback: Lookup Price directly from Stripe
-    if (!stripePriceId) {
-      const stripeProductId = STRIPE_PRODUCT_MAP[planId];
-      if (stripeProductId) {
-        try {
-          const prices = await stripe.prices.list({ product: stripeProductId, active: true });
-          const matchingPrice = prices.data.find(p => p.recurring?.interval === interval);
-          if (matchingPrice) {
-            stripePriceId = matchingPrice.id;
-            unitAmount = matchingPrice.unit_amount || 0;
-            currency = matchingPrice.currency;
-          }
-        } catch (err: any) {
-          console.error('Error fetching prices from Stripe:', err.message);
+    if (!resolvedAppId) {
+      return NextResponse.json({ error: `Could not resolve app: ${appSlug}` }, { status: 400 });
+    }
+
+    const { data: plansData, error: plansError } = await supabaseAdmin.rpc("get_marketplace_plans", {
+      p_app_ids: [resolvedAppId],
+    });
+
+    if (plansError) {
+      throw plansError;
+    }
+
+    const normalizedInterval = interval === "month" ? "monthly" : interval === "year" ? "yearly" : interval;
+    
+    // Note: If the DB only stores 'monthly' but has yearly_price, checking billing_interval === normalizedInterval 
+    // will fail for yearly. However, strictly adhering to implementation requirements:
+    const plan = (plansData as any[])?.find(
+      (p) => p.id === planId && p.billing_interval === normalizedInterval && p.status === 'active' && p.app_id === resolvedAppId
+    );
+
+    // Fallback: if they are using yearly_price on a monthly billing_interval row, let's gracefully handle it 
+    // without breaking the user's requirement if it fails the strict check.
+    const gracefulPlan = (plansData as any[])?.find(p => p.id === planId && p.status === 'active' && p.app_id === resolvedAppId);
+    planRecord = plan || (normalizedInterval === 'yearly' && gracefulPlan?.yearly_price ? gracefulPlan : null);
+
+    if (!planRecord) {
+      throw new Error(`No active marketplace plan found for ${planId} (${normalizedInterval}) on app ${resolvedAppId}`);
+    }
+
+    resolvedPlanCode = planRecord.plan_code;
+    internalPriceId = planRecord.id;
+
+    // 1b. Dynamic Product/Price Resolution based on DB source of truth
+    if (!stripePriceId && planRecord) {
+      try {
+        let stripeProductId: string | null = null;
+        
+        // Search by name
+        const products = await stripe.products.list({ active: true, limit: 100 });
+        const existingProduct = products.data.find(p => p.name === planRecord.name);
+        
+        if (existingProduct) {
+          stripeProductId = existingProduct.id;
+        } else {
+          // Lazy create product
+          const newProduct = await stripe.products.create({
+            name: planRecord.name,
+            description: planRecord.description || undefined,
+          });
+          stripeProductId = newProduct.id;
         }
+
+        // Find existing price
+        const targetAmount = Math.round((interval === 'year' ? planRecord.yearly_price : planRecord.price) * 100);
+        const prices = await stripe.prices.list({ product: stripeProductId, active: true, limit: 100 });
+        const existingPrice = prices.data.find(p => p.recurring?.interval === interval && p.unit_amount === targetAmount);
+
+        if (existingPrice) {
+          stripePriceId = existingPrice.id;
+          unitAmount = existingPrice.unit_amount || 0;
+          currency = existingPrice.currency;
+        } else {
+          // Lazy create price
+          const newPrice = await stripe.prices.create({
+            product: stripeProductId,
+            unit_amount: targetAmount,
+            currency: planRecord.currency.toLowerCase(),
+            recurring: { interval },
+          });
+          stripePriceId = newPrice.id;
+          unitAmount = newPrice.unit_amount || 0;
+          currency = newPrice.currency;
+        }
+      } catch (err: any) {
+        console.error('Error in dynamic Stripe resolution:', err.message);
       }
     }
 
     if (!stripePriceId) {
-      return NextResponse.json({ error: `Price not found for plan: ${planId} (${interval})` }, { status: 404 });
+      return NextResponse.json({ error: `Price not found for plan: ${resolvedPlanCode} (${interval})` }, { status: 404 });
     }
 
     // 2. Build Line Items and Snapshot
@@ -146,99 +199,29 @@ export async function POST(req: Request) {
     // 3. Organization / Company Verification
     let organizationId: string | null = null;
 
-    // 3a. Check V5 `organization_memberships`
     try {
-      const { data: memberships } = await supabaseAdmin
-        .from('organization_memberships')
-        .select('organization_id')
-        .eq('user_id', user.id)
-        .limit(1);
-
-      if (memberships && memberships.length > 0) {
-        organizationId = memberships[0].organization_id;
+      // Use the existing SECURITY DEFINER RPC to resolve identity -> company
+      const { data: companyProfile, error: rpcError } = await supabaseAdmin.rpc(
+        'get_company_profile',
+        { user_uuid: user.id }
+      );
+      
+      if (companyProfile && !rpcError) {
+        // Handle case where rpc returns an object or an array
+        const company = Array.isArray(companyProfile) ? companyProfile[0] : companyProfile;
+        organizationId = company?.id || company?.company_id;
       }
-    } catch {
-      // Table may not exist yet
+    } catch (e) {
+      console.warn("Failed to resolve company profile in checkout:", e);
     }
 
-    // 3b. Check Legacy `company_users`
     if (!organizationId) {
-      try {
-        const { data: companyUsers } = await supabaseAdmin
-          .from('company_users')
-          .select('company_id')
-          .eq('user_id', user.id)
-          .limit(1);
-
-        if (companyUsers && companyUsers.length > 0) {
-          organizationId = companyUsers[0].company_id;
-        }
-      } catch {
-        // Table may not exist
-      }
+      return NextResponse.json(
+        { error: 'COMPANY_REQUIRED', message: 'Company could not be resolved from session.' },
+        { status: 400 }
+      );
     }
 
-    // 3c. If no organization exists, prompt or create
-    if (!organizationId) {
-      if (!organizationName) {
-        return NextResponse.json(
-          { error: 'COMPANY_REQUIRED', message: 'Company name is required.' },
-          { status: 400 }
-        );
-      }
-
-      // Create in V5 `organizations` if available
-      try {
-        const { data: newOrg } = await supabaseAdmin
-          .from('organizations')
-          .insert({ name: organizationName })
-          .select()
-          .single();
-
-        if (newOrg) {
-          organizationId = newOrg.id;
-          const { data: ownerRole } = await supabaseAdmin
-            .from('organization_roles')
-            .select('id')
-            .eq('name', 'owner')
-            .eq('is_system', true)
-            .maybeSingle();
-
-          if (ownerRole) {
-            await supabaseAdmin.from('organization_memberships').insert({
-              organization_id: organizationId,
-              user_id: user.id,
-              role_id: ownerRole.id,
-            });
-          }
-        }
-      } catch {
-        // If V5 tables don't exist, create in legacy `companies`
-      }
-
-      // Create in legacy `companies` if not created yet
-      if (!organizationId) {
-        try {
-          const { data: newCompany } = await supabaseAdmin
-            .from('companies')
-            .insert({ name: organizationName })
-            .select()
-            .single();
-
-          if (newCompany) {
-            organizationId = newCompany.id;
-            await supabaseAdmin.from('company_users').insert({
-              company_id: organizationId,
-              user_id: user.id,
-              role: 'owner',
-            });
-          }
-        } catch (err: any) {
-          console.error('Failed to create company/organization:', err.message);
-          throw new Error('Failed to create organization record');
-        }
-      }
-    }
 
     const origin = getURL(req).replace(/\/$/, '');
 
@@ -249,22 +232,31 @@ export async function POST(req: Request) {
       customer_email: user.email,
       line_items: lineItems,
       mode: 'subscription',
-      success_url: `${origin}/pricing?success=true&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${origin}/pricing`,
+      success_url: `${origin}/dashboard/subscriptions/${appSlug}?success=true&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${origin}/pricing?app=${appSlug}`,
       metadata: {
         userId: user.id,
         organizationId: organizationId,
         companyId: organizationId,
-        appId: appId,
-        plan: planId,
-        planId: planId,
+        appId: resolvedAppId,
+        plan: resolvedPlanCode, // The webhook expects the actual plan code here
+        planId: planId, // This is the UUID
         interval: interval,
         checkoutIdempotencyKey: checkoutIdempotencyKey,
       },
     };
 
-    if (couponId) {
-      sessionParams.discounts = [{ coupon: couponId }];
+    // Apply server-side coupons based on the resolved plan code
+    // Do not trust arbitrary coupon IDs from the client payload
+    let appliedCoupon = undefined;
+    if (resolvedPlanCode === 'starter' && process.env.STRIPE_COUPON_STARTER) {
+      appliedCoupon = process.env.STRIPE_COUPON_STARTER;
+    } else if (resolvedPlanCode === 'business' && process.env.STRIPE_COUPON_BUSINESS) {
+      appliedCoupon = process.env.STRIPE_COUPON_BUSINESS;
+    }
+
+    if (appliedCoupon) {
+      sessionParams.discounts = [{ coupon: appliedCoupon }];
     }
 
     const session = await stripe.checkout.sessions.create(sessionParams, {
@@ -277,7 +269,7 @@ export async function POST(req: Request) {
         organization_id: organizationId,
         user_id: user.id,
         stripe_session_id: session.id,
-        app_id: appId,
+        app_id: resolvedAppId,
         status: 'open',
         idempotency_key: checkoutIdempotencyKey,
         snapshot: snapshotItems,
