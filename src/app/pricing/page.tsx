@@ -1,4 +1,4 @@
-import { createClient } from "@/utils/supabase/server";
+import { createPublicClient } from "@/utils/supabase/public";
 import { PricingContent, DynamicPricingData } from "./PricingContent";
 
 export const revalidate = 60; // Revalidate every minute for high speed and fresh Stripe prices
@@ -25,7 +25,7 @@ export default async function PricingPage() {
   let pricingData: DynamicPricingData = DEFAULT_PRICING;
 
   try {
-    const supabase = await createClient();
+    const supabase = createPublicClient();
 
     // Query active plans with their active prices
     const { data: plans } = await supabase
