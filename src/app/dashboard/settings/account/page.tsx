@@ -152,11 +152,12 @@ function AccountSettingsContent() {
     loadSettings();
 
     // Handle OAuth reauth callback
-    const reauthSuccess = searchParams.get("reauth_success");
-    const reauthError = searchParams.get("reauth_error");
+    const isReauthSuccess = searchParams.get("reauth_success") === "true" || searchParams.get("reauth") === "success";
+    const reauthErr = searchParams.get("reauth_error") || (searchParams.get("reauth") === "error" ? "failed" : null);
     const action = searchParams.get("action");
 
-    if (reauthSuccess === "true" && action) {
+    if (isReauthSuccess && action) {
+      setIsReauthOpen(false);
       if (action === "enable_2fa") {
         setIs2FAModalOpen(true);
       } else if (action === "disable_2fa") {
@@ -165,21 +166,35 @@ function AccountSettingsContent() {
         performRegisterPasskey();
       }
       
-      // Clean up URL
+      // Clean up URL parameters cleanly
       const newUrl = new URL(window.location.href);
       newUrl.searchParams.delete("reauth_success");
+      newUrl.searchParams.delete("reauth");
       newUrl.searchParams.delete("action");
-      window.history.replaceState({}, '', newUrl.toString());
-    } else if (reauthError) {
-      setTimeout(() => {
-        alert(`Authentication failed: ${reauthError}`);
-      }, 500);
+      window.history.replaceState({}, '', newUrl.pathname);
+    } else if (reauthErr) {
+      setIsReauthOpen(false);
+      const friendlyMsg = reauthErr === "google_account_mismatch"
+        ? "Please use the Google account associated with this Dort Asia account."
+        : reauthErr === "reauth_session_expired"
+        ? "Re-authentication session expired. Please try again."
+        : "Re-authentication failed. Please try again.";
       
-      // Clean up URL
+      setTimeout(() => {
+        alert(friendlyMsg);
+      }, 300);
+      
+      // Clean up URL parameters cleanly
       const newUrl = new URL(window.location.href);
       newUrl.searchParams.delete("reauth_error");
+      newUrl.searchParams.delete("reauth");
       newUrl.searchParams.delete("action");
-      window.history.replaceState({}, '', newUrl.toString());
+      window.history.replaceState({}, '', newUrl.pathname);
+    } else if (action && !isReauthSuccess && !reauthErr) {
+      if (action === "enable_2fa" || action === "disable_2fa") {
+        setActionIntent(action);
+        setIsReauthOpen(true);
+      }
     }
   }, [searchParams]);
 
