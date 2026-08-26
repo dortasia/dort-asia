@@ -218,19 +218,20 @@ export async function GET(request: Request) {
           path: '/'
         });
 
-        // Fire login security event asynchronously so it doesn't block routing
+        // Fire login security event and AWAIT IT so Vercel does not aggressively kill it
         console.log("[DIAG] auth callback invoking processLoginSecurityEvent");
-        processLoginSecurityEvent({
-          authMethod: loginMethod,
-          user: sessionData.session.user,
-          userId: sessionData.session.user.id,
-          session: sessionData.session,
-          accessToken: sessionData.session.access_token,
-        }).then(res => {
+        try {
+          const res = await processLoginSecurityEvent({
+            authMethod: loginMethod,
+            user: sessionData.session.user,
+            userId: sessionData.session.user.id,
+            session: sessionData.session,
+            accessToken: sessionData.session.access_token,
+          });
           console.log("[DIAG] auth callback processLoginSecurityEvent result:", res);
-        }).catch(err => {
+        } catch (err) {
           console.error("Failed to process login security event:", err);
-        });
+        }
 
         // Use an admin client to safely check the account status via a secure RPC
         const { createClient: createSupabaseClient } = await import('@supabase/supabase-js');
