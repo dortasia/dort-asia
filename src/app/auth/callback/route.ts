@@ -27,7 +27,9 @@ export async function GET(request: Request) {
           // No original session
           const html = `
             <script>
-              window.opener.postMessage({ type: "DORT_REAUTH_RESULT", success: false, reason: "original_session_missing" }, "${origin}");
+              if (window.opener) {
+                window.opener.postMessage({ type: "DORT_REAUTH_RESULT", success: false, reason: "original_session_missing" }, window.location.origin);
+              }
               window.close();
             </script>
           `;
@@ -43,7 +45,9 @@ export async function GET(request: Request) {
           console.log('[REAUTH CALLBACK] transaction missing');
           const html = `
             <script>
-              window.opener.postMessage({ type: "DORT_REAUTH_RESULT", success: false, reason: "reauth_session_expired" }, "${origin}");
+              if (window.opener) {
+                window.opener.postMessage({ type: "DORT_REAUTH_RESULT", success: false, reason: "reauth_session_expired" }, window.location.origin);
+              }
               window.close();
             </script>
           `;
@@ -61,7 +65,9 @@ export async function GET(request: Request) {
           cookieStore.delete('dort_reauth_transaction');
           const html = `
             <script>
-              window.opener.postMessage({ type: "DORT_REAUTH_RESULT", success: false, reason: "reauth_session_expired" }, "${origin}");
+              if (window.opener) {
+                window.opener.postMessage({ type: "DORT_REAUTH_RESULT", success: false, reason: "reauth_session_expired" }, window.location.origin);
+              }
               window.close();
             </script>
           `;
@@ -75,7 +81,9 @@ export async function GET(request: Request) {
           cookieStore.delete('dort_reauth_transaction');
           const html = `
             <script>
-              window.opener.postMessage({ type: "DORT_REAUTH_RESULT", success: false, reason: "reauth_session_expired" }, "${origin}");
+              if (window.opener) {
+                window.opener.postMessage({ type: "DORT_REAUTH_RESULT", success: false, reason: "reauth_session_expired" }, window.location.origin);
+              }
               window.close();
             </script>
           `;
@@ -87,7 +95,9 @@ export async function GET(request: Request) {
           cookieStore.delete('dort_reauth_transaction');
           const html = `
             <script>
-              window.opener.postMessage({ type: "DORT_REAUTH_RESULT", success: false, reason: "reauth_session_expired" }, "${origin}");
+              if (window.opener) {
+                window.opener.postMessage({ type: "DORT_REAUTH_RESULT", success: false, reason: "reauth_session_expired" }, window.location.origin);
+              }
               window.close();
             </script>
           `;
@@ -118,7 +128,9 @@ export async function GET(request: Request) {
           cookieStore.delete('dort_reauth_transaction');
           const html = `
             <script>
-              window.opener.postMessage({ type: "DORT_REAUTH_RESULT", success: false, reason: "exchange_failed" }, "${origin}");
+              if (window.opener) {
+                window.opener.postMessage({ type: "DORT_REAUTH_RESULT", success: false, reason: "exchange_failed" }, window.location.origin);
+              }
               window.close();
             </script>
           `;
@@ -145,7 +157,9 @@ export async function GET(request: Request) {
           
           const html = `
             <script>
-              window.opener.postMessage({ type: "DORT_REAUTH_RESULT", success: false, reason: "google_account_mismatch" }, "${origin}");
+              if (window.opener) {
+                window.opener.postMessage({ type: "DORT_REAUTH_RESULT", success: false, reason: "google_account_mismatch" }, window.location.origin);
+              }
               window.close();
             </script>
           `;
@@ -159,7 +173,9 @@ export async function GET(request: Request) {
         // DO NOT overwrite the primary session. The popup is merely for verification.
         const html = `
           <script>
-            window.opener.postMessage({ type: "DORT_REAUTH_RESULT", success: true }, "${origin}");
+            if (window.opener) {
+              window.opener.postMessage({ type: "DORT_REAUTH_RESULT", success: true }, window.location.origin);
+            }
             window.close();
           </script>
         `;
@@ -287,7 +303,9 @@ export async function GET(request: Request) {
         
         const html = `
           <script>
-            window.opener.postMessage({ type: "DORT_REAUTH_RESULT", success: false, reason: "cancelled" }, "${origin}");
+            if (window.opener) {
+              window.opener.postMessage({ type: "DORT_REAUTH_RESULT", success: false, reason: "cancelled" }, window.location.origin);
+            }
             window.close();
           </script>
         `;
