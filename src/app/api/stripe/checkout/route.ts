@@ -102,23 +102,33 @@ export async function POST(req: Request) {
       try {
         let stripeProductId: string | null = null;
         
-        // Search by name
-        const products = await stripe.products.list({ active: true, limit: 100 });
-        const existingProduct = products.data.find(p => p.name === planRecord.name);
-        
-        if (existingProduct) {
-          stripeProductId = existingProduct.id;
-        } else {
-          // Lazy create product
-          const newProduct = await stripe.products.create({
-            name: planRecord.name,
-            description: planRecord.description || undefined,
-          });
-          stripeProductId = newProduct.id;
+        const isStarterPlan = resolvedPlanCode.toLowerCase() === 'starter' || resolvedPlanCode.toLowerCase() === 'plus';
+
+        if (isStarterPlan && starterProduct) stripeProductId = starterProduct;
+        else if (resolvedPlanCode.toLowerCase() === 'business' && businessProduct) stripeProductId = businessProduct;
+
+        if (!stripeProductId) {
+          // Search by name
+          const products = await stripe.products.list({ active: true, limit: 100 });
+          const existingProduct = products.data.find(p => p.name === planRecord.name);
+          
+          if (existingProduct) {
+            stripeProductId = existingProduct.id;
+          } else {
+            // Lazy create product
+            const newProduct = await stripe.products.create({
+              name: planRecord.name,
+              description: planRecord.description || undefined,
+            });
+            stripeProductId = newProduct.id;
+          }
         }
 
         // Find existing price
-        const targetAmount = Math.round((interval === 'year' ? planRecord.yearly_price : planRecord.price) * 100);
+        const basePrice = isStarterPlan ? 129 : planRecord.price;
+        const baseYearlyPrice = isStarterPlan ? 1299 : planRecord.yearly_price;
+        const targetAmount = Math.round((interval === 'year' ? baseYearlyPrice : basePrice) * 100);
+        
         const prices = await stripe.prices.list({ product: stripeProductId, active: true, limit: 100 });
         const existingPrice = prices.data.find(p => p.recurring?.interval === interval && p.unit_amount === targetAmount);
 
@@ -249,9 +259,11 @@ export async function POST(req: Request) {
     // Apply server-side coupons based on the resolved plan code
     // Do not trust arbitrary coupon IDs from the client payload
     let appliedCoupon = undefined;
-    if (resolvedPlanCode === 'starter' && process.env.STRIPE_COUPON_STARTER) {
+    const isStarterPlan = resolvedPlanCode.toLowerCase() === 'starter' || resolvedPlanCode.toLowerCase() === 'plus';
+
+    if (isStarterPlan && process.env.STRIPE_COUPON_STARTER) {
       appliedCoupon = process.env.STRIPE_COUPON_STARTER;
-    } else if (resolvedPlanCode === 'business' && process.env.STRIPE_COUPON_BUSINESS) {
+    } else if (resolvedPlanCode.toLowerCase() === 'business' && process.env.STRIPE_COUPON_BUSINESS) {
       appliedCoupon = process.env.STRIPE_COUPON_BUSINESS;
     }
 
