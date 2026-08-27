@@ -43,7 +43,10 @@ export async function GET(req: NextRequest) {
     // Self-healing: if no active session exists or current device is missing, record the current device
     if (!sessions || sessions.length === 0 || !sessions.some(s => s.device_id === currentDeviceId)) {
       try {
-        await processLoginSecurityEvent({ user, userId: user.id });
+        const result = await processLoginSecurityEvent({ user, userId: user.id });
+        if (result && !result.success) {
+          console.warn("[SESSIONS_API] Self-healing session registration notice:", result.error);
+        }
         const { data: refetched } = await supabaseAdmin
           .schema("identity")
           .from("account_sessions")

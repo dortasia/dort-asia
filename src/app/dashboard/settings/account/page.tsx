@@ -17,6 +17,8 @@ import { TwoFactorModal } from "@/components/auth/TwoFactorModal";
 import { ReauthModal } from "@/components/auth/ReauthModal";
 import { Disable2FAModal } from "@/components/auth/Disable2FAModal";
 import { StepUpMfaModal } from "@/components/auth/StepUpMfaModal";
+import { RecoveryCodesModal } from "@/components/auth/RecoveryCodesModal";
+import { getRecoveryCodesCount } from "@/app/dashboard/settings/security/recovery-actions";
 
 interface AccountSettingsCache {
   userEmail: string;
@@ -25,6 +27,7 @@ interface AccountSettingsCache {
   twoFactorEnabled: boolean;
   twoFactorId: string | null;
   passkeys: any[];
+  recoveryCodesCount: number;
 }
 
 // Module-level cache: persists across internal client navigation, reloads on tab refresh
@@ -124,6 +127,9 @@ export default function AccountSettingsPage() {
   const [passkeys, setPasskeys] = useState<any[]>(
     cachedAccountSettings ? cachedAccountSettings.passkeys : []
   );
+  const [recoveryCodesCount, setRecoveryCodesCount] = useState(
+    cachedAccountSettings ? cachedAccountSettings.recoveryCodesCount : 0
+  );
   
   const [userEmail, setUserEmail] = useState(
     cachedAccountSettings ? cachedAccountSettings.userEmail : ""
@@ -139,6 +145,7 @@ export default function AccountSettingsPage() {
   const [isDisable2FAModalOpen, setIsDisable2FAModalOpen] = useState(false);
   const [isReauthOpen, setIsReauthOpen] = useState(false);
   const [isStepUpMfaModalOpen, setIsStepUpMfaModalOpen] = useState(false);
+  const [isRecoveryModalOpen, setIsRecoveryModalOpen] = useState(false);
   const [actionIntent, setActionIntent] = useState("");
 
   const [isLoading, setIsLoading] = useState(!cachedAccountSettings);
@@ -156,13 +163,14 @@ export default function AccountSettingsPage() {
     }
 
     try {
-      const [userRes, methodRes, mfaRes, passkeysRes] = await Promise.all([
+      const [userRes, methodRes, mfaRes, passkeysRes, recoveryRes] = await Promise.all([
         supabase.auth.getUser(),
         fetch("/api/auth/login-method")
           .then((res) => (res.ok ? res.json() : null))
           .catch(() => null),
         supabase.auth.mfa.listFactors(),
         (supabase.auth as any).passkey?.list().catch(() => ({ data: [] })),
+        getRecoveryCodesCount().catch(() => 0),
       ]);
 
       const user = userRes.data?.user;
@@ -203,6 +211,7 @@ export default function AccountSettingsPage() {
         twoFactorEnabled: is2FA,
         twoFactorId: factorId,
         passkeys: pkeys,
+        recoveryCodesCount: recoveryRes || 0,
       };
 
       cachedAccountSettings = newCache;
@@ -213,6 +222,7 @@ export default function AccountSettingsPage() {
       setTwoFactorEnabled(is2FA);
       setTwoFactorId(factorId);
       setPasskeys(pkeys);
+      setRecoveryCodesCount(recoveryRes || 0);
     } catch (e) {
       console.error("Error loading account settings:", e);
     } finally {
@@ -379,6 +389,29 @@ export default function AccountSettingsPage() {
                 </button>
               </div>
 
+              {/* Recovery Codes */}
+              {twoFactorEnabled && (
+                <div className="flex items-center justify-between p-4 rounded-xl border border-gray-100 bg-gray-50/50">
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-gray-700">
+                      <HugeiconsIcon icon={Shield01Icon} className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-[14.5px] font-semibold text-gray-900">Recovery Codes</h4>
+                      <p className="text-[12.5px] text-gray-500">
+                        {recoveryCodesCount > 0 ? `${recoveryCodesCount} unused codes remaining.` : "No unused codes remaining."}
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setIsRecoveryModalOpen(true)}
+                    className="px-4 py-2 text-[13.5px] font-medium bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 rounded-full transition-all cursor-pointer"
+                  >
+                    Generate New Codes
+                  </button>
+                </div>
+              )}
+
               {/* Passkeys Link */}
               <Link href="/dashboard/settings/account/passkeys" className="group block cursor-pointer">
                 <div className="flex items-center justify-between p-4 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-gray-100/50 transition-colors">
@@ -530,6 +563,15 @@ export default function AccountSettingsPage() {
           if (actionIntent === "add_passkey") {
             performRegisterPasskey();
           }
+        }}
+      />
+
+      <RecoveryCodesModal
+        isOpen={isRecoveryModalOpen}
+        onClose={() => setIsRecoveryModalOpen(false)}
+        onSuccess={() => {
+          setIsRecoveryModalOpen(false);
+          loadSettings(true);
         }}
       />
     </>

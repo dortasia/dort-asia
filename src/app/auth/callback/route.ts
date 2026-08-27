@@ -262,6 +262,13 @@ export async function GET(request: Request) {
         }
 
         if (accountStatus === 'active') {
+          // Check for recovery routing
+          const { checkRecoveryRouting } = await import("@/app/dashboard/settings/security/recovery-actions");
+          const recoveryRoute = await checkRecoveryRouting();
+          if (recoveryRoute) {
+            return NextResponse.redirect(`${origin}${recoveryRoute}`);
+          }
+
           // Enforce MFA if required
           const { data: mfaData } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
           const needsMFA = mfaData?.nextLevel === 'aal2';

@@ -8,6 +8,7 @@ import { Cancel01Icon, Shield01Icon, CheckmarkCircle02Icon, InformationCircleIco
 import { Loader2 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { create2FANotification } from "@/app/dashboard/settings/security/actions";
+import { generateRecoveryCodes } from "@/app/dashboard/settings/security/recovery-actions";
 
 interface TwoFactorModalProps {
   isOpen: boolean;
@@ -26,6 +27,10 @@ export function TwoFactorModal({ isOpen, onClose, onSuccess }: TwoFactorModalPro
   const [errorMsg, setErrorMsg] = useState("");
   const [success, setSuccess] = useState(false);
   const [copied, setCopied] = useState(false);
+  
+  const [showRecovery, setShowRecovery] = useState(false);
+  const [recoveryCodes, setRecoveryCodes] = useState<string[]>([]);
+  const [isGeneratingCodes, setIsGeneratingCodes] = useState(false);
 
   const supabase = createClient();
 
@@ -40,6 +45,8 @@ export function TwoFactorModal({ isOpen, onClose, onSuccess }: TwoFactorModalPro
       setVerificationCode("");
       setErrorMsg("");
       setSuccess(false);
+      setShowRecovery(false);
+      setRecoveryCodes([]);
       startEnrollment();
     } else {
       isEnrollingRef.current = false;
@@ -152,12 +159,24 @@ export function TwoFactorModal({ isOpen, onClose, onSuccess }: TwoFactorModalPro
         console.error("Failed to create 2FA notification:", notifErr);
       }
 
-      // Success
-      setSuccess(true);
-      setTimeout(() => {
-        onSuccess();
-      }, 2000);
-
+      // Generate recovery codes
+      try {
+        setIsGeneratingCodes(true);
+        const result = await generateRecoveryCodes();
+        if (result.success && result.codes) {
+          setRecoveryCodes(result.codes);
+          setShowRecovery(true);
+        } else {
+          setSuccess(true);
+          setTimeout(() => onSuccess(), 2000);
+        }
+      } catch (e) {
+        console.error("Failed to generate recovery codes:", e);
+        setSuccess(true);
+        setTimeout(() => onSuccess(), 2000);
+      } finally {
+        setIsGeneratingCodes(false);
+      }
       
     } catch (err: any) {
       setErrorMsg("That code is incorrect or expired. Try again.");
@@ -172,6 +191,12 @@ export function TwoFactorModal({ isOpen, onClose, onSuccess }: TwoFactorModalPro
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
+  };
+
+  const copyRecoveryCodes = () => {
+    navigator.clipboard.writeText(recoveryCodes.join("\n"));
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   if (!isOpen) return null;
@@ -214,15 +239,53 @@ export function TwoFactorModal({ isOpen, onClose, onSuccess }: TwoFactorModalPro
             </div>
 
             <h2 className="text-[22px] font-semibold text-center text-gray-900 mb-2">
-              {success ? "2FA Enabled" : "Secure your account"}
+              {showRecovery ? "Save Recovery Codes" : success ? "2FA Enabled" : "Secure your account"}
             </h2>
             <p className="text-center text-[14px] text-gray-500 mb-8 px-4">
-              {success 
+              {showRecovery 
+                ? "If you lose your authenticator app, these codes are the only way to regain access. Keep them safe."
+                : success 
                 ? "Your account is now protected by Two-Factor Authentication." 
                 : "Add an authenticator app to protect your Dort Asia account."}
             </p>
 
-            {success ? (
+            {showRecovery ? (
+              <div className="flex flex-col items-center w-full">
+                 <div className="grid grid-cols-2 gap-2 w-full mb-6">
+                   {recoveryCodes.map(c => (
+                      <div key={c} className="bg-gray-50 border border-gray-200 p-2.5 text-center rounded-lg font-mono text-[13px] font-semibold text-gray-800 tracking-wider">
+                        {c}
+                      </div>
+                   ))}
+                 </div>
+                 
+                 <div className="flex gap-3 w-full">
+                   <button
+                     type="button"
+                     onClick={copyRecoveryCodes}
+                     className="w-1/3 h-[48px] bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 font-medium rounded-xl transition-colors cursor-pointer flex items-center justify-center gap-2"
+                   >
+                     {copied ? (
+                       <HugeiconsIcon icon={CheckmarkCircle02Icon} className="w-4 h-4 text-emerald-600" />
+                     ) : (
+                       <HugeiconsIcon icon={Copy01Icon} className="w-4 h-4" />
+                     )}
+                     <span className="text-[13.5px]">{copied ? "Copied" : "Copy"}</span>
+                   </button>
+                   
+                   <button
+                     onClick={() => {
+                        setShowRecovery(false);
+                        setSuccess(true);
+                        setTimeout(() => onSuccess(), 2000);
+                     }}
+                     className="w-2/3 h-[48px] bg-gray-900 hover:bg-black text-white font-medium rounded-xl transition-colors cursor-pointer text-[14.5px]"
+                   >
+                     I've saved them securely
+                   </button>
+                 </div>
+              </div>
+            ) : success ? (
               <div className="flex justify-center pb-2">
                 <button
                   onClick={onSuccess}
@@ -231,10 +294,12 @@ export function TwoFactorModal({ isOpen, onClose, onSuccess }: TwoFactorModalPro
                   Done
                 </button>
               </div>
-            ) : isEnrolling ? (
+            ) : isEnrolling || isGeneratingCodes ? (
               <div className="flex flex-col items-center justify-center py-12 text-gray-400">
                 <Loader2 className="w-8 h-8 animate-spin mb-4 text-blue-500" />
-                <p className="text-[14px]">Generating setup key...</p>
+                <p className="text-[14px]">
+                  {isGeneratingCodes ? "Generating recovery codes..." : "Generating setup key..."}
+                </p>
               </div>
             ) : (
               <form onSubmit={handleVerify} className="space-y-6">

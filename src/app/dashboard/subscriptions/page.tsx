@@ -204,8 +204,8 @@ export default function SubscriptionsHubPage() {
             Your workspace is not subscribed to any apps yet. Explore the marketplace to get started.
           </p>
           <button 
-            onClick={() => router.push('/dashboard/apps')}
-            className="mt-6 px-5 py-2.5 bg-black text-white text-[13.5px] font-medium rounded-xl hover:bg-gray-800 transition-colors shadow-sm"
+            onClick={() => router.push('/dashboard/marketplace')}
+            className="mt-6 px-5 py-2.5 bg-black text-white text-[13.5px] font-medium rounded-xl hover:bg-gray-800 transition-colors shadow-sm cursor-pointer"
           >
             Explore Apps
           </button>

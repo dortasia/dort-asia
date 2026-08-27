@@ -3,6 +3,7 @@ import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 import { getDeviceIdentity, parseUserAgent } from "@/lib/security/device";
 import { getGeoLocation } from "@/lib/security/geo";
 import { sendSecurityAlertNotification } from "@/services/notifications";
+import { randomUUID } from "crypto";
 
 export interface SecurityEventOptions {
   authMethod?: string;
@@ -30,12 +31,24 @@ export async function processLoginSecurityEvent(options?: SecurityEventOptions) 
   let userId = options?.userId || user?.id;
   let authSessionId = options?.accessToken || options?.session?.access_token;
 
-  if (!userId) {
-    const supabase = await createClient();
-    const { data: userData, error: userError } = await supabase.auth.getUser();
-    if (!userError && userData?.user) {
-      user = userData.user;
-      userId = user.id;
+  if (!userId || !authSessionId) {
+    try {
+      const supabase = await createClient();
+      if (!userId) {
+        const { data: userData, error: userError } = await supabase.auth.getUser();
+        if (!userError && userData?.user) {
+          user = userData.user;
+          userId = user.id;
+        }
+      }
+      if (!authSessionId) {
+        const { data: sessionData } = await supabase.auth.getSession();
+        if (sessionData?.session?.access_token) {
+          authSessionId = sessionData.session.access_token;
+        }
+      }
+    } catch (authFetchErr) {
+      console.warn("[SECURITY_DIAG] Notice fetching auth session context:", authFetchErr);
     }
   }
 
@@ -128,6 +141,10 @@ export async function processLoginSecurityEvent(options?: SecurityEventOptions) 
     }
   }
 
+  // Determine the stable session reference for identity.account_sessions
+  // Priority: native Supabase Auth session_id if available, otherwise a secure random UUID
+  const sessionReference = supabaseSessionId || randomUUID();
+
   let internalSessionId;
 
   if (existingSession) {
@@ -172,6 +189,7 @@ export async function processLoginSecurityEvent(options?: SecurityEventOptions) 
       .insert({
         account_id: accountId,
         user_id: userId,
+        session_reference: sessionReference,
         device_id: deviceId,
         is_active: true,
         supabase_session_id: supabaseSessionId,
@@ -196,7 +214,7 @@ export async function processLoginSecurityEvent(options?: SecurityEventOptions) 
     );
 
     if (insertError) {
-      return { success: false, error: "Failed to process security event (session insert)" };
+      return { success: false, error: `Failed to process security event (session insert): ${insertError.message}` };
     }
     internalSessionId = newSession?.id;
   }

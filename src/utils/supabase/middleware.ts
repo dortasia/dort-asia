@@ -70,6 +70,15 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
+  // Strictly protect the recovery enrollment route
+  if (request.nextUrl.pathname === "/auth/mfa/recover") {
+    if (!request.cookies.has("mfa_recovery_token")) {
+      const url = request.nextUrl.clone();
+      url.pathname = user ? "/dashboard" : "/auth";
+      return NextResponse.redirect(url);
+    }
+  }
+
   if (user && isProtected) {
     // Enforce MFA if the user has a verified factor but hasn't completed it this session
     const { data: aal, error: aalError } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
@@ -85,7 +94,7 @@ export async function updateSession(request: NextRequest) {
 
   // Optional: If user is logged in and trying to access /auth, redirect to dashboard
   // IMPORTANT: Do not redirect /auth/callback or /auth/mfa because they are needed for authentication flows
-  if (user && isAuthRoute && request.nextUrl.pathname !== "/auth/callback" && request.nextUrl.pathname !== "/auth/mfa") {
+  if (user && isAuthRoute && request.nextUrl.pathname !== "/auth/callback" && !request.nextUrl.pathname.startsWith("/auth/mfa")) {
     // Before redirecting to dashboard, check if they need MFA
     const { data: aal } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
     if (aal && aal.currentLevel === "aal1" && aal.nextLevel === "aal2") {

@@ -18,6 +18,7 @@ function AuthContent() {
   const initialEmailParam = searchParams.get("email") || "";
   const initialTabParam = (searchParams.get("tab") as "signin" | "signup") || "signin";
   const isPromptAccountNotFound = searchParams.get("prompt") === "account_not_found" || searchParams.get("error") === "unauthenticated";
+  const isRecovery = searchParams.get("recovery") === "true";
 
   const [activeTab, setActiveTab] = useState<"signin" | "signup" | "otp">(initialTabParam);
   const [email, setEmail] = useState(initialEmailParam);
@@ -146,6 +147,13 @@ function AuthContent() {
           setErrorMsg(error.message);
         }
       } else {
+        const { checkRecoveryRouting } = await import("@/app/dashboard/settings/security/recovery-actions");
+        const recoveryRoute = await checkRecoveryRouting();
+        if (recoveryRoute) {
+          handleNavigateNext(recoveryRoute);
+          return;
+        }
+
         const { data: aalData } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
         if (aalData?.nextLevel === 'aal2' && aalData.currentLevel === 'aal1') {
           window.location.href = "/auth/mfa";
@@ -210,6 +218,13 @@ function AuthContent() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ authMethod: "passkey" }),
       }).catch(err => console.error("Failed to record login security event", err));
+
+      const { checkRecoveryRouting } = await import("@/app/dashboard/settings/security/recovery-actions");
+      const recoveryRoute = await checkRecoveryRouting();
+      if (recoveryRoute) {
+        handleNavigateNext(recoveryRoute);
+        return;
+      }
 
       const { data: aalData } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
       if (aalData?.nextLevel === 'aal2' && aalData.currentLevel === 'aal1') {
@@ -336,6 +351,24 @@ function AuthContent() {
       >
         {/* User Account Not Found Alert Banner */}
         <AnimatePresence>
+          {isRecovery && !isUserNotFound && (
+            <motion.div
+              initial={{ opacity: 0, height: 0, marginBottom: 0 }}
+              animate={{ opacity: 1, height: "auto", marginBottom: 24 }}
+              exit={{ opacity: 0, height: 0, marginBottom: 0 }}
+              className="w-full p-4 rounded-2xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200/90 dark:border-blue-800/60 flex flex-col gap-2 text-left overflow-hidden"
+            >
+              <div className="flex items-center gap-2.5 text-blue-600 dark:text-blue-400">
+                <div className="w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center shrink-0">
+                  <HugeiconsIcon icon={Shield01Icon} size={15} strokeWidth={2} />
+                </div>
+                <span className="text-[14px] font-semibold">Authenticator removed securely</span>
+              </div>
+              <p className="text-[12.5px] text-gray-600 dark:text-gray-300 leading-relaxed">
+                Please sign in again to continue setting up your new authenticator.
+              </p>
+            </motion.div>
+          )}
           {isUserNotFound && (
             <motion.div
               initial={{ opacity: 0, height: 0, marginBottom: 0 }}
